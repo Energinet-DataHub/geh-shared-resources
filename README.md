@@ -7,6 +7,8 @@
     - [Setting up the domain](#setting-up-the-domain)
 - [Using the shared resources](#using-the-shared-resources)
     - [Shared SQL Server](#shared-sql-server)
+    - [Shared SQL Server](#shared-sql-server)
+    - [Shared Integration Events Service Bus Namespace](#shared-integration-events-service-bus-namespace)
 - [Where can I get more help](#where-can-i-get-more-help)
 
 ## Intro
@@ -56,7 +58,8 @@ resource "azurerm_mssql_database" "sqldb_yourname" {
 
 ### Shared SQL Server User
 
-To use the shared admin user for the server, you can refer to the keyvault secrets, using the Terraform Data Resource
+To use the shared admin user for the server, you can refer to the keyvault secrets, using the Terraform Data Resource.
+This will eventually be replaced by Azure AD Authentication.
 
 ```ruby
 data "azurerm_key_vault_secret" "SHARED_RESOURCES_DB_ADMIN_NAME" {
@@ -67,6 +70,29 @@ data "azurerm_key_vault_secret" "SHARED_RESOURCES_DB_ADMIN_NAME" {
 data "azurerm_key_vault_secret" "SHARED_RESOURCES_DB_ADMIN_PASSWORD" {
   name         = "SHARED-RESOURCES-DB-ADMIN-PASSWORD"
   key_vault_id = data.azurerm_key_vault.kv_sharedresources.id
+}
+```
+
+### Shared Integration Events Service Bus Namespace
+
+The integration events Service Bus Namespace is an empty server that other domains can add databases into.
+
+To get started using the Service Bus Namespace, you will need to refer to the server as a Terraform Data Resource.
+
+```ruby
+data "azurerm_servicebus_namespace" "integrationevents" {
+  name                = var.sharedresources_integrationevents_service_bus_namespace_name
+  resource_group_name = var.sharedresources_resource_group_name
+}
+```
+
+Once this is done, you can now refer to the namespace from your local resources.
+
+```ruby
+resource "azurerm_servicebus_queue" "queue_example" {
+  name                = "queue-example"
+  resource_group_name = var.sharedresources_resource_group_name
+  namespace_name      = data.azurerm_servicebus_namespace.integrationevents.name
 }
 ```
 
