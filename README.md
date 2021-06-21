@@ -7,7 +7,7 @@
     - [Setting up the domain](#setting-up-the-domain)
 - [Using the shared resources](#using-the-shared-resources)
     - [Shared SQL Server](#shared-sql-server)
-    - [Shared SQL Server](#shared-sql-server)
+    - [Shared SQL Server User](#shared-sql-server-user)
     - [Shared Integration Events Service Bus Namespace](#shared-integration-events-service-bus-namespace)
 - [Where can I get more help](#where-can-i-get-more-help)
 
@@ -75,7 +75,7 @@ data "azurerm_key_vault_secret" "SHARED_RESOURCES_DB_ADMIN_PASSWORD" {
 
 ### Shared Integration Events Service Bus Namespace
 
-The integration events Service Bus Namespace is an empty server that other domains can add databases into.
+The integration events Service Bus Namespace is an empty namespace that other domains can add queues and topics into.
 
 To get started using the Service Bus Namespace, you will need to refer to the server as a Terraform Data Resource.
 
