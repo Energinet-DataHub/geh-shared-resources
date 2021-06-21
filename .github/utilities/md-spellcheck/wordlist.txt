@@ -32,6 +32,8 @@ microsoft
 Moq
 MPL
 msbuild
+namespace
+Namespace
 NodaTime
 nuget
 NuGet

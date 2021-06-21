@@ -34,29 +34,59 @@ In this program increment we are working towards:
 
 ## Using the shared resources
 
+You will from each domain be able to use resources inside the shared resources domain.
+The shared resources is created, to prevent other domains from being to hard coupled, but integrating into each other.
+
+If you need to share secrets between domains, you can use the shared Key Vault as a mediator for these.
+
+If you need to publish integration events, you can use the integration events Service Bus Namespace.
+
+Below is a guide on how to use the different resources.
+
 ### Shared SQL Server
 
-The Shared SQL Server is an empty server that other domains can add databases into.
+The shared SQL Server is an empty server that other domains can add databases into.
 
-To get started using the SQL Server, you will need to refer to the server as a Terraform Data Resource.
+Before you start using the shared SQL Server, you will need to expose the following variables to your IaC.
+
+- A variable containing the name of the shared resource group. In the example below this is referred to as `sharedresources_resource_group_name`.
+- A variable containing the name of the shared SQL Server. In the example below this is referred to as `sharedresources_sql_server_name`.
+
+These should be added to the environment as secrets, and parsed down through the pipeline, to ensure the flexibility of changing these in the future.
+
+Once these is added, you can start using the snippets below.
+
+1 - Create a reference to the shared resource group.
+
+```ruby
+data "azurerm_resource_group" "shared_resources" {
+  name = var.sharedresources_resource_group_name
+}
+```
+
+2 - Create a reference to the shared SQL server.
 
 ```ruby
 data "azurerm_sql_server" "sqlsrv" {
-  name                = "sqlsrv-sharedres-${var.organisation}-${var.environment}"
-  resource_group_name = var.sharedresources_resource_group_name
+  name                = var.sharedresources_sql_server_name
+  resource_group_name = data.azurerm_resource_group.shared_resources.name
 }
 ```
 
-Once this is done, you can now refer to the server from your local resources.
+3 - You can now use these references in the local resources you want to create.
 
 ```ruby
-resource "azurerm_mssql_database" "sqldb_yourname" {
-  name                = "sqldb"
-  server_id           = data.azurerm_sql_server.sqlsrv.id
+module "sqldb_example" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//sql-database?ref=REPLACE_WITH_CURRENT_VERSION"
+  name                = "sqldb-${var.project}-${var.organisation}"
+  resource_group_name = data.azurerm_resource_group.shared_resources.name
+  location            = data.azurerm_resource_group.shared_resources.location
+  tags                = data.azurerm_resource_group.shared_resources.tags
+  server_name         = data.azurerm_sql_server.sqlsrv.name
 }
 ```
 
-### Shared SQL Server User
+<!-- ### Shared SQL Server User
 
 To use the shared admin user for the server, you can refer to the keyvault secrets, using the Terraform Data Resource.
 This will eventually be replaced by Azure AD Authentication.
@@ -71,28 +101,46 @@ data "azurerm_key_vault_secret" "SHARED_RESOURCES_DB_ADMIN_PASSWORD" {
   name         = "SHARED-RESOURCES-DB-ADMIN-PASSWORD"
   key_vault_id = data.azurerm_key_vault.kv_sharedresources.id
 }
-```
+``` -->
 
 ### Shared Integration Events Service Bus Namespace
 
 The integration events Service Bus Namespace is an empty namespace that other domains can add queues and topics into.
 
-To get started using the Service Bus Namespace, you will need to refer to the server as a Terraform Data Resource.
+Before you start using the integration events Service Bus Namespace, you will need to expose the following variables to your IaC.
+
+- A variable containing the name of the shared resource group. In the example below this is referred to as `sharedresources_resource_group_name`.
+- A variable containing the name of the integration events Service Bus Namespace. In the example below this is referred to as `sharedresources_integrationevents_service_bus_namespace_name`.
+
+These should be added to the environment as secrets, and parsed down through the pipeline, to ensure the flexibility of changing these in the future.
+
+Once these is added, you can start using the snippets below.
+
+1 - Create a reference to the shared resource group.
+
+```ruby
+data "azurerm_resource_group" "shared_resources" {
+  name = var.sharedresources_resource_group_name
+}
+```
+
+2 - Create a reference to the Service Bus Namespace.
 
 ```ruby
 data "azurerm_servicebus_namespace" "integrationevents" {
   name                = var.sharedresources_integrationevents_service_bus_namespace_name
-  resource_group_name = var.sharedresources_resource_group_name
+  resource_group_name = data.azurerm_resource_group.shared_resources.name
 }
 ```
 
-Once this is done, you can now refer to the namespace from your local resources.
+3 - You can now refer to the namespace from your local resources.
 
 ```ruby
-resource "azurerm_servicebus_queue" "queue_example" {
-  name                = "queue-example"
-  resource_group_name = var.sharedresources_resource_group_name
+module "sbq_example" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=REPLACE_WITH_CURRENT_VERSION"
+  name                = "sbq-example"
   namespace_name      = data.azurerm_servicebus_namespace.integrationevents.name
+  resource_group_name = data.azurerm_resource_group.shared_resources.name
 }
 ```
 
