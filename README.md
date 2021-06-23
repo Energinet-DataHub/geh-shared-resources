@@ -8,7 +8,9 @@
 - [Using the shared resources](#using-the-shared-resources)
     - [Shared SQL Server](#shared-sql-server)
     - [Shared SQL Server User](#shared-sql-server-user)
-    - [Shared Integration Events Service Bus Namespace](#shared-integration-events-service-bus-namespace)
+    - Integration Events Service Bus Namespace
+        - [Creating resources under the integration events Service Bus Namespace](#creating-resources-under-the-integration-events-service-bus-namespace)
+        - [Connecting to the integration events Service Bus Namespace](#connecting-to-the-integration-events-service-bus-namespace)
 - [Where can I get more help](#where-can-i-get-more-help)
 
 ## Intro
@@ -50,7 +52,7 @@ The shared SQL Server is an empty server that other domains can add databases in
 Before you start using the shared SQL Server, you will need to expose the following variables to your IaC.
 
 - A variable containing the name of the shared resource group. In the example below this is referred to as `sharedresources_resource_group_name`.
-- A variable containing the name of the shared SQL Server. In the example below this is referred to as `sharedresources_sql_server_name`.
+- A variable containing the name of the SQL Server. In the example below this is referred to as `sharedresources_sql_server_name`.
 
 These should be added to the environment as secrets, and parsed down through the pipeline, to ensure the flexibility of changing these in the future.
 
@@ -103,14 +105,14 @@ data "azurerm_key_vault_secret" "SHARED_RESOURCES_DB_ADMIN_PASSWORD" {
 }
 ``` -->
 
-### Shared Integration Events Service Bus Namespace
+### Creating resources under the integration events Service Bus Namespace
 
 The integration events Service Bus Namespace is an empty namespace that other domains can add queues and topics into.
 
-Before you start using the integration events Service Bus Namespace, you will need to expose the following variables to your IaC.
+Before you start using the service bus namespace, you will need to expose the following variables to your IaC.
 
 - A variable containing the name of the shared resource group. In the example below this is referred to as `sharedresources_resource_group_name`.
-- A variable containing the name of the integration events Service Bus Namespace. In the example below this is referred to as `sharedresources_integrationevents_service_bus_namespace_name`.
+- A variable containing the name of the service bus namespace. In the example below this is referred to as `sharedresources_integrationevents_service_bus_namespace_name`.
 
 These should be added to the environment as secrets, and parsed down through the pipeline, to ensure the flexibility of changing these in the future.
 
@@ -143,6 +145,54 @@ module "sbq_example" {
   resource_group_name = data.azurerm_resource_group.shared_resources.name
 }
 ```
+
+### Connecting to the integration events Service Bus Namespace
+
+The integration events Service Bus Namespace comes with 2 connection strings, one for publishing messages into the service bus, and one for listening for messages.
+
+Before you start using the service bus namespace connection strings, you will need to expose the following variables to your IaC.
+
+- A variable containing the name of the shared resource group. In the example below this is referred to as `sharedresources_resource_group_name`.
+- A variable containing the name of the shared key vault. In the example below this is referred to as `sharedresources_keyvault_name`.
+
+These should be added to the environment as secrets, and parsed down through the pipeline, to ensure the flexibility of changing these in the future.
+
+Once these is added, you can start using the snippets below.
+
+1 - Create a reference to the shared key vault.
+
+```ruby
+data "azurerm_key_vault" "kv_sharedresources" {
+  name                = var.sharedresources_keyvault_name
+  resource_group_name = var.sharedresources_resource_group_name
+}
+```
+
+2.a - To send messages use the snippet below.
+
+```ruby
+data "azurerm_key_vault_secret" "INTEGRATION_EVENTS_SENDER_CONNECTION_STRING" {
+  name         = "INTEGRATION-EVENTS-SENDER-CONNECTION-STRING"
+  key_vault_id = data.azurerm_key_vault.kv_sharedresources.id
+}
+```
+
+2.b - To listen for new messages, use the snippet below.
+
+```ruby
+data "azurerm_key_vault_secret" "INTEGRATION_EVENTS_LISTENER_CONNECTION_STRING" {
+  name         = "INTEGRATION-EVENTS-LISTENER-CONNECTION-STRING"
+  key_vault_id = data.azurerm_key_vault.kv_sharedresources.id
+}
+```
+
+3 - You can now refer to this value from the needed resources by using the following variables
+
+Reading
+`data.azurerm_key_vault_secret.INTEGRATION_EVENTS_LISTENER_CONNECTION_STRING.value`
+
+Writing
+`data.azurerm_key_vault_secret.INTEGRATION_EVENTS_SENDER_CONNECTION_STRING.value`
 
 ## Where can I get more help?
 

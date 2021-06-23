@@ -19,3 +19,21 @@ module "sbn_integrationevents" {
   sku                 = "basic"
   tags                = data.azurerm_resource_group.main.tags
 }
+
+module "sbnar_integrationevents_listener" {
+  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace-auth-rule?ref=1.2.0"
+  name                      = "sbnar-integrationevents-listener"
+  namespace_name            = module.sbn_integrationevents.name
+  resource_group_name       = data.azurerm_resource_group.main.name
+  listen                    = true
+  dependencies              = [module.sbn_integrationevents]
+}
+
+module "sbnar_integrationevents_sender" {
+  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace-auth-rule?ref=1.2.0"
+  name                      = "sbnar-integrationevents-sender"
+  namespace_name            = module.sbn_integrationevents.name
+  resource_group_name       = data.azurerm_resource_group.main.name
+  send                      = true
+  dependencies              = [module.sbn_integrationevents]
+}
