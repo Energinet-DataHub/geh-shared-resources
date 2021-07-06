@@ -14,7 +14,7 @@
 data "azurerm_client_config" "current" {}
 
 module "kv" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault?ref=1.3.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault?ref=1.6.0"
   name                            = "kv${var.project}${var.organisation}${var.environment}"
   resource_group_name             = data.azurerm_resource_group.main.name
   location                        = data.azurerm_resource_group.main.location
@@ -99,21 +99,21 @@ module "kv" {
 }
 
 module "kvs_db_admin_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.6.0"
   name          = "SHARED-RESOURCES-DB-ADMIN-NAME"
   value         = local.sqlServerAdminName
   key_vault_id  = module.kv.id
 }
 
 module "kvs_db_admin_password" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.6.0"
   name          = "SHARED-RESOURCES-DB-ADMIN-PASSWORD"
   value         = random_password.sqlsrv_admin_password.result
   key_vault_id  = module.kv.id
 }
 
 module "kvs_db_url" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.6.0"
   name          = "SHARED-RESOURCES-DB-URL"
   value         = module.sqlsrv.fully_qualified_domain_name
   key_vault_id  = module.kv.id
@@ -121,7 +121,7 @@ module "kvs_db_url" {
 }
 
 module "kvs_integrationevents_listener_connection_string" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.6.0"
   name          = "INTEGRATION-EVENTS-LISTENER-CONNECTION-STRING"
   value         = module.sbnar_integrationevents_listener.primary_connection_string
   key_vault_id  = module.kv.id
@@ -129,7 +129,7 @@ module "kvs_integrationevents_listener_connection_string" {
 }
 
 module "kvs_integrationevents_sender_connection_string" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.6.0"
   name          = "INTEGRATION-EVENTS-SENDER-CONNECTION-STRING"
   value         = module.sbnar_integrationevents_sender.primary_connection_string
   key_vault_id  = module.kv.id
