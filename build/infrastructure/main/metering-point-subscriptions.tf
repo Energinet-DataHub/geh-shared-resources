@@ -11,26 +11,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-resource "null_resource" "dependency_setter" {
-  depends_on = [azurerm_servicebus_subscription.main]
-}
-
-#Queue to forward subscriptions to
-module "sbq_market_roles_forwarded_queue" {
+# Queue to forward subscriptions to
+module "sbq_metering_point_forwarded_queue" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=1.3.0"
-  name                = "metering-point-forwarded_queue"
+  name                = "metering-point-forwarded-queue"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
+  dependencies        = [ module.sbn_integrationevents.dependent_on ]
 }
 
 # Subscriptions
-module "sbt_energy_supplier_changed_subscription" {
+module "sbs_energy_supplier_changed_subscription" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=1.3.0"
-  name                = "metering-point"
+  name                = "metering-point-energy-supplier-changed-sub"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name 
   topic_name          = module.sbt_energy_supplier_changed.name
   max_delivery_count  = 10
   forward_to          = module.sbq_metering_point_forwarded_queue.name
-  depends_on          = [null_resource.dependency_getter]
 }
