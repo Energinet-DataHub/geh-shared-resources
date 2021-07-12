@@ -16,5 +16,5 @@ module "sbt_energy_supplier_changed" {
   name                = "energy-supplier-changed"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
-  dependencies        = [module.sbn_integrationevents]
+  dependencies        = [module.sbn_integrationevents.dependent_on]
 }

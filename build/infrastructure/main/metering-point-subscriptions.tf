@@ -29,4 +29,5 @@ module "sbs_energy_supplier_changed_subscription" {
   topic_name          = module.sbt_energy_supplier_changed.name
   max_delivery_count  = 10
   forward_to          = module.sbq_metering_point_forwarded_queue.name
+  dependencies        = [ module.sbn_integrationevents.dependent_on ]
 }
