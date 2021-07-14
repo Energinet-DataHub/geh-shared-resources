@@ -21,15 +21,13 @@ resource "null_resource" "dependency_setter" {
   depends_on = [azurerm_servicebus_subscription.main]
 }
 
-# Currently our terraform subscription module in geh-terraform-modules doesn't support 'forward_to' so we can't use it
 resource "azurerm_servicebus_subscription" "sbs_metering_point_created_charges" {
   depends_on          = [null_resource.dependency_getter]
-  name                = "charges"
+  name                = "metering-point-created-sub-charges"
   resource_group_name = data.azurerm_resource_group.main.name
   namespace_name      = module.sbn_integrationevents.name
   topic_name          = module.sbt_metering_point_created.name
   max_delivery_count  = 1
-  forward_to          = module.sbt_metering_point_created_charges.name
 }
 
 module "sbt_metering_point_created_charges" {
