@@ -12,17 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "null_resource" "dependency_getter" {
-  provisioner "local-exec" {
-    command = "echo ${length(var.dependencies)}"
-  }
-}
-resource "null_resource" "dependency_setter" {
-  depends_on = [azurerm_servicebus_subscription.main]
-}
-
 resource "azurerm_servicebus_subscription" "sbs_metering_point_created_charges" {
-  depends_on          = [null_resource.dependency_getter]
+  depends_on          = [module.sbt_metering_point_created]
   name                = "metering-point-created-sub-charges"
   resource_group_name = data.azurerm_resource_group.main.name
   namespace_name      = module.sbn_integrationevents.name
