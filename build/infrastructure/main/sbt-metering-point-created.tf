@@ -19,3 +19,41 @@ module "sbt_metering_point_created" {
   resource_group_name = data.azurerm_resource_group.main.name
   dependencies        = [module.sbn_integrationevents]
 }
+
+module "sbtar_metering_point_created_listener" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-topic-auth-rule?ref=1.7.0"
+  name                = "metering-point-created-listener"
+  namespace_name      = module.sbn_integrationevents.name
+  topic_name          = module.sbt_metering_point_created.name
+  resource_group_name = data.azurerm_resource_group.main.name
+  listen              = true
+  dependencies        = [module.sbt_metering_point_created]
+}
+
+module "kv_metering_point_created_listener_connection_string" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.7.0"
+  name                = "metering-point-created-listener-connection-string"
+  value               = trimsuffix(module.sbtar_metering_point_created_listener.primary_connection_string, ";EntityPath=${module.sbt_metering_point_created.name}")
+  key_vault_id        = module.kv.id
+  tags                = data.azurerm_resource_group.main.tags
+  dependencies        = [module.kv.dependent_on, module.sbtar_metering_point_created_listener.dependent_on]
+}
+
+module "sbtar_metering_point_created_sender" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-topic-auth-rule?ref=1.7.0"
+  name                = "metering-point-created-sender"
+  namespace_name      = module.sbn_integrationevents.name
+  topic_name          = module.sbt_metering_point_created.name
+  resource_group_name = data.azurerm_resource_group.main.name
+  send                = true
+  dependencies        = [module.sbn_integrationevents]  
+}
+
+module "kv_metering_point_created_sender_connection_string" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.7.0"
+  name                = "metering-point-created-sender-connection-string"
+  value               = trimsuffix(module.sbtar_metering_point_created_sender.primary_connection_string, ";EntityPath=${module.sbt_metering_point_created.name}")
+  key_vault_id        = module.kv.id
+  tags                = data.azurerm_resource_group.main.tags
+  dependencies        = [module.kv.dependent_on, module.sbtar_metering_point_created_sender.dependent_on]
+}
