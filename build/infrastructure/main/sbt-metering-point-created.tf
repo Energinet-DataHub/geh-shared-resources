@@ -17,7 +17,7 @@ module "sbt_metering_point_created" {
   name                = "metering-point-created"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
-  dependencies        = [module.sbn_integrationevents]
+  dependencies        = [module.sbn_integrationevents.dependent_on]
 }
 
 module "sbtar_metering_point_created_listener" {
@@ -27,7 +27,7 @@ module "sbtar_metering_point_created_listener" {
   topic_name          = module.sbt_metering_point_created.name
   resource_group_name = data.azurerm_resource_group.main.name
   listen              = true
-  dependencies        = [module.sbt_metering_point_created]
+  dependencies        = [module.sbt_metering_point_created.dependent_on]
 }
 
 module "kv_metering_point_created_listener_connection_string" {
@@ -46,7 +46,7 @@ module "sbtar_metering_point_created_sender" {
   topic_name          = module.sbt_metering_point_created.name
   resource_group_name = data.azurerm_resource_group.main.name
   send                = true
-  dependencies        = [module.sbn_integrationevents]  
+  dependencies        = [module.sbn_integrationevents.dependent_on]
 }
 
 module "kv_metering_point_created_sender_connection_string" {
