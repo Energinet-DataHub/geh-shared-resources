@@ -13,10 +13,12 @@
 # limitations under the License.
 
 resource "azurerm_servicebus_subscription" "sbs_metering_point_created_charges" {
-  depends_on          = [module.sbt_metering_point_created]
   name                = "metering-point-created-sub-charges"
   resource_group_name = data.azurerm_resource_group.main.name
   namespace_name      = module.sbn_integrationevents.name
   topic_name          = module.sbt_metering_point_created.name
   max_delivery_count  = 1
+  depends_on          = [
+    module.sbt_metering_point_created
+  ]
 }

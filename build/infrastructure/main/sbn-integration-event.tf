@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "sbn_integrationevents" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace?ref=1.6.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace?ref=1.9.0"
   name                = "sbn-integrationevents-${var.project}-${var.organisation}-${var.environment}"
   resource_group_name = data.azurerm_resource_group.main.name
   location            = data.azurerm_resource_group.main.location
@@ -21,7 +21,7 @@ module "sbn_integrationevents" {
 }
 
 module "sbnar_integrationevents_listener" {
-  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace-auth-rule?ref=1.6.0"
+  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace-auth-rule?ref=1.9.0"
   name                      = "sbnar-integrationevents-listener"
   namespace_name            = module.sbn_integrationevents.name
   resource_group_name       = data.azurerm_resource_group.main.name
@@ -30,7 +30,7 @@ module "sbnar_integrationevents_listener" {
 }
 
 module "sbnar_integrationevents_sender" {
-  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace-auth-rule?ref=1.6.0"
+  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace-auth-rule?ref=1.9.0"
   name                      = "sbnar-integrationevents-sender"
   namespace_name            = module.sbn_integrationevents.name
   resource_group_name       = data.azurerm_resource_group.main.name
