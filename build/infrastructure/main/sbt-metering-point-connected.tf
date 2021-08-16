@@ -16,5 +16,7 @@ module "sbt_metering_point_connected" {
   name                = "metering-point-connected"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
-  dependencies        = [module.sbn_integrationevents.dependent_on]
+  dependencies        = [
+    module.sbn_integrationevents.dependent_on
+    ]
 }

@@ -31,7 +31,8 @@ module "sbs_metering_point_connected_subscription_market_roles" {
   topic_name          = module.sbt_metering_point_connected.name
   max_delivery_count  = 10
   forward_to          = module.sbq_market_roles_forwarded_queue.name
-  dependencies        = [ module.sbn_integrationevents.dependent_on, 
+  dependencies        = [ 
+    module.sbn_integrationevents.dependent_on, 
     module.sbq_market_roles_forwarded_queue.dependent_on,
     module.sbt_metering_point_connected.dependent_on]
 }
