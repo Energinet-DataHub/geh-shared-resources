@@ -18,5 +18,5 @@ module "sbt_metering_point_connected" {
   resource_group_name = data.azurerm_resource_group.main.name
   dependencies        = [
     module.sbn_integrationevents.dependent_on
-    ]
+  ]
 }

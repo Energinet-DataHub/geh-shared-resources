@@ -34,7 +34,8 @@ module "sbs_metering_point_connected_subscription_market_roles" {
   dependencies        = [ 
     module.sbn_integrationevents.dependent_on, 
     module.sbq_market_roles_forwarded_queue.dependent_on,
-    module.sbt_metering_point_connected.dependent_on]
+    module.sbt_metering_point_connected.dependent_on
+  ]
 }
 
 # Add sbq_market_roles_forwarded_queue name to key vault to be able to fetch that out in the market roles repo
