@@ -69,3 +69,8 @@ variable "testing_domain_spn_object_id" {
   type          = string
   description   = "The object id of the testing domain service principal."
 }
+
+variable "publisher_email" {
+  type          = string
+  description   = "(Required) The email of publisher/company."
+}

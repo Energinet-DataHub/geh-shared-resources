@@ -50,9 +50,10 @@ jobs:
           echo "TF_VAR_post_office_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_POST_OFFICE_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_validation_reports_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_VALIDATION_REPORTS_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_testing_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_TESTING_DOMAIN }}" >> $GITHUB_ENV
+          echo "TF_VAR_publisher_email=${{ secrets.APIM_PUBLISHER_EMAIL }}" >> $GITHUB_ENV
 
       - name: Terraform CD
-        uses: Energinet-DataHub/.github/.github/actions/terraform@1.0.1
+        uses: Energinet-DataHub/.github/.github/actions/terraform@main
         with:
           PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
           ORGANISATION_NAME: ${{ secrets.ORGANISATION_NAME }}
@@ -92,9 +93,10 @@ jobs:
           echo "TF_VAR_post_office_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_POST_OFFICE_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_validation_reports_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_VALIDATION_REPORTS_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_testing_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_TESTING_DOMAIN }}" >> $GITHUB_ENV
+          echo "TF_VAR_publisher_email=${{ secrets.APIM_PUBLISHER_EMAIL }}" >> $GITHUB_ENV
 
       - name: Terraform CD
-        uses: Energinet-DataHub/.github/.github/actions/terraform@1.0.1
+        uses: Energinet-DataHub/.github/.github/actions/terraform@main
         with:
           PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
           ORGANISATION_NAME: ${{ secrets.ORGANISATION_NAME }}
@@ -134,9 +136,10 @@ jobs:
           echo "TF_VAR_post_office_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_POST_OFFICE_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_validation_reports_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_VALIDATION_REPORTS_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_testing_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_TESTING_DOMAIN }}" >> $GITHUB_ENV
+          echo "TF_VAR_publisher_email=${{ secrets.APIM_PUBLISHER_EMAIL }}" >> $GITHUB_ENV
 
       - name: Terraform CD
-        uses: Energinet-DataHub/.github/.github/actions/terraform@1.0.1
+        uses: Energinet-DataHub/.github/.github/actions/terraform@main
         with:
           PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
           ORGANISATION_NAME: ${{ secrets.ORGANISATION_NAME }}
@@ -176,9 +179,10 @@ jobs:
           echo "TF_VAR_post_office_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_POST_OFFICE_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_validation_reports_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_VALIDATION_REPORTS_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_testing_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_TESTING_DOMAIN }}" >> $GITHUB_ENV
+          echo "TF_VAR_publisher_email=${{ secrets.APIM_PUBLISHER_EMAIL }}" >> $GITHUB_ENV
       
       - name: Terraform CD
-        uses: Energinet-DataHub/.github/.github/actions/terraform@1.0.1
+        uses: Energinet-DataHub/.github/.github/actions/terraform@main
         with:
           PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
           ORGANISATION_NAME: ${{ secrets.ORGANISATION_NAME }}
