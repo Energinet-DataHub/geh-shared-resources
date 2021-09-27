@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module "sbt_charge_created" {
+module "sbt_charge_prices_updated" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-topic?ref=1.9.0"
-  name                = "charge-created"
+  name                = "charge-prices-updated"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   dependencies        = [module.sbn_integrationevents.dependent_on]
