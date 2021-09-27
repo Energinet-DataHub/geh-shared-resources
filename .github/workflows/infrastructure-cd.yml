@@ -52,6 +52,9 @@ jobs:
           echo "TF_VAR_validation_reports_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_VALIDATION_REPORTS_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_testing_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_TESTING_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_publisher_email=${{ secrets.APIM_PUBLISHER_EMAIL }}" >> $GITHUB_ENV
+          echo "TF_VAR_apim_b2b_cim_url_path_suffix=${{ secrets.APIM_B2B_CIM_URL_PATH_SUFFIX }}" >> $GITHUB_ENV
+          echo "TF_VAR_metering_point_domain_ingestion_function_name=${{ secrets.METERING_POINT_DOMAIN_INGESTION_FUNCTION_NAME }}" >> $GITHUB_ENV
+          echo "TF_VAR_metering_point_domain_ingestion_path=${{ secrets.METERING_POINT_DOMAIN_INGESTION_PATH }}" >> $GITHUB_ENV
 
       - name: Terraform CD
         uses: Energinet-DataHub/.github/.github/actions/terraform@main
@@ -96,6 +99,9 @@ jobs:
           echo "TF_VAR_validation_reports_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_VALIDATION_REPORTS_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_testing_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_TESTING_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_publisher_email=${{ secrets.APIM_PUBLISHER_EMAIL }}" >> $GITHUB_ENV
+          echo "TF_VAR_apim_b2b_cim_url_path_suffix=${{ secrets.APIM_B2B_CIM_URL_PATH_SUFFIX }}" >> $GITHUB_ENV
+          echo "TF_VAR_metering_point_domain_ingestion_function_name=${{ secrets.METERING_POINT_DOMAIN_INGESTION_FUNCTION_NAME }}" >> $GITHUB_ENV
+          echo "TF_VAR_metering_point_domain_ingestion_path=${{ secrets.METERING_POINT_DOMAIN_INGESTION_PATH }}" >> $GITHUB_ENV
 
       - name: Terraform CD
         uses: Energinet-DataHub/.github/.github/actions/terraform@main
@@ -140,6 +146,9 @@ jobs:
           echo "TF_VAR_validation_reports_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_VALIDATION_REPORTS_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_testing_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_TESTING_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_publisher_email=${{ secrets.APIM_PUBLISHER_EMAIL }}" >> $GITHUB_ENV
+          echo "TF_VAR_apim_b2b_cim_url_path_suffix=${{ secrets.APIM_B2B_CIM_URL_PATH_SUFFIX }}" >> $GITHUB_ENV
+          echo "TF_VAR_metering_point_domain_ingestion_function_name=${{ secrets.METERING_POINT_DOMAIN_INGESTION_FUNCTION_NAME }}" >> $GITHUB_ENV
+          echo "TF_VAR_metering_point_domain_ingestion_path=${{ secrets.METERING_POINT_DOMAIN_INGESTION_PATH }}" >> $GITHUB_ENV
 
       - name: Terraform CD
         uses: Energinet-DataHub/.github/.github/actions/terraform@main
@@ -184,6 +193,9 @@ jobs:
           echo "TF_VAR_validation_reports_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_VALIDATION_REPORTS_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_testing_domain_spn_object_id=${{ secrets.AZURE_SPN_OBJECT_ID_TESTING_DOMAIN }}" >> $GITHUB_ENV
           echo "TF_VAR_publisher_email=${{ secrets.APIM_PUBLISHER_EMAIL }}" >> $GITHUB_ENV
+          echo "TF_VAR_apim_b2b_cim_url_path_suffix=${{ secrets.APIM_B2B_CIM_URL_PATH_SUFFIX }}" >> $GITHUB_ENV
+          echo "TF_VAR_metering_point_domain_ingestion_function_name=${{ secrets.METERING_POINT_DOMAIN_INGESTION_FUNCTION_NAME }}" >> $GITHUB_ENV
+          echo "TF_VAR_metering_point_domain_ingestion_path=${{ secrets.METERING_POINT_DOMAIN_INGESTION_PATH }}" >> $GITHUB_ENV
       
       - name: Terraform CD
         uses: Energinet-DataHub/.github/.github/actions/terraform@main
