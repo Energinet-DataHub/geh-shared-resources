@@ -13,11 +13,24 @@
 # limitations under the License.
 
 module "sbt_charge_created" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-topic?ref=1.9.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-topic?ref=2.0.0"
   name                = "charge-created"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   dependencies        = [
     module.sbn_integrationevents.dependent_on
     ]
+}
+
+module "sbs_charge_created_charge" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-topic?ref=2.0.0"
+  name                = "charge-created-sub-charges"
+  resource_group_name = data.azurerm_resource_group.main.name
+  namespace_name      = module.sbn_integrationevents.name
+  topic_name          = module.sbt_charge_created.name
+  max_delivery_count  = 1
+  dependencies        = [
+    module.sbt_charge_created.dependent_on,
+    module.sbn_integrationevents.dependent_on,
+  ]
 }
