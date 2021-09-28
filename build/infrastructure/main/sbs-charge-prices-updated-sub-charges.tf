@@ -19,6 +19,7 @@ resource "azurerm_servicebus_subscription" "sbs_charge_prices-updated_charge" {
   topic_name          = module.sbt_charge_prices-updated.name
   max_delivery_count  = 1
   depends_on          = [
-    module.sbt_charge_prices-updated
+    module.sbt_charge_prices-updated,
+    module.sbn_integrationevents
   ]
 }

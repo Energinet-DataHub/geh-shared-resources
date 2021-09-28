@@ -19,6 +19,7 @@ resource "azurerm_servicebus_subscription" "sbs_charge_created_charge" {
   topic_name          = module.sbt_charge_created.name
   max_delivery_count  = 1
   depends_on          = [
-    module.sbt_charge_created
+    module.sbt_charge_created,
+    module.sbn_integrationevents
   ]
 }
