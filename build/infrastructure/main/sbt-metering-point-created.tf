@@ -25,5 +25,7 @@ module "sbt_consumption_metering_point_created" {
   name                = "consumption-metering-point-created"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
-  dependencies        = [module.sbn_integrationevents.dependent_on]
+  dependencies        = [
+    module.sbn_integrationevents.dependent_on
+  ]
 }
