@@ -11,61 +11,81 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-variable "resource_group_name" {
+variable resource_group_name {
   type = string
 }
 
-variable "environment" {
+variable environment {
   type          = string
   description   = "Enviroment that the infrastructure code is deployed into"
 }
 
-variable "project" {
+variable project {
   type          = string
   description   = "Project that is running the infrastructure code"
 }
 
-variable "organisation" {
+variable organisation {
   type          = string
   description   = "Organisation that is running the infrastructure code"
 }
 
-variable "aggregations_domain_spn_object_id" {
+variable aggregations_domain_spn_object_id {
   type          = string
   description   = "The object id of the aggregations domain service principal."
 }
 
-variable "charges_domain_spn_object_id" {
+variable charges_domain_spn_object_id {
   type          = string
   description   = "The object id of the charges domain service principal."
 }
 
-variable "market_roles_domain_spn_object_id" {
+variable market_roles_domain_spn_object_id {
   type          = string
   description   = "The object id of the market roles domain service principal."
 }
 
-variable "timeseries_domain_spn_object_id" {
+variable timeseries_domain_spn_object_id {
   type          = string
   description   = "The object id of the time series domain service principal."
 }
 
-variable "metering_point_domain_spn_object_id" {
+variable metering_point_domain_spn_object_id {
   type          = string
   description   = "The object id of the metering point domain service principal."
 }
 
-variable "post_office_domain_spn_object_id" {
+variable post_office_domain_spn_object_id {
   type          = string
   description   = "The object id of the post office domain service principal."
 }
 
-variable "validation_reports_domain_spn_object_id" {
+variable validation_reports_domain_spn_object_id {
   type          = string
   description   = "The object id of the validation reports domain service principal."
 }
 
-variable "testing_domain_spn_object_id" {
+variable testing_domain_spn_object_id {
   type          = string
   description   = "The object id of the testing domain service principal."
+}
+
+variable publisher_email {
+  type          = string
+  description   = "(Required) The email of publisher/company."
+}
+
+variable metering_point_domain_ingestion_function_name {
+  type          = string
+  description   = "Name of the MeteringPoint domain ingestion function"
+}
+
+variable metering_point_domain_ingestion_path {
+  type          = string
+  description   = "Path of the MeteringPoint domain ingestion"
+}
+
+variable apim_b2b_cim_url_path_suffix {
+  type          = string
+  description   = "URL path suffix for the b2b cim endpoints inside Api management"
 }

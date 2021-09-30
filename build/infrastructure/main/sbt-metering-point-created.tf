@@ -17,5 +17,17 @@ module "sbt_metering_point_created" {
   name                = "metering-point-created"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
-  dependencies        = [module.sbn_integrationevents.dependent_on]
+  dependencies        = [
+    module.sbn_integrationevents.dependent_on
+  ]
+}
+
+module "sbt_consumption_metering_point_created" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-topic?ref=1.9.0"
+  name                = "consumption-metering-point-created"
+  namespace_name      = module.sbn_integrationevents.name
+  resource_group_name = data.azurerm_resource_group.main.name
+  dependencies        = [
+    module.sbn_integrationevents.dependent_on
+  ]
 }
