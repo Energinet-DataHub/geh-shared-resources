@@ -12,10 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Create link command queue
+# Create create link command queue
 module "sbq_create_link_command" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
-  name                = "create_link_command"
+  name                = "create-link-command"
+  namespace_name      = module.sbn_integrationevents.name
+  resource_group_name = data.azurerm_resource_group.main.name
+  dependencies        = [
+    module.sbn_integrationevents.dependent_on
+  ]
+}
+
+# Create create link command reply queue
+module "sbq_create_link_command_reply" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
+  name                = "sbq-create-link-command-reply"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   dependencies        = [
