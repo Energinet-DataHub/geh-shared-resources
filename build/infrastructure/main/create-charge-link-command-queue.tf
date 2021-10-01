@@ -26,7 +26,7 @@ module "sbq_create_link_command" {
 # Create create link command reply queue
 module "sbq_create_link_command_reply" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
-  name                = "sbq-create-link-command-reply"
+  name                = "create-link-command-reply"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   dependencies        = [
