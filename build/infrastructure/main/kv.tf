@@ -135,3 +135,11 @@ module "kvs_integrationevents_sender_connection_string" {
   key_vault_id  = module.kv.id
   dependencies  = [module.sbnar_integrationevents_sender.dependent_on]
 }
+
+module "kvs_integrationevents_messagehub_connection_string" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.6.0"
+  name          = "INTEGRATION-EVENTS-MESSAGEHUB-CONNECTION-STRING"
+  value         = module.sbnar_integrationevents_messagehub.primary_connection_string
+  key_vault_id  = module.kv.id
+  dependencies  = [module.sbnar_integrationevents_messagehub.dependent_on]
+}
