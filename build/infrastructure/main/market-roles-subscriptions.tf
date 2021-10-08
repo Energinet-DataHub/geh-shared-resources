@@ -40,7 +40,7 @@ module "sbs_metering_point_connected_subscription_market_roles" {
 
 module "sbs_consumption_metering_point_created_subscription_market_roles" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=1.9.0"
-  name                = "market-roles-consumption-metering-point-created-sub"
+  name                = "market-roles-consumption-mp-created-sub"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name 
   topic_name          = module.sbt_consumption_metering_point_created.name
