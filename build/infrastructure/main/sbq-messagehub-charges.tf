@@ -17,7 +17,9 @@ module "sbq_messagehub_charges" {
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   requires_session    = true
-  dependencies        = [module.sbn_integrationevents.dependent_on]
+  dependencies        = [
+    module.sbn_integrationevents.dependent_on
+  ]
 }
 
 module "sbq_messagehub_charges_reply" {
@@ -26,7 +28,9 @@ module "sbq_messagehub_charges_reply" {
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   requires_session    = true
-  dependencies        = [module.sbn_integrationevents.dependent_on]
+  dependencies        = [
+    module.sbn_integrationevents.dependent_on
+  ]
 }
 
 module "sbq_messagehub_charges_dequeue" {
@@ -34,5 +38,7 @@ module "sbq_messagehub_charges_dequeue" {
   name                = "sbq-charges-dequeue"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
-  dependencies        = [module.sbn_integrationevents.dependent_on]
+  dependencies        = [
+    module.sbn_integrationevents.dependent_on
+  ]
 }

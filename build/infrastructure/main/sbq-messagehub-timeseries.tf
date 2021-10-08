@@ -17,7 +17,9 @@ module "sbq_messagehub_timeseries" {
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   requires_session    = true
-  dependencies        = [module.sbn_integrationevents.dependent_on]
+  dependencies        = [
+    module.sbn_integrationevents.dependent_on
+  ]
 }
 
 module "sbq_messagehub_timeseries_reply" {
@@ -26,7 +28,9 @@ module "sbq_messagehub_timeseries_reply" {
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   requires_session    = true
-  dependencies        = [module.sbn_integrationevents.dependent_on]
+  dependencies        = [
+    module.sbn_integrationevents.dependent_on
+  ]
 }
 
 module "sbq_messagehub_timeseries_dequeue" {
@@ -34,5 +38,7 @@ module "sbq_messagehub_timeseries_dequeue" {
   name                = "sbq-timeseries-dequeue"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
-  dependencies        = [module.sbn_integrationevents.dependent_on]
+  dependencies        = [
+    module.sbn_integrationevents.dependent_on
+  ]
 }
