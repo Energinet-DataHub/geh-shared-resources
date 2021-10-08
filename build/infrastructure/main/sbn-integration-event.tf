@@ -26,7 +26,9 @@ module "sbnar_integrationevents_listener" {
   namespace_name            = module.sbn_integrationevents.name
   resource_group_name       = data.azurerm_resource_group.main.name
   listen                    = true
-  dependencies              = [module.sbn_integrationevents]
+  dependencies              = [
+    module.sbn_integrationevents.dependent_on
+  ]
 }
 
 module "sbnar_integrationevents_sender" {
@@ -35,5 +37,7 @@ module "sbnar_integrationevents_sender" {
   namespace_name            = module.sbn_integrationevents.name
   resource_group_name       = data.azurerm_resource_group.main.name
   send                      = true
-  dependencies              = [module.sbn_integrationevents]
+  dependencies              = [
+    module.sbn_integrationevents.dependent_on
+  ]
 }
