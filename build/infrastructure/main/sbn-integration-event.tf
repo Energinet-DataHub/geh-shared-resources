@@ -45,5 +45,5 @@ module "sbnar_integrationevents_messagehub" {
   resource_group_name       = data.azurerm_resource_group.main.name
   listen                    = true
   send                      = true
-  dependencies              = [module.sbn_marketoperator]
+  dependencies              = [module.sbn_integrationevents.dependent_on]
 }

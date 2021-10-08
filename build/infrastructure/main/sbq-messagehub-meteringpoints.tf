@@ -17,7 +17,7 @@ module "sbq_messagehub_meteringpoints" {
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   requires_session    = true
-  dependencies        = [module.sbn_integrationevents]
+  dependencies        = [module.sbn_integrationevents.dependent_on]
 }
 
 module "sbq_messagehub_meteringpoints_reply" {
@@ -26,7 +26,7 @@ module "sbq_messagehub_meteringpoints_reply" {
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   requires_session    = true
-  dependencies        = [module.sbn_integrationevents]
+  dependencies        = [module.sbn_integrationevents.dependent_on]
 }
 
 module "sbq_messagehub_meteringpoints_dequeue" {
@@ -34,6 +34,5 @@ module "sbq_messagehub_meteringpoints_dequeue" {
   name                = "sbq-meteringpoints-dequeue"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
-  requires_session    = false
-  dependencies        = [module.sbn_integrationevents]
+  dependencies        = [module.sbn_integrationevents.dependent_on]
 }
