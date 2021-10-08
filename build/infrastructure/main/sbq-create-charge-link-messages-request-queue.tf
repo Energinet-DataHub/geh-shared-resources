@@ -19,7 +19,7 @@ module "sbq_create_link_messages_request" {
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   dependencies        = [
-    module.sbn_integrationevents.dependent_on
+    module.sbn_integrationevents.dependent_on,
   ]
 }
 
@@ -30,6 +30,6 @@ module "sbq_create_link_messages_reply" {
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   dependencies        = [
-    module.sbn_integrationevents.dependent_on
+    module.sbn_integrationevents.dependent_on,
   ]
 }
