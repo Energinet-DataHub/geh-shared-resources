@@ -11,9 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 # Queue to forward subscriptions to
 module "sbq_market_roles_forwarded_queue" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=1.9.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
   name                = "market-roles-forwarded-queue"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
@@ -24,7 +25,7 @@ module "sbq_market_roles_forwarded_queue" {
 
 # Subscriptions
 module "sbs_metering_point_connected_subscription_market_roles" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=1.9.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=2.0.0"
   name                = "market-roles-metering-point-connected-sub"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name 
@@ -40,7 +41,7 @@ module "sbs_metering_point_connected_subscription_market_roles" {
 
 # Add sbq_market_roles_forwarded_queue name to key vault to be able to fetch that out in the market roles repo
 module "kv_market_roles_forwarded_queue_name" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.9.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=2.0.0"
   name                = "MARKET-ROLES-FORWARDED-QUEUE-NAME"
   value               = module.sbq_market_roles_forwarded_queue.name
   key_vault_id        = module.kv.id
