@@ -23,22 +23,6 @@ module "sbq_market_roles_forwarded_queue" {
   ]
 }
 
-# Subscriptions
-module "sbs_metering_point_connected_subscription_market_roles" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=2.0.0"
-  name                = "market-roles-metering-point-connected-sub"
-  namespace_name      = module.sbn_integrationevents.name
-  resource_group_name = data.azurerm_resource_group.main.name 
-  topic_name          = module.sbt_metering_point_connected.name
-  max_delivery_count  = 10
-  forward_to          = module.sbq_market_roles_forwarded_queue.name
-  dependencies        = [ 
-    module.sbn_integrationevents.dependent_on, 
-    module.sbq_market_roles_forwarded_queue.dependent_on,
-    module.sbt_metering_point_connected.dependent_on
-  ]
-}
-
 # Add sbq_market_roles_forwarded_queue name to key vault to be able to fetch that out in the market roles repo
 module "kv_market_roles_forwarded_queue_name" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=2.0.0"
