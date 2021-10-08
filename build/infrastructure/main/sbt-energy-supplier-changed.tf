@@ -16,7 +16,9 @@ module "sbt_energy_supplier_changed" {
   name                = "energy-supplier-changed"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
-  dependencies        = [module.sbn_integrationevents.dependent_on]
+  dependencies        = [
+    module.sbn_integrationevents.dependent_on
+  ]
 }
 
 module "sbs_energy_supplier_changed_subscription_metering_point" {
@@ -30,5 +32,6 @@ module "sbs_energy_supplier_changed_subscription_metering_point" {
   dependencies        = [
     module.sbn_integrationevents.dependent_on, 
     module.sbq_metering_point_forwarded_queue.dependent_on,
-    module.sbt_energy_supplier_changed.dependent_on]
+    module.sbt_energy_supplier_changed.dependent_on
+  ]
 }
