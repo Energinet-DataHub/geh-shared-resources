@@ -76,7 +76,7 @@ resource "azurerm_storage_blob" "timeseries" {
 
 module "kvs_data_lake_storage_account_key" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
-  name                            = "AGGREGATION-STORAGE-ACCOUNT-KEY"
+  name                            = "DELTA-LAKE-STORAGE-ACCOUNT-KEY"
   value                           = module.stor_data_lake.primary_access_key
   key_vault_id                    = module.kv.id
   tags                            = data.azurerm_resource_group.main.tags
@@ -88,7 +88,7 @@ module "kvs_data_lake_storage_account_key" {
 
 module "kvs_data_lake_storage_account_name" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
-  name                            = "AGGREGATION-STORAGE-ACCOUNT-NAME"
+  name                            = "DELTA-LAKE-STORAGE-ACCOUNT-NAME"
   value                           = module.stor_data_lake.name
   key_vault_id                    = module.kv.id
   tags                            = data.azurerm_resource_group.main.tags
@@ -112,7 +112,7 @@ module "kvs_data_lake_container_name" {
 
 module "kvs_master_data_blob_name" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
-  name                            = "MASTER-DATA-BLOB-NAME"
+  name                            = "DELTA-LAKE-MASTER-DATA-BLOB-NAME"
   value                           = local.master-data-blob-name
   key_vault_id                    = module.kv.id
   tags                            = data.azurerm_resource_group.main.tags
@@ -124,7 +124,7 @@ module "kvs_master_data_blob_name" {
 
 module "kvs_events_blob_name" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
-  name                            = "EVENTS-BLOB-NAME"
+  name                            = "DELTA-LAKE-EVENTS-BLOB-NAME"
   value                           = local.events-blob-name
   key_vault_id                    = module.kv.id
   tags                            = data.azurerm_resource_group.main.tags
@@ -136,7 +136,7 @@ module "kvs_events_blob_name" {
 
 module "kvs_results_blob_name" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
-  name                            = "RESULTS-BLOB-NAME"
+  name                            = "DELTA-LAKE-RESULTS-BLOB-NAME"
   value                           = local.results-blob-name
   key_vault_id                    = module.kv.id
   tags                            = data.azurerm_resource_group.main.tags
@@ -148,7 +148,7 @@ module "kvs_results_blob_name" {
 
 module "kvs_snapshots_blob_name" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
-  name                            = "SNAPSHOTS-BLOB-NAME"
+  name                            = "DELTA-LAKE-SNAPSHOTS-BLOB-NAME"
   value                           = local.snapshots-blob-name
   key_vault_id                    = module.kv.id
   tags                            = data.azurerm_resource_group.main.tags
@@ -160,7 +160,7 @@ module "kvs_snapshots_blob_name" {
 
 module "kvs_timeseries_blob_name" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
-  name                            = "TIMESERIES-BLOB-NAME"
+  name                            = "DELTA-LAKE-TIMESERIES-BLOB-NAME"
   value                           = local.timeseries-blob-name
   key_vault_id                    = module.kv.id
   tags                            = data.azurerm_resource_group.main.tags
