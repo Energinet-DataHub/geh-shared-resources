@@ -19,5 +19,5 @@ module "sbq_messagehub_dataavailable" {
   resource_group_name = data.azurerm_resource_group.main.name
   dependencies        = [
     module.sbn_integrationevents.dependent_on
-    ]
+  ]
 }

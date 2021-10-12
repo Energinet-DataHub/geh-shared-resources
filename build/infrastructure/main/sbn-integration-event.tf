@@ -37,3 +37,15 @@ module "sbnar_integrationevents_sender" {
   send                      = true
   dependencies              = [module.sbn_integrationevents]
 }
+
+module "sbnar_integrationevents_messagehub" {
+  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace-auth-rule?ref=1.9.0"
+  name                      = "sbnar-integrationevents-messagehub"
+  namespace_name            = module.sbn_integrationevents.name
+  resource_group_name       = data.azurerm_resource_group.main.name
+  listen                    = true
+  send                      = true
+  dependencies              = [
+    module.sbn_integrationevents.dependent_on
+  ]
+}
