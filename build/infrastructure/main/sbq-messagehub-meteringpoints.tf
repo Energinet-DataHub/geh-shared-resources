@@ -11,26 +11,34 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-module "sbt_charge_link_created" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-topic?ref=2.0.0"
-  name                = "charge-link-created"
+module "sbq_messagehub_meteringpoints" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
+  name                = "sbq-meteringpoints"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
+  requires_session    = true
   dependencies        = [
     module.sbn_integrationevents.dependent_on
   ]
 }
 
-module "sbs_charge_link_created_charge" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=2.0.0"
-  name                = "charge-link-created-sub-charges"
-  resource_group_name = data.azurerm_resource_group.main.name
+module "sbq_messagehub_meteringpoints_reply" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
+  name                = "sbq-meteringpoints-reply"
   namespace_name      = module.sbn_integrationevents.name
-  topic_name          = module.sbt_charge_link_created.name
-  max_delivery_count  = 1
+  resource_group_name = data.azurerm_resource_group.main.name
+  requires_session    = true
   dependencies        = [
-    module.sbt_charge_link_created.dependent_on,
+    module.sbn_integrationevents.dependent_on
+  ]
+}
+
+module "sbq_messagehub_meteringpoints_dequeue" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
+  name                = "sbq-meteringpoints-dequeue"
+  namespace_name      = module.sbn_integrationevents.name
+  resource_group_name = data.azurerm_resource_group.main.name
+  dependencies        = [
     module.sbn_integrationevents.dependent_on
   ]
 }

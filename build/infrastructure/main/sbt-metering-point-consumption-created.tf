@@ -11,10 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# Queue to forward subscriptions to
-module "sbq_market_roles_forwarded_queue" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=1.9.0"
-  name                = "market-roles-forwarded-queue"
+
+module "sbt_consumption_metering_point_created" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-topic?ref=2.0.0"
+  name                = "consumption-metering-point-created"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   dependencies        = [
@@ -22,31 +22,30 @@ module "sbq_market_roles_forwarded_queue" {
   ]
 }
 
-# Subscriptions
-module "sbs_metering_point_connected_subscription_market_roles" {
+module "sbs_consumption_metering_point_created_charge" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=2.0.0"
+  name                = "consumption-metering-point-created-sub-charges"
+  resource_group_name = data.azurerm_resource_group.main.name
+  namespace_name      = module.sbn_integrationevents.name
+  topic_name          = module.sbt_consumption_metering_point_created.name
+  max_delivery_count  = 1
+  dependencies        = [
+    module.sbt_consumption_metering_point_created.dependent_on,
+    module.sbn_integrationevents.dependent_on,
+  ]
+}
+
+module "sbs_consumption_metering_point_created_subscription_market_roles" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=1.9.0"
-  name                = "market-roles-metering-point-connected-sub"
+  name                = "market-roles-consumption-mp-created-sub"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name 
-  topic_name          = module.sbt_metering_point_connected.name
+  topic_name          = module.sbt_consumption_metering_point_created.name
   max_delivery_count  = 10
   forward_to          = module.sbq_market_roles_forwarded_queue.name
   dependencies        = [ 
     module.sbn_integrationevents.dependent_on, 
     module.sbq_market_roles_forwarded_queue.dependent_on,
-    module.sbt_metering_point_connected.dependent_on
-  ]
-}
-
-# Add sbq_market_roles_forwarded_queue name to key vault to be able to fetch that out in the market roles repo
-module "kv_market_roles_forwarded_queue_name" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.9.0"
-  name                = "MARKET-ROLES-FORWARDED-QUEUE-NAME"
-  value               = module.sbq_market_roles_forwarded_queue.name
-  key_vault_id        = module.kv.id
-  tags                = data.azurerm_resource_group.main.tags
-  dependencies        = [
-    module.kv.dependent_on,
-    module.sbq_market_roles_forwarded_queue.dependent_on
+    module.sbt_consumption_metering_point_created.dependent_on
   ]
 }
