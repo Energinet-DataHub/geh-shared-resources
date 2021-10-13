@@ -20,3 +20,18 @@ module "sbt_metering_point_connected" {
     module.sbn_integrationevents.dependent_on
   ]
 }
+
+module "sbs_metering_point_connected_subscription_market_roles" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=2.0.0"
+  name                = "market-roles-metering-point-connected-sub"
+  namespace_name      = module.sbn_integrationevents.name
+  resource_group_name = data.azurerm_resource_group.main.name 
+  topic_name          = module.sbt_metering_point_connected.name
+  max_delivery_count  = 10
+  forward_to          = module.sbq_market_roles_forwarded_queue.name
+  dependencies        = [ 
+    module.sbn_integrationevents.dependent_on, 
+    module.sbq_market_roles_forwarded_queue.dependent_on,
+    module.sbt_metering_point_connected.dependent_on
+  ]
+}
