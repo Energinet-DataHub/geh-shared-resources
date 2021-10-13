@@ -120,19 +120,3 @@ module "kvs_db_url" {
   dependencies  = [module.sqlsrv.dependent_on]
 }
 
-module "kvs_integrationevents_listener_connection_string" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.6.0"
-  name          = "INTEGRATION-EVENTS-LISTENER-CONNECTION-STRING"
-  value         = module.sbnar_integrationevents_listener.primary_connection_string
-  key_vault_id  = module.kv.id
-  dependencies  = [module.sbnar_integrationevents_listener.dependent_on]
-}
-
-module "kvs_integrationevents_sender_connection_string" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.6.0"
-  name          = "INTEGRATION-EVENTS-SENDER-CONNECTION-STRING"
-  value         = module.sbnar_integrationevents_sender.primary_connection_string
-  key_vault_id  = module.kv.id
-  dependencies  = [module.sbnar_integrationevents_sender.dependent_on]
-}
-
