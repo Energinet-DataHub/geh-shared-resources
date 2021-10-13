@@ -135,3 +135,4 @@ module "kvs_integrationevents_sender_connection_string" {
   key_vault_id  = module.kv.id
   dependencies  = [module.sbnar_integrationevents_sender.dependent_on]
 }
+

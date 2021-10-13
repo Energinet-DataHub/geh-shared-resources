@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module "sbt_charge_link_created" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-topic?ref=2.0.0"
-  name                = "charge-link-created"
+# Create create link request queue
+module "sbq_create_link_request" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
+  name                = "create-link-request"
   namespace_name      = module.sbn_integrationevents.name
   resource_group_name = data.azurerm_resource_group.main.name
   dependencies        = [
@@ -22,15 +23,13 @@ module "sbt_charge_link_created" {
   ]
 }
 
-module "sbs_charge_link_created_charge" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=2.0.0"
-  name                = "charge-link-created-sub-charges"
-  resource_group_name = data.azurerm_resource_group.main.name
+# Create create link reply queue
+module "sbq_create_link_reply" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
+  name                = "create-link-reply"
   namespace_name      = module.sbn_integrationevents.name
-  topic_name          = module.sbt_charge_link_created.name
-  max_delivery_count  = 1
+  resource_group_name = data.azurerm_resource_group.main.name
   dependencies        = [
-    module.sbt_charge_link_created.dependent_on,
     module.sbn_integrationevents.dependent_on
   ]
 }
