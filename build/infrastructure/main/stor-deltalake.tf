@@ -85,3 +85,87 @@ module "kvs_data_lake_storage_account_key" {
     module.stor_data_lake.dependent_on
   ]
 }
+
+module "kvs_data_lake_storage_account_name" {
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
+  name                            = "DELTA-LAKE-STORAGE-ACCOUNT-NAME"
+  value                           = module.stor_data_lake.name
+  key_vault_id                    = module.kv.id
+  tags                            = data.azurerm_resource_group.main.tags
+  dependencies = [
+    module.kv.dependent_on,
+    module.stor_data_lake.dependent_on
+  ]
+}
+
+module "kvs_data_lake_container_name" {
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
+  name                            = "DELTA-LAKE-CONTAINER-NAME"
+  value                           = module.stor_data_lake_container.name
+  key_vault_id                    = module.kv.id
+  tags                            = data.azurerm_resource_group.main.tags
+  dependencies = [
+    module.kv.dependent_on,
+    module.stor_data_lake.dependent_on
+  ]
+}
+
+module "kvs_master_data_blob_name" {
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
+  name                            = "DELTA-LAKE-AGGREGATION-MASTER-DATA-BLOB-NAME"
+  value                           = local.master-data-blob-name
+  key_vault_id                    = module.kv.id
+  tags                            = data.azurerm_resource_group.main.tags
+  dependencies = [
+    module.kv.dependent_on,
+    module.stor_data_lake.dependent_on
+  ]
+}
+
+module "kvs_events_blob_name" {
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
+  name                            = "DELTA-LAKE-AGGREGATION-EVENTS-BLOB-NAME"
+  value                           = local.events-blob-name
+  key_vault_id                    = module.kv.id
+  tags                            = data.azurerm_resource_group.main.tags
+  dependencies = [
+    module.kv.dependent_on,
+    module.stor_data_lake.dependent_on
+  ]
+}
+
+module "kvs_results_blob_name" {
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
+  name                            = "DELTA-LAKE-AGGREGATION-RESULTS-BLOB-NAME"
+  value                           = local.results-blob-name
+  key_vault_id                    = module.kv.id
+  tags                            = data.azurerm_resource_group.main.tags
+  dependencies = [
+    module.kv.dependent_on,
+    module.stor_data_lake.dependent_on
+  ]
+}
+
+module "kvs_snapshots_blob_name" {
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
+  name                            = "DELTA-LAKE-AGGREGATION-SNAPSHOTS-BLOB-NAME"
+  value                           = local.snapshots-blob-name
+  key_vault_id                    = module.kv.id
+  tags                            = data.azurerm_resource_group.main.tags
+  dependencies = [
+    module.kv.dependent_on,
+    module.stor_data_lake.dependent_on
+  ]
+}
+
+module "kvs_timeseries_blob_name" {
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
+  name                            = "DELTA-LAKE-TIMESERIES-BLOB-NAME"
+  value                           = local.timeseries-blob-name
+  key_vault_id                    = module.kv.id
+  tags                            = data.azurerm_resource_group.main.tags
+  dependencies = [
+    module.kv.dependent_on,
+    module.stor_data_lake.dependent_on
+  ]
+}
