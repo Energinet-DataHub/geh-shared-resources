@@ -40,35 +40,35 @@ module "stor_data_lake_container" {
 }
 
 resource "azurerm_storage_blob" "master_data" {
-  name                            = local.master-data-blob-name
+  name                            = "${local.master-data-blob-name}/notused"
   storage_account_name            = module.stor_data_lake.name
   storage_container_name          = module.stor_data_lake_container.name
   type                            = "Block"
 }
 
 resource "azurerm_storage_blob" "events" {
-  name                            = local.events-blob-name
+  name                            = "${local.events-blob-name}/notused"
   storage_account_name            = module.stor_data_lake.name
   storage_container_name          = module.stor_data_lake_container.name
   type                            = "Block"
 }
 
 resource "azurerm_storage_blob" "results" {
-  name                            = local.results-blob-name
+  name                            = "${local.results-blob-name}/notused"
   storage_account_name            = module.stor_data_lake.name
   storage_container_name          = module.stor_data_lake_container.name
   type                            = "Block"
 }
 
 resource "azurerm_storage_blob" "snapshots" {
-  name                            = local.snapshots-blob-name
+  name                            = "${local.snapshots-blob-name}/notused"
   storage_account_name            = module.stor_data_lake.name
   storage_container_name          = module.stor_data_lake_container.name
   type                            = "Block"
 }
 
 resource "azurerm_storage_blob" "timeseries" {
-  name                            = local.timeseries-blob-name
+  name                            = "${local.timeseries-blob-name}/notused"
   storage_account_name            = module.stor_data_lake.name
   storage_container_name          = module.stor_data_lake_container.name
   type                            = "Block"
