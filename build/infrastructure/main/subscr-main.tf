@@ -11,13 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-module "sbq_messagehub_dataavailable" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
-  name                = "sbq-dataavailable"
-  namespace_name      = module.sbn_integrationevents.name
-  resource_group_name = data.azurerm_resource_group.main.name
-  dependencies        = [
-    module.sbn_integrationevents.dependent_on
-  ]
+data "azurerm_subscription" "this" {
+  subscription_id = var.subscription_id
 }

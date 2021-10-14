@@ -11,15 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-module "sbt_metering_point_message_dequeued" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=renetnielsen/3.1.0"
-
-  name                = "metering-point-message-dequeued"
-  namespace_name      = module.sb_communication.name
+resource "azurerm_api_management_backend" "metering_point" {
+  name                = "metering_point"
   resource_group_name = azurerm_resource_group.this.name
-
-  dependencies        = [
-    module.sb_communication.dependent_on
-  ]
+  api_management_name = module.apim_this.name
+  protocol            = "http"
+  url                 = var.apimao_metering_point_domain_ingestion_function_url
 }

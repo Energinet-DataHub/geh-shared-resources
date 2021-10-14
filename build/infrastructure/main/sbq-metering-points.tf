@@ -11,32 +11,40 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-# Queue to forward subscriptions to
-module "sbq_metering_point_forwarded_queue" {
+module "sbq_metering_points" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
 
-  name                = "metering-point-forwarded-queue"
+  name                = "meteringpoints"
   namespace_name      = module.sb_communication.name
   resource_group_name = azurerm_resource_group.this.name
+  requires_session    = true
 
   dependencies        = [
     module.sb_communication.dependent_on,
   ]
 }
 
-# Add sbq_meterig_point_forwarded_queue name to key vault to be able to fetch that out in the metering point repo
-module "kvs_metering_point_forwarded_queue_name" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
+module "sbq_metering_points_reply" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
 
-  name                = "shared-resource--metering-point-forward-queue-name"
-  value               = module.sbq_metering_point_forwarded_queue.name
-  key_vault_id        = module.kv_this.id
-
-  tags                = azurerm_resource_group.this.tags
+  name                = "meteringpoints-reply"
+  namespace_name      = module.sb_communication.name
+  resource_group_name = azurerm_resource_group.this.name
+  requires_session    = true
 
   dependencies        = [
-    module.kv_this.dependent_on,
-    module.sbq_metering_point_forwarded_queue.dependent_on,
+    module.sb_communication.dependent_on,
+  ]
+}
+
+module "sbq_metering_points_dequeue" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
+
+  name                = "meteringpoints-dequeue"
+  namespace_name      = module.sb_communication.name
+  resource_group_name = azurerm_resource_group.this.name
+  dependencies        = [
+
+    module.sb_communication.dependent_on,
   ]
 }

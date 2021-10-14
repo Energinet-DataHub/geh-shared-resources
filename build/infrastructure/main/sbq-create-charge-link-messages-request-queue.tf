@@ -14,22 +14,26 @@
 
 # Create create link messages request queue
 module "sbq_create_link_messages_request" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
+
   name                = "create-link-messages-request"
-  namespace_name      = module.sbn_integrationevents.name
-  resource_group_name = data.azurerm_resource_group.main.name
+  namespace_name      = module.sb_communication.name
+  resource_group_name = azurerm_resource_group.this.name
+
   dependencies        = [
-    module.sbn_integrationevents.dependent_on,
+    module.sb_communication.dependent_on,
   ]
 }
 
 # Create create link messages reply queue
 module "sbq_create_link_messages_reply" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
+
   name                = "create-link-messages-reply"
-  namespace_name      = module.sbn_integrationevents.name
-  resource_group_name = data.azurerm_resource_group.main.name
+  namespace_name      = module.sb_communication.name
+  resource_group_name = azurerm_resource_group.this.name
+
   dependencies        = [
-    module.sbn_integrationevents.dependent_on,
+    module.sb_communication.dependent_on,
   ]
 }

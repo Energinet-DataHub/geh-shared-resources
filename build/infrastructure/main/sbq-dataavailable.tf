@@ -11,15 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+module "sbq_dataavailable" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
 
-module "sbt_metering_point_message_dequeued" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=renetnielsen/3.1.0"
-
-  name                = "metering-point-message-dequeued"
+  name                = "dataavailable"
   namespace_name      = module.sb_communication.name
   resource_group_name = azurerm_resource_group.this.name
 
   dependencies        = [
-    module.sb_communication.dependent_on
+    module.sb_communication.dependent_on,
   ]
 }

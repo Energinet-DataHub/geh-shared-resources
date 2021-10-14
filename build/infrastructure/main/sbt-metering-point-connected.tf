@@ -12,26 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "sbt_metering_point_connected" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-topic?ref=1.9.0"
-  name                = "metering-point-connected"
-  namespace_name      = module.sbn_integrationevents.name
-  resource_group_name = data.azurerm_resource_group.main.name
-  dependencies        = [
-    module.sbn_integrationevents.dependent_on
-  ]
-}
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=renetnielsen/3.1.0"
 
-module "sbs_metering_point_connected_subscription_market_roles" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=2.0.0"
-  name                = "market-roles-metering-point-connected-sub"
-  namespace_name      = module.sbn_integrationevents.name
-  resource_group_name = data.azurerm_resource_group.main.name 
-  topic_name          = module.sbt_metering_point_connected.name
-  max_delivery_count  = 10
-  forward_to          = module.sbq_market_roles_forwarded_queue.name
-  dependencies        = [ 
-    module.sbn_integrationevents.dependent_on, 
-    module.sbq_market_roles_forwarded_queue.dependent_on,
-    module.sbt_metering_point_connected.dependent_on
+  name                = "metering-point-connected"
+  namespace_name      = module.sb_communication.name
+  resource_group_name = azurerm_resource_group.this.name
+  subscriptions       = [
+    {
+      name                = "metering-point-energy-supplier-changed-sub"
+      max_delivery_count  = 10
+      forward_to          = module.sbq_metering_point_forwarded_queue.name
+    },
+  ]
+
+  dependencies        = [
+    module.sb_communication.dependent_on,
   ]
 }

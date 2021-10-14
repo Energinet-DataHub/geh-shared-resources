@@ -11,12 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-resource "azurerm_api_management" "main" {
-  name                = "apim-001-${var.project}-${var.organisation}-${var.environment}"
-  resource_group_name = data.azurerm_resource_group.main.name
-  location            = data.azurerm_resource_group.main.location
-  tags                = data.azurerm_resource_group.main.tags
+module "apim_this" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=renetnielsen/3.1.0"
+
+  name                = "main"
+  project_name        = var.project
+  organisation_name   = var.organisation
+  environment_short   = var.environment
+  resource_group_name = azurerm_resource_group.this.name
+  location            = azurerm_resource_group.this.location
   publisher_name      = var.organisation
-  publisher_email     = var.publisher_email
+  publisher_email     = var.apim_publisher_email
   sku_name            = "Developer_1"
+
+  tags                = azurerm_resource_group.this.tags
 }

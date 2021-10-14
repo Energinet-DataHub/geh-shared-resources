@@ -12,26 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "sbt_energy_supplier_changed" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-topic?ref=1.9.0"
-  name                = "energy-supplier-changed"
-  namespace_name      = module.sbn_integrationevents.name
-  resource_group_name = data.azurerm_resource_group.main.name
-  dependencies        = [
-    module.sbn_integrationevents.dependent_on
-  ]
-}
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=renetnielsen/3.1.0"
 
-module "sbs_energy_supplier_changed_subscription_metering_point" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=2.0.0"
-  name                = "metering-point-energy-supplier-changed-sub"
-  namespace_name      = module.sbn_integrationevents.name
-  resource_group_name = data.azurerm_resource_group.main.name 
-  topic_name          = module.sbt_energy_supplier_changed.name
-  max_delivery_count  = 10
-  forward_to          = module.sbq_metering_point_forwarded_queue.name
+  name                = "energy-supplier-changed"
+  namespace_name      = module.sb_communication.name
+  resource_group_name = azurerm_resource_group.this.name
+  subscriptions       = [
+    {
+      name                = "metering-point-energy-supplier-changed-sub"
+      max_delivery_count  = 10
+      forward_to          = module.sbq_metering_point_forwarded_queue.name
+    },
+  ]
+  
   dependencies        = [
-    module.sbn_integrationevents.dependent_on, 
+    module.sb_communication.dependent_on,
     module.sbq_metering_point_forwarded_queue.dependent_on,
-    module.sbt_energy_supplier_changed.dependent_on
   ]
 }
