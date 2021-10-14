@@ -119,4 +119,3 @@ module "kvs_db_url" {
   key_vault_id  = module.kv.id
   dependencies  = [module.sqlsrv.dependent_on]
 }
-
