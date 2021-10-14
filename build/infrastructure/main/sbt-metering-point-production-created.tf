@@ -21,31 +21,3 @@ module "sbt_production_metering_point_created" {
     module.sbn_integrationevents.dependent_on
   ]
 }
-
-module "sbs_production_metering_point_created_charge" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=2.0.0"
-  name                = "production-metering-point-created-sub-charges"
-  resource_group_name = data.azurerm_resource_group.main.name
-  namespace_name      = module.sbn_integrationevents.name
-  topic_name          = module.sbt_production_metering_point_created.name
-  max_delivery_count  = 1
-  dependencies        = [
-    module.sbt_production_metering_point_created.dependent_on,
-    module.sbn_integrationevents.dependent_on,
-  ]
-}
-
-module "sbs_production_metering_point_created_subscription_market_roles" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-subscription?ref=1.9.0"
-  name                = "market-roles-production-mp-created-sub"
-  namespace_name      = module.sbn_integrationevents.name
-  resource_group_name = data.azurerm_resource_group.main.name 
-  topic_name          = module.sbt_production_metering_point_created.name
-  max_delivery_count  = 10
-  forward_to          = module.sbq_market_roles_forwarded_queue.name
-  dependencies        = [ 
-    module.sbn_integrationevents.dependent_on, 
-    module.sbq_market_roles_forwarded_queue.dependent_on,
-    module.sbt_production_metering_point_created.dependent_on
-  ]
-}
