@@ -13,43 +13,87 @@
 # limitations under the License.
 module "sbn_integrationevents" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace?ref=1.9.0"
+
   name                = "sbn-integrationevents-${var.project}-${var.organisation}-${var.environment}"
   resource_group_name = data.azurerm_resource_group.main.name
   location            = data.azurerm_resource_group.main.location
   sku                 = "basic"
+
   tags                = data.azurerm_resource_group.main.tags
 }
 
-module "sbnar_integrationevents_listener" {
+module "sbnar_integrationevents_listen" {
   source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace-auth-rule?ref=1.9.0"
-  name                      = "sbnar-integrationevents-listener"
+  name                      = "sbnar-integrationevents-listen"
+
   namespace_name            = module.sbn_integrationevents.name
   resource_group_name       = data.azurerm_resource_group.main.name
   listen                    = true
+
   dependencies              = [
-    module.sbn_integrationevents.dependent_on
+    module.sbn_integrationevents.dependent_on,
   ]
 }
 
-module "sbnar_integrationevents_sender" {
+module "sbnar_integrationevents_send" {
   source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace-auth-rule?ref=1.9.0"
-  name                      = "sbnar-integrationevents-sender"
+  name                      = "sbnar-integrationevents-send"
+
   namespace_name            = module.sbn_integrationevents.name
   resource_group_name       = data.azurerm_resource_group.main.name
   send                      = true
+
   dependencies              = [
-    module.sbn_integrationevents.dependent_on
+    module.sbn_integrationevents.dependent_on,
   ]
 }
 
-module "sbnar_integrationevents_messagehub" {
+module "sbnar_integrationevents_sendlisten" {
   source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace-auth-rule?ref=1.9.0"
-  name                      = "sbnar-integrationevents-messagehub"
+  name                      = "sbnar-integrationevents-sendlisten"
+
   namespace_name            = module.sbn_integrationevents.name
   resource_group_name       = data.azurerm_resource_group.main.name
   listen                    = true
   send                      = true
+
   dependencies              = [
-    module.sbn_integrationevents.dependent_on
+    module.sbn_integrationevents.dependent_on,
+  ]
+}
+
+module "kvs_integrationevents_send" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=2.0.0"
+
+  name          = "SHARED-RESOURCES--SB-INTEGRATIONEVENTS-LISTEN-CONNECTION-STRING"
+  value         = module.sbnar_integrationevents_listen.primary_connection_string
+  key_vault_id  = module.kv.id
+
+  dependencies  = [
+    module.sqlsrv.dependent_on,
+  ]
+}
+
+module "kvs_integrationevents_listen" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=2.0.0"
+
+  name          = "SHARED-RESOURCES--SB-INTEGRATIONEVENTS-SEND-CONNECTION-STRING"
+  value         = module.sbnar_integrationevents_send.primary_connection_string
+  key_vault_id  = module.kv.id
+
+  dependencies  = [
+    module.sqlsrv.dependent_on,
+  ]
+}
+
+module "kvs_integrationevents_sendlisten" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=2.0.0"
+
+  name          = "SHARED-RESOURCES--SB-INTEGRATIONEVENTS-SENDLISTEN-CONNECTION-STRING"
+  value         = module.sbnar_integrationevents_sendlisten.primary_connection_string
+  key_vault_id  = module.kv.id
+
+  dependencies  = [
+    module.sqlsrv.dependent_on,
   ]
 }
