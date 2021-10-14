@@ -103,6 +103,9 @@ module "kvs_db_admin_name" {
   name          = "SHARED-RESOURCES-DB-ADMIN-NAME"
   value         = local.sqlServerAdminName
   key_vault_id  = module.kv.id
+  dependencies  = [
+    module.sqlsrv.dependent_on,
+  ]
 }
 
 module "kvs_db_admin_password" {
@@ -110,6 +113,9 @@ module "kvs_db_admin_password" {
   name          = "SHARED-RESOURCES-DB-ADMIN-PASSWORD"
   value         = random_password.sqlsrv_admin_password.result
   key_vault_id  = module.kv.id
+  dependencies  = [
+    module.sqlsrv.dependent_on,
+  ]
 }
 
 module "kvs_db_url" {
@@ -117,5 +123,7 @@ module "kvs_db_url" {
   name          = "SHARED-RESOURCES-DB-URL"
   value         = module.sqlsrv.fully_qualified_domain_name
   key_vault_id  = module.kv.id
-  dependencies  = [module.sqlsrv.dependent_on]
+  dependencies  = [
+    module.sqlsrv.dependent_on,
+  ]
 }
