@@ -39,41 +39,6 @@ module "stor_data_lake_container" {
   dependencies                    = [ module.stor_data_lake.dependent_on ]
 }
 
-resource "azurerm_storage_blob" "master_data" {
-  name                            = "${local.master-data-blob-name}/"
-  storage_account_name            = module.stor_data_lake.name
-  storage_container_name          = module.stor_data_lake_container.name
-  type                            = "Block"
-}
-
-resource "azurerm_storage_blob" "events" {
-  name                            = "${local.events-blob-name}/"
-  storage_account_name            = module.stor_data_lake.name
-  storage_container_name          = module.stor_data_lake_container.name
-  type                            = "Block"
-}
-
-resource "azurerm_storage_blob" "results" {
-  name                            = "${local.results-blob-name}/"
-  storage_account_name            = module.stor_data_lake.name
-  storage_container_name          = module.stor_data_lake_container.name
-  type                            = "Block"
-}
-
-resource "azurerm_storage_blob" "snapshots" {
-  name                            = "${local.snapshots-blob-name}/"
-  storage_account_name            = module.stor_data_lake.name
-  storage_container_name          = module.stor_data_lake_container.name
-  type                            = "Block"
-}
-
-resource "azurerm_storage_blob" "timeseries" {
-  name                            = "${local.timeseries-blob-name}/"
-  storage_account_name            = module.stor_data_lake.name
-  storage_container_name          = module.stor_data_lake_container.name
-  type                            = "Block"
-}
-
 module "kvs_data_lake_storage_account_key" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
   name                            = "DELTA-LAKE-STORAGE-ACCOUNT-KEY"
