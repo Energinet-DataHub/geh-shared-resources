@@ -15,12 +15,12 @@ locals {
   sqlServerAdminName = "gehdbadmin"
 }
 
-module "sql_data" {
+module "sql_shared" {
   source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=renetnielsen/3.1.0"
-  name                          = "data"
-  project_name                  = var.project
-  organisation_name             = var.organisation
-  environment_short             = var.environment
+
+  name                          = "shared"
+  environment_short             = var.environment_short
+  environment_instance          = var.environment_instance
   sql_version                   = "12.0"
   resource_group_name           = azurerm_resource_group.this.name
   location                      = azurerm_resource_group.this.location
@@ -34,43 +34,30 @@ module "sql_data" {
     }
   ]
 
-  tags                          = azurerm_resource_group.this.tags
+  tags                          = local.tags
 }
 
 module "kvs_db_admin_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "shared-resources--sql-db-admin-name"
+  name          = "sql-data-admin-user-name"
   value         = local.sqlServerAdminName
-  key_vault_id  = module.kv_this.id
-
-  dependencies  = [
-    module.kv_this.dependent_on,
-  ]
+  key_vault_id  = module.kv_shared.id
 }
 
 module "kvs_db_admin_password" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "shared-resources--sql-db-admin-password"
+  name          = "sql-data-admin-user-password"
   value         = random_password.sql_administrator_login_password.result
-  key_vault_id  = module.kv_this.id
-
-  dependencies  = [
-    module.kv_this.dependent_on,
-  ]
+  key_vault_id  = module.kv_shared.id
 }
 
 module "kvs_db_url" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
-  name          = "shared-resources--sql-db-url"
-  value         = module.sql_data.fully_qualified_domain_name
-  key_vault_id  = module.kv_this.id
-
-  dependencies  = [
-    module.kv_this.dependent_on,
-    module.sql_data.dependent_on,
-  ]
+  name          = "sql-data-url"
+  value         = module.sql_shared.fully_qualified_domain_name
+  key_vault_id  = module.kv_shared.id
 }
 
 resource "random_password" "sql_administrator_login_password" {

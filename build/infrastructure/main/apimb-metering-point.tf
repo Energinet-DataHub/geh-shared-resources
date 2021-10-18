@@ -14,7 +14,7 @@
 resource "azurerm_api_management_backend" "metering_point" {
   name                = "metering_point"
   resource_group_name = azurerm_resource_group.this.name
-  api_management_name = module.apim_this.name
+  api_management_name = module.apim_shared.name
   protocol            = "http"
   url                 = var.apimao_metering_point_domain_ingestion_function_url
 }

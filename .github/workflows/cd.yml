@@ -32,7 +32,7 @@ jobs:
     name: Deploy infrastructure to Development 001
     runs-on: ubuntu-latest
     environment:
-      name: Development001
+      name: Development_001
     env: 
       TF_VAR_apim_publisher_email: ${{ secrets.AZURE_APIM_PUBLISHER_EMAIL }}
       TF_VAR_apimao_b2b_cim_url_path_suffix: ${{ secrets.AZURE_APIMA_B2B_CIM_URL_PATH_SUFFIX }}
@@ -43,10 +43,12 @@ jobs:
         uses: Energinet-DataHub/.github/.github/actions/terraform-apply@renetnielsen/terraform-apply-1.4.0
         with:
           PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
-          ORGANISATION_NAME: ${{ secrets.ORGANISATION_NAME }}
-          ENVIRONMENT_SHORT: u001
+          SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+          ENVIRONMENT_INSTANCE: "001"
+          ENVIRONMENT_SHORT: u
           TERRAFORM_BACKEND_FILE_PATH: ${{ env.TERRAFORM_BACKEND_FILE_PATH }}
-          TERRAFORM_WORKING_DIR_PATH: ${{ env.TERRAFORM_VERSION }}
+          TERRAFORM_WORKING_DIR_PATH: ${{ env.TERRAFORM_WORKING_DIR_PATH }}
+          TERRAFORM_STATE_RG_NAME: ${{ secrets.AZURE_TF_STATE_RG_NAME }}
           TERRAFORM_VERSION: ${{ env.TERRAFORM_VERSION }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_SPN_ID: ${{ secrets.AZURE_SPN_ID }}
@@ -60,7 +62,7 @@ jobs:
     needs: infra_deploy_development_001
     runs-on: ubuntu-latest
     environment:
-      name: Test001
+      name: Test_001
     env: 
       TF_VAR_apim_publisher_email: ${{ secrets.AZURE_APIM_PUBLISHER_EMAIL }}
       TF_VAR_apimao_b2b_cim_url_path_suffix: ${{ secrets.AZURE_APIMA_B2B_CIM_URL_PATH_SUFFIX }}
@@ -71,10 +73,12 @@ jobs:
         uses: Energinet-DataHub/.github/.github/actions/terraform-apply@renetnielsen/terraform-apply-1.4.0
         with:
           PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
-          ORGANISATION_NAME: ${{ secrets.ORGANISATION_NAME }}
-          ENVIRONMENT_SHORT: t001
+          SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+          ENVIRONMENT_INSTANCE: "001"
+          ENVIRONMENT_SHORT: t
           TERRAFORM_BACKEND_FILE_PATH: ${{ env.TERRAFORM_BACKEND_FILE_PATH }}
           TERRAFORM_WORKING_DIR_PATH: ${{ env.TERRAFORM_WORKING_DIR_PATH }}
+          TERRAFORM_STATE_RG_NAME: ${{ secrets.AZURE_TF_STATE_RG_NAME }}
           TERRAFORM_VERSION: ${{ env.TERRAFORM_VERSION }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_SPN_ID: ${{ secrets.AZURE_SPN_ID }}
@@ -88,7 +92,7 @@ jobs:
     needs: infra_deploy_test_001
     runs-on: ubuntu-latest
     environment:
-      name: Preproduction001
+      name: Preproduction_001
     env: 
       TF_VAR_apim_publisher_email: ${{ secrets.AZURE_APIM_PUBLISHER_EMAIL }}
       TF_VAR_apimao_b2b_cim_url_path_suffix: ${{ secrets.AZURE_APIMA_B2B_CIM_URL_PATH_SUFFIX }}
@@ -99,10 +103,12 @@ jobs:
         uses: Energinet-DataHub/.github/.github/actions/terraform-apply@renetnielsen/terraform-apply-1.4.0
         with:
           PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
-          ORGANISATION_NAME: ${{ secrets.ORGANISATION_NAME }}
-          ENVIRONMENT_SHORT: b001
+          SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+          ENVIRONMENT_INSTANCE: "001"
+          ENVIRONMENT_SHORT: b
           TERRAFORM_BACKEND_FILE_PATH: ${{ env.TERRAFORM_BACKEND_FILE_PATH }}
           TERRAFORM_WORKING_DIR_PATH: ${{ env.TERRAFORM_WORKING_DIR_PATH }}
+          TERRAFORM_STATE_RG_NAME: ${{ secrets.AZURE_TF_STATE_RG_NAME }}
           TERRAFORM_VERSION: ${{ env.TERRAFORM_VERSION }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_SPN_ID: ${{ secrets.AZURE_SPN_ID }}
@@ -116,7 +122,7 @@ jobs:
     needs: infra_deploy_test_001
     runs-on: ubuntu-latest
     environment:
-      name: Preproduction001
+      name: Preproduction_002
     env: 
       TF_VAR_apim_publisher_email: ${{ secrets.AZURE_APIM_PUBLISHER_EMAIL }}
       TF_VAR_apimao_b2b_cim_url_path_suffix: ${{ secrets.AZURE_APIMA_B2B_CIM_URL_PATH_SUFFIX }}
@@ -127,10 +133,12 @@ jobs:
         uses: Energinet-DataHub/.github/.github/actions/terraform-apply@renetnielsen/terraform-apply-1.4.0
         with:
           PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
-          ORGANISATION_NAME: ${{ secrets.ORGANISATION_NAME }}
-          ENVIRONMENT_SHORT: b001
+          SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+          ENVIRONMENT_INSTANCE: "001"
+          ENVIRONMENT_SHORT: b
           TERRAFORM_BACKEND_FILE_PATH: ${{ env.TERRAFORM_BACKEND_FILE_PATH }}
           TERRAFORM_WORKING_DIR_PATH: ${{ env.TERRAFORM_WORKING_DIR_PATH }}
+          TERRAFORM_STATE_RG_NAME: ${{ secrets.AZURE_TF_STATE_RG_NAME }}
           TERRAFORM_VERSION: ${{ env.TERRAFORM_VERSION }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_SPN_ID: ${{ secrets.AZURE_SPN_ID }}
@@ -141,10 +149,10 @@ jobs:
 
   infra_deploy_production_001:
     name: Deploy infrastructure to Production
-    needs: infra_deploy_preprod_001
+    needs: [infra_deploy_preprod_001, infra_deploy_preprod_001]
     runs-on: ubuntu-latest
     environment:
-      name: Production001
+      name: Production_001
     env: 
       TF_VAR_apim_publisher_email: ${{ secrets.AZURE_APIM_PUBLISHER_EMAIL }}
       TF_VAR_apimao_b2b_cim_url_path_suffix: ${{ secrets.AZURE_APIMA_B2B_CIM_URL_PATH_SUFFIX }}
@@ -155,10 +163,12 @@ jobs:
         uses: Energinet-DataHub/.github/.github/actions/terraform-apply@renetnielsen/terraform-apply-1.4.0
         with:
           PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
-          ORGANISATION_NAME: ${{ secrets.ORGANISATION_NAME }}
-          ENVIRONMENT_SHORT: p001
+          SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+          ENVIRONMENT_INSTANCE: "001"
+          ENVIRONMENT_SHORT: p
           TERRAFORM_BACKEND_FILE_PATH: ${{ env.TERRAFORM_BACKEND_FILE_PATH }}
           TERRAFORM_WORKING_DIR_PATH: ${{ env.TERRAFORM_WORKING_DIR_PATH }}
+          TERRAFORM_STATE_RG_NAME: ${{ secrets.AZURE_TF_STATE_RG_NAME }}
           TERRAFORM_VERSION: ${{ env.TERRAFORM_VERSION }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_SPN_ID: ${{ secrets.AZURE_SPN_ID }}

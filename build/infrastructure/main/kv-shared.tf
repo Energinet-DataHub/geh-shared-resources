@@ -11,17 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-module "kv_this" {
+module "kv_shared" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault?ref=renetnielsen/3.1.0"
 
-  name                            = "this"
-  project_name                    = var.project
-  organisation_name               = var.organisation
-  environment_short               = var.environment
+  name                            = "shared"
+  environment_short               = var.environment_short
+  environment_instance            = var.environment_instance
   resource_group_name             = azurerm_resource_group.this.name
   location                        = azurerm_resource_group.this.location
   enabled_for_template_deployment = true
   sku_name                        = "standard"
 
-  tags                            = azurerm_resource_group.this.tags
+  tags                            = local.tags
 }

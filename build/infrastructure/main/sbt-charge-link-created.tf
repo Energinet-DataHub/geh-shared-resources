@@ -11,21 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 module "sbt_charge_link_created" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=renetnielsen/3.1.0"
 
   name                = "charge-link-created"
-  namespace_name      = module.sb_communication.name
+  namespace_name      = module.sb_domainrelay.name
   resource_group_name = azurerm_resource_group.this.name
   subscriptions       = [
     {
       name                = "charge-link-created-sub-charges"
       max_delivery_count  = 1
     },
-  ]
-  
-  dependencies        = [
-    module.sb_communication.dependent_on,
   ]
 }

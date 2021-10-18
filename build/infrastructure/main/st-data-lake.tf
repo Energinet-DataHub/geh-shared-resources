@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 locals {
-    data_lake_master_data_blob_name = "master-data"
+    data_lake_master_data_blob_name = "masterdata"
     data_lake_events_blob_name      = "events"
     data_lake_results_blob_name     = "results"
     data_lake_snapshots_blob_name   = "snapshots"
@@ -23,10 +23,9 @@ locals {
 module "st_data_lake" {
   source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=renetnielsen/3.1.0"
 
-  name                      = "data"
-  project_name              = var.project
-  organisation_name         = var.organisation
-  environment_short         = var.environment
+  name                      = "datalake"
+  environment_short         = var.environment_short
+  environment_instance      = var.environment_instance
   resource_group_name       = azurerm_resource_group.this.name
   location                  = azurerm_resource_group.this.location
   account_replication_type  = "LRS"
@@ -34,11 +33,11 @@ module "st_data_lake" {
   is_hns_enabled            = true
   containers                = [
     {
-      name  = local.data_lake_data_container_name
-    }
+      name  = local.data_lake_data_container_name,
+    },
   ]
 
-  tags                      = azurerm_resource_group.this.tags
+  tags                      = local.tags
 }
 
 resource "azurerm_storage_blob" "master_data" {
@@ -46,10 +45,6 @@ resource "azurerm_storage_blob" "master_data" {
   storage_account_name    = module.st_data_lake.name
   storage_container_name  = local.data_lake_data_container_name
   type                    = "Block"
-  
-  depends_on              = [
-    module.st_data_lake.dependent_on,
-  ]
 }
 
 resource "azurerm_storage_blob" "events" {
@@ -57,10 +52,6 @@ resource "azurerm_storage_blob" "events" {
   storage_account_name    = module.st_data_lake.name
   storage_container_name  = local.data_lake_data_container_name
   type                    = "Block"
-  
-  depends_on              = [
-    module.st_data_lake.dependent_on,
-  ]
 }
 
 resource "azurerm_storage_blob" "results" {
@@ -68,10 +59,6 @@ resource "azurerm_storage_blob" "results" {
   storage_account_name    = module.st_data_lake.name
   storage_container_name  = local.data_lake_data_container_name
   type                    = "Block"
-  
-  depends_on              = [
-    module.st_data_lake.dependent_on,
-  ]
 }
 
 resource "azurerm_storage_blob" "snapshots" {
@@ -79,10 +66,6 @@ resource "azurerm_storage_blob" "snapshots" {
   storage_account_name    = module.st_data_lake.name
   storage_container_name  = local.data_lake_data_container_name
   type                    = "Block"
-  
-  depends_on              = [
-    module.st_data_lake.dependent_on,
-  ]
 }
 
 resource "azurerm_storage_blob" "timeseries" {
@@ -90,128 +73,84 @@ resource "azurerm_storage_blob" "timeseries" {
   storage_account_name    = module.st_data_lake.name
   storage_container_name  = local.data_lake_data_container_name
   type                    = "Block"
-  
-  depends_on              = [
-    module.st_data_lake.dependent_on,
-  ]
 }
 
-module "kvs_st_data_lake_primary_access_key" {
+module "kvs_st_data_lake_primary_connection_string" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "st-data-lake-primary-access-key"
-  value         = module.st_data_lake.primary_access_key
-  key_vault_id  = module.kv_this.id
+  name          = "${module.st_data_lake.name}-primary-connection-string"
+  value         = module.st_data_lake.primary_connection_string
+  key_vault_id  = module.kv_shared.id
 
-  tags          = azurerm_resource_group.this.tags
-
-  dependencies = [
-    module.kv_this.dependent_on,
-    module.st_data_lake.dependent_on,
-  ]
+  tags          = local.tags
 }
 
 module "kvs_st_data_lake_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "st-data-lake-name"
+  name          = "${module.st_data_lake.name}-name"
   value         = module.st_data_lake.name
-  key_vault_id  = module.kv_this.id
+  key_vault_id  = module.kv_shared.id
 
-  tags          = azurerm_resource_group.this.tags
-
-  dependencies = [
-    module.kv_this.dependent_on,
-    module.st_data_lake.dependent_on,
-  ]
+  tags          = local.tags
 }
 
 module "kvs_st_data_lake_data_container_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "st-data-lake-data-container-name"
+  name          = "${module.st_data_lake.name}-data-container-name"
   value         = local.data_lake_data_container_name
-  key_vault_id  = module.kv_this.id
+  key_vault_id  = module.kv_shared.id
 
-  tags          = azurerm_resource_group.this.tags
-
-  dependencies = [
-    module.kv_this.dependent_on,
-    module.st_data_lake.dependent_on,
-  ]
+  tags          = local.tags
 }
 
 module "kvs_st_data_lake_master_data_blob_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "st-master-data-blob-name"
+  name          = "${module.st_data_lake.name}-masterdata-blob-name"
   value         = local.data_lake_master_data_blob_name
-  key_vault_id  = module.kv_this.id
+  key_vault_id  = module.kv_shared.id
 
-  tags          = azurerm_resource_group.this.tags
-
-  dependencies = [
-    module.kv_this.dependent_on,
-    module.st_data_lake.dependent_on,
-  ]
+  tags          = local.tags
 }
 
 module "kvs_st_data_lake_events_blob_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "st-data-lake-events-blob-name"
+  name          = "${module.st_data_lake.name}-events-blob-name"
   value         = local.data_lake_events_blob_name
-  key_vault_id  = module.kv_this.id
+  key_vault_id  = module.kv_shared.id
 
-  tags          = azurerm_resource_group.this.tags
-
-  dependencies = [
-    module.kv_this.dependent_on,
-    module.st_data_lake.dependent_on,
-  ]
+  tags          = local.tags
 }
 
 module "kvs_st_aggregation_data_lake_results_blob_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "st-data-lake-results-blob-name"
+  name          = "${module.st_data_lake.name}-results-blob-name"
   value         = local.data_lake_results_blob_name
-  key_vault_id  = module.kv_this.id
+  key_vault_id  = module.kv_shared.id
 
-  tags          = azurerm_resource_group.this.tags
-
-  dependencies = [
-    module.kv_this.dependent_on,
-    module.st_data_lake.dependent_on,
-  ]
+  tags          = local.tags
 }
 
 module "kvs_st_aggregation_snapshot_blob_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "st-data-lake-snapshot-blob-name"
+  name          = "${module.st_data_lake.name}-snapshot-blob-name"
   value         = local.data_lake_snapshots_blob_name
-  key_vault_id  = module.kv_this.id
+  key_vault_id  = module.kv_shared.id
 
-  tags          = azurerm_resource_group.this.tags
-
-  dependencies = [
-    module.kv_this.dependent_on,
-    module.st_data_lake.dependent_on,
-  ]
+  tags          = local.tags
 }
 
 module "kvs_st_data_lake_timeseries_blob_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "st-data-lake-blob-name"
+  name          = "${module.st_data_lake.name}-timeseries-blob-name"
   value         = local.data_lake_timeseries_blob_name
-  key_vault_id  = module.kv_this.id
+  key_vault_id  = module.kv_shared.id
 
-  tags          = azurerm_resource_group.this.tags
-
-  dependencies = [
-    module.kv_this.dependent_on,
-    module.st_data_lake.dependent_on,
-  ]
+  tags          = local.tags
 }

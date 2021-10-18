@@ -19,19 +19,24 @@ variable "subscription_id" {
   type = string
 }
 
-variable environment {
+variable environment_short {
   type          = string
-  description   = "Enviroment that the infrastructure code is deployed into"
+  description   = "Enviroment that the infrastructure code is deployed into."
 }
 
-variable project {
+variable environment_instance {
   type          = string
-  description   = "Project that is running the infrastructure code"
+  description   = "Enviroment instance that the infrastructure code is deployed into."
 }
 
-variable organisation {
+variable project_name {
   type          = string
-  description   = "Organisation that is running the infrastructure code"
+  description   = "Name of the project this infrastructure is a part of."
+}
+
+variable service_name {
+  type          = string
+  description   = "Name of the service this infrastructure is a part of."
 }
 
 variable apim_publisher_email {
@@ -41,15 +46,15 @@ variable apim_publisher_email {
 
 variable apimao_metering_point_domain_ingestion_function_url {
   type          = string
-  description   = "Url of the Metering Point domain ingestion function, used for configuration inside the API Managment API"
+  description   = "Url of the Metering Point domain ingestion function, used for configuration inside the API Managment API."
 }
 
 variable apimao_metering_point_domain_ingestion_path {
   type          = string
-  description   = "Path of the Metering Point domain ingestion function, used for configuration inside the API Managment API"
+  description   = "Path of the Metering Point domain ingestion function, used for configuration inside the API Managment API."
 }
 
 variable apimao_b2b_cim_url_path_suffix {
   type          = string
-  description   = "URL path suffix for the b2b cim endpoints, used for configuration inside the API Managment API"
+  description   = "URL path suffix for the b2b cim endpoints, used for configuration inside the API Managment API."
 }

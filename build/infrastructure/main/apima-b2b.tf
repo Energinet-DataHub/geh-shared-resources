@@ -15,10 +15,9 @@ module "apima_b2b" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=renetnielsen/3.1.0"
 
   name                  = "b2b"
-  project_name          = var.project
-  organisation_name     = var.organisation
-  environment_short     = var.environment
-  api_management_name   = module.apim_this.name
+  environment_short     = var.environment_short
+  environment_instance  = var.environment_instance
+  api_management_name   = module.apim_shared.name
   resource_group_name   = azurerm_resource_group.this.name
   revision              = "1"
   display_name          = "B2B Api"
@@ -46,9 +45,5 @@ module "apima_b2b" {
         </policies>
       XML
     }
-  ]
-
-  dependencies          = [
-    module.apim_this.dependent_on,
   ]
 }

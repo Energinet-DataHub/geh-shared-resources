@@ -15,35 +15,24 @@ module "sbq_aggregations" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
 
   name                = "aggregations"
-  namespace_name      = module.sb_communication.name
+  namespace_name      = module.sb_domainrelay.name
   resource_group_name = azurerm_resource_group.this.name
   requires_session    = true
-
-  dependencies        = [
-    module.sb_communication.dependent_on,
-  ]
 }
 
 module "sbq_aggregations_reply" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
 
   name                = "aggregations-reply"
-  namespace_name      = module.sb_communication.name
+  namespace_name      = module.sb_domainrelay.name
   resource_group_name = azurerm_resource_group.this.name
   requires_session    = true
-
-  dependencies        = [
-    module.sb_communication.dependent_on,
-  ]
 }
 
 module "sbq_aggregations_dequeue" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
 
   name                = "aggregations-dequeue"
-  namespace_name      = module.sb_communication.name
+  namespace_name      = module.sb_domainrelay.name
   resource_group_name = azurerm_resource_group.this.name
-  dependencies        = [
-    module.sb_communication.dependent_on,
-  ]
 }

@@ -17,7 +17,7 @@ module "apimao_request_change_of_accounting_point_characteristics" {
   operation_id            = "request-change-of-accounting-point-characteristics"
   api_management_api_name = module.apima_b2b.name
   resource_group_name     = azurerm_resource_group.this.name
-  api_management_name     = module.apim_this.name
+  api_management_name     = module.apim_shared.name
   display_name            = "Request change of accounting point characteristics"
   method                  = "POST"
   url_template            = "${var.apimao_b2b_cim_url_path_suffix}/request-change-of-accounting-point-characteristics"
@@ -27,15 +27,11 @@ module "apimao_request_change_of_accounting_point_characteristics" {
         <policies>
           <inbound>
             <base />
-            <set-backend-service backend-id="${azurerm_api_management_backend.metering_point.id}" />
+            <set-backend-service backend-id="${azurerm_api_management_backend.metering_point.name}" />
             <rewrite-uri template="${var.apimao_metering_point_domain_ingestion_path}" />
           </inbound>
         </policies>
       XML
     }
-  ]
-
-  dependencies          = [
-    module.apim_this.dependent_on,
   ]
 }

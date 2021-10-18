@@ -15,10 +15,6 @@ module "sbq_dataavailable" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
 
   name                = "dataavailable"
-  namespace_name      = module.sb_communication.name
+  namespace_name      = module.sb_domainrelay.name
   resource_group_name = azurerm_resource_group.this.name
-
-  dependencies        = [
-    module.sb_communication.dependent_on,
-  ]
 }

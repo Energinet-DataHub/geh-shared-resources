@@ -17,12 +17,8 @@ module "sbq_metering_point_forwarded_queue" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
 
   name                = "metering-point-forwarded-queue"
-  namespace_name      = module.sb_communication.name
+  namespace_name      = module.sb_domainrelay.name
   resource_group_name = azurerm_resource_group.this.name
-
-  dependencies        = [
-    module.sb_communication.dependent_on,
-  ]
 }
 
 # Add sbq_meterig_point_forwarded_queue name to key vault to be able to fetch that out in the metering point repo
@@ -31,12 +27,7 @@ module "kvs_metering_point_forwarded_queue_name" {
 
   name                = "shared-resource--metering-point-forward-queue-name"
   value               = module.sbq_metering_point_forwarded_queue.name
-  key_vault_id        = module.kv_this.id
+  key_vault_id        = module.kv_shared.id
 
-  tags                = azurerm_resource_group.this.tags
-
-  dependencies        = [
-    module.kv_this.dependent_on,
-    module.sbq_metering_point_forwarded_queue.dependent_on,
-  ]
+  tags                = local.tags
 }

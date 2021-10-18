@@ -15,36 +15,24 @@ module "sbq_marketroles" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
 
   name                = "marketroles"
-  namespace_name      = module.sb_communication.name
+  namespace_name      = module.sb_domainrelay.name
   resource_group_name = azurerm_resource_group.this.name
-
   requires_session    = true
-  dependencies        = [
-    module.sb_communication.dependent_on,
-  ]
 }
 
 module "sbq_marketroles_reply" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
 
   name                = "marketroles-reply"
-  namespace_name      = module.sb_communication.name
+  namespace_name      = module.sb_domainrelay.name
   resource_group_name = azurerm_resource_group.this.name
-
   requires_session    = true
-  dependencies        = [
-    module.sb_communication.dependent_on,
-  ]
 }
 
 module "sbq_marketroles_dequeue" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
 
   name                = "marketroles-dequeue"
-  namespace_name      = module.sb_communication.name
+  namespace_name      = module.sb_domainrelay.name
   resource_group_name = azurerm_resource_group.this.name
-
-  dependencies        = [
-    module.sb_communication.dependent_on,
-  ]
 }
