@@ -12,11 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 locals {
-    master_data_blob_name = "master-data"
-    events_blob_name = "events"
-    results_blob_name = "results"
-    snapshots_blob_name = "snapshots"
-    timeseries_blob_name = "timeseries"
+    data_lake_master_data_blob_name = "master-data"
+    data_lake_events_blob_name      = "events"
+    data_lake_results_blob_name     = "results"
+    data_lake_snapshots_blob_name   = "snapshots"
+    data_lake_timeseries_blob_name  = "timeseries"
+    data_lake_data_container_name   = "data"
 }
 
 module "st_data_lake" {
@@ -31,84 +32,74 @@ module "st_data_lake" {
   account_replication_type  = "LRS"
   account_tier              = "Standard"
   is_hns_enabled            = true
+  containers                = [
+    {
+      name  = local.data_lake_data_container_name
+    }
+  ]
 
   tags                      = azurerm_resource_group.this.tags
 }
 
-resource "azurerm_storage_container" "data_lake" {
-  name                  = "data-lake"
-  storage_account_name  = module.st_data_lake.name
-  container_access_type = "private"
-
-  depends_on            = [
-    module.st_data_lake.dependent_on,
-  ]
-}
-
 resource "azurerm_storage_blob" "master_data" {
-  name                    = "${local.master_data_blob_name}/notused"
+  name                    = "${local.data_lake_master_data_blob_name}/notused"
   storage_account_name    = module.st_data_lake.name
-  storage_container_name  = azurerm_storage_container.data_lake.name
+  storage_container_name  = local.data_lake_data_container_name
   type                    = "Block"
   
   depends_on              = [
     module.st_data_lake.dependent_on,
-    azurerm_storage_container.data_lake,
   ]
 }
 
 resource "azurerm_storage_blob" "events" {
-  name                    = "${local.events_blob_name}/notused"
+  name                    = "${local.data_lake_events_blob_name}/notused"
   storage_account_name    = module.st_data_lake.name
-  storage_container_name  = azurerm_storage_container.data_lake.name
+  storage_container_name  = local.data_lake_data_container_name
   type                    = "Block"
   
   depends_on              = [
     module.st_data_lake.dependent_on,
-    azurerm_storage_container.data_lake,
   ]
 }
 
 resource "azurerm_storage_blob" "results" {
-  name                    = "${local.results_blob_name}/notused"
+  name                    = "${local.data_lake_results_blob_name}/notused"
   storage_account_name    = module.st_data_lake.name
-  storage_container_name  = azurerm_storage_container.data_lake.name
+  storage_container_name  = local.data_lake_data_container_name
   type                    = "Block"
   
   depends_on              = [
     module.st_data_lake.dependent_on,
-    azurerm_storage_container.data_lake,
   ]
 }
 
 resource "azurerm_storage_blob" "snapshots" {
-  name                    = "${local.snapshots_blob_name}/notused"
+  name                    = "${local.data_lake_snapshots_blob_name}/notused"
   storage_account_name    = module.st_data_lake.name
-  storage_container_name  = azurerm_storage_container.data_lake.name
+  storage_container_name  = local.data_lake_data_container_name
   type                    = "Block"
   
   depends_on              = [
     module.st_data_lake.dependent_on,
-    azurerm_storage_container.data_lake,
   ]
 }
 
 resource "azurerm_storage_blob" "timeseries" {
-  name                    = "${local.timeseries_blob_name}/notused"
+  name                    = "${local.data_lake_timeseries_blob_name}/notused"
   storage_account_name    = module.st_data_lake.name
-  storage_container_name  = azurerm_storage_container.data_lake.name
+  storage_container_name  = local.data_lake_data_container_name
   type                    = "Block"
   
   depends_on              = [
     module.st_data_lake.dependent_on,
-    azurerm_storage_container.data_lake,
   ]
 }
 
-module "kvs_data_lake_primary_access_key" {
+module "kvs_st_data_lake_primary_access_key" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "shared-resources--st-data-lake-primary-access-key"
+  name          = "st-data-lake-primary-access-key"
   value         = module.st_data_lake.primary_access_key
   key_vault_id  = module.kv_this.id
 
@@ -123,7 +114,7 @@ module "kvs_data_lake_primary_access_key" {
 module "kvs_st_data_lake_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "shared-resources--st-data-lake-name"
+  name          = "st-data-lake-name"
   value         = module.st_data_lake.name
   key_vault_id  = module.kv_this.id
 
@@ -135,11 +126,11 @@ module "kvs_st_data_lake_name" {
   ]
 }
 
-module "kvs_st_data_lake_container_name" {
+module "kvs_st_data_lake_data_container_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "shared-resources--st-data-lake-container-name"
-  value         = azurerm_storage_container.data_lake.name
+  name          = "st-data-lake-data-container-name"
+  value         = local.data_lake_data_container_name
   key_vault_id  = module.kv_this.id
 
   tags          = azurerm_resource_group.this.tags
@@ -150,11 +141,11 @@ module "kvs_st_data_lake_container_name" {
   ]
 }
 
-module "kvs_st_aggregation_master_data_blob_name" {
+module "kvs_st_data_lake_master_data_blob_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "shared-resources--st-aggregation-master-data-blob-name"
-  value         = local.master_data_blob_name
+  name          = "st-master-data-blob-name"
+  value         = local.data_lake_master_data_blob_name
   key_vault_id  = module.kv_this.id
 
   tags          = azurerm_resource_group.this.tags
@@ -165,11 +156,11 @@ module "kvs_st_aggregation_master_data_blob_name" {
   ]
 }
 
-module "kvs_st_aggregation_events_blob_name" {
+module "kvs_st_data_lake_events_blob_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "shared-resources--st-aggregation-events-blob-name"
-  value         = local.events_blob_name
+  name          = "st-data-lake-events-blob-name"
+  value         = local.data_lake_events_blob_name
   key_vault_id  = module.kv_this.id
 
   tags          = azurerm_resource_group.this.tags
@@ -180,11 +171,11 @@ module "kvs_st_aggregation_events_blob_name" {
   ]
 }
 
-module "kvs_st_aggregation_results_blob_name" {
+module "kvs_st_aggregation_data_lake_results_blob_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "shared-resources--st-aggregation-results-blob-name"
-  value         = local.results_blob_name
+  name          = "st-data-lake-results-blob-name"
+  value         = local.data_lake_results_blob_name
   key_vault_id  = module.kv_this.id
 
   tags          = azurerm_resource_group.this.tags
@@ -198,8 +189,8 @@ module "kvs_st_aggregation_results_blob_name" {
 module "kvs_st_aggregation_snapshot_blob_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "shared-resources--st-aggregation-snapshot-blob-name"
-  value         = local.snapshots_blob_name
+  name          = "st-data-lake-snapshot-blob-name"
+  value         = local.data_lake_snapshots_blob_name
   key_vault_id  = module.kv_this.id
 
   tags          = azurerm_resource_group.this.tags
@@ -210,11 +201,11 @@ module "kvs_st_aggregation_snapshot_blob_name" {
   ]
 }
 
-module "kvs_st_timeseries_blob_name" {
+module "kvs_st_data_lake_timeseries_blob_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
 
-  name          = "shared-resources--st-timeseries-blob-name"
-  value         = local.timeseries_blob_name
+  name          = "st-data-lake-blob-name"
+  value         = local.data_lake_timeseries_blob_name
   key_vault_id  = module.kv_this.id
 
   tags          = azurerm_resource_group.this.tags
