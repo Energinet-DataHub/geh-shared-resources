@@ -99,7 +99,7 @@ module "container_meteringpoints_reply" {
 module "kvs_st_marketoperator_response_connection_string" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
   name                            = "SHARED-RESOURCES-MARKETOPERATOR-RESPONSE-CONNECTION-STRING"
-  value                           = module.stor_data_lake.primary_access_key
+  value                           = module.stor_data_lake.primary_connection_string
   key_vault_id                    = module.kv.id
   tags                            = data.azurerm_resource_group.main.tags
   dependencies = [
@@ -108,3 +108,13 @@ module "kvs_st_marketoperator_response_connection_string" {
   ]
 }
 
+module "kvs_st_marketoperator_container_reply_name" {
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=1.3.0"
+  name                            = "SHARED-RESOURCES-MARKETOPERATOR-CONTAINER-REPLY-NAME"
+  value                           = module.container_postoffice_reply.name
+  key_vault_id                    = module.kv.id
+  tags                            = data.azurerm_resource_group.main.tags
+  dependencies = [
+    module.kv.dependent_on,
+  ]
+}
