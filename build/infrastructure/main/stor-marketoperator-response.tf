@@ -116,6 +116,5 @@ module "kvs_st_marketoperator_container_reply_name" {
   tags                            = data.azurerm_resource_group.main.tags
   dependencies = [
     module.kv.dependent_on,
-    module.container_postoffice_reply.dependent_on,
   ]
 }
