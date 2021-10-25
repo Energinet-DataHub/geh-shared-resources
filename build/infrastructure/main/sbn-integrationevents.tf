@@ -55,6 +55,8 @@ module "sbnar_integrationevents_manage" {
   namespace_name            = module.sbn_integrationevents.name
   resource_group_name       = data.azurerm_resource_group.main.name
   manage                    = true
+  listen                    = true
+  send                      = true
 }
 
 module "sbnar_integrationevents_transceiver" {
