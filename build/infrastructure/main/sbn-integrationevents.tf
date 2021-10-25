@@ -50,7 +50,7 @@ module "sbnar_integrationevents_send" {
 
 module "sbnar_integrationevents_manage" {
   source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-namespace-auth-rule?ref=1.9.0"
-  name                      = "sbnar-integrationevents-send"
+  name                      = "sbnar-integrationevents-manage"
 
   namespace_name            = module.sbn_integrationevents.name
   resource_group_name       = data.azurerm_resource_group.main.name
