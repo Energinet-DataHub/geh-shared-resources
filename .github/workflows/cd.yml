@@ -38,6 +38,8 @@ jobs:
       TF_VAR_apim_publisher_email: ${{ secrets.AZURE_APIM_PUBLISHER_EMAIL }}
       TF_VAR_apimao_metering_point_domain_ingestion_function_url: ${{ secrets.AZURE_APIMAO_METERING_POINT_DOMAIN_INGESTION_FUNCTION_URL }}
       TF_VAR_apimao_metering_point_domain_name: ${{ secrets.AZURE_APIMAO_METERING_POINT_DOMAIN_NAME }}
+      TF_VAR_apimao_charges_domain_ingestion_function_url: ${{ secrets.AZURE_APIMAO_CHARGES_DOMAIN_INGESTION_FUNCTION_URL }}
+      TF_VAR_apimao_charges_domain_name: ${{ secrets.AZURE_APIMAO_CHARGES_DOMAIN_NAME }}
     steps:
       - name: Terraform CD
         uses: Energinet-DataHub/.github/.github/actions/terraform-apply@renetnielsen/terraform-apply-1.4.0
@@ -67,6 +69,8 @@ jobs:
       TF_VAR_apim_publisher_email: ${{ secrets.AZURE_APIM_PUBLISHER_EMAIL }}
       TF_VAR_apimao_metering_point_domain_ingestion_function_url: ${{ secrets.AZURE_APIMAO_METERING_POINT_DOMAIN_INGESTION_FUNCTION_URL }}
       TF_VAR_apimao_metering_point_domain_name: ${{ secrets.AZURE_APIMAO_METERING_POINT_DOMAIN_NAME }}
+      TF_VAR_apimao_charges_domain_ingestion_function_url: ${{ secrets.AZURE_APIMAO_CHARGES_DOMAIN_INGESTION_FUNCTION_URL }}
+      TF_VAR_apimao_charges_domain_name: ${{ secrets.AZURE_APIMAO_CHARGES_DOMAIN_NAME }}
     steps:
       - name: Terraform CD
         uses: Energinet-DataHub/.github/.github/actions/terraform-apply@renetnielsen/terraform-apply-1.4.0
@@ -96,6 +100,8 @@ jobs:
       TF_VAR_apim_publisher_email: ${{ secrets.AZURE_APIM_PUBLISHER_EMAIL }}
       TF_VAR_apimao_metering_point_domain_ingestion_function_url: ${{ secrets.AZURE_APIMAO_METERING_POINT_DOMAIN_INGESTION_FUNCTION_URL }}
       TF_VAR_apimao_metering_point_domain_name: ${{ secrets.AZURE_APIMAO_METERING_POINT_DOMAIN_NAME }}
+      TF_VAR_apimao_charges_domain_ingestion_function_url: ${{ secrets.AZURE_APIMAO_CHARGES_DOMAIN_INGESTION_FUNCTION_URL }}
+      TF_VAR_apimao_charges_domain_name: ${{ secrets.AZURE_APIMAO_CHARGES_DOMAIN_NAME }}
     steps:
       - name: Terraform CD
         uses: Energinet-DataHub/.github/.github/actions/terraform-apply@renetnielsen/terraform-apply-1.4.0
@@ -125,6 +131,8 @@ jobs:
       TF_VAR_apim_publisher_email: ${{ secrets.AZURE_APIM_PUBLISHER_EMAIL }}
       TF_VAR_apimao_metering_point_domain_ingestion_function_url: ${{ secrets.AZURE_APIMAO_METERING_POINT_DOMAIN_INGESTION_FUNCTION_URL }}
       TF_VAR_apimao_metering_point_domain_name: ${{ secrets.AZURE_APIMAO_METERING_POINT_DOMAIN_NAME }}
+      TF_VAR_apimao_charges_domain_ingestion_function_url: ${{ secrets.AZURE_APIMAO_CHARGES_DOMAIN_INGESTION_FUNCTION_URL }}
+      TF_VAR_apimao_charges_domain_name: ${{ secrets.AZURE_APIMAO_CHARGES_DOMAIN_NAME }}
     steps:
       - name: Terraform CD
         uses: Energinet-DataHub/.github/.github/actions/terraform-apply@renetnielsen/terraform-apply-1.4.0
@@ -154,6 +162,8 @@ jobs:
       TF_VAR_apim_publisher_email: ${{ secrets.AZURE_APIM_PUBLISHER_EMAIL }}
       TF_VAR_apimao_metering_point_domain_ingestion_function_url: ${{ secrets.AZURE_APIMAO_METERING_POINT_DOMAIN_INGESTION_FUNCTION_URL }}
       TF_VAR_apimao_metering_point_domain_name: ${{ secrets.AZURE_APIMAO_METERING_POINT_DOMAIN_NAME }}
+      TF_VAR_apimao_charges_domain_ingestion_function_url: ${{ secrets.AZURE_APIMAO_CHARGES_DOMAIN_INGESTION_FUNCTION_URL }}
+      TF_VAR_apimao_charges_domain_name: ${{ secrets.AZURE_APIMAO_CHARGES_DOMAIN_NAME }}
     steps:
       - name: Terraform CD
         uses: Energinet-DataHub/.github/.github/actions/terraform-apply@renetnielsen/terraform-apply-1.4.0
