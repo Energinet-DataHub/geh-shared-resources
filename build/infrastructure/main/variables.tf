@@ -43,3 +43,13 @@ variable apim_publisher_email {
   type          = string
   description   = "(Required) The email of publisher/company."
 }
+
+variable apimao_metering_point_domain_ingestion_function_url {
+  type          = string
+  description   = "Url of the Metering Point domain ingestion function, used for configuration inside the API Managment API."
+}
+
+variable apimao_metering_point_domain_name {
+  type          = string
+  description   = "Name of the Metering Point domain ingestion function, used for configuration inside the API Managment API."
+}
