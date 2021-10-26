@@ -29,7 +29,25 @@ module "apima_b2b" {
         <policies>
           <inbound>
             <base />
-            <check-header name="Content-Type" failed-check-httpcode="403" failed-check-error-message="Only Content-Type application/xml is allowed" ignore-case="true">
+            <choose>
+                <when condition="@(context.Request.Method == "POST")">
+                    <set-variable name="bodySize" value="@(context.Request.Headers["Content-Length"][0])" />
+                    <choose>
+                        <when condition="@(int.Parse(context.Variables.GetValueOrDefault<string>("bodySize"))<52428800)">
+                            <!--let it pass through by doing nothing-->
+                        </when>
+                        <otherwise>
+                            <return-response>
+                                <set-status code="413" reason="Payload Too Large" />
+                                <set-body>@{
+                                        return "Maximum allowed size for the POST requests is 52428800 bytes (50 MB). This request has size of "+ context.Variables.GetValueOrDefault<string>("bodySize") +" bytes";
+                                    }</set-body>
+                            </return-response>
+                        </otherwise>
+                    </choose>
+                </when>
+            </choose>
+            <check-header name="Content-Type" failed-check-httpcode="415" failed-check-error-message="Only Content-Type application/xml is allowed" ignore-case="true">
               <value>application/xml</value>
             </check-header>
           </inbound>
