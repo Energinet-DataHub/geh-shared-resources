@@ -18,7 +18,7 @@ module "apimao_request_change_of_accounting_point_characteristics" {
   api_management_api_name = module.apima_b2b.name
   resource_group_name     = azurerm_resource_group.this.name
   api_management_name     = module.apim_shared.name
-  display_name            = "Request change of accounting point characteristics"
+  display_name            = "Metering Point: Request change of accounting point characteristics"
   method                  = "POST"
   url_template            = "v1.0/cim/request-change-of-accounting-point-characteristics"
   policies                = [

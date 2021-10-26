@@ -18,7 +18,7 @@ module "apimao_request_change_billing_master_data" {
   api_management_api_name = module.apima_b2b.name
   resource_group_name     = azurerm_resource_group.this.name
   api_management_name     = module.apim_shared.name
-  display_name            = "Request change billing master data"
+  display_name            = "Charges: Request change billing master data"
   method                  = "POST"
   url_template            = "v1.0/cim/request-change-billing-master-data"
   policies                = [

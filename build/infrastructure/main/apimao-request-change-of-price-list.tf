@@ -18,7 +18,7 @@ module "apimao_request_change_of_price_list" {
   api_management_api_name = module.apima_b2b.name
   resource_group_name     = azurerm_resource_group.this.name
   api_management_name     = module.apim_shared.name
-  display_name            = "Request change of price list"
+  display_name            = "Charges: Request change of price list"
   method                  = "POST"
   url_template            = "v1.0/cim/request-change-of-price-list"
   policies                = [

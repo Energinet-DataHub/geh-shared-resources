@@ -18,7 +18,7 @@ module "apimao_request_price_list" {
   api_management_api_name = module.apima_b2b.name
   resource_group_name     = azurerm_resource_group.this.name
   api_management_name     = module.apim_shared.name
-  display_name            = "Request price list"
+  display_name            = "Charges: Request price list"
   method                  = "POST"
   url_template            = "v1.0/cim/request-price-list"
   policies                = [
