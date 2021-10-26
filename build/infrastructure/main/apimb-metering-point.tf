@@ -17,5 +17,4 @@ resource "azurerm_api_management_backend" "metering_point" {
   api_management_name = module.apim_shared.name
   protocol            = "http"
   url                 = "https://azfun-ingestion-meteringpoint-endk-u.azurewebsites.net/api"
-  #url                 = var.apimao_metering_point_domain_ingestion_function_url
 }
