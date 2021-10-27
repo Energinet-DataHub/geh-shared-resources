@@ -14,7 +14,7 @@
 
 # Create create link messages request queue
 module "sbq_create_link_messages_request" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=4.1.0"
 
   name                = "create-link-messages-request"
   namespace_name      = module.sb_domainrelay.name
@@ -23,7 +23,7 @@ module "sbq_create_link_messages_request" {
 
 # Create create link messages reply queue
 module "sbq_create_link_messages_reply" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=4.1.0"
 
   name                = "create-link-messages-reply"
   namespace_name      = module.sb_domainrelay.name

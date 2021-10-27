@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "sb_domainrelay" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-namespace?ref=renetnielsen/3.1.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-namespace?ref=4.1.0"
 
   name                  = "domainrelay"
   environment_short     = var.environment_short
@@ -46,7 +46,7 @@ module "sb_domainrelay" {
 }
 
 module "kvs_sb_domainrelay_send_connection_string" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
 
   name          = "sb-communications-listen-connection-string"
   value         = module.sb_domainrelay.primary_connection_strings["listen"]
@@ -54,7 +54,7 @@ module "kvs_sb_domainrelay_send_connection_string" {
 }
 
 module "kvs_sb_domainrelay_listen_connection_string" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
 
   name          = "sb-communications-send-connection-string"
   value         = module.sb_domainrelay.primary_connection_strings["send"]
@@ -62,7 +62,7 @@ module "kvs_sb_domainrelay_listen_connection_string" {
 }
 
 module "kvs_sb_domainrelay_transceiver_connection_string" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
 
   name          = "sb-communications-transceiver-connection-string"
   value         = module.sb_domainrelay.primary_connection_strings["transceiver"]
@@ -70,7 +70,7 @@ module "kvs_sb_domainrelay_transceiver_connection_string" {
 }
 
 module "kvs_sb_domainrelay_manage_connection_string" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
 
   name          = "sb-communications-manage-connection-string"
   value         = module.sb_domainrelay.primary_connection_strings["manage"]

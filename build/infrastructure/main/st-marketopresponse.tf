@@ -16,7 +16,7 @@ locals {
 }
 
 module "st_marketopresponse" {
-  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=renetnielsen/3.1.0"
+  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=4.1.0"
 
   name                      = "marketopresponse"
   environment_short         = var.environment_short
@@ -51,7 +51,7 @@ module "st_marketopresponse" {
 }
 
 module "kvs_st_marketopresponse_primary_connection_string" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
   name                            = "${module.st_marketopresponse.name}-primary-connection-string"
   value                           = module.st_marketopresponse.primary_connection_string
   key_vault_id                    = module.kv_shared.id
@@ -60,7 +60,7 @@ module "kvs_st_marketopresponse_primary_connection_string" {
 }
 
 module "kvs_st_marketopresponse_postofficereply_container_name" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
 
   name                            = "${module.st_marketopresponse.name}-postofficereply-container-name"
   value                           = local.postoffice_reply_container_name

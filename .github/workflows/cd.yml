@@ -22,30 +22,12 @@ on:
       - build/**
       - .github/workflows/cd.yml
   workflow_dispatch: {}
-env:
-  RELEASE_FOLDER_PATH: ${{ github.workspace }}/release
 
 jobs:
   create_release:
-    name: Create new release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Copy Terraform to release folder
-        shell: bash
-        run: |
-          cp -fR ../../build/** ${{ env.RELEASE_FOLDER_PATH }} 2>/dev/null || :
-
-      - name: Zip artifact
-        uses: papeloto/action-zip@v1
-        with:
-          files: ${{ env.RELEASE_FOLDER_PATH }}
-          dest: ${{ github.workspace }}/drop.zip
-
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ${{ github.workspace }}/drop.zip
-          tag_name: ${{ github.sha }}
+    uses: Energinet-DataHub/.github/.github/workflows/create-deployment-request.yml@renetnielsen/refactor-release-workflows
+    with:
+      REPOSITORY_NAME: geh-shared-resources
+    secrets:
+      PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+      ENVIRONMENT_REPOSITORY_PATH: ${{ secrets.ENVIRONMENT_REPOSITORY_PATH }}

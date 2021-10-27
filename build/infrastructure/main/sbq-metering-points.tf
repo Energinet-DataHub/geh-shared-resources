@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "sbq_metering_points" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=4.1.0"
 
   name                = "meteringpoints"
   namespace_name      = module.sb_domainrelay.name
@@ -21,7 +21,7 @@ module "sbq_metering_points" {
 }
 
 module "sbq_metering_points_reply" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=4.1.0"
 
   name                = "meteringpoints-reply"
   namespace_name      = module.sb_domainrelay.name
@@ -30,7 +30,7 @@ module "sbq_metering_points_reply" {
 }
 
 module "sbq_metering_points_dequeue" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=4.1.0"
 
   name                = "meteringpoints-dequeue"
   namespace_name      = module.sb_domainrelay.name

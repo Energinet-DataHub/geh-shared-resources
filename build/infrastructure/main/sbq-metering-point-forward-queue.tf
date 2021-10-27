@@ -14,7 +14,7 @@
 
 # Queue to forward subscriptions to
 module "sbq_metering_point_forwarded_queue" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=4.1.0"
 
   name                = "metering-point-forwarded-queue"
   namespace_name      = module.sb_domainrelay.name
@@ -23,7 +23,7 @@ module "sbq_metering_point_forwarded_queue" {
 
 # Add sbq_meterig_point_forwarded_queue name to key vault to be able to fetch that out in the metering point repo
 module "kvs_metering_point_forwarded_queue_name" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
 
   name                = "shared-resource--metering-point-forward-queue-name"
   value               = module.sbq_metering_point_forwarded_queue.name
