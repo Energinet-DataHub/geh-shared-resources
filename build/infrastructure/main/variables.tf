@@ -63,3 +63,13 @@ variable apimao_charges_domain_name {
   type          = string
   description   = "Name of the Charges domain ingestion function, used for configuration inside the API Managment API."
 }
+
+variable apimao_market_roles_domain_ingestion_function_url {
+  type          = string
+  description   = "Url of the Market Roles domain ingestion function, used for configuration inside the API Managment API."
+}
+
+variable apimao_market_roles_domain_name {
+  type          = string
+  description   = "Name of the Market Roles domain ingestion function, used for configuration inside the API Managment API."
+}
