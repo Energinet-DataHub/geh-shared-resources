@@ -51,3 +51,4 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: drop.zip
+          tag_name: ${{ github.ref }}
