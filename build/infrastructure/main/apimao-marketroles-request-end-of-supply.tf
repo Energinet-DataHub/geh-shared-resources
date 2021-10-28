@@ -18,7 +18,7 @@ module "apimao_request_end_of_supply" {
   api_management_api_name = module.apima_b2b.name
   resource_group_name     = azurerm_resource_group.this.name
   api_management_name     = module.apim_shared.name
-  display_name            = "Metering Point: Request end of supply"
+  display_name            = "Market Roles: Request end of supply"
   method                  = "POST"
   url_template            = "v1.0/cim/request-end-of-supply"
   policies                = [

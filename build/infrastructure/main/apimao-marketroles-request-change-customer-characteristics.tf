@@ -18,7 +18,7 @@ module "apimao_request_change_customer_characteristics" {
   api_management_api_name = module.apima_b2b.name
   resource_group_name     = azurerm_resource_group.this.name
   api_management_name     = module.apim_shared.name
-  display_name            = "Metering Point: Request change customer characteristics"
+  display_name            = "Market Roles: Request change customer characteristics"
   method                  = "POST"
   url_template            = "v1.0/cim/request-change-customer-characteristics"
   policies                = [
