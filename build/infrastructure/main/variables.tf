@@ -73,3 +73,13 @@ variable apimao_market_roles_domain_name {
   type          = string
   description   = "Name of the Market Roles domain ingestion function, used for configuration inside the API Managment API."
 }
+
+variable apimao_timeseries_domain_ingestion_function_url {
+  type          = string
+  description   = "Url of the Timeseries domain ingestion function, used for configuration inside the API Managment API."
+}
+
+variable apimao_timeseries_domain_name {
+  type          = string
+  description   = "Name of the Timeseries domain ingestion function, used for configuration inside the API Managment API."
+}
