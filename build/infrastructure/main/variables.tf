@@ -34,9 +34,9 @@ variable project_name {
   description   = "Name of the project this infrastructure is a part of."
 }
 
-variable service_name {
+variable product_name {
   type          = string
-  description   = "Name of the service this infrastructure is a part of."
+  description   = "Name of the product this infrastructure is a part of."
 }
 
 variable apim_publisher_email {

@@ -15,10 +15,11 @@ locals {
   postoffice_reply_container_name = "postoffice-reply"
 }
 
-module "st_marketopresponse" {
-  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=4.1.0"
+module "st_market_operator_response" {
+  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=5.1.0"
 
-  name                      = "marketopresponse"
+  name                      = "marketres"
+  project_name              = var.project_name
   environment_short         = var.environment_short
   environment_instance      = var.environment_instance
   resource_group_name       = azurerm_resource_group.this.name
@@ -47,24 +48,24 @@ module "st_marketopresponse" {
     },
   ]
 
-  tags                      = local.tags
+  tags                      = azurerm_resource_group.this.tags
 }
 
-module "kvs_st_marketopresponse_primary_connection_string" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
-  name                            = "${module.st_marketopresponse.name}-primary-connection-string"
-  value                           = module.st_marketopresponse.primary_connection_string
-  key_vault_id                    = module.kv_shared.id
+module "kvs_st_market_operator_response_primary_connection_string" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  name          = "st-marketres-primary-connection-string"
+  value         = module.st_market_operator_response.primary_connection_string
+  key_vault_id  = module.kv_shared.id
 
-  tags                            = local.tags
+  tags          = azurerm_resource_group.this.tags
 }
 
-module "kvs_st_marketopresponse_postofficereply_container_name" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
+module "kvs_st_market_operator_response_postofficereply_container_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
-  name                            = "${module.st_marketopresponse.name}-postofficereply-container-name"
-  value                           = local.postoffice_reply_container_name
-  key_vault_id                    = module.kv_shared.id
+  name          = "st-marketres-postofficereply-container-name"
+  value         = local.postoffice_reply_container_name
+  key_vault_id  = module.kv_shared.id
 
-  tags                            = local.tags
+  tags          = azurerm_resource_group.this.tags
 }

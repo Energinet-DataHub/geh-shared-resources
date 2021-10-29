@@ -15,10 +15,11 @@ locals {
   sqlServerAdminName = "gehdbadmin"
 }
 
-module "sql_shared" {
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=4.1.0"
+module "sql_data" {
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=5.1.0"
 
-  name                          = "shared"
+  name                          = "data"
+  project_name                  = var.project_name
   environment_short             = var.environment_short
   environment_instance          = var.environment_instance
   sql_version                   = "12.0"
@@ -34,30 +35,37 @@ module "sql_shared" {
     }
   ]
 
-  tags                          = local.tags
+  tags                          = azurerm_resource_group.this.tags
 }
 
 module "kvs_db_admin_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "sql-data-admin-user-name"
   value         = local.sqlServerAdminName
   key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
 }
 
 module "kvs_db_admin_password" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "sql-data-admin-user-password"
   value         = random_password.sql_administrator_login_password.result
   key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
 }
 
 module "kvs_db_url" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
   name          = "sql-data-url"
-  value         = module.sql_shared.fully_qualified_domain_name
+  value         = module.sql_data.fully_qualified_domain_name
   key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
 }
 
 resource "random_password" "sql_administrator_login_password" {

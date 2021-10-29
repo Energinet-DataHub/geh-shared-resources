@@ -12,27 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "sbq_metering_points" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=4.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=5.1.0"
 
   name                = "meteringpoints"
-  namespace_name      = module.sb_domainrelay.name
+  namespace_name      = module.sb_domain_relay.name
   resource_group_name = azurerm_resource_group.this.name
   requires_session    = true
 }
 
 module "sbq_metering_points_reply" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=4.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=5.1.0"
 
   name                = "meteringpoints-reply"
-  namespace_name      = module.sb_domainrelay.name
+  namespace_name      = module.sb_domain_relay.name
   resource_group_name = azurerm_resource_group.this.name
   requires_session    = true
 }
 
 module "sbq_metering_points_dequeue" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=4.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=5.1.0"
 
   name                = "meteringpoints-dequeue"
-  namespace_name      = module.sb_domainrelay.name
+  namespace_name      = module.sb_domain_relay.name
   resource_group_name = azurerm_resource_group.this.name
 }

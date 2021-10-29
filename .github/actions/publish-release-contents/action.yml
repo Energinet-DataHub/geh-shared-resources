@@ -11,8 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-locals {
-  tags  = merge(azurerm_resource_group.this.tags, {
-    "Project" = var.project_name
-  })
-}
+name: 'Publish release content'
+inputs:
+  RELEASE_FOLDER_PATH:
+    required: true
+  LOCAL_REPO_FOLDER_PATH:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Copy Infrastructure to release folder
+      shell: bash
+      run: |
+        mkdir ${{ inputs.RELEASE_FOLDER_PATH }}
+        cp -fR ${{ inputs.LOCAL_REPO_FOLDER_PATH }}/build/infrastructure ${{ inputs.RELEASE_FOLDER_PATH }} 2>/dev/null || :
