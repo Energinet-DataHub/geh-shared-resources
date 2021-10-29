@@ -21,13 +21,18 @@ on:
     paths:
       - build/**
       - .github/workflows/cd.yml
-  workflow_dispatch: {}
 
 jobs:
-  create_release:
-    uses: Energinet-DataHub/.github/.github/workflows/create-deployment-request.yml@renetnielsen/refactor-release-workflows
-    with:
-      REPOSITORY_NAME: geh-shared-resources
+  publish_release:
+    uses: Energinet-DataHub/.github/.github/workflows/publish-release.yml@1.12.0
+    secrets:
+      PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+
+  dispatch_deployment_request:
+    needs: publish_release
+    uses: Energinet-DataHub/.github/.github/workflows/dispatch-deployment-request.yml@1.12.0
     secrets:
       PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
       ENVIRONMENT_REPOSITORY_PATH: ${{ secrets.ENVIRONMENT_REPOSITORY_PATH }}
+      LOCAL_REPOSITORY_NAME: ${{ secrets.THIS_REPOSITORY_NAME }}
+      LOCAL_REPOSITORY_PATH: ${{ secrets.THIS_REPOSITORY_PATH }}

@@ -11,8 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-module "apim_shared" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=5.1.0"
+module "appi_shared" {
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/application-insights?ref=5.1.0"
 
   name                  = "shared"
   project_name          = var.project_name
@@ -20,9 +20,16 @@ module "apim_shared" {
   environment_instance  = var.environment_instance
   resource_group_name   = azurerm_resource_group.this.name
   location              = azurerm_resource_group.this.location
-  publisher_name        = var.product_name
-  publisher_email       = var.apim_publisher_email
-  sku_name              = "Developer_1"
 
   tags                  = azurerm_resource_group.this.tags
+}
+
+module "kvs_appi_shared_instrumentation_key" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "appi-shared-instrumentation-key"
+  value         = module.appi_shared.instrumentation_key
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
 }
