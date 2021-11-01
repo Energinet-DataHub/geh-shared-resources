@@ -1,3 +1,3 @@
 environment         = "YOUR_ENVIRONMENT"
 resource_group_name = "YOUR_RESOURCE_GROUP"
-service_name        = "YOUR_SERVICE_NAME"
+product_name        = "YOUR_PRODUCT_NAME"

@@ -13,21 +13,21 @@
 # limitations under the License.
 
 # Queue to forward subscriptions to
-module "sbq_market_roles_forwarded_queue" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=renetnielsen/3.1.0"
+module "sbq_market_roles_forwarded" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=5.1.0"
 
-  name                = "market-roles-forwarded-queue"
-  namespace_name      = module.sb_domainrelay.name
+  name                = "market-roles-forwarded"
+  namespace_name      = module.sb_domain_relay.name
   resource_group_name = azurerm_resource_group.this.name
 }
 
-# Add sbq_market_roles_forwarded_queue name to key vault to be able to fetch that out in the market roles repo
-module "kvs_market_roles_forwarded_queue_name" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=renetnielsen/3.1.0"
+# Add sbq_market_roles_forwarded name to key vault to be able to fetch that out in the market roles repo
+module "kvs_market_roles_forwarded_name" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
-  name                = "shared-resource--market-roles-forward-queue-name"
-  value               = module.sbq_market_roles_forwarded_queue.name
+  name                = "sbq-market-roles-forward-name"
+  value               = module.sbq_market_roles_forwarded.name
   key_vault_id        = module.kv_shared.id
 
-  tags                = local.tags
+  tags                = azurerm_resource_group.this.tags
 }
