@@ -13,10 +13,8 @@
 # limitations under the License.
 resource "azurerm_api_management_backend" "metering_point" {
   name                = var.apimao_metering_point_domain_name
-  #name =              "azfun-ingestion-meteringpoint-endk-u"
   resource_group_name = azurerm_resource_group.this.name
   api_management_name = module.apim_shared.name
   protocol            = "http"
   url                 = var.apimao_metering_point_domain_ingestion_function_url
-  #url                 = "https://azfun-ingestion-meteringpoint-endk-u.azurewebsites.net/api"
 }
