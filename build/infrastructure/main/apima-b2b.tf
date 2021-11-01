@@ -50,6 +50,12 @@ module "apima_b2b" {
             <check-header name="Content-Type" failed-check-httpcode="415" failed-check-error-message="Only Content-Type application/xml is allowed" ignore-case="true">
               <value>application/xml</value>
             </check-header>
+            <set-header name="X-Correlation-ID" exists-action="override">
+                <value>@($"{context.RequestId}")</value>
+            </set-header>
+            <set-header name="X-Timestamp" exists-action="override">
+                <value>@(DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ"))</value>
+            </set-header>
           </inbound>
           <backend>
               <base />
