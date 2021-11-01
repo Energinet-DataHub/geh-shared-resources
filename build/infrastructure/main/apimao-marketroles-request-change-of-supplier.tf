@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "apimao_request_change_of_supplier" {
-  source                  = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=renetnielsen/3.1.0"
+  source                  = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=5.1.0"
 
   operation_id            = "request-change-of-supplier"
   api_management_api_name = module.apima_b2b.name
