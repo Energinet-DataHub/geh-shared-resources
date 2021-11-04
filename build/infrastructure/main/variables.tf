@@ -15,77 +15,46 @@ variable resource_group_name {
   type = string
 }
 
-variable environment {
-  type          = string
-  description   = "Enviroment that the infrastructure code is deployed into"
+variable "subscription_id" {
+  type = string
 }
 
-variable project {
+variable environment_short {
   type          = string
-  description   = "Project that is running the infrastructure code"
+  description   = "Enviroment that the infrastructure code is deployed into."
 }
 
-variable organisation {
+variable environment_instance {
   type          = string
-  description   = "Organisation that is running the infrastructure code"
+  description   = "Enviroment instance that the infrastructure code is deployed into."
 }
 
-variable aggregations_domain_spn_object_id {
+variable project_name {
   type          = string
-  description   = "The object id of the aggregations domain service principal."
+  description   = "Name of the project this infrastructure is a part of."
 }
 
-variable charges_domain_spn_object_id {
+variable product_name {
   type          = string
-  description   = "The object id of the charges domain service principal."
+  description   = "Name of the product this infrastructure is a part of."
 }
 
-variable market_roles_domain_spn_object_id {
-  type          = string
-  description   = "The object id of the market roles domain service principal."
-}
-
-variable timeseries_domain_spn_object_id {
-  type          = string
-  description   = "The object id of the time series domain service principal."
-}
-
-variable metering_point_domain_spn_object_id {
-  type          = string
-  description   = "The object id of the metering point domain service principal."
-}
-
-variable post_office_domain_spn_object_id {
-  type          = string
-  description   = "The object id of the post office domain service principal."
-}
-
-variable validation_reports_domain_spn_object_id {
-  type          = string
-  description   = "The object id of the validation reports domain service principal."
-}
-
-variable testing_domain_spn_object_id {
-  type          = string
-  description   = "The object id of the testing domain service principal."
-}
-
-variable publisher_email {
+variable apim_publisher_email {
   type          = string
   description   = "(Required) The email of publisher/company."
 }
 
-variable metering_point_domain_ingestion_function_name {
+variable apimao_metering_point_domain_ingestion_function_url {
   type          = string
-  description   = "Name of the MeteringPoint domain ingestion function"
+  description   = "Url of the Metering Point domain ingestion function, used for configuration inside the API Managment API."
 }
 
-variable metering_point_domain_ingestion_path {
+variable apimao_metering_point_domain_ingestion_path {
   type          = string
-  description   = "Path of the MeteringPoint domain ingestion"
+  description   = "Path of the Metering Point domain ingestion function, used for configuration inside the API Managment API."
 }
 
-variable apim_b2b_cim_url_path_suffix {
+variable apimao_b2b_cim_url_path_suffix {
   type          = string
-  description   = "URL path suffix for the b2b cim endpoints inside Api management"
+  description   = "URL path suffix for the b2b cim endpoints, used for configuration inside the API Managment API."
 }

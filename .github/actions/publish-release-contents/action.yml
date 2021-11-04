@@ -11,16 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-module "sbt_charge_created" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=5.1.0"
+name: 'Publish release content'
+inputs:
+  RELEASE_FOLDER_PATH:
+    required: true
+  LOCAL_REPO_FOLDER_PATH:
+    required: true
 
-  name                = "charge-created"
-  namespace_name      = module.sb_domain_relay.name
-  resource_group_name = azurerm_resource_group.this.name
-  subscriptions       = [
-    {
-      name                = "charge-created-sub-charges",
-      max_delivery_count  = 1,
-    },
-  ]
-}
+runs:
+  using: composite
+  steps:
+    - name: Copy Infrastructure to release folder
+      shell: bash
+      run: |
+        mkdir ${{ inputs.RELEASE_FOLDER_PATH }}
+        cp -fR ${{ inputs.LOCAL_REPO_FOLDER_PATH }}/build/infrastructure ${{ inputs.RELEASE_FOLDER_PATH }} 2>/dev/null || :

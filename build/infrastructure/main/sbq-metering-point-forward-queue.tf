@@ -13,25 +13,21 @@
 # limitations under the License.
 
 # Queue to forward subscriptions to
-module "sbq_metering_point_forwarded_queue" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
-  name                = "metering-point-forwarded-queue"
-  namespace_name      = module.sbn_integrationevents.name
-  resource_group_name = data.azurerm_resource_group.main.name
-  dependencies        = [
-    module.sbn_integrationevents.dependent_on
-  ]
+module "sbq_metering_point_forwarded" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=5.1.0"
+
+  name                = "metering-point-forwarded"
+  namespace_name      = module.sb_domain_relay.name
+  resource_group_name = azurerm_resource_group.this.name
 }
 
-# Add sbq_meterig_point_forwarded_queue name to key vault to be able to fetch that out in the metering point repo
-module "kv_metering_point_forwarded_queue_name" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//key-vault-secret?ref=2.0.0"
-  name                = "METERING-POINT-FORWARDED-QUEUE-NAME"
-  value               = module.sbq_metering_point_forwarded_queue.name
-  key_vault_id        = module.kv.id
-  tags                = data.azurerm_resource_group.main.tags
-  dependencies        = [
-    module.kv.dependent_on,
-    module.sbq_metering_point_forwarded_queue.dependent_on
-  ]
+# Add sbq_meterig_point_forwarded name to key vault to be able to fetch that out in the metering point repo
+module "kvs_metering_point_forwarded_name" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name                = "sbq-metering-point-forward-name"
+  value               = module.sbq_metering_point_forwarded.name
+  key_vault_id        = module.kv_shared.id
+
+  tags                = azurerm_resource_group.this.tags
 }

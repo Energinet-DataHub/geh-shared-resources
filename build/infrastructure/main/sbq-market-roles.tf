@@ -11,21 +11,28 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-# Create create link messages request queue
-module "sbq_create_link_messages_request" {
+module "sbq_marketroles" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=5.1.0"
 
-  name                = "create-link-messages-request"
+  name                = "marketroles"
   namespace_name      = module.sb_domain_relay.name
   resource_group_name = azurerm_resource_group.this.name
+  requires_session    = true
 }
 
-# Create create link messages reply queue
-module "sbq_create_link_messages_reply" {
+module "sbq_marketroles_reply" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=5.1.0"
 
-  name                = "create-link-messages-reply"
+  name                = "marketroles-reply"
+  namespace_name      = module.sb_domain_relay.name
+  resource_group_name = azurerm_resource_group.this.name
+  requires_session    = true
+}
+
+module "sbq_marketroles_dequeue" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=5.1.0"
+
+  name                = "marketroles-dequeue"
   namespace_name      = module.sb_domain_relay.name
   resource_group_name = azurerm_resource_group.this.name
 }
