@@ -8,9 +8,9 @@
 - [Using the shared resources](#using-the-shared-resources)
     - [Shared SQL Server](#shared-sql-server)
     - [Shared SQL Server User](#shared-sql-server-user)
-    - Integration Events Service Bus Namespace
-        - [Creating resources under the integration events Service Bus Namespace](#creating-resources-under-the-integration-events-service-bus-namespace)
-        - [Connecting to the integration events Service Bus Namespace](#connecting-to-the-integration-events-service-bus-namespace)
+    - Shared Service Bus
+        - [Creating resources under the domain relay Service Bus Namespace](#creating-resources-under-the-integration-events-service-bus-namespace)
+        - [Connecting to the domain relay Service Bus Namespace](#connecting-to-the-integration-events-service-bus-namespace)
 - [Where can I get more help](#where-can-i-get-more-help)
 
 ## Intro
@@ -41,7 +41,7 @@ The shared resources is created, to prevent other domains from being to hard cou
 
 If you need to share secrets between domains, you can use the shared Key Vault as a mediator for these.
 
-If you need to publish integration events, you can use the integration events Service Bus Namespace.
+If you need to publish domain relay, you can use the domain relay Service Bus Namespace.
 
 Below is a guide on how to use the different resources.
 
@@ -96,23 +96,23 @@ This will eventually be replaced by Azure AD Authentication.
 ```ruby
 data "azurerm_key_vault_secret" "SHARED_RESOURCES_DB_ADMIN_NAME" {
   name         = "SHARED-RESOURCES-DB-ADMIN-NAME"
-  key_vault_id = data.azurerm_key_vault.kv_sharedresources.id
+  key_vault_id = data.azurerm_key_vault.kv_shared.id
 }
 
 data "azurerm_key_vault_secret" "SHARED_RESOURCES_DB_ADMIN_PASSWORD" {
   name         = "SHARED-RESOURCES-DB-ADMIN-PASSWORD"
-  key_vault_id = data.azurerm_key_vault.kv_sharedresources.id
+  key_vault_id = data.azurerm_key_vault.kv_shared.id
 }
 ``` -->
 
-### Creating resources under the integration events Service Bus Namespace
+### Creating resources under the domain relay Service Bus Namespace
 
-The integration events Service Bus Namespace is an empty namespace that other domains can add queues and topics into.
+The domain relay Service Bus Namespace is an empty namespace that other domains can add queues and topics into.
 
 Before you start using the service bus namespace, you will need to expose the following variables to your IaC.
 
 - A variable containing the name of the shared resource group. In the example below this is referred to as `sharedresources_resource_group_name`.
-- A variable containing the name of the service bus namespace. In the example below this is referred to as `sharedresources_integrationevents_service_bus_namespace_name`.
+- A variable containing the name of the service bus namespace. In the example below this is referred to as `sharedresources_domainrelay_service_bus_namespace_name`.
 
 These should be added to the environment as secrets, and parsed down through the pipeline, to ensure the flexibility of changing these in the future.
 
@@ -129,8 +129,8 @@ data "azurerm_resource_group" "shared_resources" {
 2 - Create a reference to the Service Bus Namespace.
 
 ```ruby
-data "azurerm_servicebus_namespace" "integrationevents" {
-  name                = var.sharedresources_integrationevents_service_bus_namespace_name
+data "azurerm_servicebus_namespace" "domainrelay" {
+  name                = var.sharedresources_domainrelay_service_bus_namespace_name
   resource_group_name = data.azurerm_resource_group.shared_resources.name
 }
 ```
@@ -138,17 +138,17 @@ data "azurerm_servicebus_namespace" "integrationevents" {
 3 - You can now refer to the namespace from your local resources.
 
 ```ruby
-module "sbq_example" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=REPLACE_WITH_CURRENT_VERSION"
-  name                = "sbq-example"
-  namespace_name      = data.azurerm_servicebus_namespace.integrationevents.name
+module "sb_example" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=REPLACE_WITH_CURRENT_VERSION"
+  name                = "sb-example"
+  namespace_name      = data.azurerm_servicebus_namespace.domainrelay.name
   resource_group_name = data.azurerm_resource_group.shared_resources.name
 }
 ```
 
-### Connecting to the integration events Service Bus Namespace
+### Connecting to the domain relay Service Bus Namespace
 
-The integration events Service Bus Namespace comes with 2 connection strings, one for publishing messages into the service bus, and one for listening for messages.
+The domain relay Service Bus Namespace comes with 2 connection strings, one for publishing messages into the service bus, and one for listening for messages.
 
 Before you start using the service bus namespace connection strings, you will need to expose the following variables to your IaC.
 
@@ -162,7 +162,7 @@ Once these is added, you can start using the snippets below.
 1 - Create a reference to the shared key vault.
 
 ```ruby
-data "azurerm_key_vault" "kv_sharedresources" {
+data "azurerm_key_vault" "kv_shared" {
   name                = var.sharedresources_keyvault_name
   resource_group_name = var.sharedresources_resource_group_name
 }
@@ -171,28 +171,28 @@ data "azurerm_key_vault" "kv_sharedresources" {
 2.a - To send messages use the snippet below.
 
 ```ruby
-data "azurerm_key_vault_secret" "INTEGRATION_EVENTS_SENDER_CONNECTION_STRING" {
-  name         = "INTEGRATION-EVENTS-SENDER-CONNECTION-STRING"
-  key_vault_id = data.azurerm_key_vault.kv_sharedresources.id
+data "azurerm_key_vault_secret" "kvs_sb_domain_relay_send_connection_string" {
+  name         = "sb-domain-relay-send-connection-string"
+  key_vault_id = data.azurerm_key_vault.kv_shared.id
 }
 ```
 
 2.b - To listen for new messages, use the snippet below.
 
 ```ruby
-data "azurerm_key_vault_secret" "INTEGRATION_EVENTS_LISTENER_CONNECTION_STRING" {
-  name         = "INTEGRATION-EVENTS-LISTENER-CONNECTION-STRING"
-  key_vault_id = data.azurerm_key_vault.kv_sharedresources.id
+data "azurerm_key_vault_secret" "kvs_sb_domain_relay_listen_connection_string" {
+  name         = "sb-domain-relay-listen-connection-string"
+  key_vault_id = data.azurerm_key_vault.kv_shared.id
 }
 ```
 
 3 - You can now refer to this value from the needed resources by using the following variables
 
 Reading
-`data.azurerm_key_vault_secret.INTEGRATION_EVENTS_LISTENER_CONNECTION_STRING.value`
+`data.azurerm_key_vault_secret.kvs_sb_domain_relay_listen_connection_string.value`
 
 Writing
-`data.azurerm_key_vault_secret.INTEGRATION_EVENTS_SENDER_CONNECTION_STRING.value`
+`data.azurerm_key_vault_secret.kvs_sb_domain_relay_send_connection_string.value`
 
 ## Where can I get more help?
 

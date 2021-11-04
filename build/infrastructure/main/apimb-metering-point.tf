@@ -11,13 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-module "sbq_messagehub_dataavailable" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//service-bus-queue?ref=2.0.0"
-  name                = "sbq-dataavailable"
-  namespace_name      = module.sbn_integrationevents.name
-  resource_group_name = data.azurerm_resource_group.main.name
-  dependencies        = [
-    module.sbn_integrationevents.dependent_on
-  ]
+resource "azurerm_api_management_backend" "metering_point" {
+  name                = "metering_point"
+  resource_group_name = azurerm_resource_group.this.name
+  api_management_name = module.apim_shared.name
+  protocol            = "http"
+  url                 = var.apimao_metering_point_domain_ingestion_function_url
 }
