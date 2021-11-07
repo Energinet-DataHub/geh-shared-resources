@@ -11,12 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-variable resource_group_name {
-  type = string
+variable subscription_id {
+  type        = string
+  description = "Subscription that the infrastructure code is deployed into."
 }
 
-variable "subscription_id" {
-  type = string
+variable resource_group_name {
+  type        = string
+  description = "Resource Group that the infrastructure code is deployed into."
 }
 
 variable environment_short {
@@ -29,14 +31,13 @@ variable environment_instance {
   description   = "Enviroment instance that the infrastructure code is deployed into."
 }
 
-variable project_name {
+variable domain_name_short {
   type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  description   = "Shortest possible edition of the domain name."
 }
 
-variable product_name {
+variable project_name {
   type          = string
-  description   = "Name of the product this infrastructure is a part of."
 }
 
 variable apim_publisher_email {
