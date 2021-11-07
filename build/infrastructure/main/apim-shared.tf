@@ -15,12 +15,12 @@ module "apim_shared" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=5.1.0"
 
   name                  = "shared"
-  project_name          = var.project_name
+  project_name          = var.domain_name_short
   environment_short     = var.environment_short
   environment_instance  = var.environment_instance
   resource_group_name   = azurerm_resource_group.this.name
   location              = azurerm_resource_group.this.location
-  publisher_name        = var.product_name
+  publisher_name        = var.project_name
   publisher_email       = var.apim_publisher_email
   sku_name              = "Developer_1"
 
