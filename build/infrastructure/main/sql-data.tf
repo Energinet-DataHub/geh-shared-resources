@@ -19,7 +19,7 @@ module "sql_data" {
   source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=5.1.0"
 
   name                          = "data"
-  project_name                  = var.project_name
+  project_name                  = var.domain_name_short
   environment_short             = var.environment_short
   environment_instance          = var.environment_instance
   sql_version                   = "12.0"
