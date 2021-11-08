@@ -38,7 +38,7 @@ module "sql_data" {
   tags                          = azurerm_resource_group.this.tags
 }
 
-module "kvs_db_admin_name" {
+module "kvs_sql_data_admin_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "sql-data-admin-user-name"
@@ -48,7 +48,7 @@ module "kvs_db_admin_name" {
   tags          = azurerm_resource_group.this.tags
 }
 
-module "kvs_db_admin_password" {
+module "kvs_sql_data_admin_password" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "sql-data-admin-user-password"
@@ -58,7 +58,7 @@ module "kvs_db_admin_password" {
   tags          = azurerm_resource_group.this.tags
 }
 
-module "kvs_db_url" {
+module "kvs_sql_data_url" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "sql-data-url"
@@ -74,7 +74,7 @@ resource "random_password" "sql_administrator_login_password" {
   override_special = "_%@"
 }
 
-module "kvs_db_name" {
+module "kvs_sql_data_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "sql-data-name"
