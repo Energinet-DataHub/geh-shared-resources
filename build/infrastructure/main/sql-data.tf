@@ -73,3 +73,13 @@ resource "random_password" "sql_administrator_login_password" {
   special = true
   override_special = "_%@"
 }
+
+module "kvs_db_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sql-data-name"
+  value         = module.sql_data.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
