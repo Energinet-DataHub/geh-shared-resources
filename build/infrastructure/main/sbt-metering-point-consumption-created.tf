@@ -34,7 +34,7 @@ module "sbt_consumption_metering_point_created" {
   ]
 }
 
-module "kvs_sbt_consumption_metering_point_created" {
+module "kvs_sbt_consumption_metering_point_created_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "sbt-consumption-metering-point-created-name"
@@ -44,7 +44,7 @@ module "kvs_sbt_consumption_metering_point_created" {
   tags          = azurerm_resource_group.this.tags
 }
 
-module "kvs_sbs_consumption_metering_point_created_sub_charges" {
+module "kvs_sbs_consumption_metering_point_created_sub_charges_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "sbs-consumption-metering-point-created-sub-charges-name"
