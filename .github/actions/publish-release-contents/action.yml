@@ -15,7 +15,7 @@ name: 'Publish release content'
 inputs:
   RELEASE_FOLDER_PATH:
     required: true
-  LOCAL_REPO_FOLDER_PATH:
+  REPO_FOLDER_PATH:
     required: true
 
 runs:
@@ -25,4 +25,4 @@ runs:
       shell: bash
       run: |
         mkdir ${{ inputs.RELEASE_FOLDER_PATH }}
-        cp -fR ${{ inputs.LOCAL_REPO_FOLDER_PATH }}/build/infrastructure ${{ inputs.RELEASE_FOLDER_PATH }} 2>/dev/null || :
+        cp -fR ${{ inputs.REPO_FOLDER_PATH }}/build/infrastructure ${{ inputs.RELEASE_FOLDER_PATH }} 2>/dev/null || :
