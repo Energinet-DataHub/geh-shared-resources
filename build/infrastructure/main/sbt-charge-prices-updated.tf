@@ -24,3 +24,13 @@ module "sbt_charge_prices_updated" {
     },
   ]
 }
+
+module "kvs_sbt_charge_prices_updated" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbt-charge-prices-updated-name"
+  value         = module.sbt_charge_prices_updated.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
