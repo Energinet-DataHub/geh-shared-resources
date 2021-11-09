@@ -54,7 +54,7 @@ module "apima_b2b" {
             <set-header name="X-Correlation-ID" exists-action="override">
                 <value>@($"{context.RequestId}")</value>
             </set-header>
-            <set-header name="X-Timestamp" exists-action="override">
+            <set-header name="X-RequestTime" exists-action="override">
                 <value>@(DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ"))</value>
             </set-header>
           </inbound>

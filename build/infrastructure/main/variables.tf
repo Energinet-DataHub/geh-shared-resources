@@ -83,3 +83,13 @@ variable apimao_timeseries_domain_name {
   type          = string
   description   = "Name of the Timeseries domain ingestion function, used for configuration inside the API Managment API."
 }
+
+variable apimao_messagehub_domain_ingestion_function_url {
+  type          = string
+  description   = "Url of the Message hub domain ingestion function, used for configuration inside the API Managment API."
+}
+
+variable apimao_messagehub_domain_name {
+  type          = string
+  description   = "Name of the Message hub domain ingestion function, used for configuration inside the API Managment API."
+}
