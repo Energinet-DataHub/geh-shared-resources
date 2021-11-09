@@ -30,7 +30,7 @@ module "sbq_create_link_messages_reply" {
   resource_group_name = azurerm_resource_group.this.name
 }
 
-module "kvs_sbq_create_link_messages_request" {
+module "kvs_sbq_create_link_messages_request_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "sbq-create-link-messages-request-name"
@@ -40,7 +40,7 @@ module "kvs_sbq_create_link_messages_request" {
   tags          = azurerm_resource_group.this.tags
 }
 
-module "kvs_sbq_create_link_messages_reply" {
+module "kvs_sbq_create_link_messages_reply_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "sbq-create-link-messages-reply-name"
