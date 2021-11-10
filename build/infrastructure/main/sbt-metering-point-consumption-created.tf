@@ -13,6 +13,7 @@
 # limitations under the License.
 locals {
   SBS_CONSUMPTION_METERING_POINT_SUB_CHARGES_NAME = "consumption-metering-point-created-sub-charges"
+  SBS_CONSUMPTION_METERING_POINT_TO_AGGREGATIONS_NAME = "consumption-metering-point-created-to-aggregations"
 }
 
 module "sbt_consumption_metering_point_created" {
@@ -30,6 +31,10 @@ module "sbt_consumption_metering_point_created" {
       name                = "market-roles-consumption-mp-created-sub"
       max_delivery_count  = 10
       forward_to          = module.sbq_market_roles_forwarded.name
+    },
+    {
+      name                = local.SBS_CONSUMPTION_METERING_POINT_TO_AGGREGATIONS_NAME
+      max_delivery_count  = 10
     },
   ]
 }
@@ -54,3 +59,12 @@ module "kvs_sbs_consumption_metering_point_created_sub_charges_name" {
   tags          = azurerm_resource_group.this.tags
 }
 
+module "kvs_sbs_consumption_metering_point_created_to_aggregations_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbs-consumption-metering-point-created-to-aggregations-name"
+  value         = local.SBS_CONSUMPTION_METERING_POINT_TO_AGGREGATIONS_NAME
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}

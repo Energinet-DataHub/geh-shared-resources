@@ -11,6 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+locals {
+  SBS_ENERGY_SUPPLIER_CHANGE_TO_AGGREGATIONS_NAME = "energy-supplier-change-to-aggregations"
+}
+
 module "sbt_energy_supplier_changed" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=5.1.0"
 
@@ -23,5 +27,29 @@ module "sbt_energy_supplier_changed" {
       max_delivery_count  = 10
       forward_to          = module.sbq_metering_point_forwarded.name
     },
+    {
+      name                = local.SBS_ENERGY_SUPPLIER_CHANGE_TO_AGGREGATIONS_NAME
+      max_delivery_count  = 10
+    },
   ]
+}
+
+module "kvs_sbt_energy_supplier_changed_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbt-energy-supplier-changed-name"
+  value         = module.sbt_energy_supplier_changed.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_sbs_energy_supplier_change_to_aggregations_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbs-energy-supplier-change-to-aggregations-name"
+  value         = local.SBS_ENERGY_SUPPLIER_CHANGE_TO_AGGREGATIONS_NAME
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
 }
