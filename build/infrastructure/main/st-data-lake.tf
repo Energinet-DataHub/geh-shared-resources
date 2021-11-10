@@ -100,7 +100,7 @@ module "kvs_st_data_lake_primary_access_key" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "st-data-lake-primary-access-key"
-  value         = module.st_data_lake.name
+  value         = module.st_data_lake.primary_access_key
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
