@@ -36,3 +36,33 @@ module "sbq_metering_points_dequeue" {
   namespace_name      = module.sb_domain_relay.name
   resource_group_name = azurerm_resource_group.this.name
 }
+
+module "kvs_sbq_metering_points_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbq-metering-points-name"
+  value         = module.sbq_metering_points.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_sbq_metering_points_reply_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbq-metering-points-reply-name"
+  value         = module.sbq_metering_points_reply.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_sbq_metering_points_dequeue_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbq-metering-points-dequeue-name"
+  value         = module.sbq_metering_points_dequeue.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
