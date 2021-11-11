@@ -17,25 +17,21 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - build/**
-      - .github/workflows/ci.yml
 
 jobs:
-  md_check:
-    uses: Energinet-DataHub/.github/.github/workflows/md-check.yml@1.12.0
+  ci_base:
+    uses: Energinet-DataHub/.github/.github/workflows/ci-base.yml@1.13.0
 
-  license_check:
-    uses: Energinet-DataHub/.github/.github/workflows/license-check.yml@1.12.0
-  
   terraform_validate:
-    uses: Energinet-DataHub/.github/.github/workflows/terraform-validate.yml@1.12.0
+    uses: Energinet-DataHub/.github/.github/workflows/terraform-validate.yml@1.13.0
     with:
       TERRAFORM_WORKING_DIR_PATH: './build/infrastructure/main'
       TERRAFORM_VERSION: '1.0.6'
 
   create_prerelease:
-    needs: [md_check, license_check, terraform_validate]
-    uses: Energinet-DataHub/.github/.github/workflows/create-prerelease.yml@1.12.0
+    needs: [ci_base, terraform_validate]
+    uses: Energinet-DataHub/.github/.github/workflows/create-prerelease.yml@1.13.0
+    with:
+      CALLER_REPOSITORY_PATH: Energinet-DataHub/geh-shared-resources
     secrets:
-      PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+      PAT_TOKEN: ${{ secrets.PAT_TOKEN }}

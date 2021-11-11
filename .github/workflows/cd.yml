@@ -17,19 +17,19 @@ on:
   push:
     branches:
       - main
-    paths:
-      - build/**
-      - .github/workflows/cd.yml
 
 jobs:
   publish_release:
-    uses: Energinet-DataHub/.github/.github/workflows/publish-release.yml@1.12.0
+    uses: Energinet-DataHub/.github/.github/workflows/publish-release.yml@1.13.0
     secrets:
       PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
 
   dispatch_deployment_request:
     needs: publish_release
-    uses: Energinet-DataHub/.github/.github/workflows/dispatch-deployment-request.yml@1.12.0
+    uses: Energinet-DataHub/.github/.github/workflows/dispatch-deployment-request.yml@1.13.0
+    with:
+      CALLER_REPOSITORY_NAME: geh-shared-resources
+      CALLER_REPOSITORY_PATH: Energinet-DataHub/geh-shared-resources
     secrets:
       PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
       ENVIRONMENT_REPOSITORY_PATH: ${{ secrets.ENVIRONMENT_REPOSITORY_PATH }}

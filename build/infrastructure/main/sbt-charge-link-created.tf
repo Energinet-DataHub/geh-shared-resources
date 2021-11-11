@@ -24,3 +24,13 @@ module "sbt_charge_link_created" {
     },
   ]
 }
+
+module "kvs_sbt_charge_link_created_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbt-charge-link-created-name"
+  value         = module.sbt_charge_link_created.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
