@@ -20,7 +20,7 @@ module "apimao_messagehub_peek_all" {
   api_management_name     = module.apim_shared.name
   display_name            = "Message Hub: Peek all"
   method                  = "GET"
-  url_template            = "v1.0/cim/all"
+  url_template            = "v1.0/cim/all/{id}"
   policies                = [
     {
       xml_content = <<XML
@@ -29,6 +29,9 @@ module "apimao_messagehub_peek_all" {
             <base />
             <set-backend-service backend-id="${azurerm_api_management_backend.messagehub.name}" />
             <rewrite-uri template="/peek" />
+            <set-query-parameter name="bundleid" exists-action="override">
+              <value>@(context.Request.MatchedParameters["id"])</value>
+            </set-query-parameter>
           </inbound>
         </policies>
       XML
