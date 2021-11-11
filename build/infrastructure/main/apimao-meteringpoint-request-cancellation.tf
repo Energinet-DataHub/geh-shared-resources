@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "apimao_request_cancellation" {
-  source                  = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=renetnielsen/3.1.0"
+  source                  = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=5.1.0"
 
   operation_id            = "request-cancellation"
   api_management_api_name = module.apima_b2b.name
@@ -20,7 +20,7 @@ module "apimao_request_cancellation" {
   api_management_name     = module.apim_shared.name
   display_name            = "Metering Point: Request cancellation"
   method                  = "POST"
-  url_template            = "v1.0/cim/request-cancellation"
+  url_template            = "v1.0/cim/requestcancellation"
   policies                = [
     {
       xml_content = <<XML

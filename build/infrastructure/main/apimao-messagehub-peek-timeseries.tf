@@ -19,8 +19,8 @@ module "apimao_messagehub_peek_timeseries" {
   resource_group_name     = azurerm_resource_group.this.name
   api_management_name     = module.apim_shared.name
   display_name            = "Message Hub: Peek timeseries"
-                          method                  = "POST"
-                          url_template            = "v1.0/cim/request-validated-measure-data"
+  method                  = "GET"
+  url_template            = "v1.0/cim/timeseries"
   policies                = [
     {
       xml_content = <<XML
@@ -28,7 +28,7 @@ module "apimao_messagehub_peek_timeseries" {
           <inbound>
             <base />
             <set-backend-service backend-id="${azurerm_api_management_backend.messagehub.name}" />
-            <rewrite-uri template="/PeekTimeSeries" />
+            <rewrite-uri template="/peek/timeseries" />
           </inbound>
         </policies>
       XML

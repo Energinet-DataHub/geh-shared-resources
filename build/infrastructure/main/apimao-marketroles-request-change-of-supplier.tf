@@ -20,7 +20,7 @@ module "apimao_request_change_of_supplier" {
   api_management_name     = module.apim_shared.name
   display_name            = "Market Roles: Request change of supplier"
   method                  = "POST"
-  url_template            = "v1.0/cim/request-change-of-supplier"
+  url_template            = "v1.0/cim/requestchangeofsupplier"
   policies                = [
     {
       xml_content = <<XML

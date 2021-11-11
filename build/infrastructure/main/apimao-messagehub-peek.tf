@@ -19,8 +19,8 @@ module "apimao_messagehub_peek_all" {
   resource_group_name     = azurerm_resource_group.this.name
   api_management_name     = module.apim_shared.name
   display_name            = "Message Hub: Peek all"
-                          method                  = "POST"
-                          url_template            = "v1.0/cim/request-validated-measure-data"
+  method                  = "GET"
+  url_template            = "v1.0/cim/all"
   policies                = [
     {
       xml_content = <<XML
@@ -28,7 +28,7 @@ module "apimao_messagehub_peek_all" {
           <inbound>
             <base />
             <set-backend-service backend-id="${azurerm_api_management_backend.messagehub.name}" />
-            <rewrite-uri template="/Peek" />
+            <rewrite-uri template="/peek" />
           </inbound>
         </policies>
       XML

@@ -36,6 +36,10 @@ variable domain_name_short {
   description   = "Shortest possible edition of the domain name."
 }
 
+variable project_name {
+  type          = string
+}
+
 variable product_name {
   type          = string
   description   = "Name of the product this infrastructure is a part of."

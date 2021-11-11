@@ -11,24 +11,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-module "apimao_request_change_customer_characteristics" {
+module "apimao_request_change_price_list" {
   source                  = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=5.1.0"
 
-  operation_id            = "request-change-customer-characteristics"
+  operation_id            = "request-change-price-list"
   api_management_api_name = module.apima_b2b.name
   resource_group_name     = azurerm_resource_group.this.name
   api_management_name     = module.apim_shared.name
-  display_name            = "Market Roles: Request change customer characteristics"
+  display_name            = "Charges: Request change price list"
   method                  = "POST"
-  url_template            = "v1.0/cim/requestchangecustomercharacteristics"
+  url_template            = "v1.0/cim/requestchangepricelist"
   policies                = [
     {
       xml_content = <<XML
         <policies>
           <inbound>
             <base />
-            <set-backend-service backend-id="${azurerm_api_management_backend.market_roles.name}" />
-            <rewrite-uri template="/CommandApi" />
+            <set-backend-service backend-id="${azurerm_api_management_backend.charges.name}" />
+            <rewrite-uri template="/ChargeIngestion" />
           </inbound>
         </policies>
       XML

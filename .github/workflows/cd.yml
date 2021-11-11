@@ -33,5 +33,3 @@ jobs:
     secrets:
       PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
       ENVIRONMENT_REPOSITORY_PATH: ${{ secrets.ENVIRONMENT_REPOSITORY_PATH }}
-      LOCAL_REPOSITORY_NAME: ${{ secrets.THIS_REPOSITORY_NAME }}
-      LOCAL_REPOSITORY_PATH: ${{ secrets.THIS_REPOSITORY_PATH }}

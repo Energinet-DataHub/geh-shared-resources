@@ -20,7 +20,7 @@ module "apimao_request_end_of_supply" {
   api_management_name     = module.apim_shared.name
   display_name            = "Market Roles: Request end of supply"
   method                  = "POST"
-  url_template            = "v1.0/cim/request-end-of-supply"
+  url_template            = "v1.0/cim/requestendofsupply"
   policies                = [
     {
       xml_content = <<XML

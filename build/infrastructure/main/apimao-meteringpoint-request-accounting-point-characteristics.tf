@@ -20,7 +20,7 @@ module "apimao_request_accounting_point_characteristics" {
   api_management_name     = module.apim_shared.name
   display_name            = "Metering Point: Request accounting point characteristics"
   method                  = "POST"
-  url_template            = "v1.0/cim/request-accounting-point-characteristics"
+  url_template            = "v1.0/cim/requestaccountingpointcharacteristics"
   policies                = [
     {
       xml_content = <<XML

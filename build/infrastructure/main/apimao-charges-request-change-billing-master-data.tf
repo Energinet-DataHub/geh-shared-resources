@@ -20,7 +20,7 @@ module "apimao_request_change_billing_master_data" {
   api_management_name     = module.apim_shared.name
   display_name            = "Charges: Request change billing master data"
   method                  = "POST"
-  url_template            = "v1.0/cim/request-change-billing-master-data"
+  url_template            = "v1.0/cim/requestchangebillingmasterdata"
   policies                = [
     {
       xml_content = <<XML

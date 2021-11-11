@@ -20,7 +20,7 @@ module "apimao_request_validated_measure_data" {
   api_management_name     = module.apim_shared.name
   display_name            = "Timeseries: Request validated measure data"
   method                  = "POST"
-  url_template            = "v1.0/cim/request-validated-measure-data"
+  url_template            = "v1.0/cim/requestvalidatedmeasuredata"
   policies                = [
     {
       xml_content = <<XML
