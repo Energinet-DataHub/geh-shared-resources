@@ -40,11 +40,6 @@ variable project_name {
   type          = string
 }
 
-variable product_name {
-  type          = string
-  description   = "Name of the product this infrastructure is a part of."
-}
-
 variable apim_publisher_email {
   type          = string
   description   = "(Required) The email of publisher/company."
