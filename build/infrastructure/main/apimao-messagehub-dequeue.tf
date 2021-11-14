@@ -21,11 +21,11 @@ module "apimao_messagehub_dequeue" {
   display_name            = "Message Hub: Dequeue"
   method                  = "DELETE"
   url_template            = "v1.0/cim/dequeue/{id}"
-  template_parameter      = [
+  template_parameters     = [
     {
       name      = "id"
       required  = true
-      type      = string
+      type      = "string"
     }
   ]
   policies                = [
