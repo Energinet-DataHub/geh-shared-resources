@@ -11,16 +11,23 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-module "apimao_messagehub_peek_timeseries" {
-  source                  = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=5.1.0"
+resource "azurerm_api_management_api_operation" "apimao_messagehub_peek_timeseries" {
+#module "apimao_messagehub_peek_timeseries" {
+  #source                  = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=5.1.0"
 
   operation_id            = "peek-timeseries"
-  api_management_api_name = module.apima_b2b.name
+  #api_management_api_name = module.apima_b2b.name
+  api_name                = module.apima_b2b.name
   resource_group_name     = azurerm_resource_group.this.name
   api_management_name     = module.apim_shared.name
   display_name            = "Message Hub: Peek timeseries"
   method                  = "GET"
   url_template            = "v1.0/cim/timeseries/{id}"
+  template_parameter      = [{
+    name          = "id"
+    required      = true
+    type          = string
+  }]
   policies                = [
     {
       xml_content = <<XML
