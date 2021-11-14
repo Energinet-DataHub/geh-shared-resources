@@ -21,13 +21,6 @@ module "apimao_messagehub_peek_timeseries" {
   display_name            = "Message Hub: Peek timeseries"
   method                  = "GET"
   url_template            = "v1.0/cim/timeseries/{id}"
-  template_parameter      = [
-    {
-      name      = "BundleID"
-      required  = true
-      type      = string
-    }
-  ]
   policies                = [
     {
       xml_content = <<XML
