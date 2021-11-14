@@ -23,7 +23,7 @@ module "apimao_messagehub_dequeue" {
   url_template            = "v1.0/cim/dequeue/{id}"
   template_parameter      = [
     {
-      name      = "BundleID"
+      name      = "id"
       required  = true
       type      = string
     }
