@@ -14,7 +14,7 @@
 module "apimao_messagehub_dequeue" {
   source                  = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=5.1.0"
 
-  operation_id            = "peek-all"
+  operation_id            = "dequeue"
   api_management_api_name = module.apima_b2b.name
   resource_group_name     = azurerm_resource_group.this.name
   api_management_name     = module.apim_shared.name
