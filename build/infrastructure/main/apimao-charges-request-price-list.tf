@@ -28,7 +28,7 @@ module "apimao_request_price_list" {
           <inbound>
             <base />
             <set-backend-service backend-id="${azurerm_api_management_backend.charges.name}" />
-            <rewrite-uri template="/ChargeIngestion" />
+            <rewrite-uri template="/api/ChargeIngestion" />
           </inbound>
         </policies>
       XML

@@ -35,7 +35,7 @@ module "apimao_messagehub_peek_aggregations" {
           <inbound>
             <base />
             <set-backend-service backend-id="${azurerm_api_management_backend.messagehub.name}" />
-            <rewrite-uri template="/peek/aggregations" />
+            <rewrite-uri template="/api/peek/aggregations" />
             <set-query-parameter name="bundleid" exists-action="override">
               <value>@(context.Request.MatchedParameters["id"])</value>
             </set-query-parameter>

@@ -35,7 +35,7 @@ module "apimao_messagehub_peek_timeseries" {
           <inbound>
             <base />
             <set-backend-service backend-id="${azurerm_api_management_backend.messagehub.name}" />
-            <rewrite-uri template="/peek/timeseries" />
+            <rewrite-uri template="/api/peek/timeseries" />
             <set-query-parameter name="bundleid" exists-action="override">
               <value>@(context.Request.MatchedParameters["id"])</value>
             </set-query-parameter>

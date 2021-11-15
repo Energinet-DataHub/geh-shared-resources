@@ -28,7 +28,7 @@ module "apimao_request_change_customer_characteristics" {
           <inbound>
             <base />
             <set-backend-service backend-id="${azurerm_api_management_backend.market_roles.name}" />
-            <rewrite-uri template="/CommandApi" />
+            <rewrite-uri template="/api/CommandApi" />
           </inbound>
         </policies>
       XML

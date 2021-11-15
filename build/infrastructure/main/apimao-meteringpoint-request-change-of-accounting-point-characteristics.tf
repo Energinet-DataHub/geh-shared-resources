@@ -28,7 +28,7 @@ module "apimao_request_change_of_accounting_point_characteristics" {
           <inbound>
             <base />
             <set-backend-service backend-id="${azurerm_api_management_backend.metering_point.name}" />
-            <rewrite-uri template="/MeteringPoint" />
+            <rewrite-uri template="/api/MeteringPoint" />
           </inbound>
         </policies>
       XML

@@ -28,7 +28,7 @@ module "apimao_request_validated_measure_data" {
           <inbound>
             <base />
             <set-backend-service backend-id="${azurerm_api_management_backend.timeseries.name}" />
-            <rewrite-uri template="/TimeSeriesHttpTrigger" />
+            <rewrite-uri template="/api/TimeSeriesHttpTrigger" />
           </inbound>
         </policies>
       XML
