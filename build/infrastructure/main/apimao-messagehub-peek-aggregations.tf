@@ -21,6 +21,13 @@ module "apimao_messagehub_peek_aggregations" {
   display_name            = "Message Hub: Peek aggregations"
   method                  = "GET"
   url_template            = "v1.0/cim/aggregations/{id}"
+  template_parameters     = [
+    {
+      name      = "id"
+      required  = true
+      type      = "string"
+    }
+  ]
   policies                = [
     {
       xml_content = <<XML

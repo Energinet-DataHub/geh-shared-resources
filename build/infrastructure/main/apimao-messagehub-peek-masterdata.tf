@@ -21,6 +21,13 @@ module "apimao_messagehub_peek_masterdata" {
   display_name            = "Message Hub: Peek masterdata"
   method                  = "GET"
   url_template            = "v1.0/cim/masterdata/{id}"
+  template_parameters     = [
+    {
+      name      = "id"
+      required  = true
+      type      = "string"
+    }
+  ]
   policies                = [
     {
       xml_content = <<XML

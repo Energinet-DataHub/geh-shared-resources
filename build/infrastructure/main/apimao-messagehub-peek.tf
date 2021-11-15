@@ -21,6 +21,13 @@ module "apimao_messagehub_peek_all" {
   display_name            = "Message Hub: Peek all"
   method                  = "GET"
   url_template            = "v1.0/cim/all/{id}"
+  template_parameters     = [
+    {
+      name      = "id"
+      required  = true
+      type      = "string"
+    }
+  ]
   policies                = [
     {
       xml_content = <<XML
