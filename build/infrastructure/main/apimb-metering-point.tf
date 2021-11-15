@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 resource "azurerm_api_management_backend" "metering_point" {
-  name                = var.apimao_metering_point_domain_name
+  name                = "metering_point"
   resource_group_name = azurerm_resource_group.this.name
   api_management_name = module.apim_shared.name
   protocol            = "http"

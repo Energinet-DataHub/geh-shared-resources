@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 resource "azurerm_api_management_backend" "charges" {
-  name                = var.apimao_charges_domain_name
+  name                = "charges"
   resource_group_name = azurerm_resource_group.this.name
   api_management_name = module.apim_shared.name
   protocol            = "http"
