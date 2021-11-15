@@ -44,3 +44,28 @@ variable apim_publisher_email {
   type          = string
   description   = "(Required) The email of publisher/company."
 }
+
+variable apimao_charges_domain_ingestion_function_url {
+  type          = string
+  description   = "Url of the Charges domain ingestion function, used for configuration inside the API Managment API."
+}
+
+variable apimao_market_roles_domain_ingestion_function_url {
+  type          = string
+  description   = "Url of the Market Roles domain ingestion function, used for configuration inside the API Managment API."
+}
+
+variable apimao_messagehub_domain_ingestion_function_url {
+  type          = string
+  description   = "Url of the Message hub domain ingestion function, used for configuration inside the API Managment API."
+}
+
+variable apimao_metering_point_domain_ingestion_function_url {
+  type          = string
+  description   = "Url of the Metering Point domain ingestion function, used for configuration inside the API Managment API."
+}
+
+variable apimao_timeseries_domain_ingestion_function_url {
+  type          = string
+  description   = "Url of the Timeseries domain ingestion function, used for configuration inside the API Managment API."
+}
