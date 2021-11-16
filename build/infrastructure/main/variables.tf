@@ -11,12 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-variable resource_group_name {
-  type = string
+variable subscription_id {
+  type        = string
+  description = "Subscription that the infrastructure code is deployed into."
 }
 
-variable "subscription_id" {
-  type = string
+variable resource_group_name {
+  type        = string
+  description = "Resource Group that the infrastructure code is deployed into."
 }
 
 variable environment_short {
@@ -29,14 +31,13 @@ variable environment_instance {
   description   = "Enviroment instance that the infrastructure code is deployed into."
 }
 
-variable project_name {
+variable domain_name_short {
   type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  description   = "Shortest possible edition of the domain name."
 }
 
-variable product_name {
+variable project_name {
   type          = string
-  description   = "Name of the product this infrastructure is a part of."
 }
 
 variable apim_publisher_email {
@@ -44,17 +45,27 @@ variable apim_publisher_email {
   description   = "(Required) The email of publisher/company."
 }
 
+variable apimao_charges_domain_ingestion_function_url {
+  type          = string
+  description   = "Url of the Charges domain ingestion function, used for configuration inside the API Managment API."
+}
+
+variable apimao_market_roles_domain_ingestion_function_url {
+  type          = string
+  description   = "Url of the Market Roles domain ingestion function, used for configuration inside the API Managment API."
+}
+
+variable apimao_messagehub_domain_ingestion_function_url {
+  type          = string
+  description   = "Url of the Message hub domain ingestion function, used for configuration inside the API Managment API."
+}
+
 variable apimao_metering_point_domain_ingestion_function_url {
   type          = string
   description   = "Url of the Metering Point domain ingestion function, used for configuration inside the API Managment API."
 }
 
-variable apimao_metering_point_domain_ingestion_path {
+variable apimao_timeseries_domain_ingestion_function_url {
   type          = string
-  description   = "Path of the Metering Point domain ingestion function, used for configuration inside the API Managment API."
-}
-
-variable apimao_b2b_cim_url_path_suffix {
-  type          = string
-  description   = "URL path suffix for the b2b cim endpoints, used for configuration inside the API Managment API."
+  description   = "Url of the Timeseries domain ingestion function, used for configuration inside the API Managment API."
 }

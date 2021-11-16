@@ -11,18 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-name: 'Publish release content'
-inputs:
-  RELEASE_FOLDER_PATH:
-    required: true
-  REPO_FOLDER_PATH:
-    required: true
-
-runs:
-  using: composite
-  steps:
-    - name: Copy Infrastructure to release folder
-      shell: bash
-      run: |
-        mkdir ${{ inputs.RELEASE_FOLDER_PATH }}
-        cp -fR ${{ inputs.REPO_FOLDER_PATH }}/build/infrastructure ${{ inputs.RELEASE_FOLDER_PATH }} 2>/dev/null || :
+resource "azurerm_api_management_backend" "market_roles" {
+  name                = "market_roles"
+  resource_group_name = azurerm_resource_group.this.name
+  api_management_name = module.apim_shared.name
+  protocol            = "http"
+  url                 = var.apimao_market_roles_domain_ingestion_function_url  
+}
