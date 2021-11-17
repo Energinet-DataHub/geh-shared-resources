@@ -23,9 +23,9 @@ module "sbt_metering_point_connected" {
   resource_group_name = azurerm_resource_group.this.name
   subscriptions       = [
     {
-      name                = "metering-point-energy-supplier-changed-sub"
+      name                = "market-roles-mp-connected-sub"
       max_delivery_count  = 10
-      forward_to          = module.sbq_metering_point_forwarded.name
+      forward_to          = module.sbq_market_roles_forwarded.name
     },
     {
       name                = local.SBS_METERING_POINT_CONNECTED_NAME
