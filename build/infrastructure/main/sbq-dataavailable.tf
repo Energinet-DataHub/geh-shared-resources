@@ -18,3 +18,13 @@ module "sbq_dataavailable" {
   namespace_name      = module.sb_domain_relay.name
   resource_group_name = azurerm_resource_group.this.name
 }
+
+module "kvs_sbq_data_available_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbq-data-available-name"
+  value         = module.sbq_dataavailable.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}

@@ -11,6 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+locals {
+  SBS_METERING_POINT_CONNECTED_NAME = "metering-point-connected-to-aggregations"
+}
+
 module "sbt_metering_point_connected" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=5.1.0"
 
@@ -23,5 +27,29 @@ module "sbt_metering_point_connected" {
       max_delivery_count  = 10
       forward_to          = module.sbq_metering_point_forwarded.name
     },
+    {
+      name                = local.SBS_METERING_POINT_CONNECTED_NAME
+      max_delivery_count  = 10
+    },
   ]
+}
+
+module "kvs_sbt_metering_point_connected_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbt-metering-point-connected-name"
+  value         = module.sbt_metering_point_connected.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_sbs_metering_point_connected_to_aggregations_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbs-metering-point-connected-to-aggregations-name"
+  value         = local.SBS_METERING_POINT_CONNECTED_NAME
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
 }

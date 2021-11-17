@@ -24,7 +24,7 @@ module "st_data_lake" {
   source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=5.1.0"
 
   name                      = "datalake"
-  project_name              = var.project_name
+  project_name              = var.domain_name_short
   environment_short         = var.environment_short
   environment_instance      = var.environment_instance
   resource_group_name       = azurerm_resource_group.this.name
@@ -91,6 +91,16 @@ module "kvs_st_data_lake_name" {
 
   name          = "st-data-lake-name"
   value         = module.st_data_lake.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_st_data_lake_primary_access_key" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "st-data-lake-primary-access-key"
+  value         = module.st_data_lake.primary_access_key
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
