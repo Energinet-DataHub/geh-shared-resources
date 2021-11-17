@@ -17,4 +17,11 @@ module "sbt_production_metering_point_created" {
   name                = "production-metering-point-created"
   namespace_name      = module.sb_domain_relay.name
   resource_group_name = azurerm_resource_group.this.name
+  subscriptions       = [
+    {
+      name                = "market-roles-production-mp-created-sub"
+      max_delivery_count  = 10
+      forward_to          = module.sbq_market_roles_forwarded.name
+    }
+  ]
 }
