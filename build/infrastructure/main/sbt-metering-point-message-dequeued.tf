@@ -21,7 +21,7 @@ module "sbt_metering_point_message_dequeued" {
     {
       name                = "metering-point-message-dequeued-sub"
       max_delivery_count  = 10
-      forward_to          = module.sbt_metering_point_message_dequeued.name
+      forward_to          = module.sbq_metering_point_forwarded.name
     }
   ]
 }
