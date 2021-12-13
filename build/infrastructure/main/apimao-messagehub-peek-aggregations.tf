@@ -20,7 +20,7 @@ module "apimao_messagehub_peek_aggregations" {
   api_management_name     = module.apim_shared.name
   display_name            = "Message Hub: Peek aggregations"
   method                  = "GET"
-  url_template            = "v1.0/cim/aggregations/{id}"
+  url_template            = "/v1.0/cim/aggregations/{id}"
   template_parameters     = [
     {
       name      = "id"

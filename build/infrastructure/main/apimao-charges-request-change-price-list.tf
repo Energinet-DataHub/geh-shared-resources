@@ -20,7 +20,7 @@ module "apimao_request_change_price_list" {
   api_management_name     = module.apim_shared.name
   display_name            = "Charges: Request change price list"
   method                  = "POST"
-  url_template            = "v1.0/cim/requestchangepricelist"
+  url_template            = "/v1.0/cim/requestchangepricelist"
   policies                = [
     {
       xml_content = <<XML

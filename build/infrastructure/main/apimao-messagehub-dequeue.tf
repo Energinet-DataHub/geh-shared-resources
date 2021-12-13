@@ -20,7 +20,7 @@ module "apimao_messagehub_dequeue" {
   api_management_name     = module.apim_shared.name
   display_name            = "Message Hub: Dequeue"
   method                  = "DELETE"
-  url_template            = "v1.0/cim/dequeue/{id}"
+  url_template            = "/v1.0/cim/dequeue/{id}"
   template_parameters     = [
     {
       name      = "id"

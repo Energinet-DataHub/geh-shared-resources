@@ -20,7 +20,7 @@ module "apimao_messagehub_peek_timeseries" {
   api_management_name     = module.apim_shared.name
   display_name            = "Message Hub: Peek timeseries"
   method                  = "GET"
-  url_template            = "v1.0/cim/timeseries/{id}"
+  url_template            = "/v1.0/cim/timeseries/{id}"
   template_parameters     = [
     {
       name      = "id"

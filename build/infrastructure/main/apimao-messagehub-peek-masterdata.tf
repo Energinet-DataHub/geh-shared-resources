@@ -20,7 +20,7 @@ module "apimao_messagehub_peek_masterdata" {
   api_management_name     = module.apim_shared.name
   display_name            = "Message Hub: Peek masterdata"
   method                  = "GET"
-  url_template            = "v1.0/cim/masterdata/{id}"
+  url_template            = "/v1.0/cim/masterdata/{id}"
   template_parameters     = [
     {
       name      = "id"

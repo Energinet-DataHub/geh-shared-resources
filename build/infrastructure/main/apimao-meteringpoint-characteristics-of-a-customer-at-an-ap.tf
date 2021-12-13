@@ -20,7 +20,7 @@ module "apimao_characteristics_of_a_customer_at_an_ap" {
   api_management_name     = module.apim_shared.name
   display_name            = "Metering Point: Characteristics of a customer at an AP"
   method                  = "POST"
-  url_template            = "v1.0/cim/characteristicsofacustomeratanap"
+  url_template            = "/v1.0/cim/characteristicsofacustomeratanap"
   policies                = [
     {
       xml_content = <<XML

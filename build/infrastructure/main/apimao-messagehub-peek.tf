@@ -20,7 +20,7 @@ module "apimao_messagehub_peek_all" {
   api_management_name     = module.apim_shared.name
   display_name            = "Message Hub: Peek all"
   method                  = "GET"
-  url_template            = "v1.0/cim/all/{id}"
+  url_template            = "/v1.0/cim/all/{id}"
   template_parameters     = [
     {
       name      = "id"
