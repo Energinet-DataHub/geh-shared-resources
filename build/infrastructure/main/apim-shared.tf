@@ -37,7 +37,8 @@ resource "azurerm_api_management_authorization_server" "oauth_server" {
   authorization_methods        =  [
     "GET",
   ]
-  client_registration_endpoint = "https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/oauth2/v2.0/token"
+  client_registration_endpoint = "http://localhost/"
+  token_endpoint               = "https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/oauth2/v2.0/token"
   grant_types = [
     "clientCredentials",
   ]
