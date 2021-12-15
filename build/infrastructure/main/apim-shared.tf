@@ -32,18 +32,21 @@ resource "azurerm_api_management_authorization_server" "oauth_server" {
   api_management_name          = module.apim_shared.name
   resource_group_name          = azurerm_resource_group.this.name
   display_name                 = "OAuth client credentials server"
-  authorization_endpoint       = "https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/oauth2/v2.0/authorize"
-  client_id                    = var.backend_service_app_id
-  authorization_methods        =  [
-    "GET",
-  ]
   client_registration_endpoint = "http://localhost/"
-  token_endpoint               = "https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/oauth2/v2.0/token"
   grant_types = [
     "clientCredentials",
   ]
+  authorization_endpoint       = "https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/oauth2/v2.0/authorize"
+  authorization_methods        =  [
+    "GET",
+  ]
+  token_endpoint               = "https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/oauth2/v2.0/token"
   client_authentication_method = [
     "Body",
   ]
+  bearer_token_sending_methods = [
+    "authorizationHeader",
+  ]
   default_scope                = "api://${var.backend_service_app_id}/.default"
+  client_id                    = var.backend_service_app_id
 }
