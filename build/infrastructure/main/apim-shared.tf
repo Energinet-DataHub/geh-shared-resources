@@ -50,3 +50,14 @@ resource "azurerm_api_management_authorization_server" "oauth_server" {
   default_scope                = "api://${var.backend_service_app_id}/.default"
   client_id                    = var.backend_service_app_id
 }
+
+resource "azurerm_api_management_logger" "apim_logger" {
+  name                = "apim-logger"
+  api_management_name = module.apim_shared.name
+  resource_group_name = azurerm_resource_group.this.name
+  resource_id         = module.appi_shared.id
+
+  application_insights {
+    instrumentation_key = module.appi_shared.instrumentation_key
+  }
+}
