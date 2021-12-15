@@ -32,6 +32,7 @@ module "apimao_request_change_billing_master_data" {
                 <required-claims>
                     <claim name="roles" match="any">
                         <value>gridoperator</value>
+                        <value>balanceresponsibleparty</value>
                     </claim>
                 </required-claims>
             </validate-jwt>
