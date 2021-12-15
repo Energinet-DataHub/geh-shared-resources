@@ -20,7 +20,7 @@ module "apimao_request_cancellation" {
   api_management_name     = module.apim_shared.name
   display_name            = "Metering Point: Request cancellation"
   method                  = "POST"
-  url_template            = "v1.0/cim/requestcancellation"
+  url_template            = "/v1.0/cim/requestcancellation"
   policies                = [
     {
       xml_content = <<XML

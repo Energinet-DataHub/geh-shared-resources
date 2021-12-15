@@ -20,7 +20,7 @@ module "apimao_request_reallocate_change_of_supplier" {
   api_management_name     = module.apim_shared.name
   display_name            = "Market Roles: Request reallocate change of supplier"
   method                  = "POST"
-  url_template            = "v1.0/cim/requestreallocatechangeofsupplier"
+  url_template            = "/v1.0/cim/requestreallocatechangeofsupplier"
   policies                = [
     {
       xml_content = <<XML

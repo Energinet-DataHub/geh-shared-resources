@@ -20,7 +20,7 @@ module "apimao_request_service" {
   api_management_name     = module.apim_shared.name
   display_name            = "Metering Point: Request service"
   method                  = "POST"
-  url_template            = "v1.0/cim/requestservice"
+  url_template            = "/v1.0/cim/requestservice"
   policies                = [
     {
       xml_content = <<XML

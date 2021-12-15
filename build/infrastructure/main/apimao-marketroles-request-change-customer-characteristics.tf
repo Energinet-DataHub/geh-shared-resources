@@ -20,7 +20,7 @@ module "apimao_request_change_customer_characteristics" {
   api_management_name     = module.apim_shared.name
   display_name            = "Market Roles: Request change customer characteristics"
   method                  = "POST"
-  url_template            = "v1.0/cim/requestchangecustomercharacteristics"
+  url_template            = "/v1.0/cim/requestchangecustomercharacteristics"
   policies                = [
     {
       xml_content = <<XML

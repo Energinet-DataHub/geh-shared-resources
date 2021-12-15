@@ -20,7 +20,7 @@ module "apimao_notify_validated_measure_data" {
   api_management_name     = module.apim_shared.name
   display_name            = "Timeseries: Notify validated measure data"
   method                  = "POST"
-  url_template            = "v1.0/cim/notifyvalidatedmeasuredata"
+  url_template            = "/v1.0/cim/notifyvalidatedmeasuredata"
   policies                = [
     {
       xml_content = <<XML
