@@ -20,13 +20,21 @@ module "apimao_characteristics_of_a_customer_at_an_ap" {
   api_management_name     = module.apim_shared.name
   display_name            = "Metering Point: Characteristics of a customer at an AP"
   method                  = "POST"
-  url_template            = "v1.0/cim/characteristicsofacustomeratanap"
+  url_template            = "/v1.0/cim/characteristicsofacustomeratanap"
   policies                = [
     {
       xml_content = <<XML
         <policies>
           <inbound>
             <base />
+            <validate-jwt header-name="Authorization" failed-validation-httpcode="403" failed-validation-error-message="Unauthorized to access this endpoint.">
+                <openid-config url="https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/v2.0/.well-known/openid-configuration" />
+                <required-claims>
+                    <claim name="roles" match="any">
+                        <value>gridoperator</value>
+                    </claim>
+                </required-claims>
+            </validate-jwt>
             <set-backend-service backend-id="${azurerm_api_management_backend.metering_point.name}" />
             <rewrite-uri template="/api/MeteringPoint" />
           </inbound>

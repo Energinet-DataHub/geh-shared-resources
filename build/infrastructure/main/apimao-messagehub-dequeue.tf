@@ -20,7 +20,7 @@ module "apimao_messagehub_dequeue" {
   api_management_name     = module.apim_shared.name
   display_name            = "Message Hub: Dequeue"
   method                  = "DELETE"
-  url_template            = "v1.0/cim/dequeue/{id}"
+  url_template            = "/v1.0/cim/dequeue/{id}"
   template_parameters     = [
     {
       name      = "id"
@@ -34,6 +34,18 @@ module "apimao_messagehub_dequeue" {
         <policies>
           <inbound>
             <base />
+            <validate-jwt header-name="Authorization" failed-validation-httpcode="403" failed-validation-error-message="Unauthorized to access this endpoint.">
+                <openid-config url="https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/v2.0/.well-known/openid-configuration" />
+                <required-claims>
+                    <claim name="roles" match="any">
+                        <value>meterdataresponsible</value>
+                        <value>balanceresponsibleparty</value>
+                        <value>gridoperator</value>
+                        <value>electricalsupplier</value>
+                        <value>transmissionsystemoperator</value>
+                    </claim>
+                </required-claims>
+            </validate-jwt>
             <set-backend-service backend-id="${azurerm_api_management_backend.messagehub.name}" />
             <rewrite-uri template="/api/dequeue" />
             <set-query-parameter name="bundleid" exists-action="override">

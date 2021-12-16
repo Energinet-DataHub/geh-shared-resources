@@ -20,13 +20,23 @@ module "apimao_request_billing_master_data" {
   api_management_name     = module.apim_shared.name
   display_name            = "Charges: Request billing master data"
   method                  = "POST"
-  url_template            = "v1.0/cim/requestbillingmasterdata"
+  url_template            = "/v1.0/cim/requestbillingmasterdata"
   policies                = [
     {
       xml_content = <<XML
         <policies>
           <inbound>
             <base />
+            <validate-jwt header-name="Authorization" failed-validation-httpcode="403" failed-validation-error-message="Unauthorized to access this endpoint.">
+                <openid-config url="https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/v2.0/.well-known/openid-configuration" />
+                <required-claims>
+                    <claim name="roles" match="any">
+                        <value>gridoperator</value>
+                        <value>electricalsupplier</value>
+                        <value>transmissionsystemoperator</value>
+                    </claim>
+                </required-claims>
+            </validate-jwt>
             <set-backend-service backend-id="${azurerm_api_management_backend.charges.name}" />
             <rewrite-uri template="/api/ChargeLinkIngestion" />
           </inbound>
