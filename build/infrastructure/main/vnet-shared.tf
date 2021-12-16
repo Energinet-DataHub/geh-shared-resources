@@ -18,20 +18,23 @@ resource "azurerm_virtual_network" "this" {
   address_space       = ["10.0.0.0/16"]
   dns_servers         = ["10.0.0.4", "10.0.0.5"]
 
-  tags                = azurerm_resource_group.this.tags
+  tags                      = azurerm_resource_group.this.tags
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
 }
 
-resource "azurerm_subnet" "this" {
-  name                 = "snet-shared-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  resource_group_name  = azurerm_resource_group.this.name
-  virtual_network_name = azurerm_virtual_network.this.name
-  address_prefixes     = ["10.0.1.0/24"]
+module "kvs_vnet_shared_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
-  delegation {
-    name = "delegation"
- 
-    service_delegation {
-      name = "Microsoft.Web/serverFarms"
-    }
-  }
+  name          = "vnet-shared-name"
+  value         = azurerm_virtual_network.this.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
 }
