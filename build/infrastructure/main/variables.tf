@@ -69,3 +69,13 @@ variable apimao_timeseries_domain_ingestion_function_url {
   type          = string
   description   = "Url of the Timeseries domain ingestion function, used for configuration inside the API Managment API."
 }
+
+variable apim_b2c_tenant_id {
+  type          = string
+  description   = "ID of the B2C tenant hosting the backend app registrations authorizing against."
+}
+
+variable backend_service_app_id {
+  type          = string
+  description   = "The app/client ID of the backend app registration."
+}
