@@ -31,6 +31,7 @@ module "apimao_request_accounting_point_characteristics" {
                 <openid-config url="https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/v2.0/.well-known/openid-configuration" />
                 <required-claims>
                     <claim name="roles" match="any">
+                        <value>electricalsupplier</value>
                         <value>gridoperator</value>
                     </claim>
                 </required-claims>

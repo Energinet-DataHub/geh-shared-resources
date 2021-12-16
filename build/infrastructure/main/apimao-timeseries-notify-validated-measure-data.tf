@@ -31,7 +31,7 @@ module "apimao_notify_validated_measure_data" {
                 <openid-config url="https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/v2.0/.well-known/openid-configuration" />
                 <required-claims>
                     <claim name="roles" match="any">
-                        <value>meterdataresponsible</value>
+                        <value>gridoperator</value>
                     </claim>
                 </required-claims>
             </validate-jwt>
