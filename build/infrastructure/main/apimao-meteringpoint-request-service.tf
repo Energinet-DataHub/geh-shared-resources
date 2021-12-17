@@ -27,6 +27,15 @@ module "apimao_request_service" {
         <policies>
           <inbound>
             <base />
+            <validate-jwt header-name="Authorization" failed-validation-httpcode="403" failed-validation-error-message="Unauthorized to access this endpoint.">
+                <openid-config url="https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/v2.0/.well-known/openid-configuration" />
+                <required-claims>
+                    <claim name="roles" match="any">
+                        <value>gridoperator</value>
+                        <value>electricalsupplier</value>
+                    </claim>
+                </required-claims>
+            </validate-jwt>
             <set-backend-service backend-id="${azurerm_api_management_backend.metering_point.name}" />
             <rewrite-uri template="/api/MeteringPoint" />
           </inbound>
