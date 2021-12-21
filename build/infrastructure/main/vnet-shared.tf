@@ -17,7 +17,7 @@ resource "azurerm_virtual_network" "this" {
   resource_group_name = azurerm_resource_group.this.name
   address_space       = ["10.0.0.0/16"]
 
-  tags                      = azurerm_resource_group.this.tags
+  tags                = azurerm_resource_group.this.tags
 
   lifecycle {
     ignore_changes = [
