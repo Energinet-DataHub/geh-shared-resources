@@ -23,33 +23,3 @@ module "appi_shared" {
 
   tags                  = azurerm_resource_group.this.tags
 }
-
-module "kvs_appi_shared_instrumentation_key" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
-
-  name          = "appi-shared-instrumentation-key"
-  value         = module.appi_shared.instrumentation_key
-  key_vault_id  = module.kv_shared.id
-
-  tags          = azurerm_resource_group.this.tags
-}
-
-module "kvs_appi_shared_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
-
-  name          = "appi-shared-name"
-  value         = module.appi_shared.name
-  key_vault_id  = module.kv_shared.id
-
-  tags          = azurerm_resource_group.this.tags
-}
-
-module "kvs_appi_shared_id" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
-
-  name          = "appi-shared-id"
-  value         = module.appi_shared.id
-  key_vault_id  = module.kv_shared.id
-
-  tags          = azurerm_resource_group.this.tags
-}
