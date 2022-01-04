@@ -36,7 +36,7 @@ resource "azurerm_storage_account_network_rules" "test" {
 
   default_action             = "Deny"
   ip_rules                   = [
-    "127.0.0.1"
+    "127.0.0.1","10.0.3.0/24"
   ]
   virtual_network_subnet_ids = [
     azurerm_subnet.this_private_endpoints_subnet.id
