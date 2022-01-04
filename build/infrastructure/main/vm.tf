@@ -113,6 +113,7 @@ resource "azurerm_storage_account" "deployagent" {
   location                    = azurerm_resource_group.this.location
   account_tier                = "Standard"
   account_replication_type    = "LRS"
+  min_tls_version             = "TLS1_2"
 
   tags                = azurerm_resource_group.this.tags
 
