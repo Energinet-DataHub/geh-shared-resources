@@ -79,3 +79,13 @@ variable backend_service_app_id {
   type          = string
   description   = "The app/client ID of the backend app registration."
 }
+
+variable vm_user_name {
+  type          = string
+  description   = "Deployment Agent VM user name for SSH connection."
+}
+
+variable github_runner_token {
+  type          = string
+  description   = "Registration token for GitHub self-hosted runner."
+}
