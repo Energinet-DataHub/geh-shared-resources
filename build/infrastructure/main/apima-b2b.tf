@@ -12,19 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "apima_b2b" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.1.0"
+  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.3.0"
 
-  name                  = "b2b"
-  project_name          = var.domain_name_short
-  environment_short     = var.environment_short
-  environment_instance  = var.environment_instance
-  api_management_name   = module.apim_shared.name
-  resource_group_name   = azurerm_resource_group.this.name
-  revision              = "1"
-  display_name          = "B2B Api"
-  protocols             = ["https"]
-  subscription_required = false
-  policies              = [
+  name                      = "b2b"
+  project_name              = var.domain_name_short
+  environment_short         = var.environment_short
+  environment_instance      = var.environment_instance
+  api_management_name       = module.apim_shared.name
+  resource_group_name       = azurerm_resource_group.this.name
+  revision                  = "1"
+  display_name              = "B2B Api"
+  protocols                 = ["https"]
+  subscription_required     = false
+  authorization_server_name = azurerm_api_management_authorization_server.oauth_server.name
+  policies                  = [
     {
       xml_content = <<XML
         <policies>
@@ -51,6 +52,14 @@ module "apima_b2b" {
             <check-header name="Content-Type" failed-check-httpcode="415" failed-check-error-message="Only Content-Type application/xml is allowed" ignore-case="true">
               <value>application/xml</value>
             </check-header>
+            <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Failed policy requirements, or token is invalid or missing.">
+                <openid-config url="https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/v2.0/.well-known/openid-configuration" />
+                <required-claims>
+                    <claim name="aud" match="any">
+                        <value>${var.backend_service_app_id}</value>
+                    </claim>
+                </required-claims>
+            </validate-jwt>
             <set-header name="Correlation-ID" exists-action="override">
                 <value>@($"{context.RequestId}")</value>
             </set-header>
