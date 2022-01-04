@@ -129,6 +129,7 @@ resource "azurerm_storage_account" "deployagent" {
 resource "random_password" "vmpassword" {
   length = 20
   special = true
+  override_special = "_%@"
 }
 
 # Create virtual machine
@@ -184,7 +185,7 @@ resource "azurerm_linux_virtual_machine" "deployagent" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x ./setup-deploy-agent.sh",
-      "./setup-deploy-agent.sh ${var.github_runner_token}",
+      "./setup-deploy-agent.sh ${var.github_runner_token} ${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}",
     ]
   }
 }

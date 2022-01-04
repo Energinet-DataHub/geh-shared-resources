@@ -17,6 +17,10 @@
 # Install GitHub runner and other software dependencies
 # necessary for running our deployments
 #
+# Parameters:
+#   $1: GitHub runner regitration token
+#   $2: Name of deployment agent; also added as label
+#
 ###################################################################
 
 ##################################
@@ -44,7 +48,7 @@ tar xzf ./actions-runner-linux-x64-2.285.1.tar.gz
 #
 
 # Create the runner and start the configuration experience
-./config.sh --unattended --url https://github.com/Energinet-DataHub/dh3-environments --token $1 --labels azure --replace
+./config.sh --unattended --url https://github.com/Energinet-DataHub/dh3-environments --token $1 --name $2 --replace --labels azure,$2
 
 #
 # Run as a service
