@@ -14,7 +14,7 @@
 
 # Create subnet
 resource "azurerm_subnet" "deployagent" {
-  name                 = "snet-deployagent"
+  name                 = "snet-deployagent-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name  = azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = ["10.0.1.0/24"]
@@ -22,7 +22,7 @@ resource "azurerm_subnet" "deployagent" {
 
 # Create public IP
  resource "azurerm_public_ip" "deployagent" {
-   name                         = "pip-deployagent"
+   name                         = "pip-deployagent-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
    location                     = azurerm_resource_group.this.location
    resource_group_name          = azurerm_resource_group.this.name
    allocation_method            = "Static"
@@ -40,7 +40,7 @@ resource "azurerm_subnet" "deployagent" {
 
 # Create network interface
 resource "azurerm_network_interface" "deployagent" {
-  name                = "nic-deployagent"
+  name                = "nic-deployagent-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name = azurerm_resource_group.this.name
   location            = azurerm_resource_group.this.location
 
@@ -64,7 +64,7 @@ resource "azurerm_network_interface" "deployagent" {
 
 # Create network security group and rules
 resource "azurerm_network_security_group" "deployagent" {
-  name                = "nsg-deployagent"
+  name                = "nsg-deployagent-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
   security_rule {
@@ -134,7 +134,7 @@ resource "random_password" "vmpassword" {
 
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "deployagent" {
-  name                            = "vm-deployagent"
+  name                            = "vm-deployagent-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name             = azurerm_resource_group.this.name
   location                        = azurerm_resource_group.this.location
   size                            = "Standard_DS2_v2"
@@ -154,7 +154,7 @@ resource "azurerm_linux_virtual_machine" "deployagent" {
   }
 
   os_disk {
-    name                 = "osdisk-deployagent"
+    name                 = "osdisk-deployagent-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
     caching              = "ReadWrite"
     storage_account_type = "StandardSSD_LRS"
   }
@@ -185,7 +185,7 @@ resource "azurerm_linux_virtual_machine" "deployagent" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x ./setup-deploy-agent.sh",
-      "./setup-deploy-agent.sh ${var.github_runner_token} ${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}",
+      "./setup-deploy-agent.sh ${var.github_runner_token} ${var.github_runner_name}",
     ]
   }
 }

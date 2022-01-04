@@ -89,3 +89,8 @@ variable github_runner_token {
   type          = string
   description   = "Registration token for GitHub self-hosted runner."
 }
+
+variable github_runner_name {
+  type          = string
+  description   = "Name of GitHub self-hosted runner."
+}
