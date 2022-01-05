@@ -38,6 +38,7 @@ module "st_market_operator_logs" {
 
 module "kvs_st_market_operator_logs_primary_connection_string" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  
   name          = "st-marketoplogs-primary-connection-string"
   value         = module.st_market_operator_logs.primary_connection_string
   key_vault_id  = module.kv_shared.id
