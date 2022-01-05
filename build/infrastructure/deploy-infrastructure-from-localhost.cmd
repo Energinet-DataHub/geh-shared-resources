@@ -21,5 +21,6 @@ rem Deploy resources of merged setup
 
 pushd .working-folder
 terraform init
+terraform get -update=true
 terraform apply -var-file="localhost.tfvars"
 popd

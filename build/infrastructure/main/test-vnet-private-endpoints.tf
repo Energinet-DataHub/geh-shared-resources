@@ -45,3 +45,18 @@ resource "azurerm_storage_account_network_rules" "test" {
     "Metrics"
   ]
 }
+
+resource "azurerm_private_endpoint" "endpoint" {
+   name                = "sa-endpoint"
+   location            = azurerm_resource_group.this.location
+   resource_group_name = azurerm_resource_group.this.name
+   subnet_id           = azurerm_subnet.this_private_endpoints_subnet.id
+   private_service_connection {
+     name                           = "sa-privateserviceconnection"
+     private_connection_resource_id = azurerm_storage_account.test.id
+     is_manual_connection           = false
+     subresource_names              = ["blob"]
+  }
+}
+
+

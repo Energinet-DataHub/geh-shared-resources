@@ -54,7 +54,7 @@ module "func_test" {
 
 resource "azurerm_app_service_virtual_network_swift_connection" "test_integration" {
   app_service_id = module.func_test.id
-  subnet_id      = azurerm_subnet.this_private_endpoints_subnet.id
+  subnet_id      = azurerm_subnet.this_vnet_integrations.id
 }
 
 module "func_testtwo" {
@@ -68,6 +68,7 @@ module "func_testtwo" {
   location                                  = azurerm_resource_group.this.location
   app_service_plan_id                       = module.plan_shared.id
   application_insights_instrumentation_key  = module.appi_shared.instrumentation_key
+  # subnet_id      = azurerm_subnet.this_private_endpoints_subnet.id
   always_on                                 = true
   app_settings                              = {
     # Region: Default Values
@@ -78,9 +79,4 @@ module "func_testtwo" {
   }
 
   tags                                    = azurerm_resource_group.this.tags
-}
-
-resource "azurerm_app_service_virtual_network_swift_connection" "testtwo_integration" {
-  app_service_id = module.func_testtwo.id
-  subnet_id      = azurerm_subnet.this_private_endpoints_subnet.id
 }

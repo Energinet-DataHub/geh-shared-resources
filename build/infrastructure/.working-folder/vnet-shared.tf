@@ -32,51 +32,43 @@ resource "azurerm_subnet" "this_vnet_integrations" {
   name                                          = "snet-vnetintegrations-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name                           = azurerm_resource_group.this.name
   virtual_network_name                          = azurerm_virtual_network.this.name
-  address_prefixes                              = ["10.0.1.0/24"]
+  address_prefixes                              = ["10.0.10.0/24"]
   enforce_private_link_service_network_policies = true
-
+  
+  # Delegate the subnet to "Microsoft.Web/serverFarms"
   delegation {
-    name = "delegation"
- 
-    service_delegation {
-      name = "Microsoft.Web/serverFarms"
-    }
+   name = "acctestdelegation"
+   service_delegation {
+     name    = "Microsoft.Web/serverFarms"
+     actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+   }
   }
-
-  lifecycle {
-    ignore_changes = [
-    ]
-  }
-}
-
-resource "azurerm_subnet" "this_external_endpoints_subnet" {
-  name                                            = "snet-externalendpoints-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  resource_group_name                             = azurerm_resource_group.this.name
-  virtual_network_name                            = azurerm_virtual_network.this.name
-  address_prefixes                                = ["10.0.2.0/24"]
-  enforce_private_link_endpoint_network_policies  = true
-
-  lifecycle {
-    ignore_changes = [
-    ]
-  }
+  
+#  service_endpoints = ["Microsoft.Storage"]
 }
 
 resource "azurerm_subnet" "this_private_endpoints_subnet" {
   name                                            = "snet-privateendpoints-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name                             = azurerm_resource_group.this.name
   virtual_network_name                            = azurerm_virtual_network.this.name
-  address_prefixes                                = ["10.0.3.0/24"]
+  address_prefixes                                = ["10.0.11.0/24"]
   enforce_private_link_endpoint_network_policies  = true
   service_endpoints = ["Microsoft.Storage"]
+#   delegation {
+#      name = "delegation"
 
-  delegation {
-    name = "delegation"
- 
-    service_delegation {
-      name = "Microsoft.Web/serverFarms"
-    }
-  }
+#      service_delegation {
+#      name = "Microsoft.Web/serverFarms"
+#      }
+#    }
+}
+
+resource "azurerm_subnet" "this_external_endpoints_subnet" {
+  name                                            = "snet-externalendpoints-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name                             = azurerm_resource_group.this.name
+  virtual_network_name                            = azurerm_virtual_network.this.name
+  address_prefixes                                = ["10.0.12.0/24"]
+  enforce_private_link_endpoint_network_policies  = true
 
   lifecycle {
     ignore_changes = [
