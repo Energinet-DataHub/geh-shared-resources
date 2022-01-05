@@ -11,21 +11,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-resource "azurerm_role_definition" "custom_role_definition_dev001" {
-  name               = "custom-role-definition-dev001"
+resource "azurerm_role_definition" "dev001_role_definition" {
+  name               = "custom-dev001-role-definition"
   scope              = data.azurerm_subscription.this.id
 
   permissions {
-    actions     = ["Microsoft.Storage/storageAccounts/listKeys/action"]
+    actions       = ["Microsoft.Storage/storageAccounts/listKeys/action"]
+    not_actions   = []  
   }
 
   assignable_scopes = [
-    data.azurerm_subscription.this.id,
+    data.azurerm_subscription.this.id
   ]
 }
 
 resource "azurerm_role_assignment" "role_assignment_to_dh_dev_sg" {
   scope              = data.azurerm_subscription.primary.id
-  role_definition_id = azurerm_role_definition.custom_role_definition_dev001.role_definition_resource_id
+  role_definition_id = azurerm_role_definition.dev001_role_definition.id
   principal_id       = "ffad55e0-f314-4852-9796-1d094a236e7b"
 }
