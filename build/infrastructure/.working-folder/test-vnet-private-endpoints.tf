@@ -30,6 +30,13 @@ resource "azurerm_storage_account" "test" {
   }
 }
 
+# Create input container
+ resource "azurerm_storage_container" "input" {
+   name                  = "input"
+   container_access_type = "private"
+   storage_account_name  = azurerm_storage_account.test.name
+ }
+
 resource "azurerm_storage_account_network_rules" "test" {
   resource_group_name  = azurerm_resource_group.this.name
   storage_account_name = azurerm_storage_account.test.name
@@ -39,7 +46,7 @@ resource "azurerm_storage_account_network_rules" "test" {
     "127.0.0.1"
   ]
   virtual_network_subnet_ids = [
-    azurerm_subnet.this_private_endpoints_subnet.id
+    azurerm_subnet.this_vnet_integrations.id
   ]
   bypass                     = [
     "Metrics"
@@ -58,5 +65,4 @@ resource "azurerm_private_endpoint" "endpoint" {
      subresource_names              = ["blob"]
   }
 }
-
 

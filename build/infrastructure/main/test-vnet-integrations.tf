@@ -30,7 +30,7 @@ module "plan_shared" {
 }
 
 module "func_test" {
-  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=6.0.0"
+  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=feature/vnet-test"
 
   name                                      = "test"
   project_name                              = var.domain_name_short
@@ -41,24 +41,23 @@ module "func_test" {
   app_service_plan_id                       = module.plan_shared.id
   application_insights_instrumentation_key  = module.appi_shared.instrumentation_key
   always_on                                 = true
+  vnet_integration_subnet_id                = azurerm_subnet.this_vnet_integrations.id
   app_settings                              = {
     # Region: Default Values
     WEBSITE_ENABLE_SYNC_UPDATE_SITE       = true
     WEBSITE_RUN_FROM_PACKAGE              = 1
     WEBSITES_ENABLE_APP_SERVICE_STORAGE   = true
-    FUNCTIONS_WORKER_RUNTIME              = "dotnet-isolated"
+    FUNCTIONS_WORKER_RUNTIME              = "dotnet"
+    privatecfm_STORAGE                    = azurerm_storage_account.test.primary_connection_string
+    WEBSITE_VNET_ROUTE_ALL                = "1"
+    WEBSITE_DNS_SERVER                    = "168.63.129.16"
   }
 
   tags                                    = azurerm_resource_group.this.tags
 }
 
-resource "azurerm_app_service_virtual_network_swift_connection" "test_integration" {
-  app_service_id = module.func_test.id
-  subnet_id      = azurerm_subnet.this_vnet_integrations.id
-}
-
 module "func_testtwo" {
-  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=6.0.0"
+  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=feature/vnet-test"
 
   name                                      = "testtwo"
   project_name                              = var.domain_name_short
@@ -70,12 +69,13 @@ module "func_testtwo" {
   application_insights_instrumentation_key  = module.appi_shared.instrumentation_key
   # subnet_id      = azurerm_subnet.this_private_endpoints_subnet.id
   always_on                                 = true
+  vnet_integration_subnet_id                = azurerm_subnet.this_vnet_integrations.id
   app_settings                              = {
     # Region: Default Values
     WEBSITE_ENABLE_SYNC_UPDATE_SITE       = true
     WEBSITE_RUN_FROM_PACKAGE              = 1
     WEBSITES_ENABLE_APP_SERVICE_STORAGE   = true
-    FUNCTIONS_WORKER_RUNTIME              = "dotnet-isolated"
+    FUNCTIONS_WORKER_RUNTIME              = "dotnet"
   }
 
   tags                                    = azurerm_resource_group.this.tags
