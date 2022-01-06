@@ -11,6 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+resource "azurerm_subnet" "apim_subnet" {
+  name                 = "snet-apim-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name  = azurerm_resource_group.this.name
+  virtual_network_name = azurerm_virtual_network.this.name
+  address_prefixes     = ["10.0.2.0/29"]
+}
+
 module "apim_shared" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=5.1.0"
 
@@ -23,6 +30,10 @@ module "apim_shared" {
   publisher_name        = var.project_name
   publisher_email       = var.apim_publisher_email
   sku_name              = "Developer_1"
+  virtual_network_type  = "External"
+  virtual_network_configuration = {
+    subnet_id           = azurerm_subnet.apim_subnet.id
+  }
 
   tags                  = azurerm_resource_group.this.tags
 }
