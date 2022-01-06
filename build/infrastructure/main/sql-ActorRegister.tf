@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 data "azurerm_sql_server" "sqlsrv" {
-  name                = data.azurerm_key_vault_secret.sql_data_name.value
-  resource_group_name = data.azurerm_resource_group.shared_resources.name
+  name                = var.sharedresources_sql_server_name
+  resource_group_name = azurerm_resource_group.this.name
 }
 
 module "sqldb_actorregister" {
