@@ -15,17 +15,6 @@ locals {
   actor_register_database_name = "actorregister"
 }
 
-data "azurerm_key_vault" "kv_shared_resources" {
-  name                = var.shared_resources_keyvault_name
-  resource_group_name = var.shared_resources_resource_group_name
-}
-
-data "azurerm_key_vault_secret" "sql_data_name" {
-  name         = "sql_data_name"
-  key_vault_id = data.azurerm_key_vault.kv_shared_resources.id
-}
-
-
 module "sqldb_actor_register" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-database?ref=5.1.0"
 
@@ -35,7 +24,7 @@ module "sqldb_actor_register" {
   environment_instance  = var.environment_instance
   resource_group_name   = azurerm_resource_group.this.name
   location              = azurerm_resource_group.this.location
-  server_name           = data.azurerm_key_vault_secret.sql_data_name
+  server_name           = module.sql_data.name
 
   tags                  = azurerm_resource_group.this.tags
 }
