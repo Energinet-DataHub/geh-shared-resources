@@ -91,7 +91,7 @@ sudo apt-get update; \
 # See https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=script
 #
 
-curl https://azurecliprod.blob.core.windows.net/install | bash
+curl -L https://aka.ms/InstallAzureCli | bash
 
 #
 # Install unzip
