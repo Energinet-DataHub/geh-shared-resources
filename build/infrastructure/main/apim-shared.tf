@@ -19,7 +19,7 @@ resource "azurerm_subnet" "apim_subnet" {
 }
 
 module "apim_shared" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=5.1.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=6.0.0"
 
   name                  = "shared"
   project_name          = var.domain_name_short
@@ -31,9 +31,7 @@ module "apim_shared" {
   publisher_email       = var.apim_publisher_email
   sku_name              = "Developer_1"
   virtual_network_type  = "External"
-  virtual_network_configuration = {
-    subnet_id           = azurerm_subnet.apim_subnet.id
-  }
+  subnet_id             = azurerm_subnet.apim_subnet.id
 
   tags                  = azurerm_resource_group.this.tags
 }
