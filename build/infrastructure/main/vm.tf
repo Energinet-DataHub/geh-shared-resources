@@ -134,6 +134,7 @@ resource "random_password" "vmpassword" {
 }
 
 # Create virtual machine
+# Notice: OS disk is automatically deleted whenever the VM is deleted
 resource "azurerm_linux_virtual_machine" "deployagent" {
   name                            = "vm-deployagent-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name             = azurerm_resource_group.this.name
@@ -143,6 +144,9 @@ resource "azurerm_linux_virtual_machine" "deployagent" {
   admin_password                  = random_password.vmpassword.result
   disable_password_authentication = false
   network_interface_ids           = [azurerm_network_interface.deployagent.id]
+
+  # Changes to the script file means the VM will be recreated
+  custom_data                     = filebase64sha256("${path.module}/scripts/setup-deploy-agent.sh")
 
   tags                = azurerm_resource_group.this.tags
 
