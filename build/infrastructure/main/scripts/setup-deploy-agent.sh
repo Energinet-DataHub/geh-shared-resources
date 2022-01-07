@@ -86,5 +86,15 @@ sudo apt-get update; \
 # Install other dependencies
 ##################################
 
+#
+# Install Azure CLI
+# See https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=script
+#
+
+curl https://azurecliprod.blob.core.windows.net/install | bash
+
+#
 # Install unzip
+#
+
 sudo apt-get install unzip
