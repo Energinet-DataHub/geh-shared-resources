@@ -59,6 +59,30 @@ sudo ./svc.sh start
 sudo ./svc.sh status
 
 ##################################
+# Install .NET SDK's
+##################################
+
+#
+# Add the Microsoft package signing key to your list of trusted keys and add the package repository
+# See https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#1804-
+#
+
+wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+
+#
+# Install versions
+# See https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#how-to-install-other-versions
+#
+
+# .NET SDK 5.0
+sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-5.0
+
+##################################
 # Install other dependencies
 ##################################
 
