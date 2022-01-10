@@ -86,5 +86,15 @@ sudo apt-get update; \
 # Install other dependencies
 ##################################
 
+#
+# Install Azure CLI
+# See https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
+#
+
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+#
 # Install unzip
+#
+
 sudo apt-get install unzip
