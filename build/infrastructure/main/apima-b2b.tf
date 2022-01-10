@@ -31,6 +31,14 @@ module "apima_b2b" {
         <policies>
           <inbound>
             <base />
+            <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Failed policy requirements, or token is invalid or missing.">
+                <openid-config url="https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/v2.0/.well-known/openid-configuration" />
+                <required-claims>
+                    <claim name="aud" match="any">
+                        <value>${var.backend_service_app_id}</value>
+                    </claim>
+                </required-claims>
+            </validate-jwt>
             <choose>
                 <when condition="@(context.Request.Method == "POST")">
                     <set-variable name="bodySize" value="@(context.Request.Headers["Content-Length"][0])" />
@@ -51,15 +59,8 @@ module "apima_b2b" {
             </choose>
             <check-header name="Content-Type" failed-check-httpcode="415" failed-check-error-message="Only Content-Type application/xml is allowed" ignore-case="true">
               <value>application/xml</value>
+              <value>application/xml; charset=utf-8</value>
             </check-header>
-            <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Failed policy requirements, or token is invalid or missing.">
-                <openid-config url="https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/v2.0/.well-known/openid-configuration" />
-                <required-claims>
-                    <claim name="aud" match="any">
-                        <value>${var.backend_service_app_id}</value>
-                    </claim>
-                </required-claims>
-            </validate-jwt>
             <set-header name="Correlation-ID" exists-action="override">
                 <value>@($"{context.RequestId}")</value>
             </set-header>
