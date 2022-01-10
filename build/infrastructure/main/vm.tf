@@ -158,6 +158,11 @@ resource "azurerm_linux_virtual_machine" "deployagent" {
     ]
   }
 
+  # Enable managed identity
+  identity {
+    type = "SystemAssigned"
+  }
+
   os_disk {
     name                 = "osdisk-deployagent-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
     caching              = "ReadWrite"
