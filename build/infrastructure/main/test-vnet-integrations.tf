@@ -42,6 +42,9 @@ module "func_test" {
   application_insights_instrumentation_key  = module.appi_shared.instrumentation_key
   always_on                                 = true
   vnet_integration_subnet_id                = azurerm_subnet.this_vnet_integrations.id
+  private_endpoint_subnet_id                = azurerm_subnet.this_private_endpoints_subnet.id
+  vnet_id                                   = azurerm_virtual_network.this.id
+  
   app_settings                              = {
     # Region: Default Values
     WEBSITE_ENABLE_SYNC_UPDATE_SITE       = true
