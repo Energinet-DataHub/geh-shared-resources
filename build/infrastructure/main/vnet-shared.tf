@@ -53,14 +53,7 @@ resource "azurerm_subnet" "this_private_endpoints_subnet" {
   virtual_network_name                            = azurerm_virtual_network.this.name
   address_prefixes                                = ["10.0.2.0/24"]
   enforce_private_link_endpoint_network_policies  = true
-  service_endpoints = ["Microsoft.Storage"]
-#   delegation {
-#      name = "delegation"
-
-#      service_delegation {
-#      name = "Microsoft.Web/serverFarms"
-#      }
-#    }
+  
 }
 
 resource "azurerm_subnet" "this_external_endpoints_subnet" {

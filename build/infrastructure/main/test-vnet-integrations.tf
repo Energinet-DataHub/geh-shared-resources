@@ -30,7 +30,7 @@ module "plan_shared" {
 }
 
 module "func_test" {
-  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=feature/vnet-test"
+  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=6.0.0"
 
   name                                      = "test"
   project_name                              = var.domain_name_short
@@ -48,35 +48,9 @@ module "func_test" {
     WEBSITE_RUN_FROM_PACKAGE              = 1
     WEBSITES_ENABLE_APP_SERVICE_STORAGE   = true
     FUNCTIONS_WORKER_RUNTIME              = "dotnet"
-    privatecfm_STORAGE                    = azurerm_storage_account.test.primary_connection_string
-    WEBSITE_VNET_ROUTE_ALL                = "1"
-    WEBSITE_DNS_SERVER                    = "168.63.129.16"
+    privatecfm_STORAGE                    = module.sa_test.primary_connection_string
   }
 
   tags                                    = azurerm_resource_group.this.tags
 }
 
-module "func_testtwo" {
-  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=feature/vnet-test"
-
-  name                                      = "testtwo"
-  project_name                              = var.domain_name_short
-  environment_short                         = var.environment_short
-  environment_instance                      = var.environment_instance
-  resource_group_name                       = azurerm_resource_group.this.name
-  location                                  = azurerm_resource_group.this.location
-  app_service_plan_id                       = module.plan_shared.id
-  application_insights_instrumentation_key  = module.appi_shared.instrumentation_key
-  # subnet_id      = azurerm_subnet.this_private_endpoints_subnet.id
-  always_on                                 = true
-  vnet_integration_subnet_id                = azurerm_subnet.this_vnet_integrations.id
-  app_settings                              = {
-    # Region: Default Values
-    WEBSITE_ENABLE_SYNC_UPDATE_SITE       = true
-    WEBSITE_RUN_FROM_PACKAGE              = 1
-    WEBSITES_ENABLE_APP_SERVICE_STORAGE   = true
-    FUNCTIONS_WORKER_RUNTIME              = "dotnet"
-  }
-
-  tags                                    = azurerm_resource_group.this.tags
-}
