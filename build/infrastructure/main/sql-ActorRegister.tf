@@ -32,7 +32,7 @@ module "sqldb_actor_register" {
 module "kvs_sql_actor_register_database_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
-  name          = "sql_actor_register_database_name"
+  name          = "sql-actor-register-database-name"
   value         = local.actor_register_database_name
   key_vault_id  = module.kv_shared.id
 
