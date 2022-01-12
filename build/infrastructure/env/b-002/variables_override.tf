@@ -11,15 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-module "apim_shared" {
-  sku_name              = "Premium_1"
+variable utils_keyvault_name {
+  type        = string
+  description = "The name of the utilities key vault."
 }
 
-resource "azurerm_api_management_custom_domain" "apim_custom_domain" {
-  api_management_id = module.apim_shared.id
-
-  proxy {
-    host_name     = "api.itlev.datahub.dk"
-    key_vault_id  = data.azurerm_key_vault_certificate.apim_pfx_cert.secret_id
-  }
+variable utils_resource_group_name {
+  type        = string
+  description = "Resource Group where the utilities key vault is deployed into."
 }
