@@ -39,6 +39,16 @@ resource "azurerm_key_vault_certificate" "apim_pfx_certificate" {
     secret_properties {
       content_type = "application/x-pkcs12"
     }
+
+    x509_certificate_properties {
+      key_usage = [
+        "digitalSignature",
+        "keyEncipherment",
+      ]
+
+      subject            = "CN=u-002-sandbox-endk"
+      validity_in_months = 12
+    }
   }
 }
 
