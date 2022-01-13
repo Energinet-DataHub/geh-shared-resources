@@ -16,7 +16,7 @@ resource "azurerm_api_management_custom_domain" "apim_custom_domain" {
   api_management_id = module.apim_shared.id
 
   proxy {
-    host_name             = "api.sandbox.datahub.dk"
+    host_name             = "u-002-sandbox-endk"
     certificate           = var.apim_base_64_encoded_pfx_cert
   }
 }
