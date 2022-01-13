@@ -11,52 +11,53 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-locals {
-  KV_APIM_PFX_CERT_NAME = "U-002-APIM-PFX-CERT"
-}
+# locals {
+#   KV_APIM_PFX_CERT_NAME = "U-002-APIM-PFX-CERT"
+# }
 
-resource "azurerm_key_vault_certificate" "apim_pfx_certificate" {
-  name         = local.KV_APIM_PFX_CERT_NAME
-  key_vault_id = module.kv_shared.id
+# resource "azurerm_key_vault_certificate" "apim_pfx_certificate" {
+#   name         = local.KV_APIM_PFX_CERT_NAME
+#   key_vault_id = module.kv_shared.id
 
-  certificate {
-    contents = var.apim_base_64_encoded_pfx_cert
-    password = ""
-  }
+#   certificate {
+#     contents = var.apim_base_64_encoded_pfx_cert
+#     password = ""
+#   }
 
-  certificate_policy {
-    issuer_parameters {
-      name = "Self"
-    }
+#   certificate_policy {
+#     issuer_parameters {
+#       name = "Self"
+#     }
 
-    key_properties {
-      exportable = true
-      key_size   = 2048
-      key_type   = "RSA"
-      reuse_key  = false
-    }
+#     key_properties {
+#       exportable = true
+#       key_size   = 2048
+#       key_type   = "RSA"
+#       reuse_key  = false
+#     }
 
-    secret_properties {
-      content_type = "application/x-pkcs12"
-    }
+#     secret_properties {
+#       content_type = "application/x-pkcs12"
+#     }
 
-    x509_certificate_properties {
-      key_usage = [
-        "digitalSignature",
-        "keyEncipherment",
-      ]
+#     x509_certificate_properties {
+#       key_usage = [
+#         "digitalSignature",
+#         "keyEncipherment",
+#       ]
 
-      subject            = "CN=u-002-sandbox-endk"
-      validity_in_months = 12
-    }
-  }
-}
+#       subject            = "CN=u-002-sandbox-endk"
+#       validity_in_months = 12
+#     }
+#   }
+# }
 
 resource "azurerm_api_management_custom_domain" "apim_custom_domain" {
   api_management_id = module.apim_shared.id
 
   proxy {
-    host_name     = "api.sandbox.datahub.dk"
-    key_vault_id  = azurerm_key_vault_certificate.apim_pfx_certificate.secret_id
+    host_name             = "api.sandbox.datahub.dk"
+    certificate           = var.apim_base_64_encoded_pfx_cert
+    certificate_password  = ""
   }
 }
