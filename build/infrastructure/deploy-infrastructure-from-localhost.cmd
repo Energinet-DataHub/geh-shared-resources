@@ -4,6 +4,9 @@ rem ----------------------------------------------------------------------------
 rem Set up prerequisites as outlined in README.md and then
 rem simply issue the command "deploy-infrastructure-from-localhost" in a command prompt in this folder
 
+powershell -command "az storage account update --resource-group "rg-khs" --name "stvnettestvnettestx1" --default-action Allow"
+powershell -command "az storage account update --resource-group "rg-khs" --name "stf9crntp84i" --default-action Allow"
+
 rem Merge main and development into new folder
 
 rem Create working folder
@@ -22,5 +25,5 @@ rem Deploy resources of merged setup
 pushd .working-folder
 terraform init
 terraform get -update=true
-terraform apply -var-file="localhost.tfvars"
+terraform apply -var-file="localhost.tfvars" -auto-approve
 popd

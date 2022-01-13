@@ -43,8 +43,7 @@ module "func_test" {
   always_on                                 = true
   vnet_integration_subnet_id                = azurerm_subnet.this_vnet_integrations.id
   private_endpoint_subnet_id                = azurerm_subnet.this_private_endpoints_subnet.id
-  vnet_id                                   = azurerm_virtual_network.this.id
-  
+  private_dns_zone_name                     = azurerm_private_dns_zone.blob.name
   app_settings                              = {
     # Region: Default Values
     WEBSITE_ENABLE_SYNC_UPDATE_SITE       = true
@@ -52,8 +51,10 @@ module "func_test" {
     WEBSITES_ENABLE_APP_SERVICE_STORAGE   = true
     FUNCTIONS_WORKER_RUNTIME              = "dotnet"
     privatecfm_STORAGE                    = module.sa_test.primary_connection_string
+    sqldb_connection                      = "Server=tcp:sql-data-vnettest-x-1.database.windows.net,1433;Initial Catalog=sqldb-testdatabase-vnettest-x-1;Persist Security Info=False;User ID=derderbestemmer;Password=Thisistest2022_%@;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
   }
 
   tags                                    = azurerm_resource_group.this.tags
 }
+
 

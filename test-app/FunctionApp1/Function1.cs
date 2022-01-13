@@ -8,7 +8,8 @@ namespace FunctionApp1
     public static class Function1
     {
         [Function("Function1")]
-        public static void Run([BlobTrigger("input/{name}", Connection = "privatecfm_STORAGE")] string myBlob, string name,
+        public static void Run([BlobTrigger("input/{name}", Connection = "privatecfm_STORAGE")] string myBlob,
+            string name,
             FunctionContext context)
         {
             var logger = context.GetLogger("Function1");
