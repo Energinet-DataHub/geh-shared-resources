@@ -11,13 +11,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+provider "azurerm" {
+  features {}
+
+  alias           = "utils_subscription"
+  subscription_id = var.utils_subscription_id
+}
+
 
 data "azurerm_key_vault" "kv_utils" {
+  provider = azurerm.utils_subscription
+  
   name                = var.utils_keyvault_name
   resource_group_name = var.utils_resource_group_name
 }
 
 data "azurerm_key_vault_certificate" "apim_pfx_cert" {
+  provider = azurerm.utils_subscription
+  
   name         = "U-002-APIM-PFX-CERT"
   key_vault_id = data.azurerm_key_vault.kv_utils.id
 }

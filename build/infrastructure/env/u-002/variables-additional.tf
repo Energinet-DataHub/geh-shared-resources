@@ -11,14 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+variable utils_subscription_id {
+  type        = string
+  description = "ID of the subscription where the Utils key vault is deployed."
+}
+
 variable utils_keyvault_name {
   type        = string
   description = "The name of the utilities key vault."
-  sensitive   = false
 }
 
 variable utils_resource_group_name {
   type        = string
   description = "Resource Group where the utilities key vault is deployed into."
-  sensitive   = false
 }
