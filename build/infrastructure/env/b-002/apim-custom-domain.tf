@@ -14,12 +14,3 @@
 module "apim_shared" {
   sku_name              = "Premium_1"
 }
-
-resource "azurerm_api_management_custom_domain" "apim_custom_domain" {
-  api_management_id = module.apim_shared.id
-
-  proxy {
-    host_name     = "api.itlev.datahub.dk"
-    key_vault_id  = data.azurerm_key_vault_certificate.apim_pfx_cert.secret_id
-  }
-}
