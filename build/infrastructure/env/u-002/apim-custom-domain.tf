@@ -23,6 +23,23 @@ resource "azurerm_key_vault_certificate" "apim_pfx_certificate" {
     contents = var.apim_base_64_encoded_pfx_cert
     password = ""
   }
+
+  certificate_policy {
+    issuer_parameters {
+      name = "Self"
+    }
+
+    key_properties {
+      exportable = true
+      key_size   = 2048
+      key_type   = "RSA"
+      reuse_key  = false
+    }
+
+    secret_properties {
+      content_type = "application/x-pkcs12"
+    }
+  }
 }
 
 resource "azurerm_api_management_custom_domain" "apim_custom_domain" {
