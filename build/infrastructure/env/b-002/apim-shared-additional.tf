@@ -11,7 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-variable apim_base_64_encoded_pfx_cert {
-  type        = string
-  description = "Base64 encoded string containing a PFX certificate."
+resource "azurerm_api_management_custom_domain" "apim_custom_domain" {
+  api_management_id = module.apim_shared.id
+
+  proxy {
+    host_name             = "api.itlev.datahub.dk"
+    certificate           = var.apim_base_64_encoded_pfx_cert
+    certificate_password  = ""
+  }
 }
