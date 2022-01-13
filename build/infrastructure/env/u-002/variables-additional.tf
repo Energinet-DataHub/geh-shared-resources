@@ -14,9 +14,11 @@
 variable utils_keyvault_name {
   type        = string
   description = "The name of the utilities key vault."
+  sensitive   = false
 }
 
 variable utils_resource_group_name {
   type        = string
   description = "Resource Group where the utilities key vault is deployed into."
+  sensitive   = false
 }
