@@ -17,6 +17,6 @@ resource "azurerm_api_management_custom_domain" "apim_custom_domain" {
   proxy {
     host_name             = "api.itlev.datahub.dk"
     certificate           = var.apim_base_64_encoded_pfx_cert
-    certificate_password  = var.apim_base_pfx_cert_password
+    certificate_password  = var.apim_pfx_cert_password
   }
 }
