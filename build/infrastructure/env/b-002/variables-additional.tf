@@ -15,3 +15,8 @@ variable apim_base_64_encoded_pfx_cert {
   type        = string
   description = "Base64 encoded string containing a PFX certificate."
 }
+
+variable apim_base_pfx_cert_password {
+  type        = string
+  description = "Password of the base64 encoded PFX certificate injected using the variable named 'apim_base_64_encoded_pfx_cert'."
+}
