@@ -69,8 +69,7 @@ resource "azurerm_subnet" "this_external_endpoints_subnet" {
   }
 }
 
-
-
+# https://gist.github.com/liamfoneill/f78698854d5dd23a9e6ab08ff044f38a
 
 # Create the blob.core.windows.net Private DNS Zone
 resource "azurerm_private_dns_zone" "blob" {
@@ -86,7 +85,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
   virtual_network_id    = azurerm_virtual_network.this.id
 }
 
-# Create the database.core.windows.net Private DNS Zone
+# Create the database.windows.net Private DNS Zone
 resource "azurerm_private_dns_zone" "database" {
   name                = "privatelink.database.windows.net"
   resource_group_name = azurerm_resource_group.this.name
@@ -97,6 +96,20 @@ resource "azurerm_private_dns_zone_virtual_network_link" "db" {
   name                  = "${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}-dblink"
   resource_group_name   = azurerm_resource_group.this.name
   private_dns_zone_name = azurerm_private_dns_zone.database.name
+  virtual_network_id    = azurerm_virtual_network.this.id
+}
+
+# Create the servicebuswindows.net Private DNS Zone
+resource "azurerm_private_dns_zone" "servicebus" {
+  name                = "privatelink.servicebus.windows.net"
+  resource_group_name =  azurerm_resource_group.this.name
+}
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "servicebus" {
+  name                  = "${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}-servicebuslink"
+  resource_group_name   = azurerm_resource_group.this.name
+  private_dns_zone_name = azurerm_private_dns_zone.servicebus.name
   virtual_network_id    = azurerm_virtual_network.this.id
 }
 
