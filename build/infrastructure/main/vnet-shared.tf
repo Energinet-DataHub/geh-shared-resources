@@ -45,13 +45,6 @@ resource "azurerm_subnet" "vnet_integrations" {
    }
   }
   
-  lifecycle {
-    ignore_changes = [
-      # Ignore changes to tags, e.g. because a management agent
-      # updates these based on some ruleset managed elsewhere.
-      tags,
-    ]
-  }
 }
 
 resource "azurerm_subnet" "private_endpoints_subnet" {
@@ -70,13 +63,6 @@ resource "azurerm_subnet" "external_endpoints_subnet" {
   address_prefixes                                = ["10.0.3.0/24"]
   enforce_private_link_endpoint_network_policies  = true
 
-  lifecycle {
-    ignore_changes = [
-      # Ignore changes to tags, e.g. because a management agent
-      # updates these based on some ruleset managed elsewhere.
-      tags,
-    ]
-  }
 }
 
 module "kvs_vnet_shared_name" {
