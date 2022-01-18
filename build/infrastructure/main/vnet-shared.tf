@@ -16,7 +16,7 @@ resource "azurerm_virtual_network" "this" {
   name                = "vnet-shared-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
-  address_space       = ["10.0.0.0/16"]
+  address_space       = ["10.10.0.0/16"]
 
   tags                = azurerm_resource_group.this.tags
 
@@ -33,7 +33,7 @@ resource "azurerm_subnet" "vnet_integrations" {
   name                                          = "snet-vnetintegrations-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name                           = azurerm_resource_group.this.name
   virtual_network_name                          = azurerm_virtual_network.this.name
-  address_prefixes                              = ["10.0.1.0/24"]
+  address_prefixes                              = ["10.10.1.0/24"]
   enforce_private_link_service_network_policies = true
   
   # Delegate the subnet to "Microsoft.Web/serverFarms"
@@ -51,7 +51,7 @@ resource "azurerm_subnet" "private_endpoints_subnet" {
   name                                            = "snet-privateendpoints-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name                             = azurerm_resource_group.this.name
   virtual_network_name                            = azurerm_virtual_network.this.name
-  address_prefixes                                = ["10.0.2.0/24"]
+  address_prefixes                                = ["10.10.2.0/24"]
   enforce_private_link_endpoint_network_policies  = true
   enforce_private_link_service_network_policies = true
 }
@@ -60,7 +60,7 @@ resource "azurerm_subnet" "external_endpoints_subnet" {
   name                                            = "snet-externalendpoints-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name                             = azurerm_resource_group.this.name
   virtual_network_name                            = azurerm_virtual_network.this.name
-  address_prefixes                                = ["10.0.3.0/24"]
+  address_prefixes                                = ["10.10.3.0/24"]
   enforce_private_link_endpoint_network_policies  = true
 
 }
