@@ -37,7 +37,7 @@ module "vnet_integrations" {
   environment_instance                          = var.environment_instance
   resource_group_name                           = var.resource_group_name
   virtual_network_name                          = azurerm_virtual_network.this.name
-  address_prefixes                              = ["10.0.11.0/24"]
+  address_prefixes                              = ["10.0.11.0/22"]
   enforce_private_link_service_network_policies = true
   
   # Delegate the subnet to "Microsoft.Web/serverFarms"
@@ -56,7 +56,7 @@ module "private_endpoints_subnet" {
   environment_instance                          = var.environment_instance
   resource_group_name                           = var.resource_group_name
   virtual_network_name                          = azurerm_virtual_network.this.name
-  address_prefixes                              = ["10.0.12.0/24"]
+  address_prefixes                              = ["10.0.12.0/22"]
   enforce_private_link_service_network_policies = true
 }
 
@@ -68,7 +68,7 @@ module "external_endpoints_subnet" {
   environment_instance                          = var.environment_instance
   resource_group_name                           = var.resource_group_name
   virtual_network_name                          = azurerm_virtual_network.this.name
-  address_prefixes                              = ["10.0.13.0/24"]
+  address_prefixes                              = ["10.0.13.0/22"]
   enforce_private_link_service_network_policies = true
 }
 
