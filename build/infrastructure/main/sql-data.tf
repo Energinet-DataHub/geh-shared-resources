@@ -16,7 +16,7 @@ locals {
 }
 
 module "sql_data" {
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=5.1.0"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=6.0.0"
 
   name                          = "data"
   project_name                  = var.domain_name_short
@@ -39,7 +39,7 @@ module "sql_data" {
 }
 
 module "kvs_sql_data_admin_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sql-data-admin-user-name"
   value         = local.sqlServerAdminName
@@ -49,7 +49,7 @@ module "kvs_sql_data_admin_name" {
 }
 
 module "kvs_sql_data_admin_password" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sql-data-admin-user-password"
   value         = random_password.sql_administrator_login_password.result
@@ -59,7 +59,7 @@ module "kvs_sql_data_admin_password" {
 }
 
 module "kvs_sql_data_url" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sql-data-url"
   value         = module.sql_data.fully_qualified_domain_name
@@ -75,7 +75,7 @@ resource "random_password" "sql_administrator_login_password" {
 }
 
 module "kvs_sql_data_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sql-data-name"
   value         = module.sql_data.name
