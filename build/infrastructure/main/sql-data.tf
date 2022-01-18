@@ -27,7 +27,7 @@ module "sql_data" {
   location                      = azurerm_resource_group.this.location
   administrator_login           = local.sqlServerAdminName
   administrator_login_password  = random_password.sql_administrator_login_password.result
-  private_endpoint_subnet_id    = azurerm_subnet.this_private_endpoints_subnet.id
+  private_endpoint_subnet_id    = module.private_endpoints_subnet.id
   private_dns_zone_name         = azurerm_private_dns_zone.database.name
 
   tags                          = azurerm_resource_group.this.tags

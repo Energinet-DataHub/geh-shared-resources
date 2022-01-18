@@ -20,7 +20,7 @@ module "sb_domain_relay" {
   environment_instance  = var.environment_instance
   resource_group_name   = azurerm_resource_group.this.name
   location              = azurerm_resource_group.this.location
-  private_endpoint_subnet_id    = azurerm_subnet.this_private_endpoints_subnet.id
+  private_endpoint_subnet_id    = module.private_endpoints_subnet.id
   private_dns_zone_name         = azurerm_private_dns_zone.servicebus.name
   sku                   = "premium"
   auth_rules            = [
