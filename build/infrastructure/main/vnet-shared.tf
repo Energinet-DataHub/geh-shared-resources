@@ -41,13 +41,13 @@ module "vnet_integrations" {
   enforce_private_link_service_network_policies = true
   
   # Delegate the subnet to "Microsoft.Web/serverFarms"
-  delegation {
+  delegations =  [{
    name = "delegation"
-   service_delegation {
+   service_delegation =  {
      name    = "Microsoft.Web/serverFarms"
      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
    }
-  }
+  }]
 }
 
 module "private_endpoints_subnet" { 
