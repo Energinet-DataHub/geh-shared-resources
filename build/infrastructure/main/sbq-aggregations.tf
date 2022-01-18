@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "sbq_aggregations" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=5.1.0"
 
   name                = "aggregations"
   namespace_name      = module.sb_domain_relay.name
@@ -21,7 +21,7 @@ module "sbq_aggregations" {
 }
 
 module "sbq_aggregations_reply" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=5.1.0"
 
   name                = "aggregations-reply"
   namespace_name      = module.sb_domain_relay.name
@@ -30,7 +30,7 @@ module "sbq_aggregations_reply" {
 }
 
 module "sbq_aggregations_dequeue" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=5.1.0"
 
   name                = "aggregations-dequeue"
   namespace_name      = module.sb_domain_relay.name
