@@ -16,7 +16,7 @@ locals {
 }
 
 module "sql_data" {
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=6.0.0"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=feature/sql-server-module"
 
   name                          = "data"
   project_name                  = var.domain_name_short
@@ -27,13 +27,8 @@ module "sql_data" {
   location                      = azurerm_resource_group.this.location
   administrator_login           = local.sqlServerAdminName
   administrator_login_password  = random_password.sql_administrator_login_password.result
-  firewall_rules                = [
-    {
-      name              = "fwrule"
-      start_ip_address  = "0.0.0.0"
-      end_ip_address    = "255.255.255.255"
-    }
-  ]
+  private_endpoint_subnet_id    = azurerm_subnet.this_private_endpoints_subnet.id
+  private_dns_zone_name         = azurerm_private_dns_zone.database.name
 
   tags                          = azurerm_resource_group.this.tags
 }

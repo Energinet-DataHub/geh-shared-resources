@@ -24,6 +24,8 @@ module "st_market_operator_logs" {
   environment_instance      = var.environment_instance
   resource_group_name       = azurerm_resource_group.this.name
   location                  = azurerm_resource_group.this.location
+  private_endpoint_subnet_id                = azurerm_subnet.this_private_endpoints_subnet.id
+  private_dns_zone_name                     = azurerm_private_dns_zone.blob.name
   account_replication_type  = "LRS"
   access_tier               = "Hot"
   account_tier              = "Standard"
