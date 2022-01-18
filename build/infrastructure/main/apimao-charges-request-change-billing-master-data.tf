@@ -38,7 +38,7 @@ module "apimao_request_change_billing_master_data" {
                 </required-claims>
             </validate-jwt>
             <set-backend-service backend-id="${azurerm_api_management_backend.charges.name}" />
-            <rewrite-uri template="/api/ChargeLinkIngestion" />
+            <rewrite-uri template="/api/ChargeLinksIngestion" />
           </inbound>
         </policies>
       XML
