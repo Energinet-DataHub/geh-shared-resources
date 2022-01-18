@@ -43,10 +43,8 @@ module "vnet_integrations" {
   # Delegate the subnet to "Microsoft.Web/serverFarms"
   delegations =  [{
    name = "delegation"
-   service_delegation =  {
-     service_delegation_name    = "Microsoft.Web/serverFarms"
-     service_delegation_actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
-   }
+   service_delegation_name    = "Microsoft.Web/serverFarms"
+   service_delegation_actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
   }]
 }
 
