@@ -29,9 +29,13 @@ resource "azurerm_virtual_network" "this" {
   }
 }
 
-resource "azurerm_subnet" "vnet_integrations" {
-  name                                          = "snet-vnetintegrations-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  resource_group_name                           = azurerm_resource_group.this.name
+module "vnet_integrations" { 
+  source                                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
+  name                                          = "vnet_integrations"
+  project_name                                  = var.project_name
+  environment_short                             = var.environment_short
+  environment_instance                          = var.environment_instance
+  resource_group_name                           = var.resource_group_name
   virtual_network_name                          = azurerm_virtual_network.this.name
   address_prefixes                              = ["10.0.11.0/24"]
   enforce_private_link_service_network_policies = true
@@ -44,26 +48,32 @@ resource "azurerm_subnet" "vnet_integrations" {
      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
    }
   }
-  
 }
 
-resource "azurerm_subnet" "private_endpoints_subnet" {
-  name                                            = "snet-privateendpoints-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  resource_group_name                             = azurerm_resource_group.this.name
-  virtual_network_name                            = azurerm_virtual_network.this.name
-  address_prefixes                                = ["10.0.12.0/24"]
-  enforce_private_link_endpoint_network_policies  = true
+module "private_endpoints_subnet" { 
+  source                                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
+  name                                          = "private_endpoints_subnet"
+  project_name                                  = var.project_name
+  environment_short                             = var.environment_short
+  environment_instance                          = var.environment_instance
+  resource_group_name                           = var.resource_group_name
+  virtual_network_name                          = azurerm_virtual_network.this.name
+  address_prefixes                              = ["10.0.12.0/24"]
   enforce_private_link_service_network_policies = true
 }
 
-resource "azurerm_subnet" "external_endpoints_subnet" {
-  name                                            = "snet-externalendpoints-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  resource_group_name                             = azurerm_resource_group.this.name
-  virtual_network_name                            = azurerm_virtual_network.this.name
-  address_prefixes                                = ["10.0.13.0/24"]
-  enforce_private_link_endpoint_network_policies  = true
-
+module "external_endpoints_subnet" { 
+  source                                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
+  name                                          = "external_endpoints_subnet"
+  project_name                                  = var.project_name
+  environment_short                             = var.environment_short
+  environment_instance                          = var.environment_instance
+  resource_group_name                           = var.resource_group_name
+  virtual_network_name                          = azurerm_virtual_network.this.name
+  address_prefixes                              = ["10.0.13.0/24"]
+  enforce_private_link_service_network_policies = true
 }
+
 
 module "kvs_vnet_shared_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=feature/key-vault-module"
