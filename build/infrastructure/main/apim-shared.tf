@@ -14,7 +14,7 @@
 resource "azurerm_subnet" "apim_subnet" {
   name                 = "snet-apim-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name  = azurerm_resource_group.this.name
-  virtual_network_name = azurerm_virtual_network.this.name
+  virtual_network_name = var.azurerm_virtual_network_name
   address_prefixes     = ["10.0.2.0/29"]
 }
 
