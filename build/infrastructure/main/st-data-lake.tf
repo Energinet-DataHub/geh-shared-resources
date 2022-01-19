@@ -28,7 +28,7 @@ module "st_data_lake" {
   account_replication_type  = "LRS"
   account_tier              = "Standard"
   private_endpoint_subnet_id                = module.private_endpoints_subnet.id
-  private_dns_zone_name                     = azurerm_private_dns_zone.blob.name
+  private_dns_zone_name                     = "privatelink.blob.core.windows.net"
   is_hns_enabled            = true
   containers                = [
     {

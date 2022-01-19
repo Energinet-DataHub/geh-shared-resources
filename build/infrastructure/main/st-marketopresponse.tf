@@ -25,7 +25,7 @@ module "st_market_operator_response" {
   resource_group_name       = azurerm_resource_group.this.name
   location                  = azurerm_resource_group.this.location
   private_endpoint_subnet_id                = module.private_endpoints_subnet.id
-  private_dns_zone_name                     = azurerm_private_dns_zone.blob.name
+  private_dns_zone_name                     = "privatelink.blob.core.windows.net"
   account_replication_type  = "LRS"
   access_tier               = "Hot"
   account_tier              = "Standard"
