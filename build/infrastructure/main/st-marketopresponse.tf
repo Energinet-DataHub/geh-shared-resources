@@ -16,7 +16,7 @@ locals {
 }
 
 module "st_market_operator_response" {
-  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=5.1.0"
+  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
 
   name                      = "marketres"
   project_name              = var.domain_name_short
@@ -24,6 +24,8 @@ module "st_market_operator_response" {
   environment_instance      = var.environment_instance
   resource_group_name       = azurerm_resource_group.this.name
   location                  = azurerm_resource_group.this.location
+  private_endpoint_subnet_id                = module.private_endpoints_subnet.id
+  private_dns_zone_name                     = azurerm_private_dns_zone.blob.name
   account_replication_type  = "LRS"
   access_tier               = "Hot"
   account_tier              = "Standard"
@@ -52,7 +54,7 @@ module "st_market_operator_response" {
 }
 
 module "kvs_st_market_operator_response_primary_connection_string" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
   name          = "st-marketres-primary-connection-string"
   value         = module.st_market_operator_response.primary_connection_string
   key_vault_id  = module.kv_shared.id
@@ -61,7 +63,7 @@ module "kvs_st_market_operator_response_primary_connection_string" {
 }
 
 module "kvs_st_market_operator_response_postofficereply_container_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "st-marketres-postofficereply-container-name"
   value         = local.postoffice_reply_container_name
