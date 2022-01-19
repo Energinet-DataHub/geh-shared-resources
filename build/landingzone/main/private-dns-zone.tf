@@ -26,7 +26,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
   name                  = "${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}-bloblink"
   resource_group_name   = azurerm_resource_group.this.name
   private_dns_zone_name = azurerm_private_dns_zone.blob.name
-  virtual_network_id    = var.azurerm_virtual_network_name
+  virtual_network_id    = azurerm_virtual_network.this.id
 }
 
 # Create the database.windows.net Private DNS Zone
@@ -40,7 +40,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "db" {
   name                  = "${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}-dblink"
   resource_group_name   = azurerm_resource_group.this.name
   private_dns_zone_name = azurerm_private_dns_zone.database.name
-  virtual_network_id    = var.azurerm_virtual_network_name
+  virtual_network_id    = azurerm_virtual_network.this.id
 }
 
 # Create the servicebuswindows.net Private DNS Zone
@@ -54,7 +54,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "servicebus" {
   name                  = "${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}-servicebuslink"
   resource_group_name   = azurerm_resource_group.this.name
   private_dns_zone_name = azurerm_private_dns_zone.servicebus.name
-  virtual_network_id    = var.azurerm_virtual_network_name
+  virtual_network_id    = azurerm_virtual_network.this.id
 }
 
 # Create the keyvault  Private DNS Zone
@@ -68,5 +68,5 @@ resource "azurerm_private_dns_zone_virtual_network_link" "vault" {
   name                  = "${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}-vaultlink"
   resource_group_name   = azurerm_resource_group.this.name
   private_dns_zone_name = azurerm_private_dns_zone.keyvault.name
-  virtual_network_id    = var.azurerm_virtual_network_name
+  virtual_network_id    = azurerm_virtual_network.this.id
 }
