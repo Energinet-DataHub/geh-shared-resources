@@ -38,7 +38,7 @@ module "vnet_integrations" {
   resource_group_name                           = var.resource_group_name
   virtual_network_name                          = azurerm_virtual_network.this.name
   address_prefixes                              = ["10.0.8.0/22"]
-  enforce_private_link_service_network_policies = true
+  enforce_private_link_service_network_policies = false
   
   # Delegate the subnet to "Microsoft.Web/serverFarms"
   delegations =  [{
@@ -57,7 +57,7 @@ module "private_endpoints_subnet" {
   resource_group_name                           = var.resource_group_name
   virtual_network_name                          = azurerm_virtual_network.this.name
   address_prefixes                              = ["10.0.12.0/22"]
-  enforce_private_link_service_network_policies = true
+  enforce_private_link_service_network_policies = false
 }
 
 module "external_endpoints_subnet" { 
@@ -69,7 +69,7 @@ module "external_endpoints_subnet" {
   resource_group_name                           = var.resource_group_name
   virtual_network_name                          = azurerm_virtual_network.this.name
   address_prefixes                              = ["10.0.16.0/22"]
-  enforce_private_link_service_network_policies = true
+  enforce_private_link_service_network_policies = false
 }
 
 
