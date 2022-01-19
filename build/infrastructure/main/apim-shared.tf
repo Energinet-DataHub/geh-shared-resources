@@ -70,3 +70,23 @@ resource "azurerm_api_management_logger" "apim_logger" {
     instrumentation_key = module.appi_shared.instrumentation_key
   }
 }
+
+module "kvs_b2c_tenant_id" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "b2c-tenant-id"
+  value         = var.apim_b2c_tenant_id
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_backend_service_app_id" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "backend-service-app-id"
+  value         = var.backend_service_app_id
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
