@@ -94,3 +94,8 @@ variable github_runner_name {
   type          = string
   description   = "Name of GitHub self-hosted runner."
 }
+
+variable azurerm_virtual_network_name {
+  type          = string
+  description   = "Name of the virtual network"
+}
