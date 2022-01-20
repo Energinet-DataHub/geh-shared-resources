@@ -79,8 +79,3 @@ variable backend_service_app_id {
   type          = string
   description   = "The app/client ID of the backend app registration."
 }
-
-variable azurerm_virtual_network_name {
-  type          = string
-  description   = "Name of the virtual network"
-}
