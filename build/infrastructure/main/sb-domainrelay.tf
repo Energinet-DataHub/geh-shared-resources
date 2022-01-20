@@ -21,6 +21,7 @@ module "sb_domain_relay" {
   resource_group_name   = azurerm_resource_group.this.name
   location              = azurerm_resource_group.this.location
   private_endpoint_subnet_id    = module.private_endpoints_subnet.id
+  vnet_resource_group_name = var.vnet_resource_group_name
   
   sku                   = "premium"
   auth_rules            = [
