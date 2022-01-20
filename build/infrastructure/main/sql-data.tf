@@ -28,7 +28,7 @@ module "sql_data" {
   administrator_login           = local.sqlServerAdminName
   administrator_login_password  = random_password.sql_administrator_login_password.result
   private_endpoint_subnet_id    = module.private_endpoints_subnet.id
-  private_dns_zone_name         = "privatelink.database.windows.net"
+  vnet_resource_group_name  = var.vnet_resource_group_name
 
   tags                          = azurerm_resource_group.this.tags
 }
