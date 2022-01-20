@@ -20,14 +20,7 @@ module "apimao_messagehub_peek_timeseries" {
   api_management_name     = module.apim_shared.name
   display_name            = "Message Hub: Peek timeseries"
   method                  = "GET"
-  url_template            = "/v1.0/cim/timeseries/{id}"
-  template_parameters     = [
-    {
-      name      = "id"
-      required  = true
-      type      = "string"
-    }
-  ]
+  url_template            = "/v1.0/cim/timeseries"
   policies                = [
     {
       xml_content = <<XML
@@ -48,9 +41,6 @@ module "apimao_messagehub_peek_timeseries" {
             </validate-jwt>
             <set-backend-service backend-id="${azurerm_api_management_backend.messagehub.name}" />
             <rewrite-uri template="/api/peek/timeseries" />
-            <set-query-parameter name="bundleid" exists-action="override">
-              <value>@(context.Request.MatchedParameters["id"])</value>
-            </set-query-parameter>
           </inbound>
         </policies>
       XML
