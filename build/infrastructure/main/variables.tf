@@ -84,8 +84,3 @@ variable backend_service_app_id {
   type          = string
   description   = "The app/client ID of the backend app registration."
 }
-
-variable vnet_resource_group_name{
-    type        = string
-    description = "The resource group name where the vnet is created"
-}
