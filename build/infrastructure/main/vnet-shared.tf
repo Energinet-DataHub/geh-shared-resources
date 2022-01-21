@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 resource "azurerm_virtual_network" "this" {
   name                = "vnet-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = azurerm_resource_group.this.location
@@ -27,4 +26,11 @@ resource "azurerm_virtual_network" "this" {
       tags,
     ]
   }
+}
+
+resource "azurerm_virtual_network_peering" "this" {
+  name                      = "shared-landingzone"
+  resource_group_name       = azurerm_resource_group.this.name
+  virtual_network_name      = azurerm_virtual_network.this.name
+  remote_virtual_network_id = var.landingzone_virtual_network_id
 }

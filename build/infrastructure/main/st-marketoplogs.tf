@@ -16,26 +16,26 @@ locals {
 }
 
 module "st_market_operator_logs" {
-  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=renetnielsen/6.0.0"
 
-  name                      = "marketlog"
-  project_name              = var.domain_name_short
-  environment_short         = var.environment_short
-  environment_instance      = var.environment_instance
-  resource_group_name       = azurerm_resource_group.this.name
-  location                  = azurerm_resource_group.this.location
-  private_endpoint_subnet_id                = module.private_endpoints_subnet.id
-  vnet_resource_group_name = var.vnet_resource_group_name
-  account_replication_type  = "LRS"
-  access_tier               = "Hot"
-  account_tier              = "Standard"
-  containers                = [
+  name                            = "marketlog"
+  project_name                    = var.domain_name_short
+  environment_short               = var.environment_short
+  environment_instance            = var.environment_instance
+  resource_group_name             = azurerm_resource_group.this.name
+  location                        = azurerm_resource_group.this.location
+  private_endpoint_subnet_id      = module.private_endpoints_subnet.id
+  private_dns_resource_group_name = azurerm_resource_group.this.name
+  account_replication_type        = "LRS"
+  access_tier                     = "Hot"
+  account_tier                    = "Standard"
+  containers                      = [
     {
       name = local.marketoplogs_container_name,
     },
   ]
 
-  tags                      = azurerm_resource_group.this.tags
+  tags                            = azurerm_resource_group.this.tags
 }
 
 module "kvs_st_market_operator_logs_primary_connection_string" {

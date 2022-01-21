@@ -21,6 +21,17 @@ resource "azurerm_private_dns_zone" "blob" {
   resource_group_name = azurerm_resource_group.this.name
 }
 
+# KV Secret
+module "kvs_pdns_blob_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+
+  name          = "pdns-blob-name"
+  value         = azurerm_private_dns_zone.blob.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
 # Link the Private Zone with the VNet
 resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
   name                  = "${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}-bloblink"
@@ -33,6 +44,17 @@ resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
 resource "azurerm_private_dns_zone" "database" {
   name                = "privatelink.database.windows.net"
   resource_group_name = azurerm_resource_group.this.name
+}
+
+# KV Secret
+module "kvs_pdns_database_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+
+  name          = "pdns-database-name"
+  value         = azurerm_private_dns_zone.database.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
 }
 
 # Link the Private Zone with the VNet
@@ -49,6 +71,17 @@ resource "azurerm_private_dns_zone" "servicebus" {
   resource_group_name =  azurerm_resource_group.this.name
 }
 
+# KV Secret
+module "kvs_pdns_servicebus_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+
+  name          = "pdns-servicebus-name"
+  value         = azurerm_private_dns_zone.servicebus.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
 # Link the Private Zone with the VNet
 resource "azurerm_private_dns_zone_virtual_network_link" "servicebus" {
   name                  = "${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}-servicebuslink"
@@ -61,6 +94,17 @@ resource "azurerm_private_dns_zone_virtual_network_link" "servicebus" {
 resource "azurerm_private_dns_zone" "keyvault" {
   name                = "privatelink.vaultcore.azure.net"
   resource_group_name = azurerm_resource_group.this.name
+}
+
+# KV Secret
+module "kvs_pdns_keyvault_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+
+  name          = "pdns-keyvault-name"
+  value         = azurerm_private_dns_zone.keyvault.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
 }
 
 # Link the Private Zone with the VNet
