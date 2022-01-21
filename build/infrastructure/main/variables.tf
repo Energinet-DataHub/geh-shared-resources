@@ -84,3 +84,8 @@ variable backend_service_app_id {
   type          = string
   description   = "The app/client ID of the backend app registration."
 }
+
+variable landingzone_virtual_network_id {
+  type          = string
+  description   = "Id of the landingzone virtual network"
+}

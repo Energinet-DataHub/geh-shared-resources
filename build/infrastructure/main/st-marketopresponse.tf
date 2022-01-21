@@ -16,20 +16,20 @@ locals {
 }
 
 module "st_market_operator_response" {
-  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=renetnielsen/6.0.0"
 
-  name                      = "marketres"
-  project_name              = var.domain_name_short
-  environment_short         = var.environment_short
-  environment_instance      = var.environment_instance
-  resource_group_name       = azurerm_resource_group.this.name
-  location                  = azurerm_resource_group.this.location
-  private_endpoint_subnet_id                = module.private_endpoints_subnet.id
-  vnet_resource_group_name  = var.vnet_resource_group_name
-  account_replication_type  = "LRS"
-  access_tier               = "Hot"
-  account_tier              = "Standard"
-  containers                = [
+  name                            = "marketres"
+  project_name                    = var.domain_name_short
+  environment_short               = var.environment_short
+  environment_instance            = var.environment_instance
+  resource_group_name             = azurerm_resource_group.this.name
+  location                        = azurerm_resource_group.this.location
+  private_endpoint_subnet_id      = module.private_endpoints_subnet.id
+  private_dns_resource_group_name = azurerm_resource_group.this.name
+  account_replication_type        = "LRS"
+  access_tier                     = "Hot"
+  account_tier                    = "Standard"
+  containers                      = [
     {
       name = local.postoffice_reply_container_name,
     },
@@ -50,7 +50,7 @@ module "st_market_operator_response" {
     },
   ]
 
-  tags                      = azurerm_resource_group.this.tags
+  tags                            = azurerm_resource_group.this.tags
 }
 
 module "kvs_st_market_operator_response_primary_connection_string" {
