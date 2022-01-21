@@ -21,7 +21,7 @@ resource "azurerm_subnet" "apim_subnet" {
 module "apim_shared" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=6.0.0"
 
-  name                  = "shared"
+  name                  = "main"
   project_name          = var.domain_name_short
   environment_short     = var.environment_short
   environment_instance  = var.environment_instance
