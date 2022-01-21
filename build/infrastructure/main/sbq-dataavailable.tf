@@ -21,7 +21,7 @@ module "sbq_dataavailable" {
 }
 
 module "kvs_sbq_data_available_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbq-data-available-name"
   value         = module.sbq_dataavailable.name

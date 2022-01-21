@@ -21,6 +21,11 @@ variable resource_group_name {
   description = "Resource Group that the infrastructure code is deployed into."
 }
 
+variable vnet_resource_group_name {
+  type        = string
+  description = "Resource Group that the VNet is created in."
+}
+
 variable environment_short {
   type          = string
   description   = "Enviroment that the infrastructure code is deployed into."
@@ -78,19 +83,4 @@ variable apim_b2c_tenant_id {
 variable backend_service_app_id {
   type          = string
   description   = "The app/client ID of the backend app registration."
-}
-
-variable vm_user_name {
-  type          = string
-  description   = "Deployment Agent VM user name for SSH connection."
-}
-
-variable github_runner_token {
-  type          = string
-  description   = "Registration token for GitHub self-hosted runner."
-}
-
-variable github_runner_name {
-  type          = string
-  description   = "Name of GitHub self-hosted runner."
 }

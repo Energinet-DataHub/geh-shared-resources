@@ -11,17 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-module "sbt_production_metering_point_created" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=6.0.0"
-
-  name                = "production-metering-point-created"
-  namespace_name      = module.sb_domain_relay.name
-  resource_group_name = azurerm_resource_group.this.name
-  subscriptions       = [
-    {
-      name                = "market-roles-production-mp-created-sub"
-      max_delivery_count  = 10
-      forward_to          = module.sbq_market_roles_forwarded.name
-    }
-  ]
+locals {
+    VIRTUAL_NETWORK_NAME = "vnet-${var.domain_name_short}-${var.environment_short}-${var.environment_instance}"
 }
