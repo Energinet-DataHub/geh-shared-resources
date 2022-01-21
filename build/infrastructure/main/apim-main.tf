@@ -13,7 +13,7 @@
 # limitations under the License.
 resource "azurerm_subnet" "apim_subnet" {
   name                 = "snet-apim-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  resource_group_name  = var.vnet_resource_group_name
+  resource_group_name  = azurerm_resource_group.this.name
   virtual_network_name = local.VIRTUAL_NETWORK_NAME
   address_prefixes     = ["10.0.2.0/29"]
 }
@@ -21,7 +21,7 @@ resource "azurerm_subnet" "apim_subnet" {
 module "apim_shared" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=6.0.0"
 
-  name                  = "shared"
+  name                  = "main"
   project_name          = var.domain_name_short
   environment_short     = var.environment_short
   environment_instance  = var.environment_instance
