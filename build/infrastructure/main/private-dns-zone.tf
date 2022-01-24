@@ -19,6 +19,8 @@
 resource "azurerm_private_dns_zone" "blob" {
   name                = "privatelink.blob.core.windows.net"
   resource_group_name = azurerm_resource_group.this.name
+
+  tags          = azurerm_resource_group.this.tags
 }
 
 # KV Secret
@@ -44,6 +46,8 @@ resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
 resource "azurerm_private_dns_zone" "database" {
   name                = "privatelink.database.windows.net"
   resource_group_name = azurerm_resource_group.this.name
+
+  tags          = azurerm_resource_group.this.tags
 }
 
 # KV Secret
@@ -69,6 +73,8 @@ resource "azurerm_private_dns_zone_virtual_network_link" "db" {
 resource "azurerm_private_dns_zone" "servicebus" {
   name                = "privatelink.servicebus.windows.net"
   resource_group_name =  azurerm_resource_group.this.name
+
+  tags          = azurerm_resource_group.this.tags
 }
 
 # KV Secret
@@ -94,6 +100,8 @@ resource "azurerm_private_dns_zone_virtual_network_link" "servicebus" {
 resource "azurerm_private_dns_zone" "keyvault" {
   name                = "privatelink.vaultcore.azure.net"
   resource_group_name = azurerm_resource_group.this.name
+
+  tags          = azurerm_resource_group.this.tags
 }
 
 # KV Secret
