@@ -16,7 +16,7 @@ locals {
 }
 
 module "mssqldb_actor_register" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-database?ref=5.4.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-database?ref=5.4.0"
 
   name                  = local.ms_actor_register_database_name
   project_name          = var.domain_name_short
