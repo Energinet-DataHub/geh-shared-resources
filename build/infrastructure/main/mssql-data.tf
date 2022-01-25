@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 locals {
-  sqlServerAdminName = "gehdbadmin"
+  mssqlServerAdminName = "gehdbadmin"
 }
 
 module "mssql_data" {
@@ -25,7 +25,7 @@ module "mssql_data" {
   sql_version                   = "12.0"
   resource_group_name           = azurerm_resource_group.this.name
   location                      = azurerm_resource_group.this.location
-  administrator_login           = local.sqlServerAdminName
+  administrator_login           = local.mssqlServerAdminName
   administrator_login_password  = random_password.mssql_administrator_login_password.result
   firewall_rules                = [
     {
