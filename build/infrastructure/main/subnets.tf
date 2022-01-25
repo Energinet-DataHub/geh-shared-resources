@@ -18,7 +18,7 @@ module "snet_internal_vnet_integrations" {
   environment_short                             = var.environment_short
   environment_instance                          = var.environment_instance
   resource_group_name                           = azurerm_resource_group.this.name
-  virtual_network_name                          = azurerm_virtual_network.this.name
+  virtual_network_name                          = module.vnet_main.name
   address_prefixes                              = ["10.0.8.0/22"]
   enforce_private_link_service_network_policies = true
 
@@ -39,7 +39,7 @@ module "snet_internal_private_endpoints" {
   environment_short                               = var.environment_short
   environment_instance                            = var.environment_instance
   resource_group_name                             = azurerm_resource_group.this.name
-  virtual_network_name                            = azurerm_virtual_network.this.name
+  virtual_network_name                            = module.vnet_main.name
   address_prefixes                                = ["10.0.12.0/22"]
   enforce_private_link_endpoint_network_policies  = true
   enforce_private_link_service_network_policies   = true
@@ -52,7 +52,7 @@ module "snet_external_endpoints_subnet" {
   environment_short                               = var.environment_short
   environment_instance                            = var.environment_instance
   resource_group_name                             = azurerm_resource_group.this.name
-  virtual_network_name                            = azurerm_virtual_network.this.name
+  virtual_network_name                            = module.vnet_main.name
   address_prefixes                                = ["10.0.16.0/22"]
   enforce_private_link_endpoint_network_policies  = true
 }
