@@ -38,11 +38,17 @@ module "mssql_data" {
   tags                          = azurerm_resource_group.this.tags
 }
 
+resource "random_password" "mssql_administrator_login_password" {
+  length = 16
+  special = true
+  override_special = "_%@"
+}
+
 module "kvs_mssql_data_admin_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "mssql-data-admin-user-name"
-  value         = local.sqlServerAdminName
+  value         = local.mssqlServerAdminName
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
@@ -66,12 +72,6 @@ module "kvs_mssql_data_url" {
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
-}
-
-resource "random_password" "mssql_administrator_login_password" {
-  length = 16
-  special = true
-  override_special = "_%@"
 }
 
 module "kvs_mssql_data_name" {
