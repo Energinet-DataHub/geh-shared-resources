@@ -16,7 +16,7 @@
 resource "azurerm_subnet" "deployagent" {
   name                 = "snet-deployagent-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name  = azurerm_resource_group.this.name
-  virtual_network_name = azurerm_virtual_network.this.name
+  virtual_network_name = module.vnet_main.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
