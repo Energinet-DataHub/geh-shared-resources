@@ -13,6 +13,6 @@
 # limitations under the License.
 output landingzone_virtual_network_id {
   description = "Id of the landingzone virtual network"
-  value       = azurerm_virtual_network.this.id
+  value       = "Test"
   sensitive   = true
 }
