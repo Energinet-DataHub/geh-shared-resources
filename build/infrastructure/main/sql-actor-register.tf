@@ -16,7 +16,7 @@ locals {
 }
 
 module "sqldb_actor_register" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-database?ref=5.1.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-database?ref=6.0.0"
 
   name                  = local.actor_register_database_name
   project_name          = var.domain_name_short
@@ -30,7 +30,7 @@ module "sqldb_actor_register" {
 }
 
 module "kvs_sql_actor_register_database_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sql-actor-register-database-name"
   value         = module.sqldb_actor_register.name

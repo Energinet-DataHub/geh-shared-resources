@@ -11,38 +11,38 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-module "sbq_create_link_request" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=6.0.0"
-
-  name                = "create-link-request"
-  namespace_name      = module.sb_domain_relay.name
-  resource_group_name = azurerm_resource_group.this.name
+module "vnet_main" {
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/vnet?ref=6.0.0"
+  name                  = "main"
+  project_name          = var.project_name
+  environment_short     = var.environment_short
+  environment_instance  = var.environment_instance
+  resource_group_name   = azurerm_resource_group.this.name
+  location              = azurerm_resource_group.this.location
+  address_space         = ["10.0.0.0/16"]
+  peerings              = [
+    {
+      name                      = "shared-landingzone"
+      remote_virtual_network_id = var.landingzone_virtual_network_id
+    }
+  ]
 }
 
-# Create create link reply queue
-module "sbq_create_link_reply" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=6.0.0"
-
-  name                = "create-link-reply"
-  namespace_name      = module.sb_domain_relay.name
-  resource_group_name = azurerm_resource_group.this.name
-}
-
-module "kvs_sbq_create_link_request_name" {
+module "kvs_vnet_shared_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
-  name          = "sbq-create-link-request-name"
-  value         = module.sbq_create_link_request.name
+  name          = "vnet-shared-name"
+  value         = module.vnet_main.name
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
 }
 
-module "kvs_sbq_create_link_reply_name" {
+module "kvs_vnet_shared_rg_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
-  name          = "sbq-create-link-reply-name"
-  value         = module.sbq_create_link_reply.name
+  name          = "vnet-shared-rg-name"
+  value         = azurerm_resource_group.this.name
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags

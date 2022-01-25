@@ -80,17 +80,7 @@ variable backend_service_app_id {
   description   = "The app/client ID of the backend app registration."
 }
 
-variable vm_user_name {
+variable landingzone_virtual_network_id {
   type          = string
-  description   = "Deployment Agent VM user name for SSH connection."
-}
-
-variable github_runner_token {
-  type          = string
-  description   = "Registration token for GitHub self-hosted runner."
-}
-
-variable github_runner_name {
-  type          = string
-  description   = "Name of GitHub self-hosted runner."
+  description   = "Id of the landingzone virtual network"
 }
