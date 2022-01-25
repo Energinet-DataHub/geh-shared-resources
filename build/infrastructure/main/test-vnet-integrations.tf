@@ -51,8 +51,8 @@ module "func_test" {
     WEBSITES_ENABLE_APP_SERVICE_STORAGE   = true
     FUNCTIONS_WORKER_RUNTIME              = "dotnet"
     privatecfm_STORAGE                    = module.sa_test.primary_connection_string
-    sqldb_connection                      = "Server=tcp:sql-data-vnettest-x-1.database.windows.net,1433;Initial Catalog=sqldb-testdatabase-vnettest-x-1;Persist Security Info=False;User ID=derderbestemmer;Password=Thisistest2022_%@;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
-    sbconstring                           = "Endpoint=sb://sb-testservicebus-vnettest-x-1.servicebus.windows.net/;SharedAccessKeyName=listen;SharedAccessKey=j5076Lip1vDkGuvm5GxsROXEoZLPhttcXxWiqRo7qjo="
+    sqldb_connection                      = "zzz"
+    sbconstring                           = "xxxx"
   }
 
   tags                                    = azurerm_resource_group.this.tags
