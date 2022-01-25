@@ -13,6 +13,5 @@
 # limitations under the License.
 output landingzone_virtual_network_id {
   description = "Id of the landingzone virtual network"
-  value       = "Test"
-  sensitive   = true
+  value       = module.vnet_main.id
 }
