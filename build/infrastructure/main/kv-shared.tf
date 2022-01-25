@@ -22,7 +22,7 @@ module "kv_shared" {
   location                        = azurerm_resource_group.this.location
   enabled_for_template_deployment = true
   sku_name                        = "premium"
-  private_endpoint_subnet_id      = module.private_endpoints_subnet.id
+  private_endpoint_subnet_id      = module.snet_internal_private_endpoints.id
   vnet_resource_group_name        = azurerm_resource_group.this.name
 
   tags                            = azurerm_resource_group.this.tags

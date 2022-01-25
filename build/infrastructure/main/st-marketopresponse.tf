@@ -24,7 +24,7 @@ module "st_market_operator_response" {
   environment_instance            = var.environment_instance
   resource_group_name             = azurerm_resource_group.this.name
   location                        = azurerm_resource_group.this.location
-  private_endpoint_subnet_id      = module.private_endpoints_subnet.id
+  private_endpoint_subnet_id      = module.snet_internal_private_endpoints.id
   private_dns_resource_group_name = azurerm_resource_group.this.name
   account_replication_type        = "LRS"
   access_tier                     = "Hot"

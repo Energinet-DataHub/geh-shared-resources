@@ -27,7 +27,7 @@ module "st_data_lake" {
   location                        = azurerm_resource_group.this.location
   account_replication_type        = "LRS"
   account_tier                    = "Standard"
-  private_endpoint_subnet_id      = module.private_endpoints_subnet.id
+  private_endpoint_subnet_id      = module.snet_internal_private_endpoints.id
   private_dns_resource_group_name = azurerm_resource_group.this.name
   is_hns_enabled                  = true
   containers                      = [
