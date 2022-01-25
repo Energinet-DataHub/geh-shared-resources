@@ -17,7 +17,7 @@ locals {
 }
 
 module "sql_data" {
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=feature/sql-server-module"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=6.0.0"
 
   name                          = "data"
   project_name                  = var.domain_name_short
