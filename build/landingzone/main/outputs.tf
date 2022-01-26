@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-output landingzone_virtual_network_id {
-  description = "Id of the landingzone virtual network"
-  value       = base64encode(module.vnet_main.id)
+output landingzone_virtual_network_name {
+  description = "Name of the landingzone virtual network"
+  value       = module.vnet_main.name
 }
