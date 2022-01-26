@@ -14,7 +14,7 @@
 module "snet_internal_vnet_integrations" {
   source                                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
   name                                          = "internal-vnet-integrations"
-  project_name                                  = var.project_name
+  project_name                                  = var.domain_name_short
   environment_short                             = var.environment_short
   environment_instance                          = var.environment_instance
   resource_group_name                           = azurerm_resource_group.this.name
@@ -35,7 +35,7 @@ module "snet_internal_vnet_integrations" {
 module "snet_internal_private_endpoints" {
   source                                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
   name                                            = "internal-private-endpoints"
-  project_name                                    = var.project_name
+  project_name                                    = var.domain_name_short
   environment_short                               = var.environment_short
   environment_instance                            = var.environment_instance
   resource_group_name                             = azurerm_resource_group.this.name
@@ -48,7 +48,7 @@ module "snet_internal_private_endpoints" {
 module "snet_external_endpoints_subnet" {
   source                                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
   name                                            = "external-endpoints-subnet"
-  project_name                                    = var.project_name
+  project_name                                    = var.domain_name_short
   environment_short                               = var.environment_short
   environment_instance                            = var.environment_instance
   resource_group_name                             = azurerm_resource_group.this.name
