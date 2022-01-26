@@ -82,7 +82,7 @@ variable backend_service_app_id {
 
 variable private_dns_resource_group_name {
   type          = string
-  description   = "Name of the landingzone resource group"
+  description   = "Name of the private dns resource group"
 }
 
 variable landingzone_virtual_network_id {
