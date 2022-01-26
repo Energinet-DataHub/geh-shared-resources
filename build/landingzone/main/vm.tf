@@ -29,7 +29,7 @@ module "snet_deployagent" {
    resource_group_name          = azurerm_resource_group.this.name
    allocation_method            = "Static"
 
-  tags                = azurerm_resource_group.this.tags
+  tags                          = azurerm_resource_group.this.tags
 
   lifecycle {
     ignore_changes = [

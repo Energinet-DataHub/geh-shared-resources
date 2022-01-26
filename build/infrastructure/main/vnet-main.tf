@@ -35,6 +35,8 @@ resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
   resource_group_name   = azurerm_resource_group.this.name
   private_dns_zone_name = var.private_dns_zone_blob_name
   virtual_network_id    = module.vnet_main.id
+
+  tags                  = azurerm_resource_group.this.tags
 }
 
 # Link the Private Zone with the VNet
@@ -43,6 +45,8 @@ resource "azurerm_private_dns_zone_virtual_network_link" "db" {
   resource_group_name   = azurerm_resource_group.this.name
   private_dns_zone_name = var.private_dns_zone_database_name
   virtual_network_id    = module.vnet_main.id
+
+  tags                  = azurerm_resource_group.this.tags
 }
 
 # Link the Private Zone with the VNet
@@ -51,6 +55,8 @@ resource "azurerm_private_dns_zone_virtual_network_link" "servicebus" {
   resource_group_name   = azurerm_resource_group.this.name
   private_dns_zone_name = var.private_dns_zone_servicebus_name
   virtual_network_id    = module.vnet_main.id
+
+  tags                  = azurerm_resource_group.this.tags
 }
 
 # Link the Private Zone with the VNet
@@ -59,6 +65,8 @@ resource "azurerm_private_dns_zone_virtual_network_link" "vault" {
   resource_group_name   = azurerm_resource_group.this.name
   private_dns_zone_name = var.private_dns_zone_keyvault_name
   virtual_network_id    = module.vnet_main.id
+
+  tags                  = azurerm_resource_group.this.tags
 }
 
 module "kvs_vnet_shared_name" {
