@@ -13,5 +13,5 @@
 # limitations under the License.
 output landingzone_virtual_network_id {
   description = "Id of the landingzone virtual network"
-  value       = module.vnet_main.id
+  value       = base64encode(module.vnet_main.id)
 }
