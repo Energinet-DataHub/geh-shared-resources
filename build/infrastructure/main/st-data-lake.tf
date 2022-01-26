@@ -28,7 +28,7 @@ module "st_data_lake" {
   account_replication_type        = "LRS"
   account_tier                    = "Standard"
   private_endpoint_subnet_id      = module.snet_internal_private_endpoints.id
-  private_dns_resource_group_name = var.landingzone_resource_group_name
+  private_dns_resource_group_name = var.private_dns_resource_group_name
   is_hns_enabled                  = true
   containers                      = [
     {

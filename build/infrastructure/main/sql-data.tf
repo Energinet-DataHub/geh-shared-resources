@@ -17,21 +17,21 @@ locals {
 }
 
 module "sql_data" {
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=6.0.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=6.0.0"
 
-  name                          = "data"
-  project_name                  = var.domain_name_short
-  environment_short             = var.environment_short
-  environment_instance          = var.environment_instance
-  sql_version                   = "12.0"
-  resource_group_name           = azurerm_resource_group.this.name
-  location                      = azurerm_resource_group.this.location
-  administrator_login           = local.sqlServerAdminName
-  administrator_login_password  = random_password.sql_administrator_login_password.result
-  private_endpoint_subnet_id    = module.snet_internal_private_endpoints.id
-  vnet_resource_group_name      = azurerm_resource_group.this.name
+  name                            = "data"
+  project_name                    = var.domain_name_short
+  environment_short               = var.environment_short
+  environment_instance            = var.environment_instance
+  sql_version                     = "12.0"
+  resource_group_name             = azurerm_resource_group.this.name
+  location                        = azurerm_resource_group.this.location
+  administrator_login             = local.sqlServerAdminName
+  administrator_login_password    = random_password.sql_administrator_login_password.result
+  private_endpoint_subnet_id      = module.snet_internal_private_endpoints.id
+  private_dns_resource_group_name = var.private_dns_resource_group_name
 
-  tags                          = azurerm_resource_group.this.tags
+  tags                            = azurerm_resource_group.this.tags
 }
 
 module "kvs_sql_data_admin_name" {
