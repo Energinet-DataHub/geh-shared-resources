@@ -16,7 +16,7 @@ locals {
 }
 
 module "st_market_operator_response" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=renetnielsen/6.0.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
 
   name                            = "marketres"
   project_name                    = var.domain_name_short
@@ -25,7 +25,7 @@ module "st_market_operator_response" {
   resource_group_name             = azurerm_resource_group.this.name
   location                        = azurerm_resource_group.this.location
   private_endpoint_subnet_id      = module.snet_internal_private_endpoints.id
-  private_dns_resource_group_name = azurerm_resource_group.this.name
+  private_dns_resource_group_name = var.landingzone_resource_group_name
   account_replication_type        = "LRS"
   access_tier                     = "Hot"
   account_tier                    = "Standard"

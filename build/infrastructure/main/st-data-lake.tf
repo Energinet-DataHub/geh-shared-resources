@@ -17,7 +17,7 @@ locals {
 }
 
 module "st_data_lake" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=renetnielsen/6.0.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
 
   name                            = "datalake"
   project_name                    = var.domain_name_short
@@ -28,7 +28,7 @@ module "st_data_lake" {
   account_replication_type        = "LRS"
   account_tier                    = "Standard"
   private_endpoint_subnet_id      = module.snet_internal_private_endpoints.id
-  private_dns_resource_group_name = azurerm_resource_group.this.name
+  private_dns_resource_group_name = var.landingzone_resource_group_name
   is_hns_enabled                  = true
   containers                      = [
     {

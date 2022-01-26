@@ -80,6 +80,11 @@ variable backend_service_app_id {
   description   = "The app/client ID of the backend app registration."
 }
 
+variable landingzone_resource_group_name {
+  type          = string
+  description   = "Name of the landingzone resource group"
+}
+
 variable landingzone_virtual_network_id {
   type          = string
   description   = "Id of the landingzone virtual network"
