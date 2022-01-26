@@ -40,7 +40,7 @@ module "snet_internal_private_endpoints" {
   environment_instance                            = var.environment_instance
   resource_group_name                             = azurerm_resource_group.this.name
   virtual_network_name                            = module.vnet_main.name
-  address_prefixes                                = ["10.0.12.0/22"]
+  address_prefixes                                = ["10.140.0.16/28"]
   enforce_private_link_endpoint_network_policies  = true
   enforce_private_link_service_network_policies   = true
 }

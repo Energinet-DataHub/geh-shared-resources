@@ -19,7 +19,7 @@ module "vnet_main" {
   environment_instance  = var.environment_instance
   resource_group_name   = azurerm_resource_group.this.name
   location              = azurerm_resource_group.this.location
-  address_space         = ["10.0.0.0/23"]
+  address_space         = ["10.140.0.0/23"]
   peerings              = [
     {
       name                      = "shared-landingzone"

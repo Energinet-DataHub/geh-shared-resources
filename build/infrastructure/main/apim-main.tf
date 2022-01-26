@@ -19,7 +19,7 @@ module "snet_apim" {
   environment_instance                          = var.environment_instance
   resource_group_name                           = azurerm_resource_group.this.name
   virtual_network_name                          = module.vnet_main.name
-  address_prefixes                              = ["10.0.2.0/29"]
+  address_prefixes                              = ["10.0.0.0/29"]
 }
 
 module "apim_shared" {
