@@ -13,7 +13,7 @@
 # limitations under the License.
 module "vnet_main" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/vnet?ref=6.0.0"
-  name                  = "main"
+  name                  = "main_1"
   project_name          = var.domain_name_short
   environment_short     = var.environment_short
   environment_instance  = var.environment_instance
