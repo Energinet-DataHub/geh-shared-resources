@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "sql_temp" {
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=5.1.0"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-server?ref=5.4.1"
 
   name                          = "temp"
   project_name                  = var.domain_name_short
@@ -51,15 +51,13 @@ module "kvs_temp_sql_data_admin_password" {
 }
 
 module "sqldb_temp" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-database?ref=5.1.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-database?ref=5.4.1"
 
   name                  = "temp"
   project_name          = var.domain_name_short
   environment_short     = var.environment_short
   environment_instance  = var.environment_instance
-  resource_group_name   = azurerm_resource_group.this.name
-  location              = azurerm_resource_group.this.location
-  server_name           = module.sql_temp.name
+  server_id             = module.sql_temp.id
 
   tags                  = azurerm_resource_group.this.tags
 }
