@@ -22,7 +22,7 @@ module "vnet_main" {
   address_space         = ["10.42.0.0/23"]
   peerings              = [
     {
-      name                      = "shared-landingzone"
+      name                      = "landingzone"
       remote_virtual_network_id = var.landingzone_virtual_network_id
     }
   ]
