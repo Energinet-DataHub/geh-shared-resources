@@ -28,6 +28,38 @@ module "vnet_main" {
   ]
 }
 
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
+  name                  = "pdnsz-blob-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = azurerm_resource_group.this.name
+  private_dns_zone_name = var.private_dns_zone_blob_name
+  virtual_network_id    = module.vnet_main.id
+}
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "db" {
+  name                  = "pdnsz-database-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = azurerm_resource_group.this.name
+  private_dns_zone_name = var.private_dns_zone_database_name
+  virtual_network_id    = module.vnet_main.id
+}
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "servicebus" {
+  name                  = "pdnsz-servicebus-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = azurerm_resource_group.this.name
+  private_dns_zone_name = var.private_dns_zone_servicebus_name
+  virtual_network_id    = module.vnet_main.id
+}
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "vault" {
+  name                  = "pdnsz-keyvault-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = azurerm_resource_group.this.name
+  private_dns_zone_name = var.private_dns_zone_keyvault_name
+  virtual_network_id    = module.vnet_main.id
+}
+
 module "kvs_vnet_shared_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 

@@ -21,3 +21,35 @@ module "vnet_main" {
   location              = azurerm_resource_group.this.location
   address_space         = ["10.42.2.0/28"]
 }
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
+  name                  = "pdnsz-blob-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = azurerm_resource_group.this.name
+  private_dns_zone_name = azurerm_private_dns_zone.blob.name
+  virtual_network_id    = module.vnet_main.id
+}
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "db" {
+  name                  = "pdnsz-database-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = azurerm_resource_group.this.name
+  private_dns_zone_name = azurerm_private_dns_zone.database.name
+  virtual_network_id    = module.vnet_main.id
+}
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "servicebus" {
+  name                  = "pdnsz-servicebus-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = azurerm_resource_group.this.name
+  private_dns_zone_name = azurerm_private_dns_zone.servicebus.name
+  virtual_network_id    = module.vnet_main.id
+}
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "vault" {
+  name                  = "pdnsz-keyvault-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = azurerm_resource_group.this.name
+  private_dns_zone_name = azurerm_private_dns_zone.keyvault.name
+  virtual_network_id    = module.vnet_main.id
+}

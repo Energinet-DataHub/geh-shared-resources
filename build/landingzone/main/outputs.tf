@@ -15,3 +15,23 @@ output landingzone_virtual_network_name {
   description = "Name of the landingzone virtual network"
   value       = module.vnet_main.name
 }
+
+output private_dns_zone_blob_name {
+  description = "Name of the blob private dns zone"
+  value       = azurerm_private_dns_zone.blob.name
+}
+
+output private_dns_zone_keyvault_name {
+  description = "Name of the keyvault private dns zone"
+  value       = azurerm_private_dns_zone.keyvault.name
+}
+
+output private_dns_zone_database_name {
+  description = "Name of the database private dns zone"
+  value       = azurerm_private_dns_zone.database.name
+}
+
+output private_dns_zone_servicebus_name {
+  description = "Name of the servicebus private dns zone"
+  value       = azurerm_private_dns_zone.servicebus.name
+}
