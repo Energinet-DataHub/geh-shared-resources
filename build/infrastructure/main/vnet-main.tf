@@ -24,6 +24,7 @@ module "vnet_main" {
     {
       name                                        = "landingzone"
       remote_virtual_network_id                   = var.landingzone_virtual_network_id
+      remote_virtual_network_name                 = var.landingzone_virtual_network_name
       remote_virtual_network_resource_group_name  = var.landingzone_resource_group_name
       remote_virtual_network_subscription_id      = var.subscription_id
     }
