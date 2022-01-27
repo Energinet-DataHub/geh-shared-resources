@@ -95,6 +95,11 @@ variable landingzone_virtual_network_id {
   description   = "Id of the landingzone virtual network"
 }
 
+variable landingzone_virtual_network_name {
+  type          = string
+  description   = "Name of the landingzone virtual network"
+}
+
 variable private_dns_zone_blob_name {
   type        = string
   description = "Name of the blob private dns zone"
