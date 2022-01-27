@@ -15,8 +15,7 @@ module "sbt_energy_supplier_change_registered" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=6.0.0"
 
   name                = "energy-supplier-change-registered"
-  namespace_name      = module.sb_domain_relay.name
-  resource_group_name = azurerm_resource_group.this.name
+  namespace_id        = module.sb_domain_relay.id
   subscriptions       = [
     {
       name                = "mp-energy-supplier-change-registred-sub"

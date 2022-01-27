@@ -15,8 +15,7 @@ module "sbt_metering_point_message_dequeued" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=6.0.0"
 
   name                = "metering-point-message-dequeued"
-  namespace_name      = module.sb_domain_relay.name
-  resource_group_name = azurerm_resource_group.this.name
+  namespace_id        = module.sb_domain_relay.id
   subscriptions       = [
     {
       name                = "metering-point-message-dequeued-sub"

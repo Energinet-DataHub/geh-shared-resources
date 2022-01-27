@@ -15,8 +15,7 @@ module "sbt_charge_link_created" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=6.0.0"
 
   name                = "charge-link-created"
-  namespace_name      = module.sb_domain_relay.name
-  resource_group_name = azurerm_resource_group.this.name
+  namespace_id        = module.sb_domain_relay.id
   subscriptions       = [
     {
       name                = "charge-link-created-sub-charges"
