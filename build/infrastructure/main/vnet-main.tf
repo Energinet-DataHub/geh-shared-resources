@@ -81,11 +81,21 @@ module "kvs_vnet_shared_name" {
   tags          = azurerm_resource_group.this.tags
 }
 
-module "kvs_vnet_shared_rg_name" {
+module "kvs_vnet_shared_resource_group_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
-  name          = "vnet-shared-rg-name"
+  name          = "vnet-shared-resource-group-name"
   value         = azurerm_resource_group.this.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_pdns_resource_group_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+
+  name          = "pdns-resource-group-name"
+  value         = var.private_dns_resource_group_name
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
