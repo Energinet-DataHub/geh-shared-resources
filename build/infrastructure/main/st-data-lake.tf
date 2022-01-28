@@ -17,7 +17,7 @@ locals {
 }
 
 module "st_data_lake" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0-storage-account"
 
   name                            = "datalake"
   project_name                    = var.domain_name_short
