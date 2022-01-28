@@ -42,6 +42,16 @@ resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
 }
 
 # Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "file" {
+  name                  = "pdnsz-file-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = var.private_dns_resource_group_name
+  private_dns_zone_name = var.private_dns_zone_file_name
+  virtual_network_id    = module.vnet_main.id
+
+  tags                  = azurerm_resource_group.this.tags
+}
+
+# Link the Private Zone with the VNet
 resource "azurerm_private_dns_zone_virtual_network_link" "db" {
   name                  = "pdnsz-database-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name   = var.private_dns_resource_group_name

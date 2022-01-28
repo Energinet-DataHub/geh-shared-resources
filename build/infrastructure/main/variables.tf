@@ -102,24 +102,29 @@ variable landingzone_virtual_network_name {
 
 variable private_dns_zone_blob_name {
   type        = string
-  description = "Name of the blob private dns zone"
+  description = "Name of the Storage Account blob private dns zone"
+}
+
+variable private_dns_zone_file_name {
+  type        = string
+  description = "Name of the Storage Account file private dns zone"
 }
 
 variable private_dns_zone_keyvault_name {
   type        = string
-  description = "Name of the keyvault private dns zone"
+  description = "Name of the Key Vault private dns zone"
 }
 
 variable private_dns_zone_database_name {
   type        = string
-  description = "Name of the database private dns zone"
+  description = "Name of the SQL database private dns zone"
 }
 
 variable private_dns_zone_servicebus_name {
   type        = string
-  description = "Name of the servicebus private dns zone"
+  description = "Name of the Service Bus private dns zone"
 }
 variable private_dns_zone_cosmos_name {
   type        = string
-  description = "Name of the cosmos private dns zone"
+  description = "Name of the Cosmos SQL database private dns zone"
 }

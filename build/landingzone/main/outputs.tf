@@ -17,26 +17,31 @@ output landingzone_virtual_network_name {
 }
 
 output private_dns_zone_blob_name {
-  description = "Name of the blob private dns zone"
+  description = "Name of the Storage Account blob private dns zone"
   value       = azurerm_private_dns_zone.blob.name
 }
 
+output private_dns_zone_file_name {
+  description = "Name of the Storage Account file private dns zone"
+  value       = azurerm_private_dns_zone.file.name
+}
+
 output private_dns_zone_keyvault_name {
-  description = "Name of the keyvault private dns zone"
+  description = "Name of the Key Vault private dns zone"
   value       = azurerm_private_dns_zone.keyvault.name
 }
 
 output private_dns_zone_database_name {
-  description = "Name of the database private dns zone"
+  description = "Name of the SQL database private dns zone"
   value       = azurerm_private_dns_zone.database.name
 }
 
 output private_dns_zone_servicebus_name {
-  description = "Name of the servicebus private dns zone"
+  description = "Name of the Service Bus private dns zone"
   value       = azurerm_private_dns_zone.servicebus.name
 }
 
 output private_dns_zone_cosmos_name {
-  description = "Name of the cosmos private dns zone"
+  description = "Name of the Cosmos SQL database private dns zone"
   value       = azurerm_private_dns_zone.cosmos.name
 }
