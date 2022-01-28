@@ -46,3 +46,11 @@ resource "azurerm_private_dns_zone" "servicebus" {
 
   tags                = azurerm_resource_group.this.tags
 }
+
+# Create the documents.net Private DNS Zone
+resource "azurerm_private_dns_zone" "cosmos" {
+  name                = "privatelink.documents.windows.net"
+  resource_group_name =  azurerm_resource_group.this.name
+
+  tags                = azurerm_resource_group.this.tags
+}

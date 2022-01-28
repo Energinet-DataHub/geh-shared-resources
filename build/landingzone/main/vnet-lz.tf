@@ -61,3 +61,13 @@ resource "azurerm_private_dns_zone_virtual_network_link" "vault" {
 
   tags                  = azurerm_resource_group.this.tags
 }
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "cosmos" {
+  name                  = "pdnsz-keyvault-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = azurerm_resource_group.this.name
+  private_dns_zone_name = azurerm_private_dns_zone.cosmos.name
+  virtual_network_id    = module.vnet_main.id
+
+  tags                  = azurerm_resource_group.this.tags
+}
