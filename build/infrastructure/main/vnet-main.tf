@@ -71,6 +71,15 @@ resource "azurerm_private_dns_zone_virtual_network_link" "vault" {
   tags                  = azurerm_resource_group.this.tags
 }
 
+resource "azurerm_private_dns_zone_virtual_network_link" "cosmos" {
+  name                  = "pdnsz-cosmos-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = var.private_dns_resource_group_name
+  private_dns_zone_name = var.private_dns_zone_cosmos_name
+  virtual_network_id    = module.vnet_main.id
+
+  tags                  = azurerm_resource_group.this.tags
+}
+
 module "kvs_vnet_shared_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 

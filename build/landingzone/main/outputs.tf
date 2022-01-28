@@ -35,3 +35,8 @@ output private_dns_zone_servicebus_name {
   description = "Name of the servicebus private dns zone"
   value       = azurerm_private_dns_zone.servicebus.name
 }
+
+output private_dns_zone_cosmos_name {
+  description = "Name of the cosmos private dns zone"
+  value       = azurerm_private_dns_zone.cosmos.name
+}

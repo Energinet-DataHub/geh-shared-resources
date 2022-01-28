@@ -119,3 +119,7 @@ variable private_dns_zone_servicebus_name {
   type        = string
   description = "Name of the servicebus private dns zone"
 }
+variable private_dns_zone_cosmos_name {
+  type        = string
+  description = "Name of the cosmos private dns zone"
+}
