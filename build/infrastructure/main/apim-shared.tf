@@ -90,3 +90,23 @@ module "kvs_backend_service_app_id" {
 
   tags          = azurerm_resource_group.this.tags
 }
+
+module "kvs_frontend_open_id_url" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "frontend-open-id-url"
+  value         = var.frontend_open_id_url
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_frontend_service_app_id" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "frontend-service-app-id"
+  value         = var.frontend_service_app_id
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
