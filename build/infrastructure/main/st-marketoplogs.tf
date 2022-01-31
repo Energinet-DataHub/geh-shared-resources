@@ -16,7 +16,7 @@ locals {
 }
 
 module "st_market_operator_logs" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0-storage-account"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
 
   name                            = "marketlog"
   project_name                    = var.domain_name_short
