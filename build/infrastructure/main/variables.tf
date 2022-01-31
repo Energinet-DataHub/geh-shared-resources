@@ -80,9 +80,9 @@ variable backend_service_app_id {
   description   = "The app/client ID of the backend app registration."
 }
 
-variable frontend_b2c_base_url {
+variable frontend_open_id_url {
   type          = string
-  description   = "Open ID configuration URL that will be used for authtication of the frontend."
+  description   = "Open ID configuration URL used for authtication of the frontend."
 }
 
 variable frontend_service_app_id {
