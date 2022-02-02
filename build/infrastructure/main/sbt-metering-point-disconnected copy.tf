@@ -25,7 +25,7 @@ module "kvs_sbt_metering_point_disconnected_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "sbt-metering-point-disconnected-name"
-  value         = module.sbt_metering_point_connected.name
+  value         = module.sbt_metering_point_disconnected.name
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
