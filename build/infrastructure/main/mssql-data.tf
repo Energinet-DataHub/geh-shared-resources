@@ -16,26 +16,21 @@ locals {
 }
 
 module "mssql_data" {
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-server?ref=5.4.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-server?ref=djorgensen/merge-sql-modules"
 
-  name                          = "data"
-  project_name                  = var.domain_name_short
-  environment_short             = var.environment_short
-  environment_instance          = var.environment_instance
-  sql_version                   = "12.0"
-  resource_group_name           = azurerm_resource_group.this.name
-  location                      = azurerm_resource_group.this.location
-  administrator_login           = local.mssqlServerAdminName
-  administrator_login_password  = random_password.mssql_administrator_login_password.result
-  firewall_rules                = [
-    {
-      name              = "fwrule"
-      start_ip_address  = "0.0.0.0"
-      end_ip_address    = "255.255.255.255"
-    }
-  ]
+  name                            = "data"
+  project_name                    = var.domain_name_short
+  environment_short               = var.environment_short
+  environment_instance            = var.environment_instance
+  sql_version                     = "12.0"
+  resource_group_name             = azurerm_resource_group.this.name
+  location                        = azurerm_resource_group.this.location
+  administrator_login             = local.mssqlServerAdminName
+  administrator_login_password    = random_password.mssql_administrator_login_password.result
+  private_dns_resource_group_name = var.private_dns_resource_group_name
+  private_endpoint_subnet_id      = module.snet_internal_private_endpoints.id
 
-  tags                          = azurerm_resource_group.this.tags
+  tags                            = azurerm_resource_group.this.tags
 }
 
 resource "random_password" "mssql_administrator_login_password" {
