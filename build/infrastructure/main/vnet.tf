@@ -11,21 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-resource "azurerm_virtual_network" "this" {
-  name                = "vnet-shared-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  location            = azurerm_resource_group.this.location
-  resource_group_name = azurerm_resource_group.this.name
-  address_space       = ["10.0.0.0/16"]
-
-  tags                = azurerm_resource_group.this.tags
-
-  lifecycle {
-    ignore_changes = [
-      # Ignore changes to tags, e.g. because a management agent
-      # updates these based on some ruleset managed elsewhere.
-      tags,
-    ]
-  }
+data "azurerm_virtual_network" "this" {
+  name                = var.virtual_network_name
+  resource_group_name = var.virtual_network_resource_group_name
 }
 
 module "kvs_vnet_shared_name" {
@@ -33,7 +21,7 @@ module "kvs_vnet_shared_name" {
 
   name          = "vnet-shared-name"
   value         = azurerm_virtual_network.this.name
-  key_vault_id  = module.kv_shared.id
+  key_vault_id  = azurerm_virtual_network
 
   tags          = azurerm_resource_group.this.tags
 }

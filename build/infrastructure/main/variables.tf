@@ -90,17 +90,62 @@ variable frontend_service_app_id {
   description   = "The app/client ID of the frontend app registration."
 }
 
-variable vm_user_name {
+variable private_dns_resource_group_name {
   type          = string
-  description   = "Deployment Agent VM user name for SSH connection."
+  description   = "Name of the private dns resource group"
 }
 
-variable github_runner_token {
+variable landingzone_resource_group_name {
   type          = string
-  description   = "Registration token for GitHub self-hosted runner."
+  description   = "Resource group name of the landingzone virtual network"
 }
 
-variable github_runner_name {
+variable landingzone_virtual_network_id {
   type          = string
-  description   = "Name of GitHub self-hosted runner."
+  description   = "Id of the landingzone virtual network"
+}
+
+variable landingzone_virtual_network_name {
+  type          = string
+  description   = "Name of the landingzone virtual network"
+}
+
+variable private_dns_zone_blob_name {
+  type        = string
+  description = "Name of the Storage Account blob private dns zone"
+}
+
+variable private_dns_zone_file_name {
+  type        = string
+  description = "Name of the Storage Account file private dns zone"
+}
+
+variable private_dns_zone_keyvault_name {
+  type        = string
+  description = "Name of the Key Vault private dns zone"
+}
+
+variable private_dns_zone_database_name {
+  type        = string
+  description = "Name of the SQL database private dns zone"
+}
+
+variable private_dns_zone_servicebus_name {
+  type        = string
+  description = "Name of the Service Bus private dns zone"
+}
+
+variable private_dns_zone_cosmos_name {
+  type        = string
+  description = "Name of the Cosmos SQL database private dns zone"
+}
+
+variable virtual_network_resource_group_name {
+  type          = string
+  description   = "Resource group name of the virtual network"
+}
+
+variable virtual_network_name {
+  type          = string
+  description   = "Name of the virtual network"
 }
