@@ -16,7 +16,7 @@ locals {
 }
 
 module "mssql_data" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-server?ref=djorgensen/merge-sql-modules"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-server?ref=6.0.0"
 
   name                            = "data"
   project_name                    = var.domain_name_short
