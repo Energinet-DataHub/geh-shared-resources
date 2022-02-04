@@ -15,7 +15,7 @@
 # Usefull resource for names
 # https://gist.github.com/liamfoneill/f78698854d5dd23a9e6ab08ff044f38a
 
-# Create the blob.core.windows.net Private DNS Zone
+# Create the Storage account "blob" Private DNS Zone
 resource "azurerm_private_dns_zone" "blob" {
   name                = "privatelink.blob.core.windows.net"
   resource_group_name = azurerm_resource_group.this.name
@@ -23,7 +23,15 @@ resource "azurerm_private_dns_zone" "blob" {
   tags                = azurerm_resource_group.this.tags
 }
 
-# Create the keyvault  Private DNS Zone
+# Create the Storage account "file" Private DNS Zone
+resource "azurerm_private_dns_zone" "file" {
+  name                = "privatelink.file.core.windows.net"
+  resource_group_name = azurerm_resource_group.this.name
+
+  tags                = azurerm_resource_group.this.tags
+}
+
+# Create the Key Vault Private DNS Zone
 resource "azurerm_private_dns_zone" "keyvault" {
   name                = "privatelink.vaultcore.azure.net"
   resource_group_name = azurerm_resource_group.this.name
@@ -31,7 +39,7 @@ resource "azurerm_private_dns_zone" "keyvault" {
   tags                = azurerm_resource_group.this.tags
 }
 
-# Create the database.windows.net Private DNS Zone
+# Create the SQL database Private DNS Zone
 resource "azurerm_private_dns_zone" "database" {
   name                = "privatelink.database.windows.net"
   resource_group_name = azurerm_resource_group.this.name
@@ -39,9 +47,17 @@ resource "azurerm_private_dns_zone" "database" {
   tags                = azurerm_resource_group.this.tags
 }
 
-# Create the servicebuswindows.net Private DNS Zone
+# Create the Service Bus Private DNS Zone
 resource "azurerm_private_dns_zone" "servicebus" {
   name                = "privatelink.servicebus.windows.net"
+  resource_group_name =  azurerm_resource_group.this.name
+
+  tags                = azurerm_resource_group.this.tags
+}
+
+# Create the Cosmos "SQL API" Private DNS Zone
+resource "azurerm_private_dns_zone" "cosmos" {
+  name                = "privatelink.documents.azure.com"
   resource_group_name =  azurerm_resource_group.this.name
 
   tags                = azurerm_resource_group.this.tags

@@ -95,21 +95,6 @@ variable private_dns_resource_group_name {
   description   = "Name of the private dns resource group"
 }
 
-variable landingzone_resource_group_name {
-  type          = string
-  description   = "Resource group name of the landingzone virtual network"
-}
-
-variable landingzone_virtual_network_id {
-  type          = string
-  description   = "Id of the landingzone virtual network"
-}
-
-variable landingzone_virtual_network_name {
-  type          = string
-  description   = "Name of the landingzone virtual network"
-}
-
 variable private_dns_zone_blob_name {
   type        = string
   description = "Name of the Storage Account blob private dns zone"

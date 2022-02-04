@@ -54,3 +54,13 @@ variable github_runner_name {
   type          = string
   description   = "Name of GitHub self-hosted runner."
 }
+
+variable virtual_network_resource_group_name {
+  type          = string
+  description   = "Resource group name of the virtual network"
+}
+
+variable virtual_network_name {
+  type          = string
+  description   = "Name of the virtual network"
+}

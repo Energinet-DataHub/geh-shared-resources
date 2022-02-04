@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "snet_deployagent" {
-  source                                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
-  name                                            = "deployagents"
-  project_name                                    = var.domain_name_short
-  environment_short                               = var.environment_short
-  environment_instance                            = var.environment_instance
-  resource_group_name                             = azurerm_resource_group.this.name
-  virtual_network_name                            = data.azurerm_virtual_network.this.name
-  address_prefixes                                = ["10.143.2.16/28"]
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
+  name                  = "deployagents"
+  project_name          = var.domain_name_short
+  environment_short     = var.environment_short
+  environment_instance  = var.environment_instance
+  resource_group_name   = var.virtual_network_resource_group_name
+  virtual_network_name  = data.azurerm_virtual_network.this.name
+  address_prefixes      = ["10.143.2.16/28"]
 }
 
 # Create public IP
