@@ -16,7 +16,7 @@ data "azurerm_virtual_network" "this" {
   resource_group_name = var.virtual_network_resource_group_name
 }
 
-module "kvs_vnet_shared_name" {
+module "kvs_vnet_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "vnet-name"
@@ -26,7 +26,7 @@ module "kvs_vnet_shared_name" {
   tags          = azurerm_resource_group.this.tags
 }
 
-module "kvs_vnet_shared_id" {
+module "kvs_vnet_id" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "vnet-id"
@@ -36,7 +36,7 @@ module "kvs_vnet_shared_id" {
   tags          = azurerm_resource_group.this.tags
 }
 
-module "kvs_vnet_shared_resource_group_name" {
+module "kvs_vnet_resource_group_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "vnet-resource-group-name"
