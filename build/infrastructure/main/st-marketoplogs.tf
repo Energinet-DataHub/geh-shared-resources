@@ -13,6 +13,7 @@
 # limitations under the License.
 locals {
   marketoplogs_container_name = "marketoplogs"
+  marketoplogsarchive_container_name = "marketoplogs-archive"
 }
 
 module "st_market_operator_logs" {
@@ -30,6 +31,9 @@ module "st_market_operator_logs" {
   containers                = [
     {
       name = local.marketoplogs_container_name,
+    },
+    {
+      name = local.marketoplogsarchive_container_name,
     },
   ]
 
@@ -51,6 +55,16 @@ module "kvs_st_market_operator_logs_container_name" {
 
   name          = "st-marketoplogs-container-name"
   value         = local.marketoplogs_container_name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_st_market_operator_logs_archive_container_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "st-marketoplogs-archive-container-name"
+  value         = local.marketoplogsarchive_container_name
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
