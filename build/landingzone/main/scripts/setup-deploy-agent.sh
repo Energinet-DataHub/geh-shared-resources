@@ -98,9 +98,3 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 #
 
 sudo apt-get install unzip
-
-#
-# Install jq
-#
-
-sudo apt-get install jq
