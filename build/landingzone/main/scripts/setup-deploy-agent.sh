@@ -103,4 +103,4 @@ sudo apt-get install unzip
 # Install jq
 #
 
-sudo apt-get install jq
+sudo apt-get install -y jq
