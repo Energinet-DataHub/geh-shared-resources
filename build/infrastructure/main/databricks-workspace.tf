@@ -25,7 +25,7 @@ module "kvs_databricks_workspace_id" {
 
   name          = "dbw-databricks-workspace-id"
   value         = azurerm_databricks_workspace.dbw_aggregations.workspace_id
-  key_vault_id  = module.kv_aggregations.id
+  key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
 }
