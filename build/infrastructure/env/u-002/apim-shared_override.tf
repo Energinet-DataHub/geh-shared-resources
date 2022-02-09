@@ -12,5 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "snet_apim" {
-  address_prefixes                                = ["10.143.6.32/28"]
+  address_prefixes  = ["10.143.6.32/28"]
 }
