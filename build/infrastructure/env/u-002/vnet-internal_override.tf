@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-module "apim_shared" {
-  address_prefixes  = ["10.141.6.48/28"]
-  sku_name          = "Premium_1"
+module "vnet_internal" {
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/vnet?ref=6.0.0"
+  address_space         = ["10.140.96.0/20"]
 }

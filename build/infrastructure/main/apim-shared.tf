@@ -17,15 +17,15 @@ module "snet_apim" {
   project_name                                    = var.domain_name_short
   environment_short                               = var.environment_short
   environment_instance                            = var.environment_instance
-  resource_group_name                             = data.azurerm_key_vault_secret.vnet_resource_group_name.value
-  virtual_network_name                            = data.azurerm_key_vault_secret.vnet_name.value
+  resource_group_name                             = var.virtual_network_resource_group_name
+  virtual_network_name                            = var.virtual_network_name
   address_prefixes                                = []
   enforce_private_link_endpoint_network_policies  = true
   enforce_private_link_service_network_policies   = true
 }
 
 module "apim_shared" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=5.4.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=6.0.0"
 
   name                  = "shared"
   project_name          = var.domain_name_short
@@ -36,6 +36,8 @@ module "apim_shared" {
   publisher_name        = var.project_name
   publisher_email       = var.apim_publisher_email
   sku_name              = "Developer_1"
+  virtual_network_type  = "External"
+  subnet_id             = module.snet_apim.id
 
   tags                  = azurerm_resource_group.this.tags
 }
