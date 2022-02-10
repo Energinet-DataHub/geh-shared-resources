@@ -1,7 +1,7 @@
 #!/bin/bash
   
 # Bash strict mode, stop on any error
-set -euo pipefail
+set -e
 
 # Ensure all required environment variables are present
 test -n "$DATABRICKS_WORKSPACE_RESOURCE_ID"
