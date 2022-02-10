@@ -54,7 +54,7 @@ resource "null_resource" "databricks_token" {
       RESOURCE_GROUP = var.resource_group_name
       DATABRICKS_WORKSPACE_RESOURCE_ID = azurerm_databricks_workspace.dbw_shared.id
       KEY_VAULT = module.kv_shared.name
-      SECRET_NAME = "DATABRICKS-TOKEN"
+      SECRET_NAME = "dbw-shared-workspace-token"
       DATABRICKS_ENDPOINT = "https://${azurerm_databricks_workspace.dbw_shared.location}.azuredatabricks.net"
       # ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_TENANT_ID are already 
       # present in the environment if you are using the Terraform
