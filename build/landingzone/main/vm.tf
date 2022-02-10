@@ -19,7 +19,7 @@ module "snet_deployagent" {
   environment_instance  = var.environment_instance
   resource_group_name   = var.virtual_network_resource_group_name
   virtual_network_name  = data.azurerm_virtual_network.this.name
-  address_prefixes      = ["10.143.2.16/28"]
+  address_prefixes      = []
 }
 
 # Create public IP

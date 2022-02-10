@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-module "apim_shared" {
-  address_prefixes  = ["10.141.6.48/28"]
-  sku_name          = "Premium_1"
+module "snet_apim" {
+  address_prefixes  = ["10.141.0.48/28"]
 }

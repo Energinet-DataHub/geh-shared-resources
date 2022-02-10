@@ -125,6 +125,11 @@ variable private_dns_zone_cosmos_name {
   description = "Name of the Cosmos SQL database private dns zone"
 }
 
+variable landing_zone_resource_group_name {
+  type          = string
+  description   = "Resource group name of the landing zone network"
+}
+
 variable virtual_network_resource_group_name {
   type          = string
   description   = "Resource group name of the virtual network"
