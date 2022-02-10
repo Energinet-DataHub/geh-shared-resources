@@ -31,6 +31,66 @@ module "vnet_internal" {
   ]
 }
 
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "internal_blob" {
+  name                  = "pdnsz-internalblob-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = var.landing_zone_resource_group_name
+  private_dns_zone_name = var.private_dns_zone_blob_name
+  virtual_network_id    = data.azurerm_virtual_network.this.id
+
+  tags                  = azurerm_resource_group.this.tags
+}
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "internal_db" {
+  name                  = "pdnsz-internaldatabase-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = var.landing_zone_resource_group_name
+  private_dns_zone_name = var.private_dns_zone_database_name
+  virtual_network_id    = data.azurerm_virtual_network.this.id
+
+  tags                  = azurerm_resource_group.this.tags
+}
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "internal_servicebus" {
+  name                  = "pdnsz-internalservicebus-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = var.landing_zone_resource_group_name
+  private_dns_zone_name = var.private_dns_zone_servicebus_name
+  virtual_network_id    = data.azurerm_virtual_network.this.id
+
+  tags                  = azurerm_resource_group.this.tags
+}
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "internal_keyvault" {
+  name                  = "pdnsz-internalkeyvault-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = var.landing_zone_resource_group_name
+  private_dns_zone_name = var.private_dns_zone_keyvault_name
+  virtual_network_id    = data.azurerm_virtual_network.this.id
+
+  tags                  = azurerm_resource_group.this.tags
+}
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "internal_cosmos" {
+  name                  = "pdnsz-internalcosmos-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = var.landing_zone_resource_group_name
+  private_dns_zone_name = var.private_dns_zone_cosmos_name
+  virtual_network_id    = data.azurerm_virtual_network.this.id
+
+  tags                  = azurerm_resource_group.this.tags
+}
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "internal_file" {
+  name                  = "pdnsz-internalfile-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = var.landing_zone_resource_group_name
+  private_dns_zone_name = var.private_dns_zone_file_name
+  virtual_network_id    = data.azurerm_virtual_network.this.id
+
+  tags                  = azurerm_resource_group.this.tags
+}
+
 module "kvs_vnet_internal_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.5.0"
 
