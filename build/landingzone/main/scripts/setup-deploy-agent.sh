@@ -108,4 +108,5 @@ sudo apt-get install -y jq
 #
 # Install pip
 #
-sudo apt install -y python3-pip
+
+sudo apt install -y python-pip
