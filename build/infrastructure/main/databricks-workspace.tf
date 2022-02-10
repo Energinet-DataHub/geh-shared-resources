@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+data "azurerm_client_config" "current" {}
+
 resource "azurerm_databricks_workspace" "dbw_shared" {
   name                = "dbw-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name = azurerm_resource_group.this.name
