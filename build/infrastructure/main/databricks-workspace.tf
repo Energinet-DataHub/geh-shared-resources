@@ -42,21 +42,11 @@ module "kvs_databricks_workspace_url" {
   tags          = azurerm_resource_group.this.tags
 }
 
-resource "azurerm_key_vault_access_policy" "this" {
-  key_vault_id = module.kv_shared.id
 
-  tenant_id = data.azurerm_client_config.this.tenant_id
-  object_id = data.azurerm_client_config.this.object_id
-
-  secret_permissions = [
-    "set",
-  ]
-}
 
 resource "null_resource" "databricks_token" {
   triggers = {
     workspace = azurerm_databricks_workspace.dbw_shared.id
-    key_vault_access = azurerm_key_vault_access_policy.this.id
   }
   provisioner "local-exec" {
     command = "${path.module}/scripts/generate-pat-token.sh"
