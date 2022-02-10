@@ -44,3 +44,23 @@ module "kvs_databricks_workspace_url" {
 
 
 
+resource "null_resource" "databricks_token" {
+  triggers = {
+    workspace = azurerm_databricks_workspace.dbw_shared.id
+  }
+  provisioner "local-exec" {
+    command = "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/scripts/generate-pat-token.sh"
+    environment = {
+      RESOURCE_GROUP = var.resource_group_name
+      DATABRICKS_WORKSPACE_RESOURCE_ID = azurerm_databricks_workspace.dbw_shared.id
+      KEY_VAULT = module.kv_shared.name
+      SECRET_NAME = "dbw-shared-workspace-token"
+      DATABRICKS_ENDPOINT = "https://${azurerm_databricks_workspace.dbw_shared.location}.azuredatabricks.net"
+      # ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_TENANT_ID are already 
+      # present in the environment if you are using the Terraform
+      # extension for Azure DevOps or the starter from 
+      # https://github.com/algattik/terraform-azure-pipelines-starter.
+      # Otherwise, provide them as additional variables.
+    }
+  }
+}
