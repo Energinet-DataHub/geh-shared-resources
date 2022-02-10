@@ -65,7 +65,7 @@ resource "null_resource" "databricks_token" {
       DATABRICKS_WORKSPACE_RESOURCE_ID = azurerm_databricks_workspace.dbw_shared.id
       KEY_VAULT = module.kv_shared.name
       SECRET_NAME = "DATABRICKS-TOKEN"
-      DATABRICKS_ENDPOINT = "https://${data.azurerm_resources.dbw_shared.resources[0].location}.azuredatabricks.net"
+      DATABRICKS_ENDPOINT = "https://${azurerm_databricks_workspace.dbw_shared.location}.azuredatabricks.net"
       # ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_TENANT_ID are already 
       # present in the environment if you are using the Terraform
       # extension for Azure DevOps or the starter from 
