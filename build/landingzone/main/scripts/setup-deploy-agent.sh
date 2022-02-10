@@ -110,3 +110,9 @@ sudo apt-get install -y jq
 #
 
 sudo apt install -y python-pip
+
+#
+# Install Databricks CLI on machine
+#
+
+pip install --upgrade databricks-cli
