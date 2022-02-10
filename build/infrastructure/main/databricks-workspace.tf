@@ -24,7 +24,7 @@ module "kvs_databricks_workspace_id" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "dbw-shared-workspace-id"
-  value         = azurerm_databricks_workspace.dbw.workspace_id
+  value         = azurerm_databricks_workspace.dbw_shared.workspace_id
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
@@ -34,7 +34,7 @@ module "kvs_databricks_workspace_url" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "dbw-shared-workspace-url"
-  value         = azurerm_databricks_workspace.dbw.workspace_url
+  value         = azurerm_databricks_workspace.dbw_shared.workspace_url
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
@@ -53,7 +53,7 @@ resource "azurerm_key_vault_access_policy" "this" {
 
 resource "null_resource" "databricks_token" {
   triggers = {
-    workspace = azurerm_databricks_workspace.dbw.id
+    workspace = azurerm_databricks_workspace.dbw_shared.id
     key_vault_access = azurerm_key_vault_access_policy.this.id
   }
   provisioner "local-exec" {
