@@ -49,7 +49,7 @@ resource "null_resource" "databricks_token" {
     workspace = azurerm_databricks_workspace.dbw_shared.id
   }
   provisioner "local-exec" {
-    command = "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/generate-pat-token.sh"
+    command = "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/scripts/generate-pat-token.sh"
     environment = {
       RESOURCE_GROUP = var.resource_group_name
       DATABRICKS_WORKSPACE_RESOURCE_ID = azurerm_databricks_workspace.dbw_shared.id
