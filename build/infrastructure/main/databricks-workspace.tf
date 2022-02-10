@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-data "azurerm_client_config" "current" {}
+data "azurerm_client_config" "this" {}
 
 resource "azurerm_databricks_workspace" "dbw_shared" {
   name                = "dbw-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
@@ -45,8 +45,8 @@ module "kvs_databricks_workspace_url" {
 resource "azurerm_key_vault_access_policy" "this" {
   key_vault_id = module.kv_shared.id
 
-  tenant_id = module.kv_shared.tenant_id
-  object_id = data.azurerm_client_config.current.object_id
+  tenant_id = data.azurerm_client_config.this.tenant_id
+  object_id = data.azurerm_client_config.this.object_id
 
   secret_permissions = [
     "set",
