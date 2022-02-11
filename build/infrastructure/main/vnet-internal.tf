@@ -19,7 +19,7 @@ module "vnet_internal" {
   environment_instance  = var.environment_instance
   resource_group_name   = azurerm_resource_group.this.name
   location              = azurerm_resource_group.this.location
-  address_space         = var.internal_virtual_network_address_space
+  address_space         = ["${var.internal_virtual_network_address_space}"]
   peerings              = [
     {
       name                                        = "internal"
