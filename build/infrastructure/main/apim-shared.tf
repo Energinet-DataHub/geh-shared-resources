@@ -19,7 +19,7 @@ module "snet_apim" {
   environment_instance                            = var.environment_instance
   resource_group_name                             = var.virtual_network_resource_group_name
   virtual_network_name                            = var.virtual_network_name
-  address_prefixes                                = []
+  address_prefixes                                = var.apim_address_space
   enforce_private_link_endpoint_network_policies  = true
   enforce_private_link_service_network_policies   = true
 }

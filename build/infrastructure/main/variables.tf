@@ -139,3 +139,13 @@ variable virtual_network_name {
   type          = string
   description   = "Name of the landing zone virtual network"
 }
+
+variable internal_virtual_network_address_space {
+  type          = string
+  description   = "Address space of the internal virtual network"
+}
+
+variable apim_address_space {
+  type          = string
+  description   = "Address space of the APIM subnet"
+}

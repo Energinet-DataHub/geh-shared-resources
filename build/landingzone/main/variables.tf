@@ -64,3 +64,8 @@ variable virtual_network_name {
   type          = string
   description   = "Name of the virtual network"
 }
+
+variable deployment_agent_address_space {
+  type          = string
+  description   = "Address space of the deployment agent subnet"
+}
