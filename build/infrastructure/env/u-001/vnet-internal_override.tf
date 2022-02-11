@@ -13,5 +13,5 @@
 # limitations under the License.
 module "vnet_internal" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/vnet?ref=6.0.0"
-  address_space         = []
+  address_space         = ["10.140.96.0/20"]
 }

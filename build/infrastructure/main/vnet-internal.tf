@@ -26,7 +26,6 @@ module "vnet_internal" {
       remote_virtual_network_id                   = data.azurerm_virtual_network.this.id
       remote_virtual_network_name                 = data.azurerm_virtual_network.this.name
       remote_virtual_network_resource_group_name  = data.azurerm_virtual_network.this.resource_group_name
-      remote_virtual_network_subscription_id      = var.subscription_id
     }
   ]
 }
