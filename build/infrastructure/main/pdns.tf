@@ -11,21 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-terraform {
-  required_version = "=1.1.5"
+module "kvs_pdns_resource_group_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
-  required_providers {
-    # It is recommended to pin to a given version of the Azure provider
-    azurerm = "=2.91.0"
-	  null = "~> 2.1"
-  }
-}
+  name          = "pdns-resource-group-name"
+  value         = var.private_dns_resource_group_name
+  key_vault_id  = module.kv_shared.id
 
-provider "azurerm" {
-  # It is recommended to pin to a given version of the Provider
-  features {
-    key_vault {
-      purge_soft_delete_on_destroy = true
-    }
-  }
+  tags          = azurerm_resource_group.this.tags
 }
