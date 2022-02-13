@@ -11,13 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-# Create subnet
-resource "azurerm_subnet" "deployagent" {
-  name                 = "snet-deployagent-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  resource_group_name  = azurerm_resource_group.this.name
-  virtual_network_name = azurerm_virtual_network.this.name
-  address_prefixes     = ["10.0.1.0/24"]
+module "snet_deployagent" {
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
+  name                  = "deployagents"
+  project_name          = var.domain_name_short
+  environment_short     = var.environment_short
+  environment_instance  = var.environment_instance
+  resource_group_name   = var.virtual_network_resource_group_name
+  virtual_network_name  = data.azurerm_virtual_network.this.name
+  address_prefixes      = ["${var.deployment_agent_address_space}"]
 }
 
 # Create public IP
@@ -27,7 +29,7 @@ resource "azurerm_subnet" "deployagent" {
    resource_group_name          = azurerm_resource_group.this.name
    allocation_method            = "Static"
 
-  tags                = azurerm_resource_group.this.tags
+  tags                          = azurerm_resource_group.this.tags
 
   lifecycle {
     ignore_changes = [
@@ -46,7 +48,7 @@ resource "azurerm_network_interface" "deployagent" {
 
   ip_configuration {
     name                          = "primary"
-    subnet_id                     = azurerm_subnet.deployagent.id
+    subnet_id                     = module.snet_deployagent.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.deployagent.id
   }
