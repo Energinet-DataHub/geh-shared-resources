@@ -36,3 +36,33 @@ module "sbq_marketroles_dequeue" {
   namespace_name      = module.sb_domain_relay.name
   resource_group_name = azurerm_resource_group.this.name
 }
+
+module "kvs_sbq_marketroles_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbq-marketroles-name"
+  value         = module.sbq_marketroles.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_sbq_marketroles_reply_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbq-marketroles-reply-name"
+  value         = module.sbq_marketroles_reply.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_sbq_marketroles_dequeue_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbq-marketroles-dequeue-name"
+  value         = module.sbq_marketroles_dequeue.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
