@@ -98,3 +98,21 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 #
 
 sudo apt-get install unzip
+
+#
+# Install jq
+#
+
+sudo apt-get install -y jq
+
+#
+# Install pip
+#
+
+sudo apt install -y python-pip
+
+#
+# Install Databricks CLI on machine
+#
+
+pip install --upgrade databricks-cli

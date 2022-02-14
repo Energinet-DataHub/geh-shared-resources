@@ -90,17 +90,62 @@ variable frontend_service_app_id {
   description   = "The app/client ID of the frontend app registration."
 }
 
-variable vm_user_name {
+variable private_dns_resource_group_name {
   type          = string
-  description   = "Deployment Agent VM user name for SSH connection."
+  description   = "Name of the resource group where the private DNS zones are deployed"
 }
 
-variable github_runner_token {
-  type          = string
-  description   = "Registration token for GitHub self-hosted runner."
+variable private_dns_zone_blob_name {
+  type        = string
+  description = "Name of the Storage Account blob private DNS zone"
 }
 
-variable github_runner_name {
+variable private_dns_zone_file_name {
+  type        = string
+  description = "Name of the Storage Account file private DNS zone"
+}
+
+variable private_dns_zone_keyvault_name {
+  type        = string
+  description = "Name of the Key Vault private DNS zone"
+}
+
+variable private_dns_zone_database_name {
+  type        = string
+  description = "Name of the SQL database private DNS zone"
+}
+
+variable private_dns_zone_servicebus_name {
+  type        = string
+  description = "Name of the Service Bus private DNS zone"
+}
+
+variable private_dns_zone_cosmos_name {
+  type        = string
+  description = "Name of the Cosmos SQL database private DNS zone"
+}
+
+variable landing_zone_resource_group_name {
   type          = string
-  description   = "Name of GitHub self-hosted runner."
+  description   = "Resource group name of the landing zone network"
+}
+
+variable virtual_network_resource_group_name {
+  type          = string
+  description   = "Name of the resource group where the landing zone virtual network is deployed"
+}
+
+variable virtual_network_name {
+  type          = string
+  description   = "Name of the landing zone virtual network"
+}
+
+variable internal_virtual_network_address_space {
+  type          = string
+  description   = "Address space of the internal virtual network"
+}
+
+variable apim_address_space {
+  type          = string
+  description   = "Address space of the APIM subnet"
 }

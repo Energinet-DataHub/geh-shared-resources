@@ -26,3 +26,8 @@ runs:
       run: |
         mkdir ${{ inputs.RELEASE_FOLDER_PATH }}
         cp -fR ${{ inputs.REPO_FOLDER_PATH }}/build/infrastructure ${{ inputs.RELEASE_FOLDER_PATH }} 2>/dev/null || :
+
+    - name: Copy Landingzone to release folder
+      shell: bash
+      run: |
+        cp -fR ${{ inputs.REPO_FOLDER_PATH }}/build/landingzone ${{ inputs.RELEASE_FOLDER_PATH }} 2>/dev/null || :
