@@ -15,6 +15,8 @@ locals {
   SBS_MARKET_PARTICIPANT_TO_CHARGES_NAME = "market-participant-changed-to-charges"
   SBS_MARKET_PARTICIPANT_TO_AGGREGATIONS_NAME = "market-participant-changed-to-aggregations"
   SBS_MARKET_PARTICIPANT_TO_TIMESERIES_NAME = "market-participant-changed-to-timeseries"
+  SBS_MARKET_PARTICIPANT_TO_METERINGPOINT_NAME = "market-participant-changed-to-meteringpoint"
+  SBS_MARKET_PARTICIPANT_TO_MARKETROLES_NAME = "market-participant-changed-to-marketroles"
 }
 
 module "sbt_market_participant_changed" {
@@ -34,6 +36,14 @@ module "sbt_market_participant_changed" {
     },
     {
       name                = local.SBS_MARKET_PARTICIPANT_TO_TIMESERIES_NAME
+      max_delivery_count  = 10
+    },
+    {
+      name                = local.SBS_MARKET_PARTICIPANT_TO_METERINGPOINT_NAME
+      max_delivery_count  = 10
+    },
+    {
+      name                = local.SBS_MARKET_PARTICIPANT_TO_MARKETROLES_NAME
       max_delivery_count  = 10
     },
   ]
@@ -74,6 +84,26 @@ module "kvs_sbs_market_participant_changed_to_timeseries_name" {
 
   name          = "sbs-market-participant-changed-to-timeseries-name"
   value         = local.SBS_MARKET_PARTICIPANT_TO_TIMESERIES_NAME
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_sbs_market_participant_changed_to_meteringpoint_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbs-market-participant-changed-to-meteringpoint-name"
+  value         = local.SBS_MARKET_PARTICIPANT_TO_METERINGPOINT_NAME
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_sbs_market_participant_changed_to_marketroles_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbs-market-participant-changed-to-marketroles-name"
+  value         = local.SBS_MARKET_PARTICIPANT_TO_MARKETROLES_NAME
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
