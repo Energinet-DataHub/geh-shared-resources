@@ -24,12 +24,7 @@ module "st_data_lake" {
   account_replication_type  = "LRS"
   account_tier              = "Standard"
   is_hns_enabled            = true
-  containers                = [
-    {
-      name  = local.data_lake_data_container_name,
-    },
-  ]
-
+  
   tags                      = azurerm_resource_group.this.tags
 }
 
