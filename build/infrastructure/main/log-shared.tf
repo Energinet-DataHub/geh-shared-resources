@@ -16,8 +16,8 @@ module "log_workspace_shared" {
   name                 = "shared"
   environment_short    = var.environment_short
   environment_instance = var.environment_instance
-  resource_group_name  = var.resource_group_name
-  location             = var.location
+  resource_group_name  = azurerm_resource_group.this.name
+  location             = azurerm_resource_group.this.location
   sku                  = "PerGB2018"
   retention_in_days    = var.log_retention_in_days
   project_name         = var.domain_name_short

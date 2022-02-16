@@ -20,7 +20,7 @@ module "appi_shared" {
   environment_instance         = var.environment_instance
   resource_group_name          = azurerm_resource_group.this.name
   location                     = azurerm_resource_group.this.location
-  log_analytics_workspace_id   = azurerm_log_analytics_workspace.log_workspace_shared.id 
+  log_analytics_workspace_id   = module.log_workspace_shared.id 
   tags                         = azurerm_resource_group.this.tags
 }
 
