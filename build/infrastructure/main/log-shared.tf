@@ -11,14 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-module "log_workspace_shared {
-  source               = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/log-workspace?ref=5.5.0"
+module "log_workspace_shared" {
+  source               = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/log-workspace?ref=5.6.0"
   name                 = "shared"
   environment_short    = var.environment_short
   environment_instance = var.environment_instance
   resource_group_name  = var.resource_group_name
   location             = var.location
   sku                  = "PerGB2018"
-  retention_in_days    = var.retention_in_days
+  retention_in_days    = var.log_retention_in_days
   project_name         = var.domain_name_short
 }
