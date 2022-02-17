@@ -12,16 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "appi_shared" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/application-insights?ref=5.1.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/application-insights?ref=5.6.0"
 
-  name                  = "shared"
-  project_name          = var.domain_name_short
-  environment_short     = var.environment_short
-  environment_instance  = var.environment_instance
-  resource_group_name   = azurerm_resource_group.this.name
-  location              = azurerm_resource_group.this.location
-
-  tags                  = azurerm_resource_group.this.tags
+  name                         = "shared"
+  project_name                 = var.domain_name_short
+  environment_short            = var.environment_short
+  environment_instance         = var.environment_instance
+  resource_group_name          = azurerm_resource_group.this.name
+  location                     = azurerm_resource_group.this.location
+  log_analytics_workspace_id   = module.log_workspace_shared.id 
+  tags                         = azurerm_resource_group.this.tags
 }
 
 module "kvs_appi_shared_instrumentation_key" {
