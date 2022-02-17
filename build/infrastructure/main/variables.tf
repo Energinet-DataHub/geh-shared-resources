@@ -149,3 +149,9 @@ variable apim_address_space {
   type          = string
   description   = "Address space of the APIM subnet"
 }
+
+variable log_retention_in_days {
+  type          = number
+  description   = "Number of days logs are retained in log analytics workspace"
+  default       = 30
+}
