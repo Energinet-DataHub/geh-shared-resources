@@ -40,3 +40,8 @@ output private_dns_zone_cosmos_name {
   description = "Name of the Cosmos SQL database private dns zone"
   value       = azurerm_private_dns_zone.cosmos.name
 }
+
+output private_dns_zone_azurewebsites_name {
+  description = "Name of the Azure websites private dns zone"
+  value       = azurerm_private_dns_zone.azurewebsites.name
+}
