@@ -36,7 +36,7 @@ module "apimao_notify_validated_measure_data" {
                 </required-claims>
             </validate-jwt>
             <set-backend-service backend-id="${azurerm_api_management_backend.timeseries.name}" />
-            <rewrite-uri template="/api/TimeSeriesIngestion" />
+            <rewrite-uri template="/api/TimeSeriesBundleIngestor" />
           </inbound>
         </policies>
       XML
