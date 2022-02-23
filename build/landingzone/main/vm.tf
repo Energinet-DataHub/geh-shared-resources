@@ -52,7 +52,7 @@ resource "azurerm_network_interface" "deployagent" {
     name                          = "primary"
     subnet_id                     = module.snet_deployagent.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip[count.index].deployagent.id
+    public_ip_address_id          = azurerm_public_ip.deployagent[count.index].id
   }
 
   tags                = azurerm_resource_group.this.tags
@@ -186,7 +186,7 @@ resource "azurerm_linux_virtual_machine" "deployagent" {
   }
 
   boot_diagnostics {
-    storage_account_uri = azurerm_storage_account[count.index].deployagent.primary_blob_endpoint
+    storage_account_uri = azurerm_storage_account.deployagent[count.index].primary_blob_endpoint
   }
 
   connection {
@@ -204,7 +204,7 @@ resource "azurerm_linux_virtual_machine" "deployagent" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x ./setup-deploy-agent.sh",
-      "./setup-deploy-agent.sh ${var.github_runner_token} deployagent${count.index} deployagent-${lower(var.environment_short)}-${lower(var.environment_instance)}",
+      "./setup-deploy-agent.sh ${var.github_runner_token} dplagent${count.index}-${lower(var.environment_short)}-${lower(var.environment_instance)} dplagent-${lower(var.environment_short)}-${lower(var.environment_instance)}",
     ]
   }
 }
