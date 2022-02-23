@@ -29,6 +29,7 @@ resource "azurerm_public_ip" "deployagent" {
   location                      = azurerm_resource_group.this.location
   resource_group_name           = azurerm_resource_group.this.name
   allocation_method             = "Static"
+  ip_tags                       = {}
 
   tags                          = azurerm_resource_group.this.tags
 
@@ -169,7 +170,8 @@ resource "azurerm_linux_virtual_machine" "deployagent" {
 
   # Enable managed identity
   identity {
-    type = "SystemAssigned"
+    identity_ids  = []
+    type          = "SystemAssigned"
   }
 
   os_disk {
