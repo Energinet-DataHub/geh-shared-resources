@@ -21,5 +21,4 @@ module "log_workspace_shared" {
   sku                  = "PerGB2018"
   retention_in_days    = var.log_retention_in_days
   project_name         = var.domain_name_short
-  domain_name_short    = var.domain_name_short
 }

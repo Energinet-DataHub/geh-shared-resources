@@ -48,7 +48,7 @@ tar xzf ./actions-runner-linux-x64-2.285.1.tar.gz
 #
 
 # Create the runner and start the configuration experience
-./config.sh --unattended --url https://github.com/Energinet-DataHub/dh3-environments --token $1 --name $2 --replace --labels azure,$2
+./config.sh --unattended --url https://github.com/Energinet-DataHub/dh3-environments --token $1 --name $2 --replace --labels azure,$3
 
 #
 # Run as a service
