@@ -22,7 +22,7 @@ module "plan_shared" {
   location              = azurerm_resource_group.this.location
   kind                  = "Windows"
   sku                   = {
-    tier  = "Premium"
+    tier  = "PremiumV2"
     size  = "P2V2"
   }
 
