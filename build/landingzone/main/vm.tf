@@ -19,19 +19,21 @@ module "snet_deployagent" {
   environment_instance  = var.environment_instance
   resource_group_name   = var.virtual_network_resource_group_name
   virtual_network_name  = data.azurerm_virtual_network.this.name
-  address_prefixes      = ["${var.deployment_agent_address_space}"]
+  address_prefixes      = [
+    var.deployment_agent_address_space
+  ]
 }
 
 # Create public IP
 resource "azurerm_public_ip" "deployagent" {
-  count                         = 3
-  name                          = "pip-deployagent${count.index}-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  location                      = azurerm_resource_group.this.location
-  resource_group_name           = azurerm_resource_group.this.name
-  allocation_method             = "Static"
-  ip_tags                       = {}
+  count               = 3
+  name                = "pip-deployagent${count.index}-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  location            = azurerm_resource_group.this.location
+  resource_group_name = azurerm_resource_group.this.name
+  allocation_method   = "Static"
+  ip_tags             = {}
 
-  tags                          = azurerm_resource_group.this.tags
+  tags                = azurerm_resource_group.this.tags
 
   lifecycle {
     ignore_changes = [
