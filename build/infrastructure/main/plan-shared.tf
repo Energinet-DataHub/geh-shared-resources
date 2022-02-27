@@ -23,7 +23,7 @@ module "plan_shared" {
   kind                  = "Windows"
   sku                   = {
     tier  = "PremiumV2"
-    size  = "P2V2"
+    size  = "P2v2"
   }
 
   tags                = azurerm_resource_group.this.tags
