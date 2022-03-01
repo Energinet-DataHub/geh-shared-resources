@@ -41,6 +41,10 @@ module "apima_b2b" {
             </validate-jwt>
             <choose>
                 <when condition="@(context.Request.Method == "POST")">
+                    <check-header name="Content-Type" failed-check-httpcode="415" failed-check-error-message="Only Content-Type application/xml is allowed" ignore-case="true">
+                      <value>application/xml</value>
+                      <value>application/xml; charset=utf-8</value>
+                    </check-header>
                     <set-variable name="bodySize" value="@(context.Request.Headers["Content-Length"][0])" />
                     <choose>
                         <when condition="@(int.Parse(context.Variables.GetValueOrDefault<string>("bodySize"))<52428800)">
@@ -57,10 +61,6 @@ module "apima_b2b" {
                     </choose>
                 </when>
             </choose>
-            <check-header name="Content-Type" failed-check-httpcode="415" failed-check-error-message="Only Content-Type application/xml is allowed" ignore-case="true">
-              <value>application/xml</value>
-              <value>application/xml; charset=utf-8</value>
-            </check-header>
             <set-header name="Correlation-ID" exists-action="override">
                 <value>@($"{context.RequestId}")</value>
             </set-header>
