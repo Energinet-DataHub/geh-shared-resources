@@ -16,7 +16,7 @@ locals {
 }
 
 module "mssql_data" {
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-server?ref=5.4.0"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-server?ref=5.7.0"
 
   name                          = "data"
   project_name                  = var.domain_name_short
@@ -27,6 +27,7 @@ module "mssql_data" {
   location                      = azurerm_resource_group.this.location
   administrator_login           = local.mssqlServerAdminName
   administrator_login_password  = random_password.mssql_administrator_login_password.result
+  log_analytics_workspace_id    = module.log_workspace_shared.id 
   firewall_rules                = [
     {
       name              = "fwrule"
