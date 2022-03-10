@@ -24,7 +24,7 @@ module "st_data_lake" {
   account_replication_type        = "LRS"
   account_tier                    = "Standard"
   is_hns_enabled                  = true
-  private_endpoint_subnet_id      = data.azurerm_key_vault_secret.snet_private_endpoints_id.value
+  private_endpoint_subnet_id      = module.snet_private_endpoints.id
   private_dns_resource_group_name = module.dbw_shared.private_dns_zone_resource_group_name
   use_blob                        = false
   use_dfs                         = true
