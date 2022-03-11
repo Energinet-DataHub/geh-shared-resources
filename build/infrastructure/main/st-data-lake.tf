@@ -25,8 +25,10 @@ module "st_data_lake" {
   account_tier                    = "Standard"
   is_hns_enabled                  = true
   private_endpoint_subnet_id      = module.snet_private_endpoints.id
-  private_dns_resource_group_name = module.dbw_shared.private_dns_zone_resource_group_name
-  use_blob                        = false
+  private_dns_resource_group_name = [
+    module.dbw_shared.private_dns_zone_resource_group_name,
+    var.private_dns_resource_group_name
+  ]
   use_dfs                         = true
   
   tags                            = azurerm_resource_group.this.tags
