@@ -13,25 +13,25 @@
 # limitations under the License.
 
 module "st_data_lake" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0-databricks-vnet"
+  source                            = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0-databricks-vnet"
 
-  name                            = "datalake"
-  project_name                    = var.domain_name_short
-  environment_short               = var.environment_short
-  environment_instance            = var.environment_instance
-  resource_group_name             = azurerm_resource_group.this.name
-  location                        = azurerm_resource_group.this.location
-  account_replication_type        = "LRS"
-  account_tier                    = "Standard"
-  is_hns_enabled                  = true
-  private_endpoint_subnet_id      = module.snet_private_endpoints.id
-  private_dns_resource_group_name = [
+  name                              = "datalake"
+  project_name                      = var.domain_name_short
+  environment_short                 = var.environment_short
+  environment_instance              = var.environment_instance
+  resource_group_name               = azurerm_resource_group.this.name
+  location                          = azurerm_resource_group.this.location
+  account_replication_type          = "LRS"
+  account_tier                      = "Standard"
+  is_hns_enabled                    = true
+  private_endpoint_subnet_id        = module.snet_private_endpoints.id
+  private_dns_resource_group_names  = [
     module.dbw_shared.private_dns_zone_resource_group_name,
     var.private_dns_resource_group_name
   ]
-  use_dfs                         = true
+  use_dfs                           = true
   
-  tags                            = azurerm_resource_group.this.tags
+  tags                              = azurerm_resource_group.this.tags
 }
 
 
