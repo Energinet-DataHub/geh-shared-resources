@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "log_workspace_shared" {
-  source               = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/log-workspace?ref=5.6.0"
+  source               = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/log-workspace?ref=6.0.0"
   name                 = "shared"
   environment_short    = var.environment_short
   environment_instance = var.environment_instance

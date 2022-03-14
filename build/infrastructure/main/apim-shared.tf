@@ -80,7 +80,7 @@ resource "azurerm_api_management_logger" "apim_logger" {
 }
 
 module "kvs_b2c_tenant_id" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "b2c-tenant-id"
   value         = var.apim_b2c_tenant_id
@@ -90,7 +90,7 @@ module "kvs_b2c_tenant_id" {
 }
 
 module "kvs_backend_service_app_id" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "backend-service-app-id"
   value         = var.backend_service_app_id
@@ -100,7 +100,7 @@ module "kvs_backend_service_app_id" {
 }
 
 module "kvs_frontend_open_id_url" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "frontend-open-id-url"
   value         = var.frontend_open_id_url
@@ -110,7 +110,7 @@ module "kvs_frontend_open_id_url" {
 }
 
 module "kvs_frontend_service_app_id" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "frontend-service-app-id"
   value         = var.frontend_service_app_id

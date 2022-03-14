@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "plan_shared" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=5.6.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=6.0.0"
 
   name                  = "shared"
   project_name          = var.domain_name_short
@@ -30,7 +30,7 @@ module "plan_shared" {
 }
 
 module "kvs_plan_shared_id" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.6.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "plan-shared-id"
   value         = module.plan_shared.id

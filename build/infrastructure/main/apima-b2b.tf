@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "apima_b2b" {
-  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.3.0"
+  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=6.0.0"
 
   name                      = "b2b"
   project_name              = var.domain_name_short

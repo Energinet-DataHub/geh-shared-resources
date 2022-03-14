@@ -17,11 +17,10 @@ locals {
 }
 
 module "sbt_metering_point_connected" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=5.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=6.0.0"
 
   name                = "metering-point-connected"
-  namespace_name      = module.sb_domain_relay.name
-  resource_group_name = azurerm_resource_group.this.name
+  namespace_id        = module.sb_domain_relay.id
   subscriptions       = [
     {
       name                = "market-roles-mp-connected-sub"
@@ -40,7 +39,7 @@ module "sbt_metering_point_connected" {
 }
 
 module "kvs_sbt_metering_point_connected_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbt-metering-point-connected-name"
   value         = module.sbt_metering_point_connected.name
@@ -50,7 +49,7 @@ module "kvs_sbt_metering_point_connected_name" {
 }
 
 module "kvs_sbs_metering_point_connected_to_aggregations_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbs-metering-point-connected-to-aggregations-name"
   value         = local.SBS_METERING_POINT_CONNECTED_TO_AGGREGATIONS_NAME
@@ -60,7 +59,7 @@ module "kvs_sbs_metering_point_connected_to_aggregations_name" {
 }
 
 module "kvs_sbs_metering_point_connected_to_timeseries_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbs-metering-point-connected-to-timeseries-name"
   value         = local.SBS_METERING_POINT_CONNECTED_TO_TIMESERIES_NAME
