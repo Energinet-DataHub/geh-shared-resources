@@ -85,3 +85,13 @@ resource "azurerm_private_dns_zone_virtual_network_link" "azurewebsites" {
 
   tags                  = azurerm_resource_group.this.tags
 }
+
+# Link the Private Zone with the VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "dfs" {
+  name                  = "pdnsz-dfs-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = azurerm_resource_group.this.name
+  private_dns_zone_name = azurerm_private_dns_zone.dfs.name
+  virtual_network_id    = data.azurerm_virtual_network.this.id
+
+  tags                  = azurerm_resource_group.this.tags
+}

@@ -25,7 +25,7 @@ module "appi_shared" {
 }
 
 module "kvs_appi_shared_instrumentation_key" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "appi-shared-instrumentation-key"
   value         = module.appi_shared.instrumentation_key
@@ -35,7 +35,7 @@ module "kvs_appi_shared_instrumentation_key" {
 }
 
 module "kvs_appi_shared_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "appi-shared-name"
   value         = module.appi_shared.name
@@ -45,7 +45,7 @@ module "kvs_appi_shared_name" {
 }
 
 module "kvs_appi_shared_id" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "appi-shared-id"
   value         = module.appi_shared.id

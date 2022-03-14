@@ -12,16 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "sbq_dataavailable" {
-  source                       = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=5.2.0"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=6.0.0"
 
-  name                         = "dataavailable"
-  namespace_name               = module.sb_domain_relay.name
-  resource_group_name          = azurerm_resource_group.this.name
-  requires_duplicate_detection = true
+  name                          = "dataavailable"
+  namespace_id                  = module.sb_domain_relay.id
+  requires_duplicate_detection  = true
 }
 
 module "kvs_sbq_data_available_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbq-data-available-name"
   value         = module.sbq_dataavailable.name
