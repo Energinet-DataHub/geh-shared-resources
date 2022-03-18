@@ -125,3 +125,8 @@ variable log_retention_in_days {
   description   = "Number of days logs are retained in log analytics workspace"
   default       = 30
 }
+
+variable ag_primary_email_address {
+  type          = string
+  description   = "Email address of primary action group to which alerts will be routed."
+}
