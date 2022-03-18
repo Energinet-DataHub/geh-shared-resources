@@ -23,7 +23,7 @@ module "ag_primary" {
 
   short_name                = "Primary"
   email_receiver_name       = "DevOps"
-  email_receiver_address    = var.monitor_alerts_email_address
+  email_receiver_address    = var.ag_primary_email_address
 
   tags                      = azurerm_resource_group.this.tags
 }
