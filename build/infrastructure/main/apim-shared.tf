@@ -27,21 +27,22 @@ module "snet_apim" {
 }
 
 module "apim_shared" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=6.0.0"
+  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=6.0.0"
 
-  name                  = "shared"
-  project_name          = var.domain_name_short
-  environment_short     = var.environment_short
-  environment_instance  = var.environment_instance
-  resource_group_name   = azurerm_resource_group.this.name
-  location              = azurerm_resource_group.this.location
-  publisher_name        = var.project_name
-  publisher_email       = var.apim_publisher_email
-  sku_name              = "Developer_1"
-  virtual_network_type  = "External"
-  subnet_id             = module.snet_apim.id
+  name                        = "shared"
+  project_name                = var.domain_name_short
+  environment_short           = var.environment_short
+  environment_instance        = var.environment_instance
+  resource_group_name         = azurerm_resource_group.this.name
+  location                    = azurerm_resource_group.this.location
+  publisher_name              = var.project_name
+  publisher_email             = var.apim_publisher_email
+  sku_name                    = "Developer_1"
+  virtual_network_type        = "External"
+  subnet_id                   = module.snet_apim.id
 
-  tags                  = azurerm_resource_group.this.tags
+  tags                        = azurerm_resource_group.this.tags
+  log_analytics_workspace_id  = module.log_workspace_shared.id
 }
 
 resource "azurerm_api_management_authorization_server" "oauth_server" {

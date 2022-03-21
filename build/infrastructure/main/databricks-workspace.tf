@@ -20,6 +20,14 @@ resource "azurerm_databricks_workspace" "dbw_shared" {
   sku                 = "standard"
 
   tags                = azurerm_resource_group.this.tags
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
 }
 
 module "kvs_databricks_workspace_id" {
@@ -41,8 +49,6 @@ module "kvs_databricks_workspace_url" {
 
   tags          = azurerm_resource_group.this.tags
 }
-
-
 
 resource "null_resource" "databricks_token" {
   triggers = {
