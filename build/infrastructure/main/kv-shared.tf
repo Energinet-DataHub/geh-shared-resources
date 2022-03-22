@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "kv_shared" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault?ref=5.1.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault?ref=5.7.0"
 
   name                            = "main"
   project_name                    = var.domain_name_short
@@ -22,6 +22,7 @@ module "kv_shared" {
   location                        = azurerm_resource_group.this.location
   enabled_for_template_deployment = true
   sku_name                        = "standard"
+  log_analytics_workspace_id      = module.log_workspace_shared.id 
 
   tags                            = azurerm_resource_group.this.tags
 }
