@@ -12,16 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "sb_domain_relay" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-namespace?ref=5.1.0"
+  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-namespace?ref=5.7.0"
 
-  name                  = "domain-relay"
-  project_name          = var.domain_name_short
-  environment_short     = var.environment_short
-  environment_instance  = var.environment_instance
-  resource_group_name   = azurerm_resource_group.this.name
-  location              = azurerm_resource_group.this.location
-  sku                   = "standard"
-  auth_rules            = [
+  name                        = "domain-relay"
+  project_name                = var.domain_name_short
+  environment_short           = var.environment_short
+  environment_instance        = var.environment_instance
+  resource_group_name         = azurerm_resource_group.this.name
+  location                    = azurerm_resource_group.this.location
+  log_analytics_workspace_id  = module.log_workspace_shared.id 
+  sku                         = "standard"
+  auth_rules                  = [
     {
       name    = "listen",
       listen  = true
@@ -43,7 +44,7 @@ module "sb_domain_relay" {
     },
   ]
 
-  tags                  = azurerm_resource_group.this.tags
+  tags                        = azurerm_resource_group.this.tags
 }
 
 module "kvs_sb_domain_relay_listen_connection_string" {
