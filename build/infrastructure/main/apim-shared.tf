@@ -40,9 +40,9 @@ module "apim_shared" {
   sku_name                    = "Developer_1"
   virtual_network_type        = "External"
   subnet_id                   = module.snet_apim.id
+  log_analytics_workspace_id  = module.log_workspace_shared.id
 
   tags                        = azurerm_resource_group.this.tags
-  log_analytics_workspace_id  = module.log_workspace_shared.id
 }
 
 resource "azurerm_api_management_authorization_server" "oauth_server" {
