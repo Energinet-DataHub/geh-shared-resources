@@ -12,25 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "plan_shared" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=5.6.0"
+  source                         = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=5.10.0"
 
-  name                  = "shared"
-  project_name          = var.domain_name_short
-  environment_short     = var.environment_short
-  environment_instance  = var.environment_instance
-  resource_group_name   = azurerm_resource_group.this.name
-  location              = azurerm_resource_group.this.location
-  kind                  = "Windows"
-  sku                   = {
+  name                           = "shared"
+  project_name                   = var.domain_name_short
+  environment_short              = var.environment_short
+  environment_instance           = var.environment_instance
+  resource_group_name            = azurerm_resource_group.this.name
+  location                       = azurerm_resource_group.this.location
+  kind                           = "Windows"
+  monitor_alerts_action_group_id = module.ag_primary.id
+
+  sku                            = {
     tier  = "PremiumV2"
     size  = "P2v2"
   }
 
-  tags                = azurerm_resource_group.this.tags
+  tags                           = azurerm_resource_group.this.tags
 }
 
 module "kvs_plan_shared_id" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.6.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.10.0"
 
   name          = "plan-shared-id"
   value         = module.plan_shared.id
