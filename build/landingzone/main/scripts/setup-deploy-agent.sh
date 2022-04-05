@@ -76,6 +76,12 @@ rm packages-microsoft-prod.deb
 # See https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#how-to-install-other-versions
 #
 
+# .NET SDK 5.0
+sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-5.0
+
 # .NET SDK 6.0
 sudo apt-get update; \
   sudo apt-get install -y apt-transport-https && \
