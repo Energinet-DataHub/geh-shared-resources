@@ -28,6 +28,7 @@ runs:
       shell: bash
       run: |
         mkdir ${{ github.workspace }}/remote
+        echo ${{ inputs.REPOSITORY }}
 
     - uses: actions/checkout@v3
       with:
