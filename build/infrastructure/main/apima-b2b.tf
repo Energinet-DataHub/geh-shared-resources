@@ -75,7 +75,7 @@ module "apima_b2b" {
           </backend>
           <outbound>
               <base />
-              <set-header name="Correlation-ID" exists-action="override">
+              <set-header name="X-Correlation-ID" exists-action="override">
                   <value>@($"{context.RequestId}")</value>
               </set-header>
           </outbound>
