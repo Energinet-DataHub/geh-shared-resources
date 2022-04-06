@@ -69,10 +69,6 @@ module "apima_b2b" {
             <set-header name="RequestTime" exists-action="override">
                 <value>@(DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ"))</value>
             </set-header>
-            <trace source="Global APIM Policy" severity="information">
-              <message>@(String.Format("{0} | {1}", context.Api.Name, context.Operation.Name))</message>
-              <metadata name="correlation-id" value="@($"{context.RequestId}")"/>
-            </trace>
           </inbound>
           <backend>
               <base />
