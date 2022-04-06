@@ -36,7 +36,7 @@ module "apimao_request_change_of_supplier" {
                 </required-claims>
             </validate-jwt>
             <set-backend-service backend-id="${azurerm_api_management_backend.market_roles.name}" />
-            <rewrite-uri template="/api/MarketRoles" />
+            <rewrite-uri template="/api/RequestChangeOfSupplier" />
           </inbound>
         </policies>
       XML
