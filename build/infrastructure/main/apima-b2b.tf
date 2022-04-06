@@ -82,3 +82,16 @@ module "apima_b2b" {
     }
   ]
 }
+
+resource "azurerm_api_management_api_diagnostic" "b2b_logs" {
+  api_management_logger_id = azurerm_api_management_logger.apim_logger.id
+  api_management_name      = module.apim_shared.name
+  api_name                 = module.apima_b2b.name
+  identifier               = "applicationinsights"
+  resource_group_name      = azurerm_resource_group.this.name
+
+  sampling_percentage       = 100.0
+  always_log_errors         = true
+  verbosity                 = "information"
+  http_correlation_protocol = "W3C"
+}
