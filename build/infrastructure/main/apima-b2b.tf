@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "apima_b2b" {
-  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.3.0"
+  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.13.0"
 
   name                      = "b2b"
   project_name              = var.domain_name_short
@@ -25,6 +25,8 @@ module "apima_b2b" {
   protocols                 = ["https"]
   subscription_required     = false
   authorization_server_name = azurerm_api_management_authorization_server.oauth_server.name
+  apim_logger_id            = azurerm_api_management_logger.apim_logger.id
+  logger_sampling_percentage  = 100.0
   policies                  = [
     {
       xml_content = <<XML
@@ -77,6 +79,9 @@ module "apima_b2b" {
           </backend>
           <outbound>
               <base />
+              <set-header name="x-correlation-id" exists-action="override">
+                  <value>@($"{context.RequestId}")</value>
+              </set-header>
           </outbound>
           <on-error>
               <base />
@@ -85,17 +90,4 @@ module "apima_b2b" {
       XML
     }
   ]
-}
-
-resource "azurerm_api_management_api_diagnostic" "b2b_logs" {
-  api_management_logger_id = azurerm_api_management_logger.apim_logger.id
-  api_management_name      = module.apim_shared.name
-  api_name                 = module.apima_b2b.name
-  identifier               = "applicationinsights"
-  resource_group_name      = azurerm_resource_group.this.name
-
-  sampling_percentage       = 100.0
-  always_log_errors         = true
-  verbosity                 = "information"
-  http_correlation_protocol = "W3C"
 }
