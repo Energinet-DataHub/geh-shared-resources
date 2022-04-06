@@ -26,11 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: 'workflow-cleaner'
 
       - name: Cleanup workflow
         uses: ./.github/actions/cleanup-workflows
         with:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-          REPOSITORY: ${{ inputs.repository }}
+          REPOSITORY: ${{ github.event.inputs.repository }}
