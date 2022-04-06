@@ -50,7 +50,8 @@ const main = async () => {
 
     if (workflowsResponse.data.workflows){
       // Iterating through workflows
-      workflowsResponse.data.workflows.map(async (workflow) => {
+      for (let workflowIndex = 0; workflowIndex < workflowsResponse.data.workflows.length; workflowIndex++) {
+        const workflow = workflowsResponse.data.workflows[workflowIndex];
         const pathWithoutPrefix = workflow.path.replace('.github/workflows/', '');
 
         // Only handling non excluded workflows
@@ -60,7 +61,9 @@ const main = async () => {
             repo,
             workflow_id: workflow.id,
           });
+          
           githubApiCallsUsed++;
+
           if (githubApiCallsUsed >= githubApiCallsThrottleCap){
             throw new Error('Close to spending up throttles for the current hour, please try again later.');
           }
@@ -68,8 +71,8 @@ const main = async () => {
           if (workflowRuns.data.workflow_runs) {
             console.log(`Cleaning runs of workflow ${workflow.name}`);
 
-            // Iterating workflow runs
-            workflowRuns.data.workflow_runs.map(async (workflowRun) => {
+            for (let workflowRunIndex = 0; workflowRunIndex < workflowsResponse.data.workflows.length; workflowRunIndex++) {
+              const workflowRun = workflowsResponse.data.workflows[workflowRunIndex];
               await octokit.rest.actions.deleteWorkflowRun({
                 owner,
                 repo,
@@ -81,10 +84,10 @@ const main = async () => {
               }
 
               console.log(`Run ${workflowRun.id} deleted`);
-            });
+            };
           }
         }
-      });
+      };
     }
   } catch (error) {
     console.log(error.message);
