@@ -35,6 +35,12 @@ module "mssql_data" {
       end_ip_address    = "255.255.255.255"
     }
   ]
+  sku                           = {
+    name     = "GP_Gen5_2"
+    tier     = "GeneralPurpose"
+    family   = "Gen4"
+    capacity = 4
+  }
 
   tags                          = azurerm_resource_group.this.tags
 }
