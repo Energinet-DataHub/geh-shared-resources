@@ -16,7 +16,7 @@ locals {
 }
 
 module "mssql_data" {
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-server?ref=5.7.0"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-server?ref=5.14.0"
 
   name                          = "data"
   project_name                  = var.domain_name_short
@@ -35,6 +35,12 @@ module "mssql_data" {
       end_ip_address    = "255.255.255.255"
     }
   ]
+  sku                           = {
+    name     = "GP_Gen5_2"
+    tier     = "GeneralPurpose"
+    family   = "Gen4"
+    capacity = 4
+  }
 
   tags                          = azurerm_resource_group.this.tags
 }
