@@ -104,7 +104,7 @@ module "kvs_apim_instance_resource_group_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "apim-instance-resource-group-name"
-  value         = module.apim_shared.resource_group_name
+  value         = azurerm_resource_group.this.name
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
