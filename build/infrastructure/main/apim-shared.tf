@@ -80,6 +80,36 @@ resource "azurerm_api_management_logger" "apim_logger" {
   }
 }
 
+module "kvs_apim_logger_id" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "apim-logger-id"
+  value         = azurerm_api_management_logger.apim_logger.id
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_apim_instance_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "apim-instance-name"
+  value         = module.apim_shared.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_apim_instance_resource_group_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "apim-instance-resource-group-name"
+  value         = module.apim_shared.resource_group_name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
 module "kvs_b2c_tenant_id" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
