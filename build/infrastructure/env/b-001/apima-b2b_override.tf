@@ -11,24 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-name: Cleanup workflows
-
-on:
-  workflow_dispatch:
-    inputs:
-      repository:
-        type: string
-        description: 'Repository the cleanup job is run towards. {owner}/{repository}'
-        required: true
-
-jobs:
-  cleanup_workflows:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Cleanup workflow
-        uses: ./.github/actions/cleanup-workflows
-        with:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-          REPOSITORY: ${{ github.event.inputs.repository }}
+module "apima_b2b" {
+  logger_sampling_percentage  = 20.0
+}
