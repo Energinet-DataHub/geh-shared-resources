@@ -63,9 +63,6 @@ module "apima_b2b" {
                     </choose>
                 </when>
             </choose>
-            <set-header name="Correlation-ID" exists-action="override">
-                <value>@($"{context.RequestId}")</value>
-            </set-header>
             <set-header name="RequestTime" exists-action="override">
                 <value>@(DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ"))</value>
             </set-header>
@@ -76,7 +73,7 @@ module "apima_b2b" {
           <outbound>
               <base />
               <set-header name="CorrelationId" exists-action="override">
-                  <value>@($"{context.RequestId}")</value>
+                  <value>@($"{context.Operation.Id}")</value>
               </set-header>
           </outbound>
           <on-error>
