@@ -20,33 +20,10 @@ on:
       - renetnielsen/cd-state-polling
 
 jobs:
-  publish_release:
-    uses: Energinet-DataHub/.github/.github/workflows/publish-release.yml@2.6.1
+  publish_and_deploy_release:
+    uses: Energinet-DataHub/.github/.github/workflows/publish-and-deploy-release.yml@6.4.0
     secrets:
       PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-
-  initiate_and_monitor_deployment:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Find associated pull request
-        uses: jwalton/gh-find-current-pr@v1
-        id: find_pull_request
-        with:
-          state: all
-
-      - name: Install npm packages
-        shell: bash
-        run: |
-          npm install @actions/core
-          npm install @actions/github
-
-      - name: Initiate and monitor deployment
-        uses: ./.github/actions/initiate-and-monitor-deployment
-        with:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-          RELEASE_NAME: ${{ steps.find_pull_request.outputs.pr }}
-          WORKFLOW_ID: ${{ secrets.DEPLOYMENT_WORKFLOW_ID  }}
-          DEPLOYMENT_REPOSITORY: ${{ secrets.DEPLOYMENT_REPOSITORY }}
-          DEPLOYMENT_REPOSITORY_OWNER: ${{ secrets.DEPLOYMENT_REPOSITORY_OWNER }}
+      DEPLOYMENT_WORKFLOW_ID: ${{ secrets.DEPLOYMENT_WORKFLOW_ID  }}
+      DEPLOYMENT_REPOSITORY: ${{ secrets.DEPLOYMENT_REPOSITORY }}
+      DEPLOYMENT_REPOSITORY_OWNER: ${{ secrets.DEPLOYMENT_REPOSITORY_OWNER }}
