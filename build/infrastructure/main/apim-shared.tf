@@ -80,6 +80,16 @@ resource "azurerm_api_management_logger" "apim_logger" {
   }
 }
 
+module "kvs_apim_gateway_url" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "apim-gateway-url"
+  value         = module.apim_shared.gateway_url
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
 module "kvs_apim_logger_id" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
