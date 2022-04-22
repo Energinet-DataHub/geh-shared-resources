@@ -20,10 +20,7 @@ module "apima_b2b" {
   environment_instance        = var.environment_instance
   api_management_name         = module.apim_shared.name
   resource_group_name         = azurerm_resource_group.this.name
-  revision                    = "1"
   display_name                = "B2B Api"
-  protocols                   = ["https"]
-  subscription_required       = false
   authorization_server_name   = azurerm_api_management_authorization_server.oauth_server.name
   apim_logger_id              = azurerm_api_management_logger.apim_logger.id
   logger_sampling_percentage  = 100.0
