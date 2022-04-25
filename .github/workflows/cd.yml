@@ -17,7 +17,6 @@ on:
   push:
     branches:
       - main
-      - renetnielsen/cd-state-polling
 
 jobs:
   publish_and_deploy_release:
