@@ -20,7 +20,7 @@ on:
 
 jobs:
   publish_and_deploy_release:
-    uses: Energinet-DataHub/.github/.github/workflows/publish-and-deploy-release.yml@6.4.0
+    uses: Energinet-DataHub/.github/.github/workflows/publish-and-deploy-release.yml@6.4.1
     secrets:
       PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
       DEPLOYMENT_WORKFLOW_ID: ${{ secrets.DEPLOYMENT_WORKFLOW_ID  }}
