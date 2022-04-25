@@ -19,17 +19,10 @@ on:
       - main
 
 jobs:
-  publish_release:
-    uses: Energinet-DataHub/.github/.github/workflows/publish-release.yml@2.6.1
+  publish_and_deploy_release:
+    uses: Energinet-DataHub/.github/.github/workflows/publish-and-deploy-release.yml@6.4.2
     secrets:
       PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-
-  dispatch_deployment_request:
-    needs: publish_release
-    uses: Energinet-DataHub/.github/.github/workflows/dispatch-deployment-request.yml@2.6.1
-    with:
-      CALLER_REPOSITORY_NAME: geh-shared-resources
-      CALLER_REPOSITORY_PATH: Energinet-DataHub/geh-shared-resources
-    secrets:
-      PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-      ENVIRONMENT_REPOSITORY_PATH: ${{ secrets.ENVIRONMENT_REPOSITORY_PATH }}
+      DEPLOYMENT_WORKFLOW_ID: ${{ secrets.DEPLOYMENT_WORKFLOW_ID  }}
+      DEPLOYMENT_REPOSITORY: ${{ secrets.DEPLOYMENT_REPOSITORY }}
+      DEPLOYMENT_REPOSITORY_OWNER: ${{ secrets.DEPLOYMENT_REPOSITORY_OWNER }}
