@@ -18,7 +18,7 @@ resource "azurerm_dashboard" "datahub_cpu_memory_dashboard" {
   dashboard_properties  = templatefile("dashboard-templates/cpu_memory_by_resource.tpl",
     {
         dashboard_name = "DataHub Resources: CPU Utilization and Memory Consumption"
-        subscription_id = data.azurerm_subscription.this,
+        subscription_id = data.azurerm_subscription.this.subscription_id,
         shared_resources_resource_group_name = azurerm_resource_group.this.name,
         shared_plan_name = module.plan_shared.name,
         charges_resource_group_name = "rg-DataHub-Charges-${upper(var.environment_short)}-${var.environment_instance}",
