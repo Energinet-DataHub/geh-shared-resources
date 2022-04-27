@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 resource "azurerm_dashboard" "datahub_cpu_memory_dashboard" {
-  name                  = "CPU utilization and Memory consumption by resource"
+  name                  = "CPU-utilization-and-Memory-consumption-by-resource"
   resource_group_name   = azurerm_resource_group.this.name
   location              = azurerm_resource_group.this.location
   dashboard_properties  = templatefile("dashboard-templates/cpu_memory_by_resource.tpl",
