@@ -47,7 +47,7 @@ module "apima_b2b" {
                             }
                         }
                     }
-                    return $"Caller ID (azp): {callerId}";
+                    return $"Caller ID (claims.azp): {callerId}";
                 }</message>
                 <metadata name="Correlation-ID" value="@($"{context.RequestId}")" />
             </trace>
