@@ -106,234 +106,234 @@
                       "metrics": [
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/${charges_resource_group_name}/providers/Microsoft.Web/sites/func-functionhost-charges-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${charges_resource_group_name}/providers/Microsoft.Web/sites/${charges_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-functionhost-charges-u-001"
+                            "resourceDisplayName": "${charges_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-Aggregations-U-001/providers/Microsoft.Web/sites/func-coordinator-aggre-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${aggregations_resource_group_name}/providers/Microsoft.Web/sites/${aggregations_coordinator_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-coordinator-aggre-u-001"
+                            "resourceDisplayName": "${aggregations_coordinator_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-Aggregations-U-001/providers/Microsoft.Web/sites/func-integration-event-listener-aggre-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${aggregations_resource_group_name}/providers/Microsoft.Web/sites/${aggregations_integration_event_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-integration-event-listener-aggre-u-001"
+                            "resourceDisplayName": "${aggregations_integration_event_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketParticipant-U-001/providers/Microsoft.Web/sites/func-organization-markpart-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_participant_resource_group_name}/providers/Microsoft.Web/sites/${market_participant_organization_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-organization-markpart-u-001"
+                            "resourceDisplayName": "${market_participant_organization_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketRoles-U-001/providers/Microsoft.Web/sites/func-api-markrol-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_roles_resource_group_name}/providers/Microsoft.Web/sites/${market_roles_api_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-api-markrol-u-001"
+                            "resourceDisplayName": "${market_roles_api_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketRoles-U-001/providers/Microsoft.Web/sites/func-ingestion-markrol-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_roles_resource_group_name}/providers/Microsoft.Web/sites/${market_roles_ingestion_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-ingestion-markrol-u-001"
+                            "resourceDisplayName": "${market_roles_ingestion_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketRoles-U-001/providers/Microsoft.Web/sites/func-internalcommanddispatcher-markrol-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_roles_resource_group_name}/providers/Microsoft.Web/sites/${market_roles_internalcommanddispatcher_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-internalcommanddispatcher-markrol-u-001"
+                            "resourceDisplayName": "${market_roles_internalcommanddispatcher_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketRoles-U-001/providers/Microsoft.Web/sites/func-localmessagehub-markrol-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_roles_resource_group_name}/providers/Microsoft.Web/sites/${market_roles_localmessagehub_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-localmessagehub-markrol-u-001"
+                            "resourceDisplayName": "${market_roles_localmessagehub_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketRoles-U-001/providers/Microsoft.Web/sites/func-outbox-markrol-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_roles_resource_group_name}/providers/Microsoft.Web/sites/${market_roles_outbox_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-outbox-markrol-u-001"
+                            "resourceDisplayName": "${market_roles_outbox_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketRoles-U-001/providers/Microsoft.Web/sites/func-processing-markrol-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_roles_resource_group_name}/providers/Microsoft.Web/sites/${market_roles_processing_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-processing-markrol-u-001"
+                            "resourceDisplayName": "${market_roles_processing_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MessageArchive-U-001/providers/Microsoft.Web/sites/func-entrypoint-msgarch-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${message_archive_resource_group_name}/providers/Microsoft.Web/sites/${message_archive_entrypoint_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-entrypoint-msgarch-u-001"
+                            "resourceDisplayName": "${message_archive_entrypoint_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MeteringPoint-U-001/providers/Microsoft.Web/sites/func-ingestion-mpt-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${metering_point_resource_group_name}/providers/Microsoft.Web/sites/${metering_point_ingestion_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-ingestion-mpt-u-001"
+                            "resourceDisplayName": "${metering_point_ingestion_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MeteringPoint-U-001/providers/Microsoft.Web/sites/func-localmessagehub-mpt-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${metering_point_resource_group_name}/providers/Microsoft.Web/sites/${metering_point_localmessagehub_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-localmessagehub-mpt-u-001"
+                            "resourceDisplayName": "${metering_point_localmessagehub_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MeteringPoint-U-001/providers/Microsoft.Web/sites/func-outbox-mpt-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${metering_point_resource_group_name}/providers/Microsoft.Web/sites/${metering_point_outbox_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-outbox-mpt-u-001"
+                            "resourceDisplayName": "${metering_point_outbox_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MeteringPoint-U-001/providers/Microsoft.Web/sites/func-processing-mpt-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${metering_point_resource_group_name}/providers/Microsoft.Web/sites/${metering_point_processing_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-processing-mpt-u-001"
+                            "resourceDisplayName": "${metering_point_processing_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-PostOffice-U-001/providers/Microsoft.Web/sites/func-marketoperator-pstoff-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${post_office_resource_group_name}/providers/Microsoft.Web/sites/${post_office_marketoperator_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-marketoperator-pstoff-u-001"
+                            "resourceDisplayName": "${post_office_marketoperator_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-PostOffice-U-001/providers/Microsoft.Web/sites/func-operations-pstoff-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${post_office_resource_group_name}/providers/Microsoft.Web/sites/${post_office_operations_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-operations-pstoff-u-001"
+                            "resourceDisplayName": "${post_office_operations_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-PostOffice-U-001/providers/Microsoft.Web/sites/func-subdomain-pstoff-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${post_office_resource_group_name}/providers/Microsoft.Web/sites/${post_office_subdomain_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-subdomain-pstoff-u-001"
+                            "resourceDisplayName": "${post_office_subdomain_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-TimeSeries-U-001/providers/Microsoft.Web/sites/func-time-series-bundle-ingestor-timeseries-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${time_series_resource_group_name}/providers/Microsoft.Web/sites/${time_series_bundle_ingestor_function_name}"
                           },
                           "name": "FunctionExecutionUnits",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Function Execution Units",
-                            "resourceDisplayName": "func-time-series-bundle-ingestor-timeseries-u-001"
+                            "resourceDisplayName": "${time_series_bundle_ingestor_function_name}"
                           }
                         }
                       ],
-                      "title": "Avg Function Execution Units for func-functionhost-charges-u-001, func-coordinator-aggre-u-001, and 17 other resources",
+                      "title": "Avg Function Execution Units per Azure Function",
                       "titleKind": 1,
                       "visualization": {
                         "chartType": 2,
@@ -386,78 +386,66 @@
                       "metrics": [
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/${charges_resource_group_name}/providers/Microsoft.Web/sites/app-webapi-charges-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${charges_resource_group_name}/providers/Microsoft.Web/sites/${charges_webapi_name}"
                           },
                           "name": "CpuTime",
                           "aggregationType": 1,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "CPU Time",
-                            "resourceDisplayName": "app-webapi-charges-u-001"
+                            "resourceDisplayName": "${charges_webapi_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-Frontend-U-001/providers/Microsoft.Web/sites/app-bff-fe-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${frontend_resource_group_name}/providers/Microsoft.Web/sites/${frontend_bff_webapi_name}"
                           },
                           "name": "CpuTime",
                           "aggregationType": 1,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "CPU Time",
-                            "resourceDisplayName": "app-bff-fe-u-001"
+                            "resourceDisplayName": "${frontend_bff_webapi_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketParticipant-U-001/providers/Microsoft.Web/sites/app-webapi-markpart-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_participant_resource_group_name}/providers/Microsoft.Web/sites/${market_participant_webapi_name}"
                           },
                           "name": "CpuTime",
                           "aggregationType": 1,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "CPU Time",
-                            "resourceDisplayName": "app-webapi-markpart-u-001"
+                            "resourceDisplayName": "${market_participant_webapi_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MessageArchive-U-001/providers/Microsoft.Web/sites/app-webapi-msgarch-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${message_archive_resource_group_name}/providers/Microsoft.Web/sites/${message_archive_webapi_name}"
                           },
                           "name": "CpuTime",
                           "aggregationType": 1,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "CPU Time",
-                            "resourceDisplayName": "app-webapi-msgarch-u-001"
+                            "resourceDisplayName": "${message_archive_webapi_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MeteringPoint-U-001/providers/Microsoft.Web/sites/app-webapi-mpt-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${metering_point_resource_group_name}/providers/Microsoft.Web/sites/${metering_point_webapi_name}"
                           },
                           "name": "CpuTime",
                           "aggregationType": 1,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "CPU Time",
-                            "resourceDisplayName": "app-webapi-mpt-u-001"
-                          }
-                        },
-                        {
-                          "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MessageArchive-U-001/providers/Microsoft.Web/sites/app-webapi-msgarch-u-001"
-                          },
-                          "name": "CpuTime",
-                          "aggregationType": 1,
-                          "namespace": "microsoft.web/sites",
-                          "metricVisualization": {
-                            "displayName": "CPU Time",
-                            "resourceDisplayName": "app-webapi-msgarch-u-001"
+                            "resourceDisplayName": "${metering_point_webapi_name}"
                           }
                         }
                       ],
-                      "title": "Sum CPU Time for app-webapi-charges-u-001, app-bff-fe-u-001, and 3 other resources",
+                      "title": "Sum CPU Time per Web API",
                       "titleKind": 1,
                       "visualization": {
                         "chartType": 2,
@@ -510,234 +498,234 @@
                       "metrics": [
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-Aggregations-U-001/providers/Microsoft.Web/sites/func-coordinator-aggre-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${aggregations_resource_group_name}/providers/Microsoft.Web/sites/${aggregations_coordinator_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-coordinator-aggre-u-001"
+                            "resourceDisplayName": "${aggregations_coordinator_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-Aggregations-U-001/providers/Microsoft.Web/sites/func-integration-event-listener-aggre-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${aggregations_resource_group_name}/providers/Microsoft.Web/sites/${aggregations_integration_event_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-integration-event-listener-aggre-u-001"
+                            "resourceDisplayName": "${aggregations_integration_event_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/${charges_resource_group_name}/providers/Microsoft.Web/sites/func-functionhost-charges-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${charges_resource_group_name}/providers/Microsoft.Web/sites/${charges_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-functionhost-charges-u-001"
+                            "resourceDisplayName": "${charges_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketParticipant-U-001/providers/Microsoft.Web/sites/func-organization-markpart-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_participant_resource_group_name}/providers/Microsoft.Web/sites/${market_participant_organization_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-organization-markpart-u-001"
+                            "resourceDisplayName": "${market_participant_organization_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketRoles-U-001/providers/Microsoft.Web/sites/func-api-markrol-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_roles_resource_group_name}/providers/Microsoft.Web/sites/${market_roles_api_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-api-markrol-u-001"
+                            "resourceDisplayName": "${market_roles_api_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketRoles-U-001/providers/Microsoft.Web/sites/func-ingestion-markrol-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_roles_resource_group_name}/providers/Microsoft.Web/sites/${market_roles_ingestion_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-ingestion-markrol-u-001"
+                            "resourceDisplayName": "${market_roles_ingestion_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketRoles-U-001/providers/Microsoft.Web/sites/func-internalcommanddispatcher-markrol-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_roles_resource_group_name}/providers/Microsoft.Web/sites/${market_roles_internalcommanddispatcher_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-internalcommanddispatcher-markrol-u-001"
+                            "resourceDisplayName": "${market_roles_internalcommanddispatcher_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketRoles-U-001/providers/Microsoft.Web/sites/func-internalcommanddispatcher-markrol-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_roles_resource_group_name}/providers/Microsoft.Web/sites/${market_roles_localmessagehub_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-internalcommanddispatcher-markrol-u-001"
+                            "resourceDisplayName": "${market_roles_localmessagehub_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketRoles-U-001/providers/Microsoft.Web/sites/func-outbox-markrol-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_roles_resource_group_name}/providers/Microsoft.Web/sites/${market_roles_outbox_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-outbox-markrol-u-001"
+                            "resourceDisplayName": "${market_roles_outbox_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketRoles-U-001/providers/Microsoft.Web/sites/func-processing-markrol-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_roles_resource_group_name}/providers/Microsoft.Web/sites/${market_roles_processing_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-processing-markrol-u-001"
+                            "resourceDisplayName": "${market_roles_processing_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MessageArchive-U-001/providers/Microsoft.Web/sites/func-entrypoint-msgarch-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${message_archive_resource_group_name}/providers/Microsoft.Web/sites/${message_archive_entrypoint_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-entrypoint-msgarch-u-001"
+                            "resourceDisplayName": "${message_archive_entrypoint_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MeteringPoint-U-001/providers/Microsoft.Web/sites/func-ingestion-mpt-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${metering_point_resource_group_name}/providers/Microsoft.Web/sites/${metering_point_ingestion_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-ingestion-mpt-u-001"
+                            "resourceDisplayName": "${metering_point_ingestion_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MeteringPoint-U-001/providers/Microsoft.Web/sites/func-localmessagehub-mpt-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${metering_point_resource_group_name}/providers/Microsoft.Web/sites/${metering_point_localmessagehub_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-localmessagehub-mpt-u-001"
+                            "resourceDisplayName": "${metering_point_localmessagehub_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MeteringPoint-U-001/providers/Microsoft.Web/sites/func-outbox-mpt-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${metering_point_resource_group_name}/providers/Microsoft.Web/sites/${metering_point_outbox_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-outbox-mpt-u-001"
+                            "resourceDisplayName": "${metering_point_outbox_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MeteringPoint-U-001/providers/Microsoft.Web/sites/func-processing-mpt-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${metering_point_resource_group_name}/providers/Microsoft.Web/sites/${metering_point_processing_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-processing-mpt-u-001"
+                            "resourceDisplayName": "${metering_point_processing_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-PostOffice-U-001/providers/Microsoft.Web/sites/func-marketoperator-pstoff-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${post_office_resource_group_name}/providers/Microsoft.Web/sites/${post_office_marketoperator_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-marketoperator-pstoff-u-001"
+                            "resourceDisplayName": "${post_office_marketoperator_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-PostOffice-U-001/providers/Microsoft.Web/sites/func-operations-pstoff-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${post_office_resource_group_name}/providers/Microsoft.Web/sites/${post_office_operations_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-operations-pstoff-u-001"
+                            "resourceDisplayName": "${post_office_operations_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-PostOffice-U-001/providers/Microsoft.Web/sites/func-subdomain-pstoff-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${post_office_resource_group_name}/providers/Microsoft.Web/sites/${post_office_subdomain_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-subdomain-pstoff-u-001"
+                            "resourceDisplayName": "${post_office_subdomain_function_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-TimeSeries-U-001/providers/Microsoft.Web/sites/func-time-series-bundle-ingestor-timeseries-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${time_series_resource_group_name}/providers/Microsoft.Web/sites/${time_series_bundle_ingestor_function_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "func-time-series-bundle-ingestor-timeseries-u-001"
+                            "resourceDisplayName": "${time_series_bundle_ingestor_function_name}"
                           }
                         }
                       ],
-                      "title": "Avg Average memory working set for func-coordinator-aggre-u-001, func-integration-event-listener-aggre-u-001, and 16 other resources",
+                      "title": "Avg Average memory working set per Azure Function",
                       "titleKind": 1,
                       "visualization": {
                         "chartType": 2,
@@ -790,66 +778,66 @@
                       "metrics": [
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/${charges_resource_group_name}/providers/Microsoft.Web/sites/app-webapi-charges-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${charges_resource_group_name}/providers/Microsoft.Web/sites/${charges_webapi_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "app-webapi-charges-u-001"
+                            "resourceDisplayName": "${charges_webapi_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-Frontend-U-001/providers/Microsoft.Web/sites/app-bff-fe-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${frontend_resource_group_name}/providers/Microsoft.Web/sites/${frontend_bff_webapi_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "app-bff-fe-u-001"
+                            "resourceDisplayName": "${frontend_bff_webapi_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MarketParticipant-U-001/providers/Microsoft.Web/sites/app-webapi-markpart-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${market_participant_resource_group_name}/providers/Microsoft.Web/sites/${market_participant_webapi_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "app-webapi-markpart-u-001"
+                            "resourceDisplayName": "${market_participant_webapi_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MessageArchive-U-001/providers/Microsoft.Web/sites/app-webapi-msgarch-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${message_archive_resource_group_name}/providers/Microsoft.Web/sites/${message_archive_webapi_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "app-webapi-msgarch-u-001"
+                            "resourceDisplayName": "${message_archive_webapi_name}"
                           }
                         },
                         {
                           "resourceMetadata": {
-                            "id": "/subscriptions/${subscription_id}/resourceGroups/rg-DataHub-MeteringPoint-U-001/providers/Microsoft.Web/sites/app-webapi-mpt-u-001"
+                            "id": "/subscriptions/${subscription_id}/resourceGroups/${metering_point_resource_group_name}/providers/Microsoft.Web/sites/${metering_point_webapi_name}"
                           },
                           "name": "AverageMemoryWorkingSet",
                           "aggregationType": 4,
                           "namespace": "microsoft.web/sites",
                           "metricVisualization": {
                             "displayName": "Average memory working set",
-                            "resourceDisplayName": "app-webapi-mpt-u-001"
+                            "resourceDisplayName": "${metering_point_webapi_name}"
                           }
                         }
                       ],
-                      "title": "Avg Average memory working set for app-webapi-charges-u-001, app-bff-fe-u-001, and 3 other resources",
+                      "title": "Avg Average memory working set per Web API",
                       "titleKind": 1,
                       "visualization": {
                         "chartType": 2,
@@ -918,11 +906,10 @@
       }
     }
   },
-  "name": "CPU Utilization - dbj test",
+  "name": "${dashboard_name}",
   "type": "Microsoft.Portal/dashboards",
-  "location": "INSERT LOCATION",
   "tags": {
-    "hidden-title": "CPU Utilization - dbj test"
+    "hidden-title": "${dashboard_name}"
   },
   "apiVersion": "2015-08-01-preview"
 }

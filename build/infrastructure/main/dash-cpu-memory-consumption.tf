@@ -17,10 +17,43 @@ resource "azurerm_portal_dashboard" "my-board" {
   location              = azurerm_resource_group.this.location
   dashboard_properties  = templatefile("dashboard-templates/cpu_memory_by_resource.tpl",
     {
-      subscription_id = "Variable content here!",
-      shared_resources_resource_group_name = "rg-DataHub-SharedResouces-U-001",
-      shared_plan_name = "plan-shared-sharedres-u-001"
-      charges_resource_group_name = "rg-DataHub-Charges-U-001"
+        dashboard_name = "DataHub Resources: CPU Utilization and Memory Consumption"
+        subscription_id = var.subscription_id,
+        shared_resources_resource_group_name = var.resource_group_name,
+        shared_plan_name = module.plan_shared.name,
+        charges_resource_group_name = "rg-DataHub-Charges-${upper(var.environment_short)}-${var.environment_instance}",
+        charges_function_name = "func-functionhost-charges-${lower(var.environment_short)}-${var.environment_instance}",
+        aggregations_resource_group_name = "rg-DataHub-Aggregations-${upper(var.environment_short)}-${var.environment_instance}",
+        aggregations_coordinator_function_name = "func-coordinator-aggre-${lower(var.environment_short)}-${var.environment_instance}",
+        aggregations_integration_event_function_name = "func-integration-event-listener-aggre-${lower(var.environment_short)}-${var.environment_instance}",
+        market_participant_resource_group_name = "rg-DataHub-MarketParticipant${upper(var.environment_short)}-${var.environment_instance}",
+        market_participant_organization_function_name = "func-organization-markpart-${lower(var.environment_short)}-${var.environment_instance}",
+        market_roles_resource_group_name = "rg-DataHub-MarketRoles-${upper(var.environment_short)}-${var.environment_instance}",
+        market_roles_api_function_name = "func-api-markrol-${lower(var.environment_short)}-${var.environment_instance}",
+        market_roles_ingestion_function_name = "func-ingestion-markrol-${lower(var.environment_short)}-${var.environment_instance}",
+        market_roles_internalcommanddispatcher_function_name = "func-internalcommanddispatcher-markrol-${lower(var.environment_short)}-${var.environment_instance}",
+        market_roles_localmessagehub_function_name = "func-localmessagehub-markrol-${lower(var.environment_short)}-${var.environment_instance}",
+        market_roles_outbox_function_name = "func-outbox-markrol-${lower(var.environment_short)}-${var.environment_instance}",
+        market_roles_processing_function_name = "func-processing-markrol-${lower(var.environment_short)}-${var.environment_instance}",
+        message_archive_resource_group_name = "rg-DataHub-MessageArchive-${upper(var.environment_short)}-${var.environment_instance}",
+        message_archive_entrypoint_function_name = "func-entrypoint-msgarch-${lower(var.environment_short)}-${var.environment_instance}",
+        metering_point_resource_group_name = "rg-DataHub-MeteringPoint-${upper(var.environment_short)}-${var.environment_instance}",
+        metering_point_ingestion_function_name = "func-ingestion-mpt-${lower(var.environment_short)}-${var.environment_instance}",
+        metering_point_localmessagehub_function_name = "func-localmessagehub-mpt-${lower(var.environment_short)}-${var.environment_instance}",
+        metering_point_outbox_function_name = "func-outbox-mpt-${lower(var.environment_short)}-${var.environment_instance}",
+        metering_point_processing_function_name = "func-processing-mpt-${lower(var.environment_short)}-${var.environment_instance}",
+        post_office_resource_group_name = "rg-DataHub-PostOffice-${upper(var.environment_short)}-${var.environment_instance}",
+        post_office_marketoperator_function_name = "func-marketoperator-pstoff-${lower(var.environment_short)}-${var.environment_instance}",
+        post_office_operations_function_name = "func-operations-pstoff-${lower(var.environment_short)}-${var.environment_instance}",
+        post_office_subdomain_function_name = "func-subdomain-pstoff-${lower(var.environment_short)}-${var.environment_instance}",
+        time_series_resource_group_name = "rg-DataHub-TimeSeries-${upper(var.environment_short)}-${var.environment_instance}",
+        time_series_bundle_ingestor_function_name = "func-time-series-bundle-ingestor-timeseries-${lower(var.environment_short)}-${var.environment_instance}",
+        charges_webapi_name = "app-webapi-charges-${lower(var.environment_short)}-${var.environment_instance}",
+        frontend_resource_group_name = "rg-DataHub-Frontend-${upper(var.environment_short)}-${var.environment_instance}",
+        frontend_bff_webapi_name = "app-bff-fe-${lower(var.environment_short)}-${var.environment_instance}",
+        market_participant_webapi_name = "app-webapi-markpart-${lower(var.environment_short)}-${var.environment_instance}",
+        message_archive_webapi_name = "app-webapi-msgarch-${lower(var.environment_short)}-${var.environment_instance}",
+        metering_point_webapi_name = "app-webapi-mpt-${lower(var.environment_short)}-${var.environment_instance}"
     })
   
   tags                         = azurerm_resource_group.this.tags
