@@ -18,15 +18,15 @@ resource "azurerm_dashboard" "datahub_cpu_memory_dashboard" {
   dashboard_properties  = templatefile("dashboard-templates/cpu_memory_by_resource.tpl",
     {
         dashboard_name = "DataHub Resources: CPU Utilization and Memory Consumption"
-        subscription_id = var.subscription_id,
-        shared_resources_resource_group_name = var.resource_group_name,
+        subscription_id = data.azurerm_subscription.this,
+        shared_resources_resource_group_name = azurerm_resource_group.this.name,
         shared_plan_name = module.plan_shared.name,
         charges_resource_group_name = "rg-DataHub-Charges-${upper(var.environment_short)}-${var.environment_instance}",
         charges_function_name = "func-functionhost-charges-${lower(var.environment_short)}-${var.environment_instance}",
         aggregations_resource_group_name = "rg-DataHub-Aggregations-${upper(var.environment_short)}-${var.environment_instance}",
         aggregations_coordinator_function_name = "func-coordinator-aggre-${lower(var.environment_short)}-${var.environment_instance}",
         aggregations_integration_event_function_name = "func-integration-event-listener-aggre-${lower(var.environment_short)}-${var.environment_instance}",
-        market_participant_resource_group_name = "rg-DataHub-MarketParticipant${upper(var.environment_short)}-${var.environment_instance}",
+        market_participant_resource_group_name = "rg-DataHub-MarketParticipant-${upper(var.environment_short)}-${var.environment_instance}",
         market_participant_organization_function_name = "func-organization-markpart-${lower(var.environment_short)}-${var.environment_instance}",
         market_roles_resource_group_name = "rg-DataHub-MarketRoles-${upper(var.environment_short)}-${var.environment_instance}",
         market_roles_api_function_name = "func-api-markrol-${lower(var.environment_short)}-${var.environment_instance}",
