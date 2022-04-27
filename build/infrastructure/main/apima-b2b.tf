@@ -99,6 +99,9 @@ module "apima_b2b" {
           </outbound>
           <on-error>
               <base />
+              <set-header name="CorrelationId" exists-action="override">
+                  <value>@($"{context.RequestId}")</value>
+              </set-header>
           </on-error>
         </policies>
       XML
