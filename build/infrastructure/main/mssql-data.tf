@@ -35,6 +35,12 @@ module "mssql_data" {
       end_ip_address    = "255.255.255.255"
     }
   ]
+  elastic_pool_sku              = {
+    name      = "GP_Gen4"
+    tier      = "GeneralPurpose"
+    family    = "Gen4"
+    capacity  = 4
+  }
 
   tags                          = azurerm_resource_group.this.tags
 }
