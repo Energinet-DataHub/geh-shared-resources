@@ -90,11 +90,6 @@ variable frontend_service_app_id {
   description   = "The app/client ID of the frontend app registration."
 }
 
-variable private_dns_resource_group_name {
-  type          = string
-  description   = "Name of the resource group where the private DNS zones are deployed"
-}
-
 variable virtual_network_resource_group_name {
   type          = string
   description   = "Name of the resource group where the landing zone virtual network is deployed"
