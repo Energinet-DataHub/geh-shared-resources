@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "sb_domain_relay" {
-  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-namespace?ref=5.7.0"
+  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-namespace?ref=5.17.0"
 
   name                        = "domain-relay"
   project_name                = var.domain_name_short
