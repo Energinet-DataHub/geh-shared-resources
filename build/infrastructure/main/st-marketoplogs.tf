@@ -19,18 +19,19 @@ locals {
 module "st_market_operator_logs" {
   source                            = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
 
-  name                              = "marketlog"
-  project_name                      = var.domain_name_short
-  environment_short                 = var.environment_short
-  environment_instance              = var.environment_instance
-  resource_group_name               = azurerm_resource_group.this.name
-  location                          = azurerm_resource_group.this.location
-  log_analytics_workspace_id        = module.log_workspace_shared.id
-  private_endpoint_subnet_id        = module.snet_private_endpoints.id
-  account_replication_type          = "LRS"
-  access_tier                       = "Hot"
-  account_tier                      = "Standard"
-  containers                        = [
+  name                        = "marketlog"
+  project_name                = var.domain_name_short
+  environment_short           = var.environment_short
+  environment_instance        = var.environment_instance
+  resource_group_name         = azurerm_resource_group.this.name
+  location                    = azurerm_resource_group.this.location
+  account_replication_type    = "LRS"
+  access_tier                 = "Hot"
+  account_tier                = "Standard"
+  log_analytics_workspace_id  = module.log_workspace_shared.id
+  private_endpoint_subnet_id  = module.snet_private_endpoints.id
+  
+  containers                  = [
     {
       name = local.marketoplogs_container_name,
     },
@@ -43,7 +44,7 @@ module "st_market_operator_logs" {
 }
 
 module "kvs_st_market_operator_logs_primary_connection_string" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
   
   name          = "st-marketoplogs-primary-connection-string"
   value         = module.st_market_operator_logs.primary_connection_string

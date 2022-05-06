@@ -33,7 +33,7 @@ resource "azurerm_public_ip" "deployagent" {
   allocation_method   = "Static"
   ip_tags             = {}
 
-  tags                = azurerm_resource_group.this.tags
+  tags                          = azurerm_resource_group.this.tags
 
   lifecycle {
     ignore_changes = [

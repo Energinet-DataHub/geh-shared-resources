@@ -44,7 +44,7 @@ module "sb_domain_relay" {
     },
   ]
 
-  tags                        = azurerm_resource_group.this.tags
+  tags                              = azurerm_resource_group.this.tags
 }
 
 module "kvs_sb_domain_relay_listen_connection_string" {
