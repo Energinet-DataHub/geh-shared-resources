@@ -35,7 +35,7 @@ module "sbq_marketroles_dequeue" {
 }
 
 module "kvs_sbq_marketroles_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbq-marketroles-name"
   value         = module.sbq_marketroles.name
@@ -45,7 +45,7 @@ module "kvs_sbq_marketroles_name" {
 }
 
 module "kvs_sbq_marketroles_reply_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbq-marketroles-reply-name"
   value         = module.sbq_marketroles_reply.name
@@ -55,7 +55,7 @@ module "kvs_sbq_marketroles_reply_name" {
 }
 
 module "kvs_sbq_marketroles_dequeue_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbq-marketroles-dequeue-name"
   value         = module.sbq_marketroles_dequeue.name

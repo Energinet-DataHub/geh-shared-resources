@@ -27,9 +27,9 @@ module "mssql_data" {
   location                        = azurerm_resource_group.this.location
   administrator_login             = local.mssqlServerAdminName
   administrator_login_password    = random_password.mssql_administrator_login_password.result
-  private_endpoint_subnet_id      = module.snet_internal_private_endpoints.id
+  private_endpoint_subnet_id      = module.snet_private_endpoints.id
   log_analytics_workspace_id      = module.log_workspace_shared.id 
-  
+
   tags                            = azurerm_resource_group.this.tags
 }
 
@@ -40,7 +40,7 @@ resource "random_password" "mssql_administrator_login_password" {
 }
 
 module "kvs_mssql_data_admin_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "mssql-data-admin-user-name"
   value         = local.mssqlServerAdminName
@@ -50,7 +50,7 @@ module "kvs_mssql_data_admin_name" {
 }
 
 module "kvs_mssql_data_admin_password" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "mssql-data-admin-user-password"
   value         = random_password.mssql_administrator_login_password.result
@@ -60,7 +60,7 @@ module "kvs_mssql_data_admin_password" {
 }
 
 module "kvs_mssql_data_url" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "mssql-data-url"
   value         = module.mssql_data.fully_qualified_domain_name
@@ -70,7 +70,7 @@ module "kvs_mssql_data_url" {
 }
 
 module "kvs_mssql_data_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "mssql-data-name"
   value         = module.mssql_data.name

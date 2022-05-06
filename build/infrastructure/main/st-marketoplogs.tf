@@ -17,7 +17,7 @@ locals {
 }
 
 module "st_market_operator_logs" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
+  source                            = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
 
   name                        = "marketlog"
   project_name                = var.domain_name_short
@@ -29,7 +29,7 @@ module "st_market_operator_logs" {
   access_tier                 = "Hot"
   account_tier                = "Standard"
   log_analytics_workspace_id  = module.log_workspace_shared.id
-  private_endpoint_subnet_id  = module.snet_internal_private_endpoints.id
+  private_endpoint_subnet_id  = module.snet_private_endpoints.id
   
   containers                  = [
     {
@@ -44,8 +44,8 @@ module "st_market_operator_logs" {
 }
 
 module "kvs_st_market_operator_logs_primary_connection_string" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
-
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  
   name          = "st-marketoplogs-primary-connection-string"
   value         = module.st_market_operator_logs.primary_connection_string
   key_vault_id  = module.kv_shared.id
@@ -64,7 +64,7 @@ module "kvs_st_market_operator_logs_container_name" {
 }
 
 module "kvs_st_market_operator_logs_archive_container_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "st-marketoplogs-archive-container-name"
   value         = local.marketoplogsarchive_container_name

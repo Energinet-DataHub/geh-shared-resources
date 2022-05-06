@@ -20,9 +20,8 @@ module "sb_domain_relay" {
   environment_instance            = var.environment_instance
   resource_group_name             = azurerm_resource_group.this.name
   location                        = azurerm_resource_group.this.location
+  private_endpoint_subnet_id      = module.snet_private_endpoints.id
   log_analytics_workspace_id      = module.log_workspace_shared.id 
-  private_endpoint_subnet_id      = module.snet_internal_private_endpoints.id
-
   auth_rules                      = [
     {
       name    = "listen",
