@@ -50,7 +50,17 @@ variable github_runner_token {
   description   = "Registration token for GitHub self-hosted runner."
 }
 
-variable github_runner_name {
+variable virtual_network_resource_group_name {
   type          = string
-  description   = "Name of GitHub self-hosted runner."
+  description   = "Resource group name of the virtual network"
+}
+
+variable virtual_network_name {
+  type          = string
+  description   = "Name of the virtual network"
+}
+
+variable deployment_agent_address_space {
+  type          = string
+  description   = "Address space of the deployment agent subnet"
 }

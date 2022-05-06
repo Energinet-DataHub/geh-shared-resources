@@ -11,40 +11,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-locals {
-    data_lake_timeseries_blob_name  = "timeseries"
-    data_lake_data_container_name   = "data"
-}
-
 module "st_data_lake" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
 
-  name                            = "datalake"
-  project_name                    = var.domain_name_short
-  environment_short               = var.environment_short
-  environment_instance            = var.environment_instance
-  resource_group_name             = azurerm_resource_group.this.name
-  location                        = azurerm_resource_group.this.location
-  account_replication_type        = "LRS"
-  account_tier                    = "Standard"
+  name                        = "datalake"
+  project_name                = var.domain_name_short
+  environment_short           = var.environment_short
+  environment_instance        = var.environment_instance
+  resource_group_name         = azurerm_resource_group.this.name
+  location                    = azurerm_resource_group.this.location
+  account_replication_type    = "LRS"
+  account_tier                = "Standard"
+  is_hns_enabled              = true
+  log_analytics_workspace_id  = module.log_workspace_shared.id
   private_endpoint_subnet_id      = module.snet_internal_private_endpoints.id
-  private_dns_resource_group_name = var.private_dns_resource_group_name
-  is_hns_enabled                  = true
-  containers                      = [
-    {
-      name  = local.data_lake_data_container_name,
-    },
-  ]
-
-  tags                            = azurerm_resource_group.this.tags
+  
+  tags                        = azurerm_resource_group.this.tags
 }
 
-resource "azurerm_storage_blob" "timeseries" {
-  name                    = "${local.data_lake_timeseries_blob_name}/notused"
-  storage_account_name    = module.st_data_lake.name
-  storage_container_name  = local.data_lake_data_container_name
-  type                    = "Block"
-}
 
 module "kvs_st_data_lake_primary_connection_string" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
@@ -76,22 +60,3 @@ module "kvs_st_data_lake_primary_access_key" {
   tags          = azurerm_resource_group.this.tags
 }
 
-module "kvs_st_data_lake_data_container_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
-
-  name          = "st-data-lake-data-container-name"
-  value         = local.data_lake_data_container_name
-  key_vault_id  = module.kv_shared.id
-
-  tags          = azurerm_resource_group.this.tags
-}
-
-module "kvs_st_data_lake_timeseries_blob_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
-
-  name          = "st-data-lake-timeseries-blob-name"
-  value         = local.data_lake_timeseries_blob_name
-  key_vault_id  = module.kv_shared.id
-
-  tags          = azurerm_resource_group.this.tags
-}

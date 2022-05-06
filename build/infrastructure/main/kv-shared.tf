@@ -23,7 +23,6 @@ module "kv_shared" {
   enabled_for_template_deployment = true
   sku_name                        = "premium"
   private_endpoint_subnet_id      = module.snet_internal_private_endpoints.id
-  private_dns_resource_group_name = var.private_dns_resource_group_name
 
   tags                            = azurerm_resource_group.this.tags
 }

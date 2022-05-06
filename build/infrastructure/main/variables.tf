@@ -90,51 +90,38 @@ variable frontend_service_app_id {
   description   = "The app/client ID of the frontend app registration."
 }
 
-variable private_dns_resource_group_name {
+variable virtual_network_resource_group_name {
   type          = string
-  description   = "Name of the private dns resource group"
+  description   = "Name of the resource group where the landing zone virtual network is deployed"
 }
 
-variable landingzone_resource_group_name {
+variable virtual_network_name {
   type          = string
-  description   = "Resource group name of the landingzone virtual network"
+  description   = "Name of the landing zone virtual network"
 }
 
-variable landingzone_virtual_network_id {
+variable apim_address_space {
   type          = string
-  description   = "Id of the landingzone virtual network"
+  description   = "Address space of the APIM subnet"
 }
 
-variable landingzone_virtual_network_name {
+variable private_endpoint_address_space {
   type          = string
-  description   = "Name of the landingzone virtual network"
+  description   = "Address space of the private endpoint subnet"
 }
 
-variable private_dns_zone_blob_name {
-  type        = string
-  description = "Name of the Storage Account blob private dns zone"
+variable vnet_integration_address_space {
+  type          = string
+  description   = "Address space of the vnet integration subnet"
 }
 
-variable private_dns_zone_file_name {
-  type        = string
-  description = "Name of the Storage Account file private dns zone"
+variable log_retention_in_days {
+  type          = number
+  description   = "Number of days logs are retained in log analytics workspace"
+  default       = 30
 }
 
-variable private_dns_zone_keyvault_name {
-  type        = string
-  description = "Name of the Key Vault private dns zone"
-}
-
-variable private_dns_zone_database_name {
-  type        = string
-  description = "Name of the SQL database private dns zone"
-}
-
-variable private_dns_zone_servicebus_name {
-  type        = string
-  description = "Name of the Service Bus private dns zone"
-}
-variable private_dns_zone_cosmos_name {
-  type        = string
-  description = "Name of the Cosmos SQL database private dns zone"
+variable ag_primary_email_address {
+  type          = string
+  description   = "Email address of primary action group to which alerts will be routed."
 }

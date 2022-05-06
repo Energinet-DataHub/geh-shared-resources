@@ -11,16 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-module "apimao_request_validated_measure_data" {
-  source                  = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=6.0.0"
+module "apimao_request_change_of_price_list" {
+  source                  = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=5.1.0"
 
-  operation_id            = "request-validated-measure-data"
+  operation_id            = "request-change-of-price-list"
   api_management_api_name = module.apima_b2b.name
   resource_group_name     = azurerm_resource_group.this.name
   api_management_name     = module.apim_shared.name
-  display_name            = "Timeseries: Request validated measure data"
+  display_name            = "Charges: Request change of price list"
   method                  = "POST"
-  url_template            = "/v1.0/cim/requestvalidatedmeasuredata"
+  url_template            = "/v1.0/cim/requestchangeofpricelist"
   policies                = [
     {
       xml_content = <<XML
@@ -32,14 +32,12 @@ module "apimao_request_validated_measure_data" {
                 <required-claims>
                     <claim name="roles" match="any">
                         <value>gridoperator</value>
-                        <value>electricalsupplier</value>
                         <value>transmissionsystemoperator</value>
-                        <value>meterdataresponsible</value>
                     </claim>
                 </required-claims>
             </validate-jwt>
-            <set-backend-service backend-id="${azurerm_api_management_backend.timeseries.name}" />
-            <rewrite-uri template="/api/TimeSeriesHttpTrigger" />
+            <set-backend-service backend-id="${azurerm_api_management_backend.charges.name}" />
+            <rewrite-uri template="/api/ChargeIngestion" />
           </inbound>
         </policies>
       XML

@@ -27,9 +27,9 @@ module "mssql_data" {
   location                        = azurerm_resource_group.this.location
   administrator_login             = local.mssqlServerAdminName
   administrator_login_password    = random_password.mssql_administrator_login_password.result
-  private_dns_resource_group_name = var.private_dns_resource_group_name
   private_endpoint_subnet_id      = module.snet_internal_private_endpoints.id
-
+  log_analytics_workspace_id      = module.log_workspace_shared.id 
+  
   tags                            = azurerm_resource_group.this.tags
 }
 

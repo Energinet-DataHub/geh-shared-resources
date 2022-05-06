@@ -12,25 +12,45 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "apima_b2b" {
-  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.3.0"
+  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.16.0"
 
-  name                      = "b2b"
-  project_name              = var.domain_name_short
-  environment_short         = var.environment_short
-  environment_instance      = var.environment_instance
-  api_management_name       = module.apim_shared.name
-  resource_group_name       = azurerm_resource_group.this.name
-  revision                  = "1"
-  display_name              = "B2B Api"
-  protocols                 = ["https"]
-  subscription_required     = false
-  authorization_server_name = azurerm_api_management_authorization_server.oauth_server.name
-  policies                  = [
+  name                        = "b2b"
+  project_name                = var.domain_name_short
+  environment_short           = var.environment_short
+  environment_instance        = var.environment_instance
+  api_management_name         = module.apim_shared.name
+  resource_group_name         = azurerm_resource_group.this.name
+  display_name                = "B2B Api"
+  authorization_server_name   = azurerm_api_management_authorization_server.oauth_server.name
+  apim_logger_id              = azurerm_api_management_logger.apim_logger.id
+  logger_sampling_percentage  = 100.0
+  logger_verbosity            = "verbose"
+  policies                    = [
     {
       xml_content = <<XML
         <policies>
           <inbound>
             <base />
+            <trace source="B2B API" severity="verbose">
+                <message>@{
+                    string authHeader = context.Request.Headers.GetValueOrDefault("Authorization", "");
+                    string callerId = "(empty)";
+                    if (authHeader?.Length > 0)
+                    {
+                        string[] authHeaderParts = authHeader.Split(' ');
+                        if (authHeaderParts?.Length == 2 && authHeaderParts[0].Equals("Bearer", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            Jwt jwt;
+                            if (authHeaderParts[1].TryParseJwt(out jwt))
+                            {
+                                callerId = (jwt.Claims.GetValueOrDefault("azp", "(empty)"));
+                            }
+                        }
+                    }
+                    return $"Caller ID (claims.azp): {callerId}";
+                }</message>
+                <metadata name="Correlation-ID" value="@($"{context.RequestId}")" />
+            </trace>
             <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Failed policy requirements, or token is invalid or missing.">
                 <openid-config url="https://login.microsoftonline.com/${var.apim_b2c_tenant_id}/v2.0/.well-known/openid-configuration" />
                 <required-claims>
@@ -41,6 +61,10 @@ module "apima_b2b" {
             </validate-jwt>
             <choose>
                 <when condition="@(context.Request.Method == "POST")">
+                    <check-header name="Content-Type" failed-check-httpcode="415" failed-check-error-message="Only Content-Type application/xml is allowed" ignore-case="true">
+                      <value>application/xml</value>
+                      <value>application/xml; charset=utf-8</value>
+                    </check-header>
                     <set-variable name="bodySize" value="@(context.Request.Headers["Content-Length"][0])" />
                     <choose>
                         <when condition="@(int.Parse(context.Variables.GetValueOrDefault<string>("bodySize"))<52428800)">
@@ -57,10 +81,6 @@ module "apima_b2b" {
                     </choose>
                 </when>
             </choose>
-            <check-header name="Content-Type" failed-check-httpcode="415" failed-check-error-message="Only Content-Type application/xml is allowed" ignore-case="true">
-              <value>application/xml</value>
-              <value>application/xml; charset=utf-8</value>
-            </check-header>
             <set-header name="Correlation-ID" exists-action="override">
                 <value>@($"{context.RequestId}")</value>
             </set-header>
@@ -73,9 +93,15 @@ module "apima_b2b" {
           </backend>
           <outbound>
               <base />
+              <set-header name="CorrelationId" exists-action="override">
+                  <value>@($"{context.RequestId}")</value>
+              </set-header>
           </outbound>
           <on-error>
               <base />
+              <set-header name="CorrelationId" exists-action="override">
+                  <value>@($"{context.RequestId}")</value>
+              </set-header>
           </on-error>
         </policies>
       XML

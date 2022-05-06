@@ -11,18 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-name: CD
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  publish_and_deploy_release:
-    uses: Energinet-DataHub/.github/.github/workflows/publish-and-deploy-release.yml@7.1.0
-    secrets:
-      PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-      DEPLOYMENT_WORKFLOW_ID: ${{ secrets.DEPLOYMENT_WORKFLOW_ID  }}
-      DEPLOYMENT_REPOSITORY: ${{ secrets.DEPLOYMENT_REPOSITORY }}
-      DEPLOYMENT_REPOSITORY_OWNER: ${{ secrets.DEPLOYMENT_REPOSITORY_OWNER }}
+data "azurerm_virtual_network" "this" {
+  name                = var.virtual_network_name
+  resource_group_name = var.virtual_network_resource_group_name
+}

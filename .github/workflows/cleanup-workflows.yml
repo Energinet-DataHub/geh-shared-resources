@@ -11,18 +11,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-name: CD
+name: Cleanup workflows
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      repository:
+        type: string
+        description: 'Repository the cleanup job is run towards. {owner}/{repository}'
+        required: true
 
 jobs:
-  publish_and_deploy_release:
-    uses: Energinet-DataHub/.github/.github/workflows/publish-and-deploy-release.yml@7.1.0
-    secrets:
-      PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-      DEPLOYMENT_WORKFLOW_ID: ${{ secrets.DEPLOYMENT_WORKFLOW_ID  }}
-      DEPLOYMENT_REPOSITORY: ${{ secrets.DEPLOYMENT_REPOSITORY }}
-      DEPLOYMENT_REPOSITORY_OWNER: ${{ secrets.DEPLOYMENT_REPOSITORY_OWNER }}
+  cleanup_workflows:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cleanup workflow
+        uses: ./.github/actions/cleanup-workflows
+        with:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          REPOSITORY: ${{ github.event.inputs.repository }}

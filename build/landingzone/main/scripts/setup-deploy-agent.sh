@@ -48,7 +48,7 @@ tar xzf ./actions-runner-linux-x64-2.285.1.tar.gz
 #
 
 # Create the runner and start the configuration experience
-./config.sh --unattended --url https://github.com/Energinet-DataHub/dh3-environments --token $1 --name $2 --replace --labels azure,$2
+./config.sh --unattended --url https://github.com/Energinet-DataHub/dh3-environments --token $1 --name $2 --replace --labels azure,$3
 
 #
 # Run as a service
@@ -82,6 +82,12 @@ sudo apt-get update; \
   sudo apt-get update && \
   sudo apt-get install -y dotnet-sdk-5.0
 
+# .NET SDK 6.0
+sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-6.0
+
 ##################################
 # Install other dependencies
 ##################################
@@ -98,3 +104,21 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 #
 
 sudo apt-get install unzip
+
+#
+# Install jq
+#
+
+sudo apt-get install -y jq
+
+#
+# Install pip
+#
+
+sudo apt install -y python-pip
+
+#
+# Install Databricks CLI on machine
+#
+
+pip install --upgrade databricks-cli
