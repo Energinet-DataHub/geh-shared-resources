@@ -24,9 +24,9 @@ module "dbw_shared" {
   main_virtual_network_id                   = data.azurerm_virtual_network.this.id
   main_virtual_network_name                 = data.azurerm_virtual_network.this.name
   main_virtual_network_resource_group_name  = data.azurerm_virtual_network.this.resource_group_name
-  databricks_virtual_network_address_space  = "10.142.92.0/23"
-  private_subnet_address_prefix             = "10.142.92.0/24"
-  public_subnet_address_prefix              = "10.142.93.0/24"
+  databricks_virtual_network_address_space  = var.databricks_vnet_address_space
+  private_subnet_address_prefix             = var.databricks_private_subnet_address_prefix
+  public_subnet_address_prefix              = var.databricks_public_subnet_address_prefix
 
   tags                                      = azurerm_resource_group.this.tags
 }

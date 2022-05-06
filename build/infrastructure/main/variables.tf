@@ -125,3 +125,18 @@ variable ag_primary_email_address {
   type          = string
   description   = "Email address of primary action group to which alerts will be routed."
 }
+
+variable databricks_vnet_address_space {
+  type          = string
+  description   = "Address space of the Virtual network where the Databricks Workspace is deployed."
+}
+
+variable databricks_private_subnet_address_prefix {
+  type          = number
+  description   = "The address prefix of the private subnet used by Databricks."
+}
+
+variable databricks_public_subnet_address_prefix {
+  type          = string
+  description   = "The address prefix of the public subnet used by Databricks."
+}
