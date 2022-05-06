@@ -21,7 +21,7 @@ module "sb_domain_relay" {
   resource_group_name             = azurerm_resource_group.this.name
   location                        = azurerm_resource_group.this.location
   private_endpoint_subnet_id      = module.snet_private_endpoints.id
-  private_dns_resource_group_name = var.private_dns_resource_group_name
+  log_analytics_workspace_id      = module.log_workspace_shared.id 
   auth_rules                      = [
     {
       name    = "listen",
@@ -44,7 +44,7 @@ module "sb_domain_relay" {
     },
   ]
 
-  tags                            = azurerm_resource_group.this.tags
+  tags                        = azurerm_resource_group.this.tags
 }
 
 module "kvs_sb_domain_relay_listen_connection_string" {

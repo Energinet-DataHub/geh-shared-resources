@@ -25,10 +25,8 @@ module "st_market_operator_logs" {
   environment_instance              = var.environment_instance
   resource_group_name               = azurerm_resource_group.this.name
   location                          = azurerm_resource_group.this.location
+  log_analytics_workspace_id        = module.log_workspace_shared.id
   private_endpoint_subnet_id        = module.snet_private_endpoints.id
-  private_dns_resource_group_names  = [
-    var.private_dns_resource_group_name
-  ]
   account_replication_type          = "LRS"
   access_tier                       = "Hot"
   account_tier                      = "Standard"
@@ -41,7 +39,7 @@ module "st_market_operator_logs" {
     },
   ]
 
-  tags                      = azurerm_resource_group.this.tags
+  tags                        = azurerm_resource_group.this.tags
 }
 
 module "kvs_st_market_operator_logs_primary_connection_string" {

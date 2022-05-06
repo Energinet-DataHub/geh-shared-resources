@@ -27,21 +27,22 @@ module "snet_apim" {
 }
 
 module "apim_shared" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=6.0.0"
+  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=6.0.0"
 
-  name                  = "shared"
-  project_name          = var.domain_name_short
-  environment_short     = var.environment_short
-  environment_instance  = var.environment_instance
-  resource_group_name   = azurerm_resource_group.this.name
-  location              = azurerm_resource_group.this.location
-  publisher_name        = var.project_name
-  publisher_email       = var.apim_publisher_email
-  sku_name              = "Developer_1"
-  virtual_network_type  = "External"
-  subnet_id             = module.snet_apim.id
+  name                        = "shared"
+  project_name                = var.domain_name_short
+  environment_short           = var.environment_short
+  environment_instance        = var.environment_instance
+  resource_group_name         = azurerm_resource_group.this.name
+  location                    = azurerm_resource_group.this.location
+  publisher_name              = var.project_name
+  publisher_email             = var.apim_publisher_email
+  sku_name                    = "Developer_1"
+  virtual_network_type        = "External"
+  subnet_id                   = module.snet_apim.id
+  log_analytics_workspace_id  = module.log_workspace_shared.id
 
-  tags                  = azurerm_resource_group.this.tags
+  tags                        = azurerm_resource_group.this.tags
 }
 
 resource "azurerm_api_management_authorization_server" "oauth_server" {
@@ -77,6 +78,46 @@ resource "azurerm_api_management_logger" "apim_logger" {
   application_insights {
     instrumentation_key = module.appi_shared.instrumentation_key
   }
+}
+
+module "kvs_apim_gateway_url" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "apim-gateway-url"
+  value         = module.apim_shared.gateway_url
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_apim_logger_id" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "apim-logger-id"
+  value         = azurerm_api_management_logger.apim_logger.id
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_apim_instance_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "apim-instance-name"
+  value         = module.apim_shared.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_apim_instance_resource_group_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "apim-instance-resource-group-name"
+  value         = azurerm_resource_group.this.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
 }
 
 module "kvs_b2c_tenant_id" {

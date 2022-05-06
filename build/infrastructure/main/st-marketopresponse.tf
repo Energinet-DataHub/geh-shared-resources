@@ -25,12 +25,10 @@ module "st_market_operator_response" {
   resource_group_name               = azurerm_resource_group.this.name
   location                          = azurerm_resource_group.this.location
   private_endpoint_subnet_id        = module.snet_private_endpoints.id
-  private_dns_resource_group_names  = [
-    var.private_dns_resource_group_name
-  ]
   account_replication_type          = "LRS"
   access_tier                       = "Hot"
   account_tier                      = "Standard"
+  log_analytics_workspace_id        = module.log_workspace_shared.id
   containers                        = [
     {
       name = local.postoffice_reply_container_name,
@@ -52,7 +50,7 @@ module "st_market_operator_response" {
     },
   ]
 
-  tags                      = azurerm_resource_group.this.tags
+  tags                              = azurerm_resource_group.this.tags
 }
 
 module "kvs_st_market_operator_response_primary_connection_string" {

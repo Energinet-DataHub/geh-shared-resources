@@ -14,19 +14,21 @@
 module "plan_shared" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=6.0.0"
 
-  name                  = "shared"
-  project_name          = var.domain_name_short
-  environment_short     = var.environment_short
-  environment_instance  = var.environment_instance
-  resource_group_name   = azurerm_resource_group.this.name
-  location              = azurerm_resource_group.this.location
-  kind                  = "Windows"
-  sku                   = {
+  name                           = "shared"
+  project_name                   = var.domain_name_short
+  environment_short              = var.environment_short
+  environment_instance           = var.environment_instance
+  resource_group_name            = azurerm_resource_group.this.name
+  location                       = azurerm_resource_group.this.location
+  kind                           = "Windows"
+  monitor_alerts_action_group_id = module.ag_primary.id
+
+  sku                            = {
     tier  = "PremiumV2"
     size  = "P2v2"
   }
 
-  tags                = azurerm_resource_group.this.tags
+  tags                           = azurerm_resource_group.this.tags
 }
 
 module "kvs_plan_shared_id" {

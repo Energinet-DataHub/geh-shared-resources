@@ -61,8 +61,6 @@ module "kvs_databricks_private_dns_resource_group_name" {
   tags          = azurerm_resource_group.this.tags
 }
 
-
-
 resource "null_resource" "databricks_token" {
   triggers = {
     workspace = module.dbw_shared.id

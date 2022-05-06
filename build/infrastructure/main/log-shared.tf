@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "log_workspace_shared" {
-  source               = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/log-workspace?ref=5.6.0"
+  source               = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/log-workspace?ref=5.8.0"
   name                 = "shared"
   environment_short    = var.environment_short
   environment_instance = var.environment_instance
@@ -21,4 +21,24 @@ module "log_workspace_shared" {
   sku                  = "PerGB2018"
   retention_in_days    = var.log_retention_in_days
   project_name         = var.domain_name_short
+}
+
+module "kvs_log_shared_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.8.0"
+
+  name          = "log-shared-name"
+  value         = module.log_workspace_shared.name
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_log_shared_id" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.8.0"
+
+  name          = "log-shared-id"
+  value         = module.log_workspace_shared.id
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
 }
