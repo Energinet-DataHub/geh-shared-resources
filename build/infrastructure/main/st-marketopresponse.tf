@@ -16,7 +16,7 @@ locals {
 }
 
 module "st_market_operator_response" {
-  source                            = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0-databricks-vnet"
+  source                            = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
 
   name                              = "marketres"
   project_name                      = var.domain_name_short
