@@ -103,4 +103,3 @@ module "kvs_snet_vnet_integrations_id" {
 
   tags          = azurerm_resource_group.this.tags
 }
-
