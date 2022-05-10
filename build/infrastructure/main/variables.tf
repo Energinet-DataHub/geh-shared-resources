@@ -132,7 +132,7 @@ variable databricks_vnet_address_space {
 }
 
 variable databricks_private_subnet_address_prefix {
-  type          = number
+  type          = string
   description   = "The address prefix of the private subnet used by Databricks."
 }
 
