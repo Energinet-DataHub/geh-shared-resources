@@ -73,6 +73,10 @@ module "snet_vnet_integrations" {
     var.vnet_integration_address_space
   ]
   enforce_private_link_service_network_policies   = true
+  service_endpoints                               = [
+    "Microsoft.EventHub",
+    "Microsoft.KeyVault"
+  ]
 
   # Delegate the subnet to "Microsoft.Web/serverFarms"
   delegations =  [{
