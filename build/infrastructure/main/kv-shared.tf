@@ -22,8 +22,9 @@ module "kv_shared" {
   location                        = azurerm_resource_group.this.location
   enabled_for_template_deployment = true
   sku_name                        = "premium"
-  log_analytics_workspace_id      = module.log_workspace_shared.id 
+  log_analytics_workspace_id      = module.log_workspace_shared.id
   private_endpoint_subnet_id      = module.snet_private_endpoints.id
+  allowed_subnet_id               = module.snet_vnet_integrations.id
 
   tags                            = azurerm_resource_group.this.tags
 }
