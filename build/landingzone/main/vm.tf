@@ -22,6 +22,9 @@ module "snet_deployagent" {
   address_prefixes      = [
     var.deployment_agent_address_space
   ]
+  service_endpoints                               = [
+    "Microsoft.KeyVault"
+  ]
 }
 
 # Create public IP
