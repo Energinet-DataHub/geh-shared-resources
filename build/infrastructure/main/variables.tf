@@ -100,6 +100,11 @@ variable virtual_network_name {
   description   = "Name of the landing zone virtual network"
 }
 
+variable deployment_agents_subnet_name {
+  type          = string
+  description   = "Name of the subnet hosting the deployment agents."
+}
+
 variable apim_address_space {
   type          = string
   description   = "Address space of the APIM subnet"
