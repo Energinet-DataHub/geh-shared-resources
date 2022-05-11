@@ -17,6 +17,7 @@ locals {
   SBS_MARKET_PARTICIPANT_TO_TIMESERIES_NAME = "market-participant-changed-to-timeseries"
   SBS_MARKET_PARTICIPANT_TO_METERINGPOINT_NAME = "market-participant-changed-to-meteringpoint"
   SBS_MARKET_PARTICIPANT_TO_MARKETROLES_NAME = "market-participant-changed-to-marketroles"
+  SBS_MARKET_PARTICIPANT_TO_MESSAGEHUB_NAME = "market-participant-changed-to-messagehub"
 }
 
 module "sbt_market_participant_changed" {
@@ -43,6 +44,10 @@ module "sbt_market_participant_changed" {
     },
     {
       name                = local.SBS_MARKET_PARTICIPANT_TO_MARKETROLES_NAME
+      max_delivery_count  = 10
+    },
+    {
+      name                = local.SBS_MARKET_PARTICIPANT_TO_MESSAGEHUB_NAME
       max_delivery_count  = 10
     },
   ]
@@ -103,6 +108,16 @@ module "kvs_sbs_market_participant_changed_to_marketroles_name" {
 
   name          = "sbs-market-participant-changed-to-marketroles-name"
   value         = local.SBS_MARKET_PARTICIPANT_TO_MARKETROLES_NAME
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_sbs_market_participant_changed_to_messagehub_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+
+  name          = "sbs-market-participant-changed-to-messagehub-name"
+  value         = local.SBS_MARKET_PARTICIPANT_TO_MESSAGEHUB_NAME
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
