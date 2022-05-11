@@ -68,7 +68,6 @@ resource "null_resource" "databricks_token" {
   provisioner "local-exec" {
     command = "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/scripts/generate-pat-token.sh"
     environment = {
-      RESOURCE_GROUP = azurerm_resource_group.this.name
       DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
       KEY_VAULT = module.kv_shared.name
       SECRET_NAME = "dbw-shared-workspace-token"
