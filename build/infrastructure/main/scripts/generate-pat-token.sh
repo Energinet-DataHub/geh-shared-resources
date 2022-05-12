@@ -11,13 +11,6 @@ test -n "$ARM_CLIENT_SECRET"
 test -n "$ARM_TENANT_ID"
 test -n "$DATABRICKS_ENDPOINT"
 
-echo "$FILE_PATH"
-echo "$DATABRICKS_WORKSPACE_RESOURCE_ID"
-echo "$DATABRICKS_ENDPOINT"
-echo "$ARM_CLIENT_ID"
-echo "$ARM_CLIENT_SECRET"
-echo "$ARM_TENANT_ID"
-
 # Login
 az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" -t "$ARM_TENANT_ID"
 
@@ -39,5 +32,7 @@ api_response=$(curl -sf $DATABRICKS_ENDPOINT/api/2.0/token/create \
 pat_token=$(jq .token_value -r <<< "$api_response")
 
 az logout
+
+echo $pat_token
 
 echo $pat_token >> $FILE_PATH
