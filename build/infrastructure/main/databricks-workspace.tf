@@ -75,9 +75,9 @@ module "kvs_databricks_private_dns_resource_group_name" {
 #       FILE_PATH = local.api_token_file_path
 #       DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
 #       DATABRICKS_ENDPOINT = "https://${module.dbw_shared.location}.azuredatabricks.net"
-#       # ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_TENANT_ID are already 
+#       # ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_TENANT_ID are already
 #       # present in the environment if you are using the Terraform
-#       # extension for Azure DevOps or the starter from 
+#       # extension for Azure DevOps or the starter from
 #       # https://github.com/algattik/terraform-azure-pipelines-starter.
 #       # Otherwise, provide them as additional variables.
 #     }
@@ -105,12 +105,20 @@ module "kvs_databricks_private_dns_resource_group_name" {
 #   tags          = azurerm_resource_group.this.tags
 # }
 
-module "kvs_dummy_test" {
+resource "time_sleep" "wait_for_dns_record" {
+  depends_on = [module.kv_shared.id]
+
+  create_duration = "10m"
+}
+
+module "kvs_dummy_test_01" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
-  name          = "dummy-test-secret"
+  name          = "dummy-test-secret-01"
   value         = "whoops"
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
+
+  depends_on = [time_sleep.wait_for_dns_record]
 }
