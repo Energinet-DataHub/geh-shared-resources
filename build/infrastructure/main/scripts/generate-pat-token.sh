@@ -4,19 +4,17 @@
 set -e
 
 # Ensure all required environment variables are present
-test -n "$DATABRICKS_WORKSPACE_RESOURCE_ID"
-#test -n "$KEY_VAULT"
-#test -n "$SECRET_NAME"
-test -n "$ARM_CLIENT_ID"
-test -n "$ARM_CLIENT_SECRET"
-test -n "$ARM_TENANT_ID"
-test -n "$DATABRICKS_ENDPOINT"
+# test -n "$DATABRICKS_WORKSPACE_RESOURCE_ID"
+# test -n "$ARM_CLIENT_ID"
+# test -n "$ARM_CLIENT_SECRET"
+# test -n "$ARM_TENANT_ID"
+# test -n "$DATABRICKS_ENDPOINT"
 
 echo "$DATABRICKS_WORKSPACE_RESOURCE_ID"
+echo "$DATABRICKS_ENDPOINT"
 echo "$ARM_CLIENT_ID"
 echo "$ARM_CLIENT_SECRET"
 echo "$ARM_TENANT_ID"
-echo "$DATABRICKS_ENDPOINT"
 
 # Login
 az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" -t "$ARM_TENANT_ID"
@@ -38,6 +36,6 @@ api_response=$(curl -sf $DATABRICKS_ENDPOINT/api/2.0/token/create \
   -d '{ "comment": "Terraform-generated token" }')
 pat_token=$(jq .token_value -r <<< "$api_response")
 
-jq -n --arg foobaz "$PAT_TOKEN" '{"pat_token":$pat_token}'
+jq -n --arg pat_token "$pat_token" '{"pat_token":$pat_token}'
 
 #az keyvault secret set --vault-name "$KEY_VAULT" -n "$SECRET_NAME" --value "$pat_token"

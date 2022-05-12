@@ -62,7 +62,7 @@ module "kvs_databricks_private_dns_resource_group_name" {
 }
 
 data "external" "databricks_token" {
-  program = ["sh", "${path.cwd}/scripts/generate-pat-token.sh"]
+  program = ["bash", "${path.cwd}/scripts/generate-pat-token.sh"]
 
   query = {
       DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
