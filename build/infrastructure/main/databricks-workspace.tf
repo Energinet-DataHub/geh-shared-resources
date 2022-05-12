@@ -115,7 +115,7 @@ module "kvs_dummy_test_01" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "dummy-test-secret-01"
-  value         = "whoops"
+  value         = "whoops-I-did-it-again!"
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
