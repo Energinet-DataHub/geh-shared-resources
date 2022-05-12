@@ -67,7 +67,7 @@ locals {
 
 resource "null_resource" "databricks_token" {
   triggers = {
-    workspace = module.dbw_shared.id
+    always_run = "${timestamp()}"
   }
   provisioner "local-exec" {
     command = "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/scripts/generate-pat-token.sh"
@@ -82,6 +82,10 @@ resource "null_resource" "databricks_token" {
       # Otherwise, provide them as additional variables.
     }
   }
+
+  depends_on = [
+    module.dbw_shared
+  ]
 }
 
 data "local_file" "api_token" {
