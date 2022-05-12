@@ -36,6 +36,7 @@ echo "$DATABRICKS_ENDPOINT"
 #   -d '{ "comment": "Terraform-generated token" }')
 # pat_token=$(jq .token_value -r <<< "$api_response")
 
+sudo apt install -y jq
 jq -n --arg pat_token "$pat_token" '{"pat_token":test}'
 
 #az keyvault secret set --vault-name "$KEY_VAULT" -n "$SECRET_NAME" --value "$pat_token"
