@@ -33,6 +33,4 @@ pat_token=$(jq .token_value -r <<< "$api_response")
 
 az logout
 
-echo $pat_token
-
 echo $pat_token >> $FILE_PATH
