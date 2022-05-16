@@ -61,9 +61,9 @@ module "kvs_databricks_private_dns_resource_group_name" {
   tags          = azurerm_resource_group.this.tags
 }
 
-locals {
-  api_token_file_path = "${path.cwd}/api_token.txt"
-}
+# locals {
+#   api_token_file_path = "${path.cwd}/api_token.txt"
+# }
 
 resource "null_resource" "databricks_token" {
   triggers = {
@@ -72,7 +72,7 @@ resource "null_resource" "databricks_token" {
   provisioner "local-exec" {
     command = "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/scripts/generate-pat-token.sh"
     environment = {
-      FILE_PATH = local.api_token_file_path
+      # FILE_PATH = local.api_token_file_path
       DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
       KEY_VAULT = module.kv_shared.name
       SECRET_NAME = "dbw-shared-workspace-token"
