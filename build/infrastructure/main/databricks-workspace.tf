@@ -61,10 +61,6 @@ module "kvs_databricks_private_dns_resource_group_name" {
   tags          = azurerm_resource_group.this.tags
 }
 
-# locals {
-#   api_token_file_path = "${path.cwd}/api_token.txt"
-# }
-
 resource "null_resource" "databricks_token" {
   triggers = {
     always_run = "${timestamp()}"
@@ -72,7 +68,6 @@ resource "null_resource" "databricks_token" {
   provisioner "local-exec" {
     command = "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/scripts/generate-pat-token.sh"
     environment = {
-      # FILE_PATH = local.api_token_file_path
       DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
       KEY_VAULT = module.kv_shared.name
       SECRET_NAME = "dbw-shared-workspace-token"
@@ -89,20 +84,3 @@ resource "null_resource" "databricks_token" {
     module.dbw_shared
   ]
 }
-
-# data "local_file" "api_token" {
-#   filename = local.api_token_file_path
-#   depends_on = [
-#     null_resource.databricks_token
-#   ]
-# }
-
-# module "kvs_databricks_token" {
-#   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
-
-#   name          = "dbw-shared-workspace-token"
-#   value         = data.local_file.api_token.content
-#   key_vault_id  = module.kv_shared.id
-
-#   tags          = azurerm_resource_group.this.tags
-# }
