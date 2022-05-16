@@ -61,64 +61,46 @@ module "kvs_databricks_private_dns_resource_group_name" {
   tags          = azurerm_resource_group.this.tags
 }
 
-# locals {
-#   api_token_file_path = "${path.cwd}/api_token.txt"
-# }
-
-# resource "null_resource" "databricks_token" {
-#   triggers = {
-#     always_run = "${timestamp()}"
-#   }
-#   provisioner "local-exec" {
-#     command = "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/scripts/generate-pat-token.sh"
-#     environment = {
-#       FILE_PATH = local.api_token_file_path
-#       DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
-#       DATABRICKS_ENDPOINT = "https://${module.dbw_shared.location}.azuredatabricks.net"
-#       # ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_TENANT_ID are already
-#       # present in the environment if you are using the Terraform
-#       # extension for Azure DevOps or the starter from
-#       # https://github.com/algattik/terraform-azure-pipelines-starter.
-#       # Otherwise, provide them as additional variables.
-#     }
-#   }
-
-#   depends_on = [
-#     module.dbw_shared
-#   ]
-# }
-
-# data "local_file" "api_token" {
-#   filename = local.api_token_file_path
-#   depends_on = [
-#     null_resource.databricks_token
-#   ]
-# }
-
-# module "kvs_databricks_token" {
-#   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
-
-#   name          = "dbw-shared-workspace-token"
-#   value         = data.local_file.api_token.content
-#   key_vault_id  = module.kv_shared.id
-
-#   tags          = azurerm_resource_group.this.tags
-# }
-
-resource "time_sleep" "wait_for_dns_record" {
-  depends_on = [module.kv_shared.id]
-
-  create_duration = "10m"
+locals {
+  api_token_file_path = "${path.cwd}/api_token.txt"
 }
 
-module "kvs_dummy_test_01" {
+resource "null_resource" "databricks_token" {
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+  provisioner "local-exec" {
+    command = "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/scripts/generate-pat-token.sh"
+    environment = {
+      FILE_PATH = local.api_token_file_path
+      DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
+      DATABRICKS_ENDPOINT = "https://${module.dbw_shared.location}.azuredatabricks.net"
+      # ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_TENANT_ID are already
+      # present in the environment if you are using the Terraform
+      # extension for Azure DevOps or the starter from
+      # https://github.com/algattik/terraform-azure-pipelines-starter.
+      # Otherwise, provide them as additional variables.
+    }
+  }
+
+  depends_on = [
+    module.dbw_shared
+  ]
+}
+
+data "local_file" "api_token" {
+  filename = local.api_token_file_path
+  depends_on = [
+    null_resource.databricks_token
+  ]
+}
+
+module "kvs_databricks_token" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
-  name          = "dummy-test-secret-01"
-  value         = "whoops-I-did-it-again and again!"
+  name          = "dbw-shared-workspace-token"
+  value         = data.local_file.api_token.content
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
-
-  depends_on = [time_sleep.wait_for_dns_record]
 }
