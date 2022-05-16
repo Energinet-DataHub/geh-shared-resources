@@ -4,8 +4,10 @@
 set -e
 
 # Ensure all required environment variables are present
-test -n "$FILE_PATH"
+# test -n "$FILE_PATH"
 test -n "$DATABRICKS_WORKSPACE_RESOURCE_ID"
+test -n "$KEY_VAULT"
+test -n "$SECRET_NAME"
 test -n "$ARM_CLIENT_ID"
 test -n "$ARM_CLIENT_SECRET"
 test -n "$ARM_TENANT_ID"
@@ -31,6 +33,8 @@ api_response=$(curl -sf $DATABRICKS_ENDPOINT/api/2.0/token/create \
   -d '{ "comment": "Terraform-generated token" }')
 pat_token=$(jq .token_value -r <<< "$api_response")
 
+az keyvault secret set --vault-name "$KEY_VAULT" -n "$SECRET_NAME" --value "$pat_token"
+
 az logout
 
-echo $pat_token >> $FILE_PATH
+# echo $pat_token >> $FILE_PATH

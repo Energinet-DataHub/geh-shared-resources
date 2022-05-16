@@ -74,6 +74,8 @@ resource "null_resource" "databricks_token" {
     environment = {
       FILE_PATH = local.api_token_file_path
       DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
+      KEY_VAULT = module.kv_shared.name
+      SECRET_NAME = "dbw-shared-workspace-token"
       DATABRICKS_ENDPOINT = "https://${module.dbw_shared.location}.azuredatabricks.net"
       # ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_TENANT_ID are already
       # present in the environment if you are using the Terraform
@@ -88,19 +90,19 @@ resource "null_resource" "databricks_token" {
   ]
 }
 
-data "local_file" "api_token" {
-  filename = local.api_token_file_path
-  depends_on = [
-    null_resource.databricks_token
-  ]
-}
+# data "local_file" "api_token" {
+#   filename = local.api_token_file_path
+#   depends_on = [
+#     null_resource.databricks_token
+#   ]
+# }
 
-module "kvs_databricks_token" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+# module "kvs_databricks_token" {
+#   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
-  name          = "dbw-shared-workspace-token"
-  value         = data.local_file.api_token.content
-  key_vault_id  = module.kv_shared.id
+#   name          = "dbw-shared-workspace-token"
+#   value         = data.local_file.api_token.content
+#   key_vault_id  = module.kv_shared.id
 
-  tags          = azurerm_resource_group.this.tags
-}
+#   tags          = azurerm_resource_group.this.tags
+# }
