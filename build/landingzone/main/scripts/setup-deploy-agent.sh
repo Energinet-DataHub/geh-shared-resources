@@ -89,6 +89,13 @@ sudo apt-get update; \
   sudo apt-get install -y dotnet-sdk-6.0
 
 ##################################
+# Install Docker
+##################################
+
+ sudo apt-get update; \
+    sudo apt install -y docker.io
+
+##################################
 # Install other dependencies
 ##################################
 
