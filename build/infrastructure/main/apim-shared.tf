@@ -47,10 +47,14 @@ module "apim_shared" {
       xml_content = <<XML
         <policies>
           <inbound>
-            <return-response>
-              <set-status code="503" reason="Service Unavailable"/>
-              <set-body>DataHub is in maintenance mode.</set-body>
-            </return-response>
+            <choose>
+              <when condition="@(false)">
+                <return-response>
+                  <set-status code="503" reason="Service Unavailable"/>
+                  <set-body>DataHub is in maintenance mode.</set-body>
+                </return-response>
+              </when>
+            </choose>
           </inbound>
           <backend>
             <forward-request />
