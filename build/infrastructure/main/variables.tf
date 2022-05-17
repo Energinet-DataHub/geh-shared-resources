@@ -47,7 +47,7 @@ variable apim_publisher_email {
 
 variable apim_maintenance_mode {
   type          = bool
-  description   = "(Required) Determine if API Management is in maintenance mode. In maintenance mode all requests will return 503 Service Unavailable."
+  description   = "Determine if API Management is in maintenance mode. In maintenance mode all requests will return 503 Service Unavailable."
   default       = false
 }
 
