@@ -42,6 +42,26 @@ module "apim_shared" {
   subnet_id                   = module.snet_apim.id
   log_analytics_workspace_id  = module.log_workspace_shared.id
 
+  policies                    = [
+    {
+      xml_content = <<XML
+        <policies>
+          <inbound>
+            <return-response>
+              <set-status code="503" reason="Service Unavailable"/>
+              <set-body>DataHub is in maintenance mode.</set-body>
+            </return-response>
+          </inbound>
+          <backend>
+            <forward-request />
+          </backend>
+          <outbound />
+          <on-error />
+        </policies>
+      XML
+    }
+  ]
+
   tags                        = azurerm_resource_group.this.tags
 }
 
