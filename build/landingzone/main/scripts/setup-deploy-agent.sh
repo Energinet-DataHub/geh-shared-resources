@@ -97,7 +97,7 @@ sudo apt-get update; \
 #
 
 sudo apt-get update; \
-  sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  sudo apt-get install -y moby-engine moby-cli moby-containerd
 
 # Verify installation
 sudo docker run hello-world
