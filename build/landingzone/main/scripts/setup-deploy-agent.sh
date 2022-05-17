@@ -58,35 +58,35 @@ sudo ./svc.sh install
 sudo ./svc.sh start
 sudo ./svc.sh status
 
-##################################
-# Install .NET SDK's
-##################################
+# ##################################
+# # Install .NET SDK's
+# ##################################
 
-#
-# Add the Microsoft package signing key to your list of trusted keys and add the package repository
-# See https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#1804-
-#
+# #
+# # Add the Microsoft package signing key to your list of trusted keys and add the package repository
+# # See https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#1804-
+# #
 
-wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
+# wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+# sudo dpkg -i packages-microsoft-prod.deb
+# rm packages-microsoft-prod.deb
 
-#
-# Install versions
-# See https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#how-to-install-other-versions
-#
+# #
+# # Install versions
+# # See https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#how-to-install-other-versions
+# #
 
-# .NET SDK 5.0
-sudo apt-get update; \
-  sudo apt-get install -y apt-transport-https && \
-  sudo apt-get update && \
-  sudo apt-get install -y dotnet-sdk-5.0
+# # .NET SDK 5.0
+# sudo apt-get update; \
+#   sudo apt-get install -y apt-transport-https && \
+#   sudo apt-get update && \
+#   sudo apt-get install -y dotnet-sdk-5.0
 
-# .NET SDK 6.0
-sudo apt-get update; \
-  sudo apt-get install -y apt-transport-https && \
-  sudo apt-get update && \
-  sudo apt-get install -y dotnet-sdk-6.0
+# # .NET SDK 6.0
+# sudo apt-get update; \
+#   sudo apt-get install -y apt-transport-https && \
+#   sudo apt-get update && \
+#   sudo apt-get install -y dotnet-sdk-6.0
 
 ##################################
 # Install Docker
@@ -102,37 +102,37 @@ sudo apt-get update; \
 # Verify installation
 sudo docker run hello-world
 
-##################################
-# Install other dependencies
-##################################
+# ##################################
+# # Install other dependencies
+# ##################################
 
-#
-# Install Azure CLI
-# See https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
-#
+# #
+# # Install Azure CLI
+# # See https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
+# #
 
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+# curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-#
-# Install unzip
-#
+# #
+# # Install unzip
+# #
 
-sudo apt-get install unzip
+# sudo apt-get install unzip
 
-#
-# Install jq
-#
+# #
+# # Install jq
+# #
 
-sudo apt-get install -y jq
+# sudo apt-get install -y jq
 
-#
-# Install pip
-#
+# #
+# # Install pip
+# #
 
-sudo apt install -y python-pip
+# sudo apt install -y python-pip
 
-#
-# Install Databricks CLI on machine
-#
+# #
+# # Install Databricks CLI on machine
+# #
 
-pip install --upgrade databricks-cli
+# pip install --upgrade databricks-cli
