@@ -114,11 +114,20 @@ echo \
 # Install Docker Engine
 
 sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt-get install -y \
+  docker-ce \
+  docker-ce-cli \
+  containerd.io \
+  docker-compose-plugin
+
+# Avoid prefacing 'docker' command with 'sudo'
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
 
 # Verify installation
-sudo docker --version
-sudo docker run hello-world
+docker --version
+docker run hello-world
 
 # ##################################
 # # Install other dependencies
