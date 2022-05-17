@@ -48,7 +48,7 @@ module "apim_shared" {
         <policies>
           <inbound>
             <choose>
-              <when condition="@(false)">
+              <when condition="@(true)">
                 <return-response>
                   <set-status code="503" reason="Service Unavailable"/>
                   <set-body>DataHub is in maintenance mode.</set-body>
