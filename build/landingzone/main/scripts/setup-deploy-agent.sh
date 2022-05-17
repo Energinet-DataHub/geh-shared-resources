@@ -24,6 +24,47 @@
 ###################################################################
 
 ##################################
+# Install Docker
+##################################
+
+#
+# See https://docs.docker.com/engine/install/ubuntu/
+#
+
+# Setup repository
+
+sudo apt-get update
+sudo apt-get install -y \
+  ca-certificates \
+  curl \
+  gnupg \
+  lsb-release
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Install Docker Engine
+
+sudo apt-get update
+sudo apt-get install -y \
+  docker-ce \
+  docker-ce-cli \
+  containerd.io \
+  docker-compose-plugin
+
+#
+# Avoid prefacing 'docker' command with 'sudo'
+# See https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+#
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+# IMPORTANT: GitHub runner service must be started AFTER this step for it to work
+
+##################################
 # GitHub runner
 ##################################
 
@@ -58,108 +99,67 @@ sudo ./svc.sh install
 sudo ./svc.sh start
 sudo ./svc.sh status
 
-# ##################################
-# # Install .NET SDK's
-# ##################################
-
-# #
-# # Add the Microsoft package signing key to your list of trusted keys and add the package repository
-# # See https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#1804-
-# #
-
-# wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-# sudo dpkg -i packages-microsoft-prod.deb
-# rm packages-microsoft-prod.deb
-
-# #
-# # Install versions
-# # See https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#how-to-install-other-versions
-# #
-
-# # .NET SDK 5.0
-# sudo apt-get update; \
-#   sudo apt-get install -y apt-transport-https && \
-#   sudo apt-get update && \
-#   sudo apt-get install -y dotnet-sdk-5.0
-
-# # .NET SDK 6.0
-# sudo apt-get update; \
-#   sudo apt-get install -y apt-transport-https && \
-#   sudo apt-get update && \
-#   sudo apt-get install -y dotnet-sdk-6.0
-
 ##################################
-# Install Docker
+# Install .NET SDK's
 ##################################
 
 #
-# See https://docs.docker.com/engine/install/ubuntu/
+# Add the Microsoft package signing key to your list of trusted keys and add the package repository
+# See https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#1804-
 #
 
-# Setup repository
+wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
 
-sudo apt-get update
-sudo apt-get install -y \
-  ca-certificates \
-  curl \
-  gnupg \
-  lsb-release
+#
+# Install versions
+# See https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#how-to-install-other-versions
+#
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+# .NET SDK 5.0
+sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-5.0
 
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+# .NET SDK 6.0
+sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-6.0
 
-# Install Docker Engine
+##################################
+# Install other dependencies
+##################################
 
-sudo apt-get update
-sudo apt-get install -y \
-  docker-ce \
-  docker-ce-cli \
-  containerd.io \
-  docker-compose-plugin
+#
+# Install Azure CLI
+# See https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
+#
 
-# Avoid prefacing 'docker' command with 'sudo'
-sudo groupadd docker
-sudo usermod -aG docker $USER
-newgrp docker
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Verify installation
-docker --version
-docker run hello-world
+#
+# Install unzip
+#
 
-# ##################################
-# # Install other dependencies
-# ##################################
+sudo apt-get install unzip
 
-# #
-# # Install Azure CLI
-# # See https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
-# #
+#
+# Install jq
+#
 
-# curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+sudo apt-get install -y jq
 
-# #
-# # Install unzip
-# #
+#
+# Install pip
+#
 
-# sudo apt-get install unzip
+sudo apt install -y python-pip
 
-# #
-# # Install jq
-# #
+#
+# Install Databricks CLI on machine
+#
 
-# sudo apt-get install -y jq
-
-# #
-# # Install pip
-# #
-
-# sudo apt install -y python-pip
-
-# #
-# # Install Databricks CLI on machine
-# #
-
-# pip install --upgrade databricks-cli
+pip install --upgrade databricks-cli
