@@ -92,8 +92,15 @@ sudo apt-get update; \
 # Install Docker
 ##################################
 
- sudo apt-get update; \
-    sudo apt install -y docker.io
+#
+# See https://docs.docker.com/engine/install/ubuntu/
+#
+
+sudo apt-get update; \
+  sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+# Verify installation
+sudo docker run hello-world
 
 ##################################
 # Install other dependencies
