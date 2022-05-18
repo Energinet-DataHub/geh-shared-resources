@@ -15,12 +15,12 @@ echo "$ARM_CLIENT_ID"
 echo "$ARM_CLIENT_SECRET"
 echo "$ARM_TENANT_ID"
 echo "$DATABRICKS_ENDPOINT"
-
-# # Login
-az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" -t "$ARM_TENANT_ID"
-
 pat_token="test"
 jq -n --arg token "$pat_token" '{"token":$token}'
+
+# # Login
+# az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" -t "$ARM_TENANT_ID"
+
 
 # # Get a token for the global Databricks application.
 # # The resource name is fixed and never changes.
