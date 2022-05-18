@@ -6,7 +6,7 @@ set -e
 eval "$(jq -r '@sh "DATABRICKS_WORKSPACE_RESOURCE_ID=\(.DATABRICKS_WORKSPACE_RESOURCE_ID) ARM_CLIENT_ID=\(.ARM_CLIENT_ID) ARM_CLIENT_SECRET=\(.ARM_CLIENT_SECRET) ARM_TENANT_ID=\(.ARM_TENANT_ID) DATABRICKS_ENDPOINT=\(.DATABRICKS_ENDPOINT)"')"
 
 # Login
-az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" -t "$ARM_TENANT_ID"
+az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" -t "$ARM_TENANT_ID" --output none
 
 new_token="test123456789"
 jq -n --arg token "$new_token" '{"token":$token}'
