@@ -85,26 +85,26 @@ module "kvs_databricks_private_dns_resource_group_name" {
 #   ]
 # }
 
-data "external" "databricks_token" {
-  program = ["bash", "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/scripts/generate-pat-token.sh"]
-  query = {
-    DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
-    DATABRICKS_ENDPOINT = "https://${module.dbw_shared.location}.azuredatabricks.net"
-    ARM_CLIENT_ID = var.arm_client_id
-    ARM_CLIENT_SECRET = var.arm_client_secret
-    ARM_TENANT_ID = var.arm_tenant_id
-  }
-  depends_on = [
-    module.dbw_shared
-  ]
-}
+# data "external" "databricks_token" {
+#   program = ["bash", "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/scripts/generate-pat-token.sh"]
+#   query = {
+#     DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
+#     DATABRICKS_ENDPOINT = "https://${module.dbw_shared.location}.azuredatabricks.net"
+#     ARM_CLIENT_ID = var.arm_client_id
+#     ARM_CLIENT_SECRET = var.arm_client_secret
+#     ARM_TENANT_ID = var.arm_tenant_id
+#   }
+#   depends_on = [
+#     module.dbw_shared
+#   ]
+# }
 
-module "kvs_databricks_dbw_shared_workspace_token" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+# module "kvs_databricks_dbw_shared_workspace_token" {
+#   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
-  name          = "dbw-shared-workspace-token"
-  value         = "test"#data.external.databricks_token.result.token
-  key_vault_id  = module.kv_shared.id
+#   name          = "dbw-shared-workspace-token"
+#   value         = "test"#data.external.databricks_token.result.token
+#   key_vault_id  = module.kv_shared.id
 
-  tags          = azurerm_resource_group.this.tags
-}
+#   tags          = azurerm_resource_group.this.tags
+# }
