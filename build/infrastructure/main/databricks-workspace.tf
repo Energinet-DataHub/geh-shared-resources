@@ -61,26 +61,53 @@ module "kvs_databricks_private_dns_resource_group_name" {
   tags          = azurerm_resource_group.this.tags
 }
 
-resource "null_resource" "databricks_token" {
+# resource "null_resource" "databricks_token" {
+#   triggers = {
+#     always_run = "${timestamp()}"
+#   }
+#   provisioner "local-exec" {
+#     command = "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/scripts/generate-pat-token.sh"
+#     environment = {
+#       DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
+#       KEY_VAULT = module.kv_shared.name
+#       SECRET_NAME = "dbw-shared-workspace-token"
+#       DATABRICKS_ENDPOINT = "https://${module.dbw_shared.location}.azuredatabricks.net"
+#       # ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_TENANT_ID are already
+#       # present in the environment if you are using the Terraform
+#       # extension for Azure DevOps or the starter from
+#       # https://github.com/algattik/terraform-azure-pipelines-starter.
+#       # Otherwise, provide them as additional variables.
+#     }
+#   }
+
+#   depends_on = [
+#     module.dbw_shared
+#   ]
+# }
+
+data "external" "databricks_token" {
+  program = ["bash", "${path.cwd}/scripts/generate-pat-token.sh"]
+  environment = {
+    DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
+    DATABRICKS_ENDPOINT = "https://${module.dbw_shared.location}.azuredatabricks.net"
+    ARM_CLIENT_ID = var.arm_client_id
+    ARM_CLIENT_SECRET = var.arm_client_secret
+    ARM_TENANT_ID = var.arm_tenant_id
+  }
   triggers = {
     always_run = "${timestamp()}"
   }
-  provisioner "local-exec" {
-    command = "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/scripts/generate-pat-token.sh"
-    environment = {
-      DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
-      KEY_VAULT = module.kv_shared.name
-      SECRET_NAME = "dbw-shared-workspace-token"
-      DATABRICKS_ENDPOINT = "https://${module.dbw_shared.location}.azuredatabricks.net"
-      # ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_TENANT_ID are already
-      # present in the environment if you are using the Terraform
-      # extension for Azure DevOps or the starter from
-      # https://github.com/algattik/terraform-azure-pipelines-starter.
-      # Otherwise, provide them as additional variables.
-    }
-  }
-
   depends_on = [
     module.dbw_shared
   ]
+}
+
+module "kvs_databricks_private_dns_resource_group_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+
+  name          = "dbw-shared-workspace-token"
+  value         = data.exter.databricks_token.result.token
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
 }
