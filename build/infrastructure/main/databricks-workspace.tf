@@ -86,7 +86,7 @@ module "kvs_databricks_private_dns_resource_group_name" {
 # }
 
 data "external" "databricks_token" {
-  program = ["bash", "chmod +x ${path.cwd}/scripts/generate-pat-token.sh; ${path.cwd}/scripts/generate-pat-token.sh"]
+  program = ["bash", "${path.cwd}/scripts/generate-pat-token.sh"]
   query = {
     DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
     DATABRICKS_ENDPOINT = "https://${module.dbw_shared.location}.azuredatabricks.net"
@@ -103,7 +103,7 @@ module "kvs_databricks_dbw_shared_workspace_token" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "dbw-shared-workspace-token"
-  value         = "test"#data.external.databricks_token.result.token
+  value         = data.external.databricks_token.result.token
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
