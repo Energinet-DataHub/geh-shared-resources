@@ -1,8 +1,9 @@
 #!/bin/bash
 
-echo "test"
-# # Bash strict mode, stop on any error
-# set -e
+# Bash strict mode, stop on any error
+set -e
+pat_token = "test"
+jq -n --arg token "$pat_token" '{"token":$token}'
 
 # # Ensure all required environment variables are present
 # test -n "$DATABRICKS_WORKSPACE_RESOURCE_ID"
