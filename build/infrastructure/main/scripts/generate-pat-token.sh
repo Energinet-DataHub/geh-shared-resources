@@ -32,7 +32,7 @@ api_response=$(curl -sf $DATABRICKS_ENDPOINT/api/2.0/token/create \
   -d '{ "comment": "Terraform-generated token" }')
 pat_token=$(jq .token_value -r <<< "$api_response")
 
-jq -n --arg token "$pat_token" '{"token":$token}'
+# jq -n --arg token "$pat_token" '{"token":$token}'
 
 # az keyvault secret set --vault-name "$KEY_VAULT" -n "$SECRET_NAME" --value "$pat_token"
 

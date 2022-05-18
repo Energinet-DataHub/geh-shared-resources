@@ -103,7 +103,7 @@ module "kvs_databricks_dbw_shared_workspace_token" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "dbw-shared-workspace-token"
-  value         = data.external.databricks_token.result.token
+  value         = "test"#data.external.databricks_token.result.token
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
