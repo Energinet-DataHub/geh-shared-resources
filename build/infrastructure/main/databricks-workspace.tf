@@ -102,7 +102,7 @@ data "external" "databricks_token" {
   ]
 }
 
-module "kvs_databricks_private_dns_resource_group_name" {
+module "kvs_databricks_dbw_shared_workspace_token" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "dbw-shared-workspace-token"
