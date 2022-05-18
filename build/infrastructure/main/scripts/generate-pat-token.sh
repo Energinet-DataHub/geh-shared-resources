@@ -17,7 +17,7 @@ echo "$ARM_TENANT_ID"
 echo "$DATABRICKS_ENDPOINT"
 
 pat_token="test"
-echo -n "{token:\"${pat_token}\"}"
+jq -n --arg token "$pat_token" '{"token":$token}'
 
 # # Login
 # az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" -t "$ARM_TENANT_ID"
