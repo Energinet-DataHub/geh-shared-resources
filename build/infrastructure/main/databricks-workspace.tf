@@ -64,11 +64,11 @@ module "kvs_databricks_private_dns_resource_group_name" {
 data "external" "databricks_token" {
   program = ["bash", "${path.cwd}/scripts/generate-pat-token.sh"]
   query = {
-    DATABRICKS_WORKSPACE_RESOURCE_ID = module.dbw_shared.id
-    DATABRICKS_ENDPOINT = "https://${module.dbw_shared.location}.azuredatabricks.net"
-    ARM_CLIENT_ID = var.arm_client_id
-    ARM_CLIENT_SECRET = var.arm_client_secret
-    ARM_TENANT_ID = var.arm_tenant_id
+    DATABRICKS_WORKSPACE_RESOURCE_ID  = "A"#module.dbw_shared.id
+    DATABRICKS_ENDPOINT               = "B"#"https://${module.dbw_shared.location}.azuredatabricks.net"
+    ARM_CLIENT_ID                     = "C"#var.arm_client_id
+    ARM_CLIENT_SECRET                 = "D"#var.arm_client_secret
+    ARM_TENANT_ID                     = "E"#var.arm_tenant_id
   }
   depends_on = [
     module.dbw_shared
