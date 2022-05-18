@@ -25,5 +25,4 @@ api_response=$(curl -sf $DATABRICKS_ENDPOINT/api/2.0/token/create \
   -d '{ "comment": "Terraform-generated token" }')
 pat_token=$(jq .token_value -r <<< "$api_response")
 
-new_token="test1234567890123456789"
-jq -n --arg token "$new_token" '{"token":$token}'
+jq -n --arg token "$pat_token" '{"token":$token}'
