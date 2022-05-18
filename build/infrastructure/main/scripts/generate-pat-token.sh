@@ -2,7 +2,7 @@
 
 # Bash strict mode, stop on any error
 set -e
-pat_token = "test"
+pat_token="test"
 jq -n --arg token "$pat_token" '{"token":$token}'
 
 # # Ensure all required environment variables are present
