@@ -45,6 +45,12 @@ variable apim_publisher_email {
   description   = "(Required) The email of publisher/company."
 }
 
+variable apim_maintenance_mode {
+  type          = bool
+  description   = "Determine if API Management is in maintenance mode. In maintenance mode all requests will return 503 Service Unavailable."
+  default       = false
+}
+
 variable apimao_charges_domain_ingestion_function_url {
   type          = string
   description   = "Url of the Charges domain ingestion function, used for configuration inside the API Managment API."
