@@ -30,7 +30,6 @@ module "apima_b2b" {
       xml_content = <<XML
         <policies>
           <inbound>
-            <base />
             <trace source="B2B API" severity="verbose">
                 <message>@{
                     string authHeader = context.Request.Headers.GetValueOrDefault("Authorization", "");
@@ -59,6 +58,7 @@ module "apima_b2b" {
                     </claim>
                 </required-claims>
             </validate-jwt>
+            <base />
             <choose>
                 <when condition="@(context.Request.Method == "POST")">
                     <check-header name="Content-Type" failed-check-httpcode="415" failed-check-error-message="Only Content-Type application/xml is allowed" ignore-case="true">
