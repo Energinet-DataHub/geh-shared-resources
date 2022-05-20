@@ -88,6 +88,10 @@ module "snet_vnet_integrations" {
       "Microsoft.Network/virtualNetworks/subnets/action"
     ]
   }]
+  
+  service_endpoints                               = [
+    "Microsoft.KeyVault"
+  ]
 }
 
 module "kvs_snet_private_endpoints_id" {
