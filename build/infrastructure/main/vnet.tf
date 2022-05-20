@@ -90,7 +90,8 @@ module "snet_vnet_integrations" {
   }]
   
   service_endpoints                               = [
-    "Microsoft.KeyVault"
+    "Microsoft.KeyVault",
+    "Microsoft.EventHub"
   ]
 }
 
