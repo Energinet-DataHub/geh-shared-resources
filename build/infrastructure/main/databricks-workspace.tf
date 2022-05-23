@@ -27,6 +27,9 @@ module "dbw_shared" {
   databricks_virtual_network_address_space  = var.databricks_vnet_address_space
   private_subnet_address_prefix             = var.databricks_private_subnet_address_prefix
   public_subnet_address_prefix              = var.databricks_public_subnet_address_prefix
+  public_network_service_endpoints          = [
+    "Microsoft.EventHub"
+  ]
 
   tags                                      = azurerm_resource_group.this.tags
 }
