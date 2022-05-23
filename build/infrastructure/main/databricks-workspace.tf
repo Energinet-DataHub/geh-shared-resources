@@ -51,6 +51,16 @@ module "kvs_databricks_workspace_url" {
   tags          = azurerm_resource_group.this.tags
 }
 
+module "kvs_databricks_public_network_id" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+
+  name          = "dbw-public-network-id"
+  value         = module.dbw_shared.public_network_id
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
 module "kvs_databricks_private_dns_resource_group_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
