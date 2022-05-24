@@ -25,7 +25,7 @@ module "plan_shared" {
 
   sku                            = {
     tier  = "PremiumV2"
-    size  = "P2v2"
+    size  = "P1v3"
   }
 
   tags                           = azurerm_resource_group.this.tags
