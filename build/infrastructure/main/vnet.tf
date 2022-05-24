@@ -16,6 +16,12 @@ data "azurerm_virtual_network" "this" {
   resource_group_name = var.virtual_network_resource_group_name
 }
 
+data "azurerm_subnet" "deployment_agents_subnet" {
+  name                  = var.deployment_agents_subnet_name
+  virtual_network_name  = var.virtual_network_name
+  resource_group_name   = var.virtual_network_resource_group_name
+}
+
 module "kvs_vnet_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
@@ -82,6 +88,11 @@ module "snet_vnet_integrations" {
       "Microsoft.Network/virtualNetworks/subnets/action"
     ]
   }]
+  
+  service_endpoints                               = [
+    "Microsoft.KeyVault",
+    "Microsoft.EventHub"
+  ]
 }
 
 module "kvs_snet_private_endpoints_id" {
@@ -103,4 +114,3 @@ module "kvs_snet_vnet_integrations_id" {
 
   tags          = azurerm_resource_group.this.tags
 }
-

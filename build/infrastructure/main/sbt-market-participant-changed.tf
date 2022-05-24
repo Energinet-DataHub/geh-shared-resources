@@ -21,11 +21,10 @@ locals {
 }
 
 module "sbt_market_participant_changed" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=5.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=6.0.0"
 
   name                = "market-participant-changed"
-  namespace_name      = module.sb_domain_relay.name
-  resource_group_name = azurerm_resource_group.this.name
+  namespace_id        = module.sb_domain_relay.id
   subscriptions       = [
     {
       name                = local.SBS_MARKET_PARTICIPANT_TO_CHARGES_NAME
@@ -55,7 +54,7 @@ module "sbt_market_participant_changed" {
 }
 
 module "kvs_sbt_market_participant_changed_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbt-market-participant-changed-name"
   value         = module.sbt_market_participant_changed.name
@@ -65,7 +64,7 @@ module "kvs_sbt_market_participant_changed_name" {
 }
 
 module "kvs_sbs_market_participant_changed_to_charges_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbs-market-participant-changed-to-charges-name"
   value         = local.SBS_MARKET_PARTICIPANT_TO_CHARGES_NAME
@@ -75,7 +74,7 @@ module "kvs_sbs_market_participant_changed_to_charges_name" {
 }
 
 module "kvs_sbs_market_participant_changed_to_aggregations_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbs-market-participant-changed-to-aggregations-name"
   value         = local.SBS_MARKET_PARTICIPANT_TO_AGGREGATIONS_NAME
@@ -85,7 +84,7 @@ module "kvs_sbs_market_participant_changed_to_aggregations_name" {
 }
 
 module "kvs_sbs_market_participant_changed_to_timeseries_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbs-market-participant-changed-to-timeseries-name"
   value         = local.SBS_MARKET_PARTICIPANT_TO_TIMESERIES_NAME
@@ -95,7 +94,7 @@ module "kvs_sbs_market_participant_changed_to_timeseries_name" {
 }
 
 module "kvs_sbs_market_participant_changed_to_meteringpoint_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbs-market-participant-changed-to-meteringpoint-name"
   value         = local.SBS_MARKET_PARTICIPANT_TO_METERINGPOINT_NAME
@@ -105,7 +104,7 @@ module "kvs_sbs_market_participant_changed_to_meteringpoint_name" {
 }
 
 module "kvs_sbs_market_participant_changed_to_marketroles_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbs-market-participant-changed-to-marketroles-name"
   value         = local.SBS_MARKET_PARTICIPANT_TO_MARKETROLES_NAME

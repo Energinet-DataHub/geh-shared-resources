@@ -1,18 +1,12 @@
 #!/bin/bash
-  
+
 # Bash strict mode, stop on any error
 set -e
 
-# Ensure all required environment variables are present
-test -n "$DATABRICKS_WORKSPACE_RESOURCE_ID"
-test -n "$KEY_VAULT"
-test -n "$SECRET_NAME"
-test -n "$ARM_CLIENT_ID"
-test -n "$ARM_CLIENT_SECRET"
-test -n "$ARM_TENANT_ID"
+eval "$(jq -r '@sh "DATABRICKS_WORKSPACE_RESOURCE_ID=\(.DATABRICKS_WORKSPACE_RESOURCE_ID) ARM_CLIENT_ID=\(.ARM_CLIENT_ID) ARM_CLIENT_SECRET=\(.ARM_CLIENT_SECRET) ARM_TENANT_ID=\(.ARM_TENANT_ID) DATABRICKS_ENDPOINT=\(.DATABRICKS_ENDPOINT)"')"
 
 # Login
-az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" -t "$ARM_TENANT_ID"
+az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" -t "$ARM_TENANT_ID" --output none
 
 # Get a token for the global Databricks application.
 # The resource name is fixed and never changes.
@@ -31,4 +25,4 @@ api_response=$(curl -sf $DATABRICKS_ENDPOINT/api/2.0/token/create \
   -d '{ "comment": "Terraform-generated token" }')
 pat_token=$(jq .token_value -r <<< "$api_response")
 
-az keyvault secret set --vault-name "$KEY_VAULT" -n "$SECRET_NAME" --value "$pat_token"
+jq -n --arg token "$pat_token" '{"token":$token}'

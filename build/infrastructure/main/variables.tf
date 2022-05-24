@@ -40,6 +40,21 @@ variable project_name {
   type          = string
 }
 
+variable arm_client_id {
+  type          = string
+  description   = "ID of the client used to communicating with the Azure Resource Manager"
+}
+
+variable arm_client_secret {
+  type          = string
+  description   = "Secret of the client used to communicating with the Azure Resource Manager"
+}
+
+variable arm_tenant_id {
+  type          = string
+  description   = "ID of the Azure tenant where the infrastructure is deployed"
+}
+
 variable apim_publisher_email {
   type          = string
   description   = "(Required) The email of publisher/company."
@@ -106,6 +121,11 @@ variable virtual_network_name {
   description   = "Name of the landing zone virtual network"
 }
 
+variable deployment_agents_subnet_name {
+  type          = string
+  description   = "Name of the subnet hosting the deployment agents."
+}
+
 variable apim_address_space {
   type          = string
   description   = "Address space of the APIM subnet"
@@ -130,4 +150,19 @@ variable log_retention_in_days {
 variable ag_primary_email_address {
   type          = string
   description   = "Email address of primary action group to which alerts will be routed."
+}
+
+variable databricks_vnet_address_space {
+  type          = string
+  description   = "Address space of the Virtual network where the Databricks Workspace is deployed."
+}
+
+variable databricks_private_subnet_address_prefix {
+  type          = string
+  description   = "The address prefix of the private subnet used by Databricks."
+}
+
+variable databricks_public_subnet_address_prefix {
+  type          = string
+  description   = "The address prefix of the public subnet used by Databricks."
 }
