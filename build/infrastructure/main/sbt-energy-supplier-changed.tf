@@ -16,11 +16,10 @@ locals {
 }
 
 module "sbt_energy_supplier_changed" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=5.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=6.0.0"
 
   name                = "energy-supplier-changed"
-  namespace_name      = module.sb_domain_relay.name
-  resource_group_name = azurerm_resource_group.this.name
+  namespace_id        = module.sb_domain_relay.id
   subscriptions       = [
     {
       name                = "metering-point-energy-supplier-changed-sub"
@@ -35,7 +34,7 @@ module "sbt_energy_supplier_changed" {
 }
 
 module "kvs_sbt_energy_supplier_changed_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbt-energy-supplier-changed-name"
   value         = module.sbt_energy_supplier_changed.name
@@ -45,7 +44,7 @@ module "kvs_sbt_energy_supplier_changed_name" {
 }
 
 module "kvs_sbs_energy_supplier_change_to_aggregations_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "sbs-energy-supplier-change-to-aggregations-name"
   value         = local.SBS_ENERGY_SUPPLIER_CHANGE_TO_AGGREGATIONS_NAME

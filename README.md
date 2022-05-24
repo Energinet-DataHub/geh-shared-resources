@@ -16,7 +16,7 @@
 ## Intro
 
 This domain will contain shared components of infrastructure, as well as code which we want to "centralize".
-Initially we will work towards translating incoming ebiX messages in xml to an internal CIM format.
+Initially we will work towards translating incoming ebiX messages in xml to an internal CIM format .
 
 ## Architecture
 
@@ -112,7 +112,7 @@ The domain relay Service Bus Namespace is an empty namespace that other domains 
 Before you start using the service bus namespace, you will need to expose the following variables to your IaC.
 
 - A variable containing the name of the shared resource group. In the example below this is referred to as `sharedresources_resource_group_name`.
-- A variable containing the name of the service bus namespace. In the example below this is referred to as `sharedresources_domainrelay_service_bus_namespace_name`.
+- A variable containing the id of the service bus namespace. In the example below this is referred to as `sharedresources_domainrelay_service_bus_namespace_id`.
 
 These should be added to the environment as secrets, and parsed down through the pipeline, to ensure the flexibility of changing these in the future.
 
@@ -130,8 +130,7 @@ data "azurerm_resource_group" "shared_resources" {
 
 ```ruby
 data "azurerm_servicebus_namespace" "domainrelay" {
-  name                = var.sharedresources_domainrelay_service_bus_namespace_name
-  resource_group_name = data.azurerm_resource_group.shared_resources.name
+  id                  = var.sharedresources_domainrelay_service_bus_namespace_id
 }
 ```
 
@@ -141,8 +140,7 @@ data "azurerm_servicebus_namespace" "domainrelay" {
 module "sb_example" {
   source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=REPLACE_WITH_CURRENT_VERSION"
   name                = "sb-example"
-  namespace_name      = data.azurerm_servicebus_namespace.domainrelay.name
-  resource_group_name = data.azurerm_resource_group.shared_resources.name
+  namespace_id        = data.azurerm_servicebus_namespace.domainrelay.id
 }
 ```
 
