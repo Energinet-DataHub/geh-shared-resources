@@ -24,7 +24,7 @@ module "plan_shared" {
   monitor_alerts_action_group_id = module.ag_primary.id
 
   sku                            = {
-    tier  = "PremiumV2"
+    tier  = "PremiumV3"
     size  = "P1v3"
   }
 
