@@ -42,7 +42,7 @@ module "kvs_sbs_consumer_moved_in_name" {
     source          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
     
     name            = "sbs-consumer-moved-in-name"
-    value           = locals.SBS_CONSUMER_MOVED_IN_NAME
+    value           = local.SBS_CONSUMER_MOVED_IN_NAME
     key_vault_id    = "module.kv_shared.id"
     
     tags            = azurerm_resource_group.this.tags
