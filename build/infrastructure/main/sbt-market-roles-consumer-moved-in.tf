@@ -16,10 +16,10 @@ locals {
 }
 
 module "sbt_consumer_moved_in" {
-  source = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=6.0.0"
     
-  name = "consumer-moved-in"
-  namespace_id = module.sb_domain_relay.id
+  name          = "consumer-moved-in"
+  namespace_id  = module.sb_domain_relay.id
   subscriptions = [
     {
       name = local.SBS_CONSUMER_MOVED_IN_NAME
@@ -29,21 +29,21 @@ module "sbt_consumer_moved_in" {
 }
 
 module "kvs_sbt_consumer_moved_in_name" {
-    source          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+
+  name          = "sbt-consumer-moved-in-name"
+  value         = module.sbt_consumer_moved_in.name
+  key_vault_id  = module.kv_shared.id
     
-    name            = "sbt-consumer-moved-in-name"
-    value           = module.sbt_consumer_moved_in.name
-    key_vault_id    = module.kv_shared.id
-    
-    tags            = azurerm_resource_group.this.tags
+  tags          = azurerm_resource_group.this.tags
 }
 
 module "kvs_sbs_consumer_moved_in_name" {
-    source          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+
+  name          = "sbs-consumer-moved-in-name"
+  value         = local.SBS_CONSUMER_MOVED_IN_NAME
+  key_vault_id  = module.kv_shared.id
     
-    name            = "sbs-consumer-moved-in-name"
-    value           = local.SBS_CONSUMER_MOVED_IN_NAME
-    key_vault_id    = "module.kv_shared.id"
-    
-    tags            = azurerm_resource_group.this.tags
+  tags          = azurerm_resource_group.this.tags
 }
