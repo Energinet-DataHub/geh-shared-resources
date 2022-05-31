@@ -22,7 +22,7 @@ module "sbt_consumer_moved_in" {
   namespace_id = module.sb_domain_relay.id
   subscriptions = [
     {
-      name = "consumer-moved-in"
+      name = local.SBS_CONSUMER_MOVED_IN_NAME
       max_delivery_count = 10
     }
   ]
