@@ -16,7 +16,7 @@ module "kv_access_policy_developers_security_group" {
   source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-access-policy?ref=6.1.0"
 
   key_vault_id  = module.kv_shared.id
-  app_identity {
+  app_identity  = {
     tenant_id     = var.arm_tenant_id
     principal_id  = var.developers_security_group_object_id
   }
