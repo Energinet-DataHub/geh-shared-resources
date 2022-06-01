@@ -166,3 +166,9 @@ variable databricks_public_subnet_address_prefix {
   type          = string
   description   = "The address prefix of the public subnet used by Databricks."
 }
+
+variable developers_security_group_object_id {
+  type          = string
+  description   = "(Optional) The Object ID of the Azure AD security group containing DataHub developers."
+  default       = null
+}
