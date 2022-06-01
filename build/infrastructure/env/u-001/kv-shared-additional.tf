@@ -18,6 +18,6 @@ module "kv_access_policy_developers_security_group" {
   key_vault_id  = module.kv_shared.id
   app_identity {
     tenant_id     = var.arm_tenant_id
-    principal_id  = var.developers_security_group_id
+    principal_id  = var.developers_security_group_object_id
   }
 }
