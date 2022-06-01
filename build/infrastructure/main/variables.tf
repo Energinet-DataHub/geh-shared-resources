@@ -169,5 +169,6 @@ variable databricks_public_subnet_address_prefix {
 
 variable developers_security_group_object_id {
   type          = string
-  description   = "The Object ID of the Azure AD security group containing DataHub developers."
+  description   = "(Optional) The Object ID of the Azure AD security group containing DataHub developers."
+  default       = null
 }

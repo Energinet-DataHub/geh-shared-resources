@@ -13,7 +13,9 @@
 # limitations under the License.
 
 module "kv_access_policy_developers_security_group" {
-  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-access-policy?ref=6.1.0"
+  count         = var.developers_security_group_object_id == null ? 0 : 1
+  
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-access-policy?ref=6.1.0"
 
   key_vault_id  = module.kv_shared.id
   app_identity  = {
