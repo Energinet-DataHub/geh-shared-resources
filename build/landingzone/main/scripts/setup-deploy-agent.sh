@@ -159,7 +159,9 @@ sudo apt-get install -y powershell
 # See https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
 #
 
-#curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+# First install latest version, to get all dependencies configured
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+# Then downgrade to the vesion we want
 sudo apt-get install azure-cli=2.36.0-1~bionic
 
 #
