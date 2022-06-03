@@ -162,7 +162,6 @@ sudo apt-get install -y powershell
 #curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 sudo apt-get install azure-cli=2.36.0-1~bionic
 
-
 #
 # Install unzip
 #
