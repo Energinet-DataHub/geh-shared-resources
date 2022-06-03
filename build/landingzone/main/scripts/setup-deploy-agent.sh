@@ -162,7 +162,7 @@ sudo apt-get install -y powershell
 # First install latest version, to get all dependencies configured
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 # Then downgrade to the vesion we want
-sudo apt-get install azure-cli=2.36.0-1~bionic
+sudo apt-get install azure-cli=2.36.0-1~bionic --allow-downgrades -y
 
 #
 # Install unzip
