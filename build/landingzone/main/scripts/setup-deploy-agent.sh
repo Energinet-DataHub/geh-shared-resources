@@ -130,6 +130,27 @@ sudo apt-get update; \
   sudo apt-get install -y dotnet-sdk-6.0
 
 ##################################
+# Install Powershell
+##################################
+
+#
+# See https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.2
+#
+
+# Update the list of packages
+sudo apt-get update
+# Install pre-requisite packages.
+sudo apt-get install -y wget apt-transport-https software-properties-common
+# Download the Microsoft repository GPG keys
+wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+# Register the Microsoft repository GPG keys
+sudo dpkg -i packages-microsoft-prod.deb
+# Update the list of packages after we added packages.microsoft.com
+sudo apt-get update
+# Install PowerShell
+sudo apt-get install -y powershell
+
+##################################
 # Install other dependencies
 ##################################
 
@@ -138,7 +159,10 @@ sudo apt-get update; \
 # See https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
 #
 
+# First install latest version, to get all dependencies configured
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+# Then downgrade to the vesion we want
+sudo apt-get install azure-cli=2.36.0-1~bionic --allow-downgrades -y
 
 #
 # Install unzip
