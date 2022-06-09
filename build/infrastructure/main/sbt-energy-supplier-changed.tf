@@ -13,6 +13,7 @@
 # limitations under the License.
 locals {
   SBS_ENERGY_SUPPLIER_CHANGE_TO_AGGREGATIONS_NAME = "energy-supplier-change-to-aggregations"
+  SBS_ENERGY_SUPPLIER_CHANGED_TO_MARKETROLES_NAME = "energy-supplier-changed-to-marketroles"
 }
 
 module "sbt_energy_supplier_changed" {
@@ -28,6 +29,10 @@ module "sbt_energy_supplier_changed" {
     },
     {
       name                = local.SBS_ENERGY_SUPPLIER_CHANGE_TO_AGGREGATIONS_NAME
+      max_delivery_count  = 10
+    },
+    {
+      name                = local.SBS_ENERGY_SUPPLIER_CHANGED_TO_MARKETROLES_NAME
       max_delivery_count  = 10
     },
   ]
@@ -48,6 +53,16 @@ module "kvs_sbs_energy_supplier_change_to_aggregations_name" {
 
   name          = "sbs-energy-supplier-change-to-aggregations-name"
   value         = local.SBS_ENERGY_SUPPLIER_CHANGE_TO_AGGREGATIONS_NAME
+  key_vault_id  = module.kv_shared.id
+
+  tags          = azurerm_resource_group.this.tags
+}
+
+module "kvs_sbs_energy_supplier_changed_to_marketroles_name" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+
+  name          = "sbs-energy-supplier-changed-to-marketroles-name"
+  value         = local.SBS_ENERGY_SUPPLIER_CHANGED_TO_MARKETROLES_NAME
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
