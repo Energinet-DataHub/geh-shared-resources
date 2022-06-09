@@ -23,7 +23,7 @@ data "azurerm_subnet" "deployment_agents_subnet" {
 }
 
 module "kvs_vnet_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "vnet-name"
   value         = data.azurerm_virtual_network.this.name
@@ -33,7 +33,7 @@ module "kvs_vnet_name" {
 }
 
 module "kvs_vnet_id" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "vnet-id"
   value         = data.azurerm_virtual_network.this.id
@@ -43,7 +43,7 @@ module "kvs_vnet_id" {
 }
 
 module "kvs_vnet_resource_group_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "vnet-resource-group-name"
   value         = data.azurerm_virtual_network.this.resource_group_name
@@ -53,7 +53,7 @@ module "kvs_vnet_resource_group_name" {
 }
 
 module "snet_private_endpoints" {
-  source                                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
+  source                                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=7.0.0"
   name                                            = "private-endpoints"
   project_name                                    = var.domain_name_short
   environment_short                               = var.environment_short
@@ -68,7 +68,7 @@ module "snet_private_endpoints" {
 }
 
 module "snet_vnet_integrations" {
-  source                                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
+  source                                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=7.0.0"
   name                                            = "vnet-integrations"
   project_name                                    = var.domain_name_short
   environment_short                               = var.environment_short
@@ -96,7 +96,7 @@ module "snet_vnet_integrations" {
 }
 
 module "kvs_snet_private_endpoints_id" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "snet-private-endpoints-id"
   value         = module.snet_private_endpoints.id
@@ -106,7 +106,7 @@ module "kvs_snet_private_endpoints_id" {
 }
 
 module "kvs_snet_vnet_integrations_id" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "snet-vnet-integrations-id"
   value         = module.snet_vnet_integrations.id

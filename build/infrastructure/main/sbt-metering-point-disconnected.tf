@@ -13,7 +13,7 @@
 # limitations under the License.
 
 module "sbt_metering_point_disconnected" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=7.0.0"
 
   name                = "metering-point-disconnected"
   namespace_id        = module.sb_domain_relay.id
@@ -21,7 +21,7 @@ module "sbt_metering_point_disconnected" {
 }
 
 module "kvs_sbt_metering_point_disconnected_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "sbt-metering-point-disconnected-name"
   value         = module.sbt_metering_point_disconnected.name

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "sbq_timeseries" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=7.0.0"
 
   name                = "timeseries"
   namespace_id        = module.sb_domain_relay.id
@@ -20,7 +20,7 @@ module "sbq_timeseries" {
 }
 
 module "sbq_timeseries_reply" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=7.0.0"
 
   name                = "timeseries-reply"
   namespace_id        = module.sb_domain_relay.id
@@ -28,7 +28,7 @@ module "sbq_timeseries_reply" {
 }
 
 module "sbq_timeseries_dequeue" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=7.0.0"
 
   name                = "timeseries-dequeue"
   namespace_id        = module.sb_domain_relay.id

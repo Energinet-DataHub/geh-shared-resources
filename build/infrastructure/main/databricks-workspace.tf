@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "dbw_shared" {
-  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/databricks-workspace?ref=6.0.0"
+  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/databricks-workspace?ref=7.0.0"
 
   name                                      = "dbw"
   project_name                              = var.domain_name_short
@@ -35,7 +35,7 @@ module "dbw_shared" {
 }
 
 module "kvs_databricks_workspace_id" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "dbw-shared-workspace-id"
   value         = module.dbw_shared.id
@@ -45,7 +45,7 @@ module "kvs_databricks_workspace_id" {
 }
 
 module "kvs_databricks_workspace_url" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "dbw-shared-workspace-url"
   value         = module.dbw_shared.workspace_url
@@ -55,7 +55,7 @@ module "kvs_databricks_workspace_url" {
 }
 
 module "kvs_databricks_public_network_id" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "dbw-public-network-id"
   value         = module.dbw_shared.public_network_id
@@ -65,7 +65,7 @@ module "kvs_databricks_public_network_id" {
 }
 
 module "kvs_databricks_private_dns_resource_group_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "databricks-private-dns-resource-group-name"
   value         = module.dbw_shared.private_dns_zone_resource_group_name
@@ -89,7 +89,7 @@ data "external" "databricks_token" {
 }
 
 module "kvs_databricks_dbw_shared_workspace_token" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "dbw-shared-workspace-token"
   value         = data.external.databricks_token.result.token

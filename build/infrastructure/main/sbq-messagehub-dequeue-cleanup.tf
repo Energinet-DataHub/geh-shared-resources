@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 module "sbq_messagehub_dequeue_cleanup" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=7.0.0"
 
   name                = "messagehub-dequeue-cleanup"
   namespace_id        = module.sb_domain_relay.id
 }
 
 module "kvs_sbq_messagehub_dequeue_cleanup_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "sbq-messagehub-dequeue-cleanup-name"
   value         = module.sbq_messagehub_dequeue_cleanup.name

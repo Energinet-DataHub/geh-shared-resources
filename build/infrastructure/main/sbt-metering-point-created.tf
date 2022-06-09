@@ -18,7 +18,7 @@ locals {
 }
 
 module "sbt_metering_point_created" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=7.0.0"
 
   name                = "metering-point-created"
   namespace_id        = module.sb_domain_relay.id
@@ -44,7 +44,7 @@ module "sbt_metering_point_created" {
 }
 
 module "kvs_sbt_metering_point_created_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "sbt-metering-point-created-name"
   value         = module.sbt_metering_point_created.name
@@ -54,7 +54,7 @@ module "kvs_sbt_metering_point_created_name" {
 }
 
 module "kvs_sbs_metering_point_created_sub_charges_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "sbs-metering-point-created-sub-charges-name"
   value         = local.SBS_METERING_POINT_SUB_CHARGES_NAME
@@ -64,7 +64,7 @@ module "kvs_sbs_metering_point_created_sub_charges_name" {
 }
 
 module "kvs_sbs_metering_point_created_to_aggregations_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "sbs-metering-point-created-to-aggregations-name"
   value         = local.SBS_METERING_POINT_TO_AGGREGATIONS_NAME
@@ -74,7 +74,7 @@ module "kvs_sbs_metering_point_created_to_aggregations_name" {
 }
 
 module "kvs_sbs_metering_point_created_to_timeseries_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "sbs-metering-point-created-to-timeseries-name"
   value         = local.SBS_METERING_POINT_TO_TIMESERIES_NAME

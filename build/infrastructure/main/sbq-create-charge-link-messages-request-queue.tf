@@ -14,7 +14,7 @@
 
 # Create create link messages request queue
 module "sbq_create_link_messages_request" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=7.0.0"
 
   name                = "create-link-messages-request"
   namespace_id        = module.sb_domain_relay.id
@@ -22,14 +22,14 @@ module "sbq_create_link_messages_request" {
 
 # Create create link messages reply queue
 module "sbq_create_link_messages_reply" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-queue?ref=7.0.0"
 
   name                = "create-link-messages-reply"
   namespace_id        = module.sb_domain_relay.id
 }
 
 module "kvs_sbq_create_link_messages_request_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "sbq-create-link-messages-request-name"
   value         = module.sbq_create_link_messages_request.name
@@ -39,7 +39,7 @@ module "kvs_sbq_create_link_messages_request_name" {
 }
 
 module "kvs_sbq_create_link_messages_reply_name" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "sbq-create-link-messages-reply-name"
   value         = module.sbq_create_link_messages_reply.name
