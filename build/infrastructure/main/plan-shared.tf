@@ -20,13 +20,9 @@ module "plan_services" {
   environment_instance           = var.environment_instance
   resource_group_name            = azurerm_resource_group.this.name
   location                       = azurerm_resource_group.this.location
-  kind                           = "Windows"
+  os_type                        = "Windows"
+  sku_name                       = "P1v3"
   monitor_alerts_action_group_id = module.ag_primary.id
-
-  sku                            = {
-    tier  = "PremiumV3"
-    size  = "P1v3"
-  }
 
   tags                           = azurerm_resource_group.this.tags
 }
