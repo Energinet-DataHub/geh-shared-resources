@@ -61,9 +61,10 @@ module "apima_b2b" {
             <base />
             <choose>
                 <when condition="@(context.Request.Method == "POST")">
-                    <check-header name="Content-Type" failed-check-httpcode="415" failed-check-error-message="Only Content-Type application/xml is allowed" ignore-case="true">
+                    <check-header name="Content-Type" failed-check-httpcode="415" failed-check-error-message="Content-Type must be either application/xml or application/json" ignore-case="true">
                       <value>application/xml</value>
                       <value>application/xml; charset=utf-8</value>
+                      <value>application/json</value>
                     </check-header>
                     <set-variable name="bodySize" value="@(context.Request.Headers["Content-Length"][0])" />
                     <choose>
