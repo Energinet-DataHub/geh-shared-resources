@@ -30,13 +30,3 @@ module "plan_shared" {
 
   tags                           = azurerm_resource_group.this.tags
 }
-
-module "kvs_plan_shared_id" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
-
-  name          = "plan-shared-id"
-  value         = module.plan_shared.id
-  key_vault_id  = module.kv_shared.id
-
-  tags          = azurerm_resource_group.this.tags
-}

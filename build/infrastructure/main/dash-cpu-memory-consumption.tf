@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-resource "azurerm_dashboard" "datahub_cpu_memory_dashboard" {
+resource "azurerm_portal_dashboard" "datahub_cpu_memory_dashboard" {
   name                  = "CPU-utilization-and-Memory-consumption-by-resource"
   resource_group_name   = azurerm_resource_group.this.name
   location              = azurerm_resource_group.this.location
