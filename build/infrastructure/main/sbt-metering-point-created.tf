@@ -29,11 +29,6 @@ module "sbt_metering_point_created" {
       max_delivery_count  = 1
     },
     {
-      name                = "market-roles-mp-created-sub"
-      max_delivery_count  = 10
-      forward_to          = module.sbq_market_roles_forwarded.name
-    },
-    {
       name                = local.SBS_METERING_POINT_TO_AGGREGATIONS_NAME
       max_delivery_count  = 10
     },
