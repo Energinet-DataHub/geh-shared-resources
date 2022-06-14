@@ -16,11 +16,6 @@ variable subscription_id {
   description = "Subscription that the infrastructure code is deployed into."
 }
 
-variable arm_tenant_id {
-  type          = string
-  description   = "ID of the Azure tenant where the infrastructure is deployed"
-}
-
 variable resource_group_name {
   type        = string
   description = "Resource Group that the infrastructure code is deployed into."
