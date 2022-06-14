@@ -14,7 +14,7 @@
 resource "azurerm_api_management_custom_domain" "apim_custom_domain" {
   api_management_id = module.apim_shared.id
 
-  proxy {
+  gateway {
     host_name             = "api.itlev.datahub.dk"
     certificate           = var.apim_base_64_encoded_pfx_cert
     certificate_password  = var.apim_pfx_cert_password
