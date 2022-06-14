@@ -27,10 +27,10 @@ module "plan_services" {
   tags                            = azurerm_resource_group.this.tags
 }
 
-module "kvs_plan_shared_id" {
+module "kvs_plan_services_id" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
-  name          = "plan-shared-id"
+  name          = "plan-services-id"
   value         = module.plan_services.id
   key_vault_id  = module.kv_shared.id
 
