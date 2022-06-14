@@ -17,5 +17,8 @@ terraform {
     storage_account_name  = "@storage_account_name"
     container_name        = "tfstate"
     key                   = "terraform_infra.tfstate"
+    use_oidc              = true
+    subscription_id       = var.subscription_id
+    tenant_id             = var.arm_tenant_id
   }
 }
