@@ -13,7 +13,7 @@
 # limitations under the License.
 
 module "sbt_master_data_updated" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service-bus-topic?ref=7.0.0"
 
   name                = "master-data-updated"
   namespace_id        = module.sb_domain_relay.id
@@ -21,7 +21,7 @@ module "sbt_master_data_updated" {
 }
 
 module "kvs_sbt_master_data_updated" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "sbt-master-data-updated-name"
   value         = module.sbt_master_data_updated.name
