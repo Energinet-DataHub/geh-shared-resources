@@ -33,6 +33,7 @@ module "apimao_request_accounting_point_characteristics" {
                     <claim name="roles" match="any">
                         <value>electricalsupplier</value>
                         <value>gridoperator</value>
+                        <value>meteringpointadministrator</value>
                     </claim>
                 </required-claims>
             </validate-jwt>

@@ -43,6 +43,8 @@ module "apimao_messagehub_dequeue" {
                         <value>gridoperator</value>
                         <value>electricalsupplier</value>
                         <value>transmissionsystemoperator</value>
+                        <value>imbalancesettlementresponsible</value>
+                        <value>meteringpointadministrator</value>
                     </claim>
                 </required-claims>
             </validate-jwt>

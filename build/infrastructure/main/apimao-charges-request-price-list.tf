@@ -34,6 +34,7 @@ module "apimao_request_price_list" {
                         <value>gridoperator</value>
                         <value>electricalsupplier</value>
                         <value>transmissionsystemoperator</value>
+                        <value>meteringpointadministrator</value>
                     </claim>
                 </required-claims>
             </validate-jwt>

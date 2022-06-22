@@ -32,6 +32,7 @@ module "apimao_characteristics_of_a_customer_at_an_ap" {
                 <required-claims>
                     <claim name="roles" match="any">
                         <value>gridoperator</value>
+                        <value>meteringpointadministrator</value>
                     </claim>
                 </required-claims>
             </validate-jwt>
