@@ -33,6 +33,7 @@ module "apimao_request_change_of_accounting_point_characteristics" {
                     <claim name="roles" match="any">
                         <value>gridoperator</value>
                         <value>transmissionsystemoperator</value>
+                        <value>systemoperator</value>
                     </claim>
                 </required-claims>
             </validate-jwt>

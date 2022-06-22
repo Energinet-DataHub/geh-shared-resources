@@ -36,6 +36,11 @@ module "apimao_messagehub_peek_all" {
                         <value>gridoperator</value>
                         <value>electricalsupplier</value>
                         <value>transmissionsystemoperator</value>
+                        <value>imbalancesettlementresponsible</value>
+                        <value>meteringpointadministrator</value>
+                        <value>metereddataadministrator</value>
+                        <value>systemoperator</value>
+                        <value>danishenergyagency</value>
                     </claim>
                 </required-claims>
             </validate-jwt>
