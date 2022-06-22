@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 locals {
-  SBS_METERING_POINT_CONNECTED_TO_AGGREGATIONS_NAME = "metering-point-connected-to-aggregations"
+  SBS_METERING_POINT_CONNECTED_TO_WHOLESALE_NAME = "metering-point-connected-to-wholesale"
   SBS_METERING_POINT_CONNECTED_TO_TIMESERIES_NAME = "metering-point-connected-to-timeseries"
 }
 
@@ -28,7 +28,7 @@ module "sbt_metering_point_connected" {
       forward_to          = module.sbq_market_roles_forwarded.name
     },
     {
-      name                = local.SBS_METERING_POINT_CONNECTED_TO_AGGREGATIONS_NAME
+      name                = local.SBS_METERING_POINT_CONNECTED_TO_WHOLESALE_NAME
       max_delivery_count  = 10
     },
     {
@@ -48,11 +48,11 @@ module "kvs_sbt_metering_point_connected_name" {
   tags          = azurerm_resource_group.this.tags
 }
 
-module "kvs_sbs_metering_point_connected_to_aggregations_name" {
+module "kvs_sbs_metering_point_connected_to_wholesale_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
-  name          = "sbs-metering-point-connected-to-aggregations-name"
-  value         = local.SBS_METERING_POINT_CONNECTED_TO_AGGREGATIONS_NAME
+  name          = "sbs-metering-point-connected-to-wholesale-name"
+  value         = local.SBS_METERING_POINT_CONNECTED_TO_WHOLESALE_NAME
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
