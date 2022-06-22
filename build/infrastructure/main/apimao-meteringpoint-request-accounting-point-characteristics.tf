@@ -34,6 +34,7 @@ module "apimao_request_accounting_point_characteristics" {
                         <value>electricalsupplier</value>
                         <value>gridoperator</value>
                         <value>meteringpointadministrator</value>
+                        <value>systemoperator</value>
                     </claim>
                 </required-claims>
             </validate-jwt>

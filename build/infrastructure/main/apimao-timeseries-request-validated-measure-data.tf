@@ -36,6 +36,7 @@ module "apimao_request_validated_measure_data" {
                         <value>transmissionsystemoperator</value>
                         <value>meterdataresponsible</value>
                         <value>metereddataadministrator</value>
+                        <value>systemoperator</value>
                     </claim>
                 </required-claims>
             </validate-jwt>

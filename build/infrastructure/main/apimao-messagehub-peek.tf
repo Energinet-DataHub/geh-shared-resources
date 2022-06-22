@@ -39,6 +39,7 @@ module "apimao_messagehub_peek_all" {
                         <value>imbalancesettlementresponsible</value>
                         <value>meteringpointadministrator</value>
                         <value>metereddataadministrator</value>
+                        <value>systemoperator</value>
                     </claim>
                 </required-claims>
             </validate-jwt>

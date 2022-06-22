@@ -46,6 +46,7 @@ module "apimao_messagehub_dequeue" {
                         <value>imbalancesettlementresponsible</value>
                         <value>meteringpointadministrator</value>
                         <value>metereddataadministrator</value>
+                        <value>systemoperator</value>
                     </claim>
                 </required-claims>
             </validate-jwt>
