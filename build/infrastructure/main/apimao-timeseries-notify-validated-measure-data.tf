@@ -33,6 +33,7 @@ module "apimao_notify_validated_measure_data" {
                     <claim name="roles" match="any">
                         <value>gridoperator</value>
                         <value>meterdataresponsible</value>
+                        <value>metereddataadministrator</value>
                     </claim>
                 </required-claims>
             </validate-jwt>
