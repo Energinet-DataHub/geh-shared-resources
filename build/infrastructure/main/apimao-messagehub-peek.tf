@@ -40,6 +40,7 @@ module "apimao_messagehub_peek_all" {
                         <value>meteringpointadministrator</value>
                         <value>metereddataadministrator</value>
                         <value>systemoperator</value>
+                        <value>danishenergyagency</value>
                     </claim>
                 </required-claims>
             </validate-jwt>

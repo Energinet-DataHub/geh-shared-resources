@@ -35,6 +35,7 @@ module "apimao_request_accounting_point_characteristics" {
                         <value>gridoperator</value>
                         <value>meteringpointadministrator</value>
                         <value>systemoperator</value>
+                        <value>danishenergyagency</value>
                     </claim>
                 </required-claims>
             </validate-jwt>

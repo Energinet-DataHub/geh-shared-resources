@@ -47,6 +47,7 @@ module "apimao_messagehub_dequeue" {
                         <value>meteringpointadministrator</value>
                         <value>metereddataadministrator</value>
                         <value>systemoperator</value>
+                        <value>danishenergyagency</value>
                     </claim>
                 </required-claims>
             </validate-jwt>
