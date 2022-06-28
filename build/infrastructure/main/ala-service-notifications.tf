@@ -17,7 +17,7 @@ resource "azurerm_monitor_activity_log_alert" "main" {
   resource_group_name = azurerm_resource_group.this.name
 
   scopes              = [
-    data.azurerm_subscription.this.subscription_id
+    data.azurerm_subscription.this.id
   ]
   description         = "Alert will fire in case of a service issue or planned maintenance of any resources in the subscription."
 
