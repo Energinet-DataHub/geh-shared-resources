@@ -20,7 +20,7 @@ resource "azurerm_portal_dashboard" "datahub_cpu_memory_dashboard" {
         dashboard_name = "${var.project_name} Resources: CPU Utilization and Memory Consumption"
         subscription_id = data.azurerm_subscription.this.subscription_id,
         shared_resources_resource_group_name = azurerm_resource_group.this.name,
-        shared_plan_name = module.plan_shared.name,
+        shared_plan_name = module.plan_services.name,
         charges_resource_group_name = "rg-${var.project_name}-Charges-${upper(var.environment_short)}-${var.environment_instance}",
         charges_function_name = "func-functionhost-charges-${lower(var.environment_short)}-${var.environment_instance}",
         aggregations_resource_group_name = "rg-${var.project_name}-Aggregations-${upper(var.environment_short)}-${var.environment_instance}",
