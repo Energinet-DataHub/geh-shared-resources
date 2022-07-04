@@ -31,9 +31,10 @@ module "mssql_data" {
   administrator_login             = local.mssqlServerAdminName
   administrator_login_password    = random_password.mssql_administrator_login_password.result
 
-  ad_authentication_only          = false
-  ad_administrator_username       = data.azurerm_client_config.this.client_id # TODO: Can we use Client ID or do we need login name?
-  ad_administrator_object_id      = data.azurerm_client_config.this.object_id
+  # PoC: Try using updated module without changes to see if it is non-breaking.
+  # ad_authentication_only          = false
+  # ad_administrator_client_id      = data.azurerm_client_config.this.client_id # TODO: Can we use Client ID or do we need login name?
+  # ad_administrator_object_id      = data.azurerm_client_config.this.object_id
 
   private_endpoint_subnet_id      = module.snet_private_endpoints.id
   log_analytics_workspace_id      = module.log_workspace_shared.id
