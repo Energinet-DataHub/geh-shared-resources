@@ -16,7 +16,7 @@ locals {
 }
 
 module "mssql_data" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-server?ref=7.0.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-server?ref=7.1.0"
 
   name                            = "data"
   project_name                    = var.domain_name_short
@@ -25,10 +25,14 @@ module "mssql_data" {
   sql_version                     = "12.0"
   resource_group_name             = azurerm_resource_group.this.name
   location                        = azurerm_resource_group.this.location
+
   administrator_login             = local.mssqlServerAdminName
   administrator_login_password    = random_password.mssql_administrator_login_password.result
+
+  ad_authentication_only          = false
+
   private_endpoint_subnet_id      = module.snet_private_endpoints.id
-  log_analytics_workspace_id      = module.log_workspace_shared.id 
+  log_analytics_workspace_id      = module.log_workspace_shared.id
 
   tags                            = azurerm_resource_group.this.tags
 }
