@@ -15,8 +15,6 @@ locals {
   mssqlServerAdminName = "gehdbadmin"
 }
 
-data "azurerm_client_config" "this" {}
-
 module "mssql_data" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-server?ref=7.1.0"
 
