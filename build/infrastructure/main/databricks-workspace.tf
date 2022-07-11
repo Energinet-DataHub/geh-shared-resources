@@ -97,3 +97,16 @@ module "kvs_databricks_dbw_shared_workspace_token" {
 
   tags          = azurerm_resource_group.this.tags
 }
+
+module "kvs_databricks_url" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
+
+  name          = "dbw-shared-url"
+  value         = "https://${module.dbw_shared.location}.azuredatabricks.net"
+  key_vault_id  = module.kv_shared.id
+  depends_on = [
+    module.dbw_shared
+  ]
+
+  tags          = azurerm_resource_group.this.tags
+}
