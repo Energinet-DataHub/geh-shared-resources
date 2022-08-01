@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   SBS_MARKET_PARTICIPANT_TO_CHARGES_NAME = "market-participant-changed-to-charges"
-  SBS_MARKET_PARTICIPANT_TO_AGGREGATIONS_NAME = "market-participant-changed-to-aggregations"
+  SBS_MARKET_PARTICIPANT_TO_WHOLESALE_NAME = "market-participant-changed-to-wholesale"
   SBS_MARKET_PARTICIPANT_TO_TIMESERIES_NAME = "market-participant-changed-to-timeseries"
   SBS_MARKET_PARTICIPANT_TO_METERINGPOINT_NAME = "market-participant-changed-to-meteringpoint"
   SBS_MARKET_PARTICIPANT_TO_MARKETROLES_NAME = "market-participant-changed-to-marketroles"
@@ -31,7 +31,7 @@ module "sbt_market_participant_changed" {
       max_delivery_count  = 10
     },
     {
-      name                = local.SBS_MARKET_PARTICIPANT_TO_AGGREGATIONS_NAME
+      name                = local.SBS_MARKET_PARTICIPANT_TO_WHOLESALE_NAME
       max_delivery_count  = 10
     },
     {
@@ -73,11 +73,11 @@ module "kvs_sbs_market_participant_changed_to_charges_name" {
   tags          = azurerm_resource_group.this.tags
 }
 
-module "kvs_sbs_market_participant_changed_to_aggregations_name" {
+module "kvs_sbs_market_participant_changed_to_wholesale_name" {
   source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
-  name          = "sbs-market-participant-changed-to-aggregations-name"
-  value         = local.SBS_MARKET_PARTICIPANT_TO_AGGREGATIONS_NAME
+  name          = "sbs-market-participant-changed-to-wholesale-name"
+  value         = local.SBS_MARKET_PARTICIPANT_TO_WHOLESALE_NAME
   key_vault_id  = module.kv_shared.id
 
   tags          = azurerm_resource_group.this.tags
