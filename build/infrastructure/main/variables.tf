@@ -40,16 +40,6 @@ variable project_name {
   type          = string
 }
 
-variable arm_client_id {
-  type          = string
-  description   = "ID of the client used to communicating with the Azure Resource Manager"
-}
-
-variable arm_client_secret {
-  type          = string
-  description   = "Secret of the client used to communicating with the Azure Resource Manager"
-}
-
 variable arm_tenant_id {
   type          = string
   description   = "ID of the Azure tenant where the infrastructure is deployed"
