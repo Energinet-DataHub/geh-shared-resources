@@ -3,10 +3,9 @@
 # Bash strict mode, stop on any error
 set -e
 
-eval "$(jq -r '@sh "DATABRICKS_WORKSPACE_RESOURCE_ID=\(.DATABRICKS_WORKSPACE_RESOURCE_ID) ARM_CLIENT_ID=\(.ARM_CLIENT_ID) ARM_CLIENT_SECRET=\(.ARM_CLIENT_SECRET) ARM_TENANT_ID=\(.ARM_TENANT_ID) DATABRICKS_ENDPOINT=\(.DATABRICKS_ENDPOINT)"')"
+eval "$(jq -r '@sh "DATABRICKS_WORKSPACE_RESOURCE_ID=\(.DATABRICKS_WORKSPACE_RESOURCE_ID) DATABRICKS_ENDPOINT=\(.DATABRICKS_ENDPOINT)"')"
 
-# Login
-az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" -t "$ARM_TENANT_ID" --output none
+# Must be run on a machine that is already logged in to Azure
 
 # Get a token for the global Databricks application.
 # The resource name is fixed and never changes.
