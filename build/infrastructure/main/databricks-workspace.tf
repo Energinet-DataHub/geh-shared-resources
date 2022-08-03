@@ -79,9 +79,6 @@ data "external" "databricks_token" {
   query = {
     DATABRICKS_WORKSPACE_RESOURCE_ID  = module.dbw_shared.id
     DATABRICKS_ENDPOINT               = "https://${module.dbw_shared.location}.azuredatabricks.net"
-    ARM_CLIENT_ID                     = var.arm_client_id
-    ARM_CLIENT_SECRET                 = var.arm_client_secret
-    ARM_TENANT_ID                     = var.arm_tenant_id
   }
   depends_on = [
     module.dbw_shared
